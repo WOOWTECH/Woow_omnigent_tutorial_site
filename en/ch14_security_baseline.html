@@ -73,8 +73,10 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#surface">對外暴露了什麼</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
+      <a href="#sharing">分享設定的陷阱</a>
       <a href="#verify">怎麼確認做對了</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
@@ -91,68 +93,170 @@
       <div class="callout i18n-pending"><strong>This chapter has not been translated yet.</strong> You are reading the original Chinese text. <a href="../ch14_security_baseline.html" hreflang="zh-Hant">Open the Chinese version</a></div>
       <div class="chapter-header">
         <div class="kicker">Chapter 14</div>
-        <h1>安全基線：憑證輪替與對外暴露面</h1>
-      </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>附加元件的 Start 按下去、或者 Helm 安裝跑完，服務就通了。而它通的那一刻同時具備三個特徵：管理員密碼還是設定檔裡的預設值、伺服器的服務埠對整個區域網路開著、代理的行為規則一條都沒啟用。</p>
+        <p>這三件事單獨看都不致命，疊在一起就是最常見的破口：有人拿到網址、用預設密碼登進來、然後指揮一個能在你機器上跑指令的代理。</p>
+        <p>這一章是一份上線前的檢查清單。六個動作，全部在網頁介面或部署設定裡完成，不需要你懂容器或 Kubernetes。做完之後，這套系統才適合給你以外的人用。</p>
+        <div class="callout warn">
+          <p>如果這台 Omnigent 已經在被其他人使用了，先做「換密碼」跟「清點成員」這兩件，其餘的可以邊用邊補。順序不要顛倒。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">三個暴露面</h2>
+        <p>把「安全」拆成三個可以逐一檢查的面向，事情會好處理很多。</p>
+        <ul>
+          <li><strong>帳號面</strong>：誰能登入這個網址。</li>
+          <li><strong>網路面</strong>：這個網址從哪些地方打得到。</li>
+          <li><strong>代理面</strong>：登入之後，代理被允許在你的機器上做什麼。</li>
+        </ul>
+        <div class="callout terminology">
+          <p><strong>暴露面（attack surface）</strong>：一套系統對外可以被觸碰到的所有入口總和。縮小暴露面不等於把功能關掉，而是讓每一個入口都是你刻意留下的。</p>
+        </div>
+        <p>三者是乘法關係，不是加法。網路面收得再緊，只要帳號面是預設密碼，區網裡任何一台機器都能登進來；帳號面守得再好，代理面一條規則都沒開，一個講錯的需求還是可能刪掉東西。</p>
+        <h3>第一次啟動的那個空窗</h3>
+        <p>管理員名冊還是空的時候，建立管理員的 <code>POST /auth/setup</code> 端點不需要任何身分驗證——先打到那個網址的人就成為這台機器的管理員。</p>
+        <p>兩種部署都用「預先種好帳密」把這個空窗關掉：Home Assistant 附加元件在第一次開機時自動用設定分頁裡的帳密建立管理員；k3s 版由安裝後的 Job 打同一個端點。好處是沒有人搶得走，代價是<strong>你的預設密碼從服務起來的第一秒就是一組有效的登入密碼</strong>。這就是為什麼換密碼是第一件事，不是最後一件。</p>
       </section>
+
+      <section id="surface" data-nav="對外暴露了什麼">
+        <h2 data-icon="network">對外暴露了什麼</h2>
+        <p>以 Home Assistant 附加元件版為例，它開的兩個埠角色完全不同。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="埠、用途、誰應該碰得到資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">埠</th><th scope="col">用途</th><th scope="col">誰應該碰得到</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">8000</th><td>伺服器 API、執行端撥入、<code>omnigent host</code> 註冊</td><td>區域網路上的執行端；需要跨網際網路時再經 Cloudflared 通道</td></tr>
+              <tr><th scope="row">8080</th><td>網頁介面，經 nginx 轉給 Home Assistant 的 Ingress</td><td>只有 Home Assistant 的 Supervisor，區網完全打不到</td></tr>
+              <tr><th scope="row">資料庫</th><td>附加元件自帶的 Postgres</td><td>只有附加元件本身，不對外發布</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>重點在前兩列的差別。你從 Home Assistant 側邊欄點進去看到的畫面走 8080，那條路只有 Supervisor 能走；但執行端要撥進來的是 8000，它必須在區網上開著，否則第 16 章的註冊會失敗。</p>
+        <p>想讓區網以外的機器也註冊進來，正規做法是搭配 Cloudflared 附加元件建一條通道路由到 8000，然後把附加元件設定裡的 <code>base_url</code> 改成那個公開網域。<code>base_url</code> 留空時系統會用區網位址，邀請連結也會跟著指到區網，外面的人點了打不開。</p>
+        <p>k3s 版的對外門面是 cloudflared，公開網址就是你在 chart 裡設定的那一個。通道憑證放在叢集的一個 Secret 裡，<strong>那份 JSON 永遠不要進版本控制</strong>。</p>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>動手前先備齊三樣東西：</p>
+        <ul>
+          <li>一個 <code>Admin</code> 角色的帳號（角色寫在 Settings 的 Members 頁）</li>
+          <li>部署設定的存取權——附加元件版是 Home Assistant 的 Configuration 分頁，k3s 版是 Helm 的 values</li>
+          <li>一份「誰應該有帳號」的名單，寫在紙上也行</li>
+        </ul>
+        <div class="callout tip">
+          <p>改部署設定要重啟才生效。附加元件版改完 Configuration 要重新啟動附加元件；k3s 版要跑一次 upgrade。改完沒重啟，舊密碼還活著，而你會以為自己已經換掉了。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">上線前的六個動作</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>換掉安裝預設的管理員密碼</h3>
+            <p>附加元件版在 Configuration 分頁有 <code>admin_username</code> 與 <code>admin_password</code> 兩個欄位，官方文件在密碼那一列直接標了「Change me」。把它改成你自己的 <code>&lt;your-password&gt;</code>，儲存，重新啟動附加元件。</p>
+            <p>k3s 版的預設帳密寫在 chart 的 <code>values.yaml</code> 裡，用安裝參數覆寫，或者放進一份不進版本控制的私有 values 檔。無論哪一種，改完之後<strong>不要把新密碼寫回會被推上去的檔案</strong>。</p>
+          </li>
+          <li>
+            <h3>清點 Members 名單</h3>
+            <p>到 Settings 的 <code>Members</code> 頁。表格有四欄：<code>USERNAME</code>、<code>ROLE</code>、<code>LAST LOGIN</code>、<code>ACTIONS</code>。角色只有 <code>Admin</code> 與 <code>Member</code> 兩種。</p>
+            <p>逐行問自己兩個問題：這個帳號我認得嗎？它需要 <code>Admin</code> 嗎？認不得的用 <code>ACTIONS</code> 欄的 Remove 移除；認得但權限過高的，先用 Reset 重設密碼再談降權。日常使用者給 <code>Member</code> 就夠，第 11 章講得更細。</p>
+          </li>
+          <li>
+            <h3>決定 Session sharing 停在哪一段</h3>
+            <p>Settings 的 <code>Sharing</code> 頁把分享分成四段，由寬到窄是 <code>On</code>、<code>Read only</code>、<code>Read only (restricted)</code>、<code>Off</code>。多數團隊適合停在 <code>Read only</code>：新的分享上限是唯讀，要求 edit 或 manage 的分享會被拒絕。</p>
+            <p><code>Read only (restricted)</code> 多一層保護——工作目錄是家目錄或檔案系統根的 session 完全不可分享。如果你的成員習慣直接在家目錄開 session，這一段值得考慮。</p>
+          </li>
+          <li>
+            <h3>決定 8000 要不要出區網</h3>
+            <p>只在自家網路內用，就讓它留在區網，不要另外開通道。需要遠端註冊執行端或遠端登入，才建 Cloudflared 通道，並且同時把 <code>base_url</code> 設成公開網域。</p>
+            <p>兩者要一起做。只開通道不改 <code>base_url</code>，邀請連結還是會指回區網位址；只改 <code>base_url</code> 沒開通道，外面根本連不上。</p>
+          </li>
+          <li>
+            <h3>至少啟用一條 Policy</h3>
+            <p>Settings 的 <code>Policies</code> 頁預設是空的，畫面上寫著沒有設定任何全域規則。內建目錄有二十五條可選，第一次只要挑一條開始。</p>
+            <p>三個好起點：<strong>Session Cost Budget</strong>（單一 session 的累計花費到頂就擋）、<strong>Block Dangerous Shell Commands</strong>（安全指令放行，高風險指令改成詢問或直接拒絕）、<strong>Require Approval for File &amp; Shell Operations</strong>（任何檔案或 shell 動作前先問你）。挑法與副作用見第 12 章。</p>
+          </li>
+          <li>
+            <h3>把金鑰放在該放的地方</h3>
+            <p>附加元件設定裡的 <code>env_vars</code> 可以塞任意環境變數，常見用途是放模型供應商的 API 金鑰。這些值<strong>只有伺服器行程看得到</strong>；執行端自己帶自己的憑證，不會從這裡拿。</p>
+            <p>所以不要為了「讓代理能用」而把個人金鑰重複貼到兩邊。哪一邊需要，就只放在那一邊。</p>
+          </li>
         </ol>
       </section>
+
+      <section id="sharing" data-nav="分享設定的陷阱">
+        <h2 data-icon="security">分享設定有一個反直覺的地方</h2>
+        <p>Sharing 頁除了四段式的 Session sharing，還有一個獨立的 <code>Public access</code> 開關，管的是「能不能用一條連結公開唯讀分享」。</p>
+        <p>把它關掉之後會發生三件事：Share 對話框裡的 Public access 切換會消失、新的公開分享會被拒絕——然後是第三件，也是最容易誤會的那件：<strong>已經公開出去的 session 在你逐一撤銷之前，仍然是公開的。</strong></p>
+        <div class="callout danger">
+          <p>設定頁的原文寫得很直白：變更只影響新的分享，既有的授權（包含已經公開的 session）在被撤銷之前都繼續有效。關掉開關不等於把流出去的連結收回來。</p>
+        </div>
+        <p>所以「收回公開連結」是兩個動作，不是一個：先關掉 <code>Public access</code> 擋住未來，再回到每一個已經分享出去的 session 逐個撤銷。第 9 章講分享對話框的操作，這裡只提醒順序。</p>
+      </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>五個檢查，全部從瀏覽器就能做完。</p>
+        <ul>
+          <li>登出，用安裝預設的帳密登入——<strong>應該失敗</strong>。成功的話代表設定沒生效，多半是漏了重啟。</li>
+          <li>Settings 的 Members 頁每一行都認得，而且 <code>Admin</code> 的數量等於你預期的數量。</li>
+          <li>Settings 的 Sharing 頁停在你選的那一段，Public access 的狀態也是你要的。</li>
+          <li>Settings 的 Policies 頁不再顯示「沒有設定任何全域規則」，至少列著一條。</li>
+          <li>從一台不在你家網路上的裝置打這個網址，結果符合你的預期——該連不上的連不上，該連得上的登入畫面正常。</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>徵狀：改了密碼，舊密碼還是登得進去</strong>。設定沒重新載入。附加元件版要重新啟動附加元件，k3s 版要跑 upgrade。另一種可能是你改了設定卻沒儲存就切換分頁。</li>
+          <li><strong>徵狀：關掉 Public access 之後，之前分享的公開連結還打得開</strong>。這是設計行為，不是故障。開關只擋新的分享，既有授權要逐一撤銷。</li>
+          <li><strong>徵狀：Members 頁出現不認識的帳號</strong>。最可能是第一次啟動的空窗被別人搶先，或有人拿預設密碼登入後自行建立帳號。先把它移除，再換掉管理員密碼，然後檢查 Sharing 有沒有被人放寬。</li>
+          <li><strong>徵狀：網頁開得起來，但一直停在登入表單</strong>。自動建立管理員用的是部署設定裡的那組帳密。回去對一次 <code>admin_username</code> 與 <code>admin_password</code>，你手上的密碼跟設定裡的可能不是同一組。</li>
+          <li><strong>徵狀：外部同事打不開你給的連結</strong>。通道與 <code>base_url</code> 沒有成對設定。先確認通道確實路由到 8000，再確認 <code>base_url</code> 填的是公開網域而不是區網位址。</li>
+          <li><strong>徵狀：啟用了 Policy，代理行為卻沒變</strong>。Policies 頁管的是全域規則，加完要確認它真的列在清單上；若清單是空的，代表新增沒有存進去。第 12 章有逐條的判讀方式。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的設定欄位、埠角色與預設值說法，以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件</a></li>
         </ul>
+        <p>Settings 各分頁的畫面與文案，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
           <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <div class="body"><p>網頁介面裡的三個動作——清點 Members、調整 Sharing、啟用 Policy——三種部署方式都一樣，因為那是同一套伺服器的設定頁。換密碼與埠的部分則依部署方式而異：附加元件版在 Configuration 分頁，k3s 版在 Helm 的 values，Rootless Podman 版的做法見第 21 章。</p></div>
+        </details>
+        <details class="faq">
+          <summary>我只是自己一個人在家裡用，這些還要做嗎？</summary>
+          <div class="body"><p>換密碼要做，其餘可以簡化。理由是代理面：就算沒有別人登入，一個誤解需求的代理仍然能在你的機器上跑指令。所以即使單人使用，也建議至少開一條規則——成本上限或危險指令攔截，兩者擇一。</p></div>
         </details>
         <details class="faq">
           <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <div class="body"><p>登入畫面拒絕安裝預設密碼、Members 頁沒有陌生帳號、Sharing 停在你選的那一段、Policies 頁至少列著一條規則。這四件事是這一章的全部成果，其他章節的操作都建立在它們之上。</p></div>
+        </details>
+        <details class="faq">
+          <summary>把 8000 關掉是不是更安全？</summary>
+          <div class="body"><p>更安全，但也更沒用。8000 是執行端撥進來的那個入口，關掉之後就沒有任何機器能註冊，主機清單會一直是空的，你只剩一個沒有工人的指揮台。正確的做法不是關掉它，而是決定它開放給哪個網段，以及要不要再經過一條通道往外開。</p></div>
         </details>
         <details class="faq">
           <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
-        </details>
-        <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <div class="body"><p>先看「固定來源」指向的 commit——本章的欄位名稱與預設值都以那兩個 commit 為準。三種部署方式的版本本來就有落差，設定欄位可能多一兩個或改過名字。但 Settings 底下的 Members、Sharing、Policies 三頁是伺服器共通的，如果連這三頁都對不上，比較可能是你登入的角色不是 <code>Admin</code>，管理類分頁不會顯示給一般成員。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch13_usage_cost.html">
         <span class="label">← Previous</span>

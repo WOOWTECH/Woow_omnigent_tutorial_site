@@ -15,14 +15,14 @@
   <meta property="og:title" content="Chapter 7 · Workspace 面板：Files、Changes、Agents 與 Terminal · WoowTech Omnigent 完整指南" />
   <meta property="og:description" content="第 7 章導覽 Workspace 的四個分頁，說明如何檢視檔案樹、審閱變更差異、觀察子代理，以及直接看終端機輸出。" />
   <meta property="og:url" content="https://omnigent-guide.woowtech.io/en/ch7_workspace.html" />
-  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch7/01_git_settings.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Chapter 7 · Workspace 面板：Files、Changes、Agents 與 Terminal · WoowTech Omnigent 完整指南" />
   <meta name="twitter:description" content="第 7 章導覽 Workspace 的四個分頁，說明如何檢視檔案樹、審閱變更差異、觀察子代理，以及直接看終端機輸出。" />
-  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch7/01_git_settings.png" />
   <meta name="theme-color" content="#6183FC" />
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.en" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -73,6 +73,8 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#open">開關與預設</a>
+      <a href="#view">顯示與主題</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
@@ -95,63 +97,171 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>對話串告訴你代理<strong>說</strong>了什麼，Workspace 面板告訴你它在那台機器上<strong>動</strong>了什麼。這兩件事不會自動一致——代理可以講得頭頭是道，同時改錯檔案。</p>
+        <p>這一章講的是畫面右側那塊工作區面板：怎麼叫出來、怎麼讓它預設就開著、它看的是哪個目錄，以及它跟對話串的呈現方式怎麼搭配。</p>
+        <div class="callout warn">
+          <p><strong>先講清楚本章的邊界。</strong>本章標題列出 Files、Changes、Agents、Terminal 四個分頁，那是本書規劃的主題。2026-09-09 對正式站的實機記錄涵蓋的是 Workspace 面板的開關、預設狀態與外觀設定，<strong>沒有逐一拍下四個分頁裡的內容</strong>。所以本章不描述各分頁的欄位、按鈕或差異呈現方式，等下一次實機補拍再補上。本章寫的每一條，都是那份記錄支持得住的。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：兩塊側邊欄，兩種視角</h2>
+        <p>介面上有兩塊可以收合的側邊欄，各自有專屬快捷鍵：</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="兩塊側邊欄與快捷鍵資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">面板</th><th scope="col">快捷鍵</th><th scope="col">它給你的視角</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">對話側邊欄</th><td><code>⌘⌥[</code></td><td>導覽：New session、Automations、Inbox、Usage，以及 Pinned 與 Projects 底下的 session 清單</td></tr>
+              <tr><th scope="row">工作區側邊欄（Workspace）</th><td><code>⌘⌥]</code></td><td>執行現場：這個 session 在目標機器上動到的東西</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout terminology">
+          <p><strong>工作區（Workspace）</strong>：這個 session 實際動手的那台機器上的那個目錄。它由 Composer 下層第二個選擇器（工作目錄）與第三個選擇器（worktree）共同決定，不是一個獨立設定。</p>
+        </div>
+        <p>這句定義是本章最重要的一句話：<strong>面板顯示的範圍不歸面板管，歸開 session 時選的那兩個選擇器管。</strong>面板裡看不到你要的檔案，通常不是面板壞了，是這個 session 從一開始就指向別的地方。</p>
+        <figure class="shot">
+          <img src="../assets/screenshots/ch7/01_git_settings.png" alt="Git 設定頁有隨機 worktree 開關與預設基底分支欄位" />
+          <figcaption><strong>圖 7-1</strong>「設定 → Git」。開啟隨機 worktree 之後，每個新 session 都會在自己的分支上動手，不會弄髒你正在用的工作目錄。</figcaption>
+        </figure>
+            </section>
+
+      <section id="open" data-nav="開關與預設">
+        <h2 data-icon="modes">開關它，並決定它預設要不要開著</h2>
+        <p>臨時開關用 <code>⌘⌥]</code>。要改預設值，路徑是 <code>Settings</code> → <code>Appearance</code> → <strong>Workspace panel</strong>，兩個選項：</p>
+        <ul>
+          <li><code>Open</code>：進到 session 畫面時面板就是展開的</li>
+          <li><code>Collapsed</code>：預設收起，需要時再用快捷鍵叫出來</li>
+        </ul>
+        <p>怎麼選看你的螢幕與工作方式。在筆電上兩塊側邊欄同時展開會把對話串擠得很窄，這時把工作區設成 <code>Collapsed</code>、需要查證時才 <code>⌘⌥]</code> 打開，會比一直開著好用。反過來，如果你正在盯一個會改很多檔案的任務，設成 <code>Open</code> 少按一次鍵。</p>
+        <div class="callout tip">
+          <p>同一頁還有 <strong>Translucent sidebars</strong>（半透明側邊欄）。這是純視覺選項，不影響面板內容，但在淺色主題下關掉它，面板與對話串的邊界會比較清楚。</p>
+        </div>
       </section>
+
+      <section id="view" data-nav="顯示與主題">
+        <h2 data-icon="theme">對話串怎麼呈現，終端機用什麼配色</h2>
+        <p>有兩個設定會影響你「看得到多少執行細節」，兩個都在 <code>Settings</code> → <code>Appearance</code>。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="外觀設定與作用資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">設定</th><th scope="col">選項</th><th scope="col">實際差別</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Default transcript view</th><td><code>Chat</code> / <code>Terminal</code></td><td>對話串的預設呈現方式。這是對話串的設定，不是工作區面板的分頁</td></tr>
+              <tr><th scope="row">Terminal theme</th><td><code>Match app</code> / <code>Light</code> / <code>Dark</code></td><td>終端機輸出的配色。可以跟整個介面的深淺色不同</td></tr>
+              <tr><th scope="row">Mode</th><td><code>System</code> / <code>Light</code> / <code>Dark</code></td><td>整個介面的深淺色</td></tr>
+              <tr><th scope="row">Code font size / family</th><td>數值與字體</td><td>程式碼與終端機輸出的字級與字體</td></tr>
+              <tr><th scope="row">Heavier code font</th><td>開 / 關</td><td>把等寬字體加粗，低對比螢幕上比較看得清</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><code>Default transcript view</code> 值得多說一句。<code>Chat</code> 是整理過的對話式呈現，<code>Terminal</code> 是原始終端機式的呈現。想確認代理實際跑了什麼指令、輸出了什麼，後者資訊比較完整；想快速讀懂它在做什麼，前者比較省力。這是預設值，不是鎖定值。</p>
+        <div class="callout tip">
+          <p><code>Terminal theme</code> 設成 <code>Match app</code> 之外的值是有實際用途的：整個介面用淺色、終端機維持深色，長時間盯輸出比較不刺眼，而且深淺交界本身就是一個「這段是機器輸出」的視覺提示。</p>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>本章的步驟需要一個<strong>已經跑過至少一個回合</strong>的 session。完全空白的 session 沒東西可看，你會分不清是面板沒內容還是設定沒生效。</p>
+        <ul>
+          <li>依第 5、6 章開一個 session，Host 有綠點，工作目錄挑一個你熟悉的資料夾</li>
+          <li>先派一個只讀的小任務（例如列出目錄內容），讓它跑完一輪</li>
+          <li>記住你選的工作目錄叫什麼名字，等一下要拿來對照</li>
+        </ul>
+        <div class="callout">
+          <p>如果這個 session 開了 worktree，代理看到的是另開的那一份，不是原本的目錄。對照的時候要拿 worktree 那一份來比，不然你會覺得「代理改的東西不見了」。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">把工作區面板調成你順手的樣子</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先用快捷鍵把兩塊側邊欄各開關一次</h3>
+            <p>在一個跑過的 session 畫面上按 <code>⌘⌥]</code>，再按一次收回；然後按 <code>⌘⌥[</code>，再按一次收回。目的是先確定你分得清哪塊是工作區、哪塊是對話導覽，之後排錯才不會弄混。</p>
+          </li>
+          <li>
+            <h3>把面板打開，跟對話串逐句對照</h3>
+            <p>面板開著，往回讀代理這一輪說過的話。它說讀了某個檔，面板裡有沒有；它說改了什麼，面板裡看不看得出來。<strong>對不上就是警訊</strong>，這時該做的是停下來確認機器與目錄，不是繼續往下派工。</p>
+          </li>
+          <li>
+            <h3>設定面板的預設狀態</h3>
+            <p>到 <code>Settings</code> → <code>Appearance</code>，把 <strong>Workspace panel</strong> 設成 <code>Open</code> 或 <code>Collapsed</code>。設完回到 session 畫面重新進入一次，確認新開的畫面是你要的狀態。</p>
+          </li>
+          <li>
+            <h3>調對話串呈現與終端機配色</h3>
+            <p>同一頁把 <strong>Default transcript view</strong> 設成 <code>Chat</code> 或 <code>Terminal</code>，把 <strong>Terminal theme</strong> 設成 <code>Match app</code>、<code>Light</code> 或 <code>Dark</code>。字太小就一併調 <code>Code font size</code>，看不清楚就打開 <code>Heavier code font</code>。</p>
+          </li>
+          <li>
+            <h3>存一份設定，然後再跑一個會寫檔的小任務</h3>
+            <p>調順之後按 <code>Export</code> 把外觀設定存下來。接著派一個真的會建立檔案的小任務（例如在該目錄下寫一個測試用的文字檔），觀察面板在「有變更」時跟「只讀」時的差別。這一步是本章唯一需要動到檔案的地方，請在練習用目錄做。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>四個檢查，全部通過才算把這個面板收進工具箱。</p>
+        <ul>
+          <li>閉著眼睛按 <code>⌘⌥]</code> 能開關工作區面板，按 <code>⌘⌥[</code> 能開關對話側邊欄，不會按反</li>
+          <li>關掉分頁重新進入 session，面板的展開狀態符合你在 <code>Appearance</code> 設的值</li>
+          <li>面板顯示的範圍，跟你開 session 時選的工作目錄一致（有開 worktree 的話是 worktree 那一份）</li>
+          <li>剛才那個會寫檔的小任務，在面板上留下了你看得出來的痕跡</li>
+        </ul>
+        <div class="callout">
+          <p>還有一條間接證據可以用：Inbox 的空狀態文案寫著「當代理需要你的輸入，<strong>或有人在某個檔案上留言</strong>，就會出現在這裡」。也就是檔案層級的留言不會停在工作區裡，它會走 Inbox。這條路徑屬於第 9 章。</p>
+        </div>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>按了快捷鍵沒反應，或開到的是另一塊側邊欄</strong>：兩個快捷鍵只差一個括號方向，<code>⌘⌥]</code> 是工作區、<code>⌘⌥[</code> 是對話側邊欄，很容易按反。按 <code>⌘/</code> 叫出快捷鍵表對照一次。</li>
+          <li><strong>面板裡沒有你預期的檔案</strong>：九成是範圍問題不是面板問題。依序確認三件事：這個 session 的 Host 是不是你以為的那台、工作目錄選的是不是那個資料夾、有沒有開 worktree 導致代理看的是另一份。三者的設定位置都在 Composer 下層（第 5、6 章）。</li>
+          <li><strong>每次進 session 都要手動開面板</strong>：那是預設值的問題。到 <code>Settings</code> → <code>Appearance</code> 把 <strong>Workspace panel</strong> 從 <code>Collapsed</code> 改成 <code>Open</code>。</li>
+          <li><strong>終端機輸出的字太小或看不清</strong>：調 <code>Code font size</code>，必要時打開 <strong>Heavier code font</strong>。整體配色刺眼就把 <code>Terminal theme</code> 從 <code>Match app</code> 改成 <code>Dark</code> 或 <code>Light</code>，它可以跟介面主題不同。</li>
+          <li><strong>畫面被兩塊側邊欄擠到沒地方讀對話</strong>：把工作區設成 <code>Collapsed</code>，需要時才用 <code>⌘⌥]</code> 叫出來；或關掉 <strong>Translucent sidebars</strong> 讓邊界更清楚。外觀調亂了用同一頁的 <code>Reset to defaults</code> 一次還原。</li>
+          <li><strong>想把某個 session 的畫面分享給同事一起看，卻被擋下來</strong>：這不是面板的限制，是分享設定。管理端的 <code>Sharing</code> 有一個 <code>Read only (restricted)</code> 模式，在該模式下<strong>工作目錄是家目錄或檔案系統根的 session 完全不可分享</strong>。要分享就換一個範圍明確的工作目錄重開，細節在第 9 章。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品邊界與版本說法，以下列來源的該 commit 內容為準，不以主分支的當下狀態為準。</p>
         <ul>
-          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件（0.1.15）</a></li>
         </ul>
+        <p><code>Appearance</code> 頁的設定項目（Workspace panel、Default transcript view、Terminal theme、Translucent sidebars、字體與 Export／Import／Reset）、兩組側邊欄快捷鍵、以及 Inbox 與 Sharing 的原文文案，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。工作區面板四個分頁的內部畫面不在該次記錄範圍內，本章據實標示為未查證。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>為什麼這一章不介紹 Files、Changes、Agents、Terminal 四個分頁的內容？</summary>
+          <div class="body"><p>因為本書的事實基礎是 2026-09-09 那次實機記錄，而那次記錄沒有逐一拍下四個分頁裡的畫面。本站的規矩是沒有實機依據的畫面不寫，寧可少寫也不編。你打開面板就會看到實際的分頁，那個才是準的；本章教你的是怎麼把面板叫出來、怎麼確認它看的是對的目錄，這兩件事沒有分頁內容也成立。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>這一章的設定是逐個 session 的還是全域的？</summary>
+          <div class="body"><p>全域的。<code>Workspace panel</code>、<code>Default transcript view</code>、<code>Terminal theme</code> 都在 <code>Settings</code> → <code>Appearance</code>，屬於你這個帳號的個人偏好，改了對所有 session 生效，也不影響其他成員。逐個 session 會變的是工作目錄與 worktree，那兩個在 Composer 下層，屬於第 6 章。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>面板顯示的內容跟我在那台機器上直接看到的不一樣，是同步延遲嗎？</summary>
+          <div class="body"><p>先不要往延遲想。最常見的原因是這個 session 開了 git 工作樹（worktree），代理動的是另開的那一份，你比對的卻是原本的目錄，兩邊當然不同。第二常見的原因是機器選錯了。確認方式在故障排除的第二條，按 Host、工作目錄、worktree 的順序查。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>三種部署方式的工作區面板會不一樣嗎？</summary>
+          <div class="body"><p>面板本身是同一套網頁介面，三種部署方式（Home Assistant 附加元件、Rootless Podman、k3s Helm）不會因此長得不同。會不同的是它連到的那台機器上有什麼檔案，以及該部署方式有沒有內建執行端。版本落差以本章「固定來源」指向的 commit 為準，跨部署的差異比較在第 19 章。</p></div>
+        </details>
+        <details class="faq">
+          <summary>我調外觀調到很亂，可以整組還原嗎？</summary>
+          <div class="body"><p>可以。<code>Settings</code> → <code>Appearance</code> 頁底有 <code>Reset to defaults</code>，一次還原整頁。調順的設定建議用同一排的 <code>Export</code> 存一份下來，換機器或換瀏覽器時 <code>Import</code> 回去，不用重調。這三個按鈕只影響外觀設定，不會動到你的 session 或 Project。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch6_host_harness_picker.html">
         <span class="label">← Previous</span>

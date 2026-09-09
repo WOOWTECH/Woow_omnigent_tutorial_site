@@ -1,10 +1,31 @@
 {
   "schema": "woowtech-omnigent-content-rules",
   "forbiddenTerms": [
-    { "pattern": "woowtech2026", "flags": "i", "label": "禁止寫入實際管理員密碼，一律使用佔位值" },
-    { "pattern": "\\bwoow\\s*/\\s*woowtech", "flags": "i", "label": "禁止寫入實際帳密組合" },
-    { "pattern": "\\bNode-RED\\b|node-red-guide|Woow_node_red", "flags": "i", "label": "禁止殘留模板來源產品詞彙" },
-    { "pattern": "\\bEMQX\\b|emqx-guide", "flags": "i", "label": "禁止其他站產品詞彙" }
+    {
+      "pattern": "1465\\.13|1245\\.42",
+      "flags": "i",
+      "label": "禁止寫入正式站的真實花費數字，範例金額請自行虛構"
+    },
+    {
+      "pattern": "woowtech2026",
+      "flags": "i",
+      "label": "禁止寫入實際管理員密碼，一律使用佔位值"
+    },
+    {
+      "pattern": "\\bwoow\\s*/\\s*woowtech",
+      "flags": "i",
+      "label": "禁止寫入實際帳密組合"
+    },
+    {
+      "pattern": "\\bNode-RED\\b|node-red-guide|Woow_node_red",
+      "flags": "i",
+      "label": "禁止殘留模板來源產品詞彙"
+    },
+    {
+      "pattern": "\\bEMQX\\b|emqx-guide",
+      "flags": "i",
+      "label": "禁止其他站產品詞彙"
+    }
   ],
   "locale": "en",
   "forbidPoliteYou": false

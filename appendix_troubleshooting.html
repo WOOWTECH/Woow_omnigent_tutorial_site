@@ -70,12 +70,16 @@
     </ol>
     <div class="toc-in-chapter">
       <h2>本章</h2>
-      <a href="#why">為何需要本章</a>
-      <a href="#concepts">核心觀念</a>
-      <a href="#prep">開始之前</a>
-      <a href="#steps">操作步驟</a>
-      <a href="#verify">怎麼確認做對了</a>
-      <a href="#troubleshoot">故障排除</a>
+      <a href="#why">怎麼用這份表</a>
+      <a href="#concepts">五層定位法</a>
+      <a href="#prep">排查前先收集</a>
+      <a href="#login">登入、成員與分享</a>
+      <a href="#remote">Runner 與主機連線</a>
+      <a href="#ai">Session 與代理行為</a>
+      <a href="#cost">用量、成本與排程</a>
+      <a href="#steps">通用排查流程</a>
+      <a href="#verify">怎麼確認修好了</a>
+      <a href="#troubleshoot">升級與最後手段</a>
       <a href="#sources">固定來源</a>
       <a href="#faq">常見問題</a>
     </div>
@@ -91,67 +95,213 @@
         <div class="kicker">附錄 B</div>
         <h1>附錄 B：疑難排解全集</h1>
       </div>
-      <section id="why" data-nav="為何需要本章">
-        <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+      <section id="why" data-nav="怎麼用這份表">
+        <h2 data-icon="why">怎麼用這份表</h2>
+        <p>前面二十二章的每一章結尾都有自己的故障排除段落，那是<strong>你已經知道問題出在哪一章</strong>的時候用的。實際遇到狀況時通常相反：畫面卡住了，你不知道該翻哪一章。</p>
+        <p>這份附錄把全書的徵狀收攏成幾張<strong>徵狀 → 可能原因 → 處置</strong>的對照表，按「壞在哪一層」分組。用法是：先看下一節的五層定位法判斷層次，再跳到對應的表找徵狀，最後照著處置做，需要細節時回到表格標的章次。</p>
+        <div class="callout tip">
+          <p>大部分問題不需要重裝。這份表裡真正需要動到基礎設施的處置不到三分之一，其餘都是設定選項、權限範圍或版本落差。</p>
+        </div>
       </section>
-      <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+
+      <section id="concepts" data-nav="五層定位法">
+        <h2 data-icon="concept">五層定位法</h2>
+        <p>一個任務從你按下送出到拿回答案，中間經過五層。<strong>先判斷斷在哪一層，可能的原因就少掉八成。</strong></p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="五個層次與各層典型徵狀資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">層次</th><th scope="col">這一層負責什麼</th><th scope="col">壞在這裡的典型長相</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">1. 瀏覽器</th><td>顯示介面、送出你的輸入</td><td>畫面空白、按鈕沒反應、重新整理就好了</td></tr>
+              <tr><th scope="row">2. Server</th><td>帳號、Session 資料、排程、成本紀錄</td><td>登不進去、清單載不出來、整站都不動</td></tr>
+              <tr><th scope="row">3. Runner</th><td>在被指揮的那台機器上常駐、接收任務</td><td>主機沒有綠點、送出去像掉進黑洞</td></tr>
+              <tr><th scope="row">4. Harness</th><td>實際幹活的 AI 工具（Claude Code、Codex、Pi…）</td><td>只有某一個框架不行、標著 <code>needs setup</code></td></tr>
+              <tr><th scope="row">5. 模型供應商</th><td>你自己的 AI 帳號與額度</td><td>回覆到一半中斷、成本異常、只有某個模型失敗</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>判斷方式很粗暴但有效：<strong>換一台主機還壞就不是第 3 層，換一個框架還壞就不是第 4 層，換一個模型還壞就不是第 5 層。</strong>三個都換過還壞，才往第 2 層看。</p>
       </section>
-      <section id="prep" data-nav="開始之前">
-        <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
-      </section>
-      <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
-        <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
-        </ol>
-      </section>
-      <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
-      </section>
-      <section id="troubleshoot" data-nav="故障排除">
-        <h2 data-icon="troubleshoot">故障排除</h2>
+
+      <section id="prep" data-nav="排查前先收集">
+        <h2 data-icon="plan">排查前先收集這五樣</h2>
+        <p>沒有這五樣，任何人（包括你自己一小時後）都很難判斷。</p>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>哪一個 Session</strong>：名稱或連結。分享出去的連結最好用，別人點得開就看得到同一份紀錄。</li>
+          <li><strong>哪一台主機、哪一個框架</strong>：Composer 底部的兩個選單各選了什麼，主機前面有沒有綠點。</li>
+          <li><strong>什麼時間</strong>：對照 Usage 頁的每日成本長條圖，看那段時間有沒有東西在跑。</li>
+          <li><strong>做了什麼之後開始的</strong>：升級、改設定、換網路、加成員——變更幾乎都是原因。</li>
+          <li><strong>是不是每次都這樣</strong>：新開一個乾淨的 Session 送同一句話還會不會發生。這一條最常直接指出答案。</li>
         </ul>
       </section>
+
+      <section id="login" data-nav="登入、成員與分享">
+        <h2 data-icon="login">登入、成員與分享</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="登入與存取層的徵狀原因處置資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">徵狀</th><th scope="col">可能原因</th><th scope="col">處置</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">介面開得起來，但一直退回登入表單</th><td>管理員已經被宣告，你輸入的密碼不對</td><td>回部署端的設定檔看實際被設成什麼，不要憑印象。見第 2 章與附錄 A</td></tr>
+              <tr><th scope="row">成員忘記密碼</th><td>沒有自助重設流程</td><td>管理員到 Settings → Members，該列的 ACTIONS 欄有 Reset。第 11 章</td></tr>
+              <tr><th scope="row">邀請進來的成員看不到你的 Session</th><td>這是預設行為，不是故障</td><td>要給對方看就用分享；可見範圍與角色差異見第 11 章</td></tr>
+              <tr><th scope="row">Share 對話框裡沒有公開存取的切換</th><td>管理端把 Public access 關掉了</td><td>Settings → Sharing 打開它。注意：<strong>已經公開的 Session 在被撤銷之前仍然是公開的</strong></td></tr>
+              <tr><th scope="row">某些 Session 完全不能分享</th><td>分享模式設在唯讀（受限），工作目錄是家目錄或檔案系統根的 Session 被完全排除</td><td>換一個工作目錄開新 Session，或請管理員調整分享模式。第 9 章</td></tr>
+              <tr><th scope="row">分享出去只能讀，改不了</th><td>分享模式設在唯讀，新的分享上限就是唯讀</td><td>需要協作編輯的話，管理端要把分享模式切到開啟。第 9 章</td></tr>
+              <tr><th scope="row">健康檢查一直是綠的，介面卻是死的</th><td>探針指到 <code>/healthz</code>，前端萬用路由對它一律回 200</td><td>改回 <code>/health</code>。第 20 到 22 章與附錄 A</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="remote" data-nav="Runner 與主機連線">
+        <h2 data-icon="remote">Runner 與主機連線</h2>
+        <p>這一層的問題最多，也最容易被誤判成「Omnigent 壞了」。第 18 章有完整的診斷流程。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Runner 與主機連線的徵狀原因處置資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">徵狀</th><th scope="col">可能原因</th><th scope="col">處置</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">主機清單是空的</th><td>Home Assistant 附加元件只包伺服器，不含 Runner</td><td>從區網任何一台機器註冊一台上去。第 16 章、附錄 A 第五步</td></tr>
+              <tr><th scope="row">主機在清單裡，但前面沒有綠點</th><td>那台機器上的 Runner 行程沒在跑，或連不到伺服器</td><td>先確認那台機器開著、Runner 服務還活著，再看網路。第 18 章</td></tr>
+              <tr><th scope="row">綠點在，送出去卻沒有任何回應</th><td>pi 的擴充套件衝突，Runner 收得到但跑不動</td><td>清掉那台機器上 pi 的外掛目錄，並把衝突的登入設定從 pi 的驗證檔移除，重新連線</td></tr>
+              <tr><th scope="row">Runner 啟動之後就卡住不動</th><td>它在伺服器還沒宣告管理員的時候嘗試登入，失敗後就一直等</td><td>先確認伺服器已完成管理員宣告再啟動 Runner；k3s 版由 chart 的前置容器擋住這個順序問題</td></tr>
+              <tr><th scope="row">早就關掉的機器還留在主機清單裡</th><td>離線主機不會自動消失</td><td>k3s 套件有每日清理排程，但目前是<strong>只報告不刪除</strong>的模式，因為上游還沒提供刪除端點。現階段忽略它們即可</td></tr>
+              <tr><th scope="row">某個框架旁邊標著 <code>needs setup</code></th><td>那台主機上還沒把那個框架設定好</td><td>要用就去該主機設定；不想看到就到 Settings → Appearance 打開隱藏未設定框架的開關。第 6、17 章</td></tr>
+              <tr><th scope="row">同一個任務在 A 主機好、B 主機壞</th><td>兩台機器上的框架版本或憑證不同</td><td>這是預期的差異，不是故障。第 6 章解釋為什麼同一句話換機器結果會不同</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="ai" data-nav="Session 與代理行為">
+        <h2 data-icon="ai">Session 與代理行為</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Session 與代理行為的徵狀原因處置資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">徵狀</th><th scope="col">可能原因</th><th scope="col">處置</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">按 Enter 變成換行，送不出去</th><td>General 設定裡的送出鍵組合被切換過</td><td>關掉那個選項就是 Enter 送出、Shift+Enter 換行；打開則相反。第 5 章</td></tr>
+              <tr><th scope="row">代理跑歪了，停不下來</th><td>沒用停止鍵</td><td>按 Esc 停止當前回應，再重新描述任務。第 5 章</td></tr>
+              <tr><th scope="row">補充的訊息要等上一輪跑完才生效</th><td>沒開 Always steer</td><td>General 設定打開它，後續訊息會直接送進進行中的回合；框架支援時會折進當前工作，否則在下一回合處理</td></tr>
+              <tr><th scope="row">每次開新 Session 都跑到一個陌生的分支</th><td>Git 設定裡「總是使用隨機 worktree」是開的</td><td>關掉，或在該 Project 自己的設定裡覆寫——Project 的設定優先於全域。第 7、8 章</td></tr>
+              <tr><th scope="row">代理停在等待核准，但沒有人會來按</th><td>權限模式選到會提問的模式</td><td>互動的 Session 沒問題，<strong>排程任務一定要維持在預設模式</strong>，否則會等一個永遠不會到的核准。第 10、12 章</td></tr>
+              <tr><th scope="row">代理反覆用同樣的參數重試同一個工具</th><td>它卡在迴圈裡</td><td>先手動停掉。要治本就啟用偵測重試迴圈或偵測代理空轉那類規則。第 12 章</td></tr>
+              <tr><th scope="row">匯入本機對話之後少了一些</th><td>已經匯入過的會被跳過</td><td>這是設計行為。Settings → Import sessions 可指定機器、框架與筆數重跑</td></tr>
+              <tr><th scope="row">Inbox 一直是空的</th><td>沒有事情在等你</td><td>空狀態就是正常。代理需要你回應、或有人在檔案上留言時才會出現項目。第 9 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="cost" data-nav="用量、成本與排程">
+        <h2 data-icon="cost">用量、成本與排程</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="用量成本與排程的徵狀原因處置資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">徵狀</th><th scope="col">可能原因</th><th scope="col">處置</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Usage 頁看起來沒有資料</th><td>期間選錯了</td><td>切換 7 天／30 天／90 天／全部時間／自訂。剛裝好的站台選 7 天當然是空的。第 13 章</td></tr>
+              <tr><th scope="row">這個月的花費比預期高很多</th><td>不知道錢花在哪個框架或哪個模型上</td><td>看 Usage 頁的「依框架分」與「依模型分」兩個區塊，先定位再處理。第 13 章</td></tr>
+              <tr><th scope="row">想設上限但不知道從哪設</th><td>成本上限是規則，不是設定頁的欄位</td><td>內建目錄裡有單一 Session 累計花費、以及每位使用者每日累計花費兩種規則。第 12 章</td></tr>
+              <tr><th scope="row">明明設了規則卻沒有生效</th><td>規則要自己啟用，<strong>預設一條都沒有開</strong></td><td>Settings → Policies 加上去。空的站台會顯示沒有設定任何全域規則。第 12 章</td></tr>
+              <tr><th scope="row">排程建好了，時間到卻沒跑</th><td>主機欄位留白時是在觸發當下才解析，那一刻沒有連線中的主機就跑不成</td><td>把排程指定到固定主機，或確保觸發時段一定有主機在線。第 10 章</td></tr>
+              <tr><th scope="row">排程每次都停住沒有結果</th><td>權限模式選到會提問的模式</td><td>排程是無人值守的，權限模式維持預設。第 10 章</td></tr>
+              <tr><th scope="row">在清單裡找不到某個排程</th><td>被篩選頁籤擋住了</td><td>清單上方有全部／執行中／已暫停三個頁籤，先切到「全部」再搜尋。第 10 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="steps" data-nav="通用排查流程">
+        <h2 data-icon="steps">通用排查流程</h2>
+        <p>找不到對應徵狀時，照這四步走。</p>
+        <ol class="steps">
+          <li>
+            <h3>先分層</h3>
+            <p>用五層定位法問三個問題：換一台主機還壞嗎？換一個框架還壞嗎？換一個模型還壞嗎？三個答案就能把層次縮到一層。這一步不要跳過，跳過的代價通常是花一小時查錯地方。</p>
+          </li>
+          <li>
+            <h3>用一個乾淨的 Session 重現</h3>
+            <p>開一個新 Session，指定同一台主機、同一個框架，送最短的一句話（例如請它列出工作目錄的檔案）。重現得出來就是環境問題，重現不出來就是原本那個 Session 的脈絡或設定問題。</p>
+          </li>
+          <li>
+            <h3>從最外層往內排除</h3>
+            <p>重新整理頁面 → 重新登入 → 換主機 → 換框架 → 換模型。每換一項只換一項，換完就重試那句最短的話。一次改兩個東西，你會不知道是哪一個治好的。</p>
+          </li>
+          <li>
+            <h3>看該層的紀錄</h3>
+            <p>第 2 層看伺服器記錄，第 3 層看那台機器上 Runner 的記錄，第 4 層看 Workspace 面板的 Terminal 分頁——代理實際跑了什麼指令、拿到什麼輸出都在那裡。第 7 章介紹那個面板。</p>
+          </li>
+          <li>
+            <h3>還是不行才動基礎設施</h3>
+            <p>重啟單一元件，不要整台重來。三種部署都可以只重啟伺服器或只重啟 Runner，指令在附錄 A 對應的來源倉庫裡。解除安裝腳本預設保留資料卷，但這是最後手段，做之前先確認備份。</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="verify" data-nav="怎麼確認修好了">
+        <h2 data-icon="test">怎麼確認修好了</h2>
+        <p>改完設定不要只看畫面「好像正常了」。這四個確認做完才算修好。</p>
+        <ul>
+          <li><strong>主機前面有綠點</strong>：Composer 底部的主機選單，狀態是即時的。</li>
+          <li><strong>最短的那句話走得完</strong>：用步驟二那個乾淨 Session 再送一次，要看到完整回覆而不是停在中間。</li>
+          <li><strong>Usage 頁多了一筆</strong>：成本有跳動代表請求真的送到模型供應商並且算進帳了，這是整條鏈路通了的最硬證據。</li>
+          <li><strong>原本失敗的那件事重做一次</strong>：不要只驗證替代路徑。用原本的主機、原本的框架、原本的任務再跑一次。</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" data-nav="升級與最後手段">
+        <h2 data-icon="troubleshoot">升級與最後手段</h2>
+        <ul>
+          <li><strong>升級後介面多了或少了東西</strong>：三種部署的版本本來就不同步，各自跟著上游走。先看該部署的固定來源，確認你手上的版本到底是哪一版，再判斷是不是真的少了功能。</li>
+          <li><strong>升級後 Runner 連不上或行為怪異</strong>：Runner 那端的 pi 版本要跟共用資料磁碟區的版本走在一起。那個磁碟區上的資料格式<strong>沒有版本標記</strong>，跨版本混用不會報錯，只會壞得很奇怪。Podman 套件的文件對這件事有明確警告。</li>
+          <li><strong>升級或重啟資料庫後，伺服器很久才恢復</strong>：k3s 版的 chart 內建連線池 sidecar 就是為了這件事。確認它沒有被關掉，而且連線池模式維持在 <code>session</code>——換成其他模式會打壞伺服器用的預備語句。</li>
+          <li><strong>真的要重來的時候</strong>：先備份。三種部署的資料都在 Postgres 裡，包含所有 Session、成本紀錄與成員資料。Home Assistant 版跟著附加元件備份走；另外兩種的解除安裝腳本預設保留資料卷，但加上清除參數就會一起刪掉。</li>
+          <li><strong>要回報問題的時候</strong>：附上「排查前先收集這五樣」那一節列的五項，加上你已經排除掉的層次。少了這些，對方只能從頭問一遍。</li>
+        </ul>
+      </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本附錄涉及部署層的徵狀與處置，以下列來源在該 commit 的內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package/tree/33dd16c985e82e8cfde301f24de385c313477d24" rel="noopener">WoowTech Omnigent Rootless Podman 套件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件</a></li>
         </ul>
+        <p>介面行為與設定文案的部分，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。表格中提到的章次以本書為準。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>找不到我的徵狀怎麼辦？</summary>
+          <div class="body"><p>照「通用排查流程」那五步走一遍。那五步的設計就是為了處理沒被收進表裡的狀況——它不告訴你答案，但會把可能的原因從五層縮到一層。縮到一層之後，回去讀該層對應的正文章節，通常就找得到了。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>重裝是不是最快的解法？</summary>
+          <div class="body"><p>幾乎不是。這份表裡真正需要動基礎設施的處置不到三分之一，而重裝會讓你失去所有 Session、成本紀錄與成員設定，還不會解決原因——因為多數原因是設定選項或版本落差，重裝之後同樣的設定會再壞一次。真的要重來之前，先確認備份。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>為什麼很多徵狀的處置都是「去某個設定頁打開某個開關」？</summary>
+          <div class="body"><p>因為這套系統的預設值偏保守。分享預設不對外、規則預設一條都沒啟用、離線主機不自動清除、匯入過的對話會被跳過——這些都是刻意的，避免預設值幫你做了你沒同意的決定。代價就是「沒生效」常常不是壞掉，而是還沒開。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>成本忽然變高，我可以事後查是誰花的嗎？</summary>
+          <div class="body"><p>可以看得出花在哪個框架、哪個模型、哪一天，這是 Usage 頁提供的三種拆分方式。要事前防止，用內建目錄裡的單一 Session 累計花費與每位使用者每日累計花費兩種規則設閘。第 12、13 章分別講規則與判讀方式。</p></div>
+        </details>
+        <details class="faq">
+          <summary>這份表會跟著版本更新嗎？</summary>
+          <div class="body"><p>表格內容綁在「固定來源」區塊指向的那幾個 commit，以及 2026-09-09 的實機記錄。上游改版之後畫面可能不一樣，但分層的邏輯與五步流程不會過期。看到跟書上不符的畫面，先當成版本差異處理，不要當成自己操作錯誤。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="appendix_install_quickstart.html">
         <span class="label">← 附錄 A</span>

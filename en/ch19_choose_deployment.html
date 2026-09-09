@@ -73,6 +73,9 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#compare">決策表</a>
+      <a href="#cost">真正的成本</a>
+      <a href="#versions">版本落差</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
@@ -95,65 +98,182 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>前面十八章都假設服務已經架好。第五部要做的事相反：<strong>把整套 Omnigent 架在你自己這邊。</strong>本書提供三條路線，第 20 到 22 章各講一條。</p>
+        <p>這一章不裝任何東西，只幫你決定走哪一條。順序很重要——<strong>先決定跑在哪台機器、跑在什麼底座上，再決定怎麼裝。</strong>裝法選錯，痛的不是今天，是三個月後的升級與備份。那時候要換，成本高很多。</p>
+        <div class="callout tip">
+          <p>如果你只是想趕快看到畫面、之後再認真決定，選門檻最低的那一條，把它當成試用。三種都是同一套 Omnigent，介面完全一樣，你在試用版學到的操作不會白費。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">三種口味，同一套產品</h2>
+        <p>第一件要澄清的事：<strong>三種部署跑的是同一套 Omnigent。</strong>側邊欄、Composer、Automations、Settings 的十一個分頁，長得一模一樣。本書第 1 到 14 章不會因為你選哪一種而改變一個字。</p>
+        <p>差別集中在三件事上：</p>
+        <ul>
+          <li><strong>誰幫你管容器</strong>：有人幫你管，你就少一層事；沒人幫你管，彈性換成你的時間。</li>
+          <li><strong>裝完之後還缺什麼</strong>：不是每一種部署都內建執行端。缺的話，裝完伺服器還要照第 16 章接一台機器上去。</li>
+          <li><strong>升級與備份誰負責</strong>：這一項在安裝當天完全感覺不到，卻是三個月後唯一有感的差別。</li>
+        </ul>
+        <div class="callout warning">
+          <p>不管你選哪一種，裝完的驗收標準都一樣：<strong>Host picker 裡真的有一台亮綠點的主機。</strong>沒有的話，服務起來了但沒人幹活。第 15 章解釋這個取捨，第 16 章給接法。</p>
+        </div>
       </section>
+
+      <section id="compare" data-nav="決策表">
+        <h2 data-icon="compare">三條路線的決策表</h2>
+        <p>橫著看是一種部署的完整樣貌，直著看是同一個面向的三種答案。先找到你手上已經有的機器那一欄，再往下讀。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="三種部署方式的前提、安裝與維運比較資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">面向</th><th scope="col">Home Assistant 附加元件</th><th scope="col">Rootless Podman</th><th scope="col">k3s Helm</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">前提條件</th><td>已經有一台在跑 Home Assistant 的機器</td><td>一台 Linux 機器，能跑免 root 的容器</td><td>一組已經在跑的 k3s 叢集</td></tr>
+              <tr><th scope="row">安裝方式</th><td>在 Home Assistant 裡當附加元件裝，設定頁填欄位</td><td>以 Quadlet 管理的三個容器</td><td>套用 Helm 圖表</td></tr>
+              <tr><th scope="row">怎麼進到畫面</th><td>Home Assistant 側邊欄的內嵌面板，另有區網埠可直連</td><td>直接連那台機器上的埠</td><td>由叢集的對外通道決定</td></tr>
+              <tr><th scope="row">多台執行端</th><td>本書不涵蓋</td><td>本書不涵蓋</td><td>圖表本身就以多執行端為前提</td></tr>
+              <tr><th scope="row">資料放哪</th><td>跟著附加元件的資料目錄</td><td>共用的資料磁碟區，三個容器都掛</td><td>叢集裡的資料庫，另有連線池</td></tr>
+              <tr><th scope="row">你要自己顧的</th><td>幾乎只有設定頁那幾欄</td><td>Quadlet 單元與磁碟區</td><td>叢集、資料庫、連線池、對外通道</td></tr>
+              <tr><th scope="row">升級路徑</th><td>走 Home Assistant 的附加元件更新流程</td><td>換映像檔後重啟單元</td><td>重新套用圖表</td></tr>
+              <tr><th scope="row">出事要看幾層</th><td>兩層：附加元件與底下的服務</td><td>三層：單元、容器、服務</td><td>四層以上：叢集、Pod、資料庫、服務</td></tr>
+              <tr><th scope="row">本書章次</th><td>第 20 章</td><td>第 21 章</td><td>第 22 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>一句話版本：<strong>已經有 Home Assistant 就走第一條；有一台閒置 Linux、不想碰 Kubernetes 就走第二條；要多台執行端或要撐得住一台掛掉，才走第三條。</strong></p>
+      </section>
+
+      <section id="cost" data-nav="真正的成本">
+        <h2 data-icon="cost">真正的成本是時間，不是錢</h2>
+        <p>三種部署都<strong>不含模型費用</strong>。你付給 AI 供應商的錢跟選哪一種無關，一樣會按框架與模型記在 Usage 頁上（第 13 章）。所以比較它們的時候，比的是你自己的時間。</p>
+        <ul>
+          <li><strong>安裝當下</strong>：這是唯一一次性的成本，也是最不重要的一項。多花一個小時裝完，之後三年都不會再想起這件事。</li>
+          <li><strong>每次升級</strong>：這一項會重複發生。層數越多，升級要確認的東西越多。</li>
+          <li><strong>出事的時候</strong>：決策表最後一欄「出事要看幾層」就是這個成本。凌晨兩點要在四層裡面找問題，跟在兩層裡面找，感受差非常多。</li>
+          <li><strong>誰能幫你</strong>：這一項常被忽略。你身邊有人會看 Pod 嗎？沒有的話，選了叢集就等於把自己綁在唯一的維護者身上——而那個人是你。</li>
+        </ul>
+        <div class="callout">
+          <p>一個實用的判準：<strong>選你半夜還修得動的那一種。</strong>能力上限不是重點，重點是出事那一刻你能不能自己站起來。</p>
+        </div>
+      </section>
+
+      <section id="versions" data-nav="版本落差">
+        <h2 data-icon="history">三邊的版本本來就不同步</h2>
+        <p>這件事要先講，免得你之後對著畫面懷疑人生：<strong>三種部署的版本不同步是已知情況</strong>，本站的來源鎖檔案裡明確記著這件事。本書的版本基準取 Home Assistant 附加元件那一條。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="三種部署在本書中釘住的版本與 commit 資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">部署方式</th><th scope="col">本書釘住的版本</th><th scope="col">釘住的 commit（前七碼）</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Home Assistant 附加元件</th><td>0.1.15，本書的版本基準</td><td><code>8018b72</code></td></tr>
+              <tr><th scope="row">Rootless Podman</th><td>未另標版本號，只以 commit 釘住</td><td><code>33dd16c</code></td></tr>
+              <tr><th scope="row">k3s Helm</th><td>圖表 0.1.0，裡面打包的應用是 0.11.0</td><td><code>97e7d52</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>k3s 那一列的兩個數字不一樣，是正常的：<strong>圖表自己的版號跟它裝進去的 Omnigent 版號各記各的</strong>，看到 0.1.0 不代表你裝到很舊的東西。</p>
+        <div class="callout warning">
+          <p>畫面跟書上對不起來的時候，先確認你裝的是哪一版、以及你照的是不是「固定來源」釘住的那個 commit——而不是主分支的當下狀態。多數對不上的情況是版本差異，不是你裝錯。</p>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
-        <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="plan">開始之前先盤點</h2>
+        <p>決策要有材料。開始比較之前，先誠實回答四個問題：</p>
+        <ul>
+          <li><strong>你手上有什麼機器？</strong>已經在跑 Home Assistant 的那一台、閒置的 Linux 機器、或一組叢集。沒有機器就沒有選擇題，先把機器準備好。</li>
+          <li><strong>那台機器會不會被關掉？</strong>只要你打算用 Automations 排程，機器就得整天醒著。桌機不適合。</li>
+          <li><strong>誰維護？</strong>只有你自己，還是有一組人。答案是「只有我」的時候，層數少的那一種幾乎永遠是對的。</li>
+          <li><strong>要從外面連進來嗎？</strong>只在家裡區網用最省事；要從外面連，通道怎麼開得先想清楚，第 14 章的安全基線在這裡就會用上。</li>
+        </ul>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">五步做出決定</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先數機器，不要先數功能</h3>
+            <p>把你實際擁有、而且可以整天開著的機器列出來。多數人到這一步就只剩一個選項了——手上只有一台跑 Home Assistant 的小主機，決策表的第一欄就是答案。</p>
+          </li>
+          <li>
+            <h3>問誰維護，決定你能承受幾層</h3>
+            <p>對照決策表「出事要看幾層」那一列。只有你自己、而且你不想每個月碰它，就選層數少的。這一題的答案通常會直接否決 k3s，不必覺得可惜。</p>
+          </li>
+          <li>
+            <h3>問要幾台執行端</h3>
+            <p>只有一台機器要跑代理，前兩條路線都夠用。要好幾台同時跑、或要一台掛了還有別台頂上，才值得走第三條。<strong>用不到多執行端卻選了叢集，是最常見的過度設計。</strong></p>
+          </li>
+          <li>
+            <h3>決定對外怎麼進來</h3>
+            <p>區網自用最單純。要從外面連，先想清楚通道與登入，再回頭看第 14 章。這一題會影響你選哪一台機器，所以要在動手前決定，不是裝完再說。</p>
+          </li>
+          <li>
+            <h3>把決定寫下來再開始裝</h3>
+            <p>三行就好：選了哪一種、釘在哪一個 commit、資料放在哪個目錄或磁碟區。半年後要升級的人很可能就是你，而那時你已經忘了。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
-      </section>
-      <section id="troubleshoot" data-nav="故障排除">
-        <h2 data-icon="troubleshoot">故障排除</h2>
+        <h2 data-icon="test">怎麼確認你選對了</h2>
+        <p>還沒開始裝，就先用這五個問題自我檢查。答不出來的那一項，就是你之後會出事的地方：</p>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li>你能說出<strong>資料存在哪裡</strong>嗎？（說不出來，就等於沒有備份計畫）</li>
+          <li>你能說出<strong>要升級時第一步做什麼</strong>嗎？</li>
+          <li>你能說出<strong>出事時要看哪一層</strong>嗎？</li>
+          <li>那台機器<strong>半夜會不會被關掉</strong>？要排程就不能關。</li>
+          <li>裝完之後，<strong>Host picker 裡會有一台亮綠點的主機</strong>嗎？沒有的話，你還缺第 16 章那一步。</li>
         </ul>
       </section>
+
+      <section id="troubleshoot" data-nav="故障排除">
+        <h2 data-icon="troubleshoot">選錯的四種徵狀</h2>
+        <p>這一節的「故障」不是裝壞了，是選錯了。徵狀出現得比你以為的晚，所以值得先讀一遍。</p>
+        <ul>
+          <li><strong>裝好了，但 Host picker 裡一台主機都沒有</strong>：不是裝壞。不是每一種部署都內建執行端，這是預期中的一步而不是意外。回第 15 章理解為什麼，照第 16 章接一台機器上去。</li>
+          <li><strong>跑起來了，但慢得不能用</strong>：代理的工作是在執行端那一側做的。如果執行端跟服務擠在同一台小機器上，慢是必然的。把執行端挪到另一台比較實在，換部署方式通常沒用。</li>
+          <li><strong>照著倉庫的說明裝，畫面跟書上不同</strong>：先確認你用的是本章「固定來源」釘住的那個 commit，而不是主分支的當下狀態。三邊版本本來就有落差，這在來源鎖裡是已知並記錄下來的。</li>
+          <li><strong>選了叢集，但只有一台機器</strong>：能跑，代價是每次出事多看兩層。單機而且不需要多執行端的話，前兩條路線省事得多，現在換還來得及。</li>
+          <li><strong>想從一種換到另一種，資料搬不過去</strong>：本站的實機記錄沒有涵蓋跨部署搬資料的流程，本書也不提供。要換底座就當成重新開始，並且在動手拆之前先確認舊的那一套還開得起來。</li>
+        </ul>
+      </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章比較的三條路線，各自以下列來源的該 commit 內容為準。版本說法一律看這三個 commit，不看主分支的當下狀態。</p>
         <ul>
-          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件（0.1.15）</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package/tree/33dd16c985e82e8cfde301f24de385c313477d24" rel="noopener">WoowTech Omnigent Rootless Podman 套件</a></li>
-          <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件（圖表 0.1.0 / 應用 0.11.0）</a></li>
         </ul>
+        <p>三邊版本不同步這件事，記在本倉庫的 <code>docs/research/source-lock.json</code>；介面說法則來自 2026-09-09 對正式站的實機記錄 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以先裝一種，之後再換嗎？</summary>
+          <div class="body"><p>可以，但要有心理準備：本書沒有跨部署搬資料的流程，換底座實務上等於重新開始。所以「先裝來玩」是合理的，「先裝來當正式環境、之後再搬」則不建議。真的要先試，就先接受那一套裡的東西之後可能留不下來。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>三種的功能有差嗎？</summary>
+          <div class="body"><p>介面與功能是同一套。差的是底座與維運：誰幫你管容器、升級怎麼做、出事要看幾層。第 1 到 14 章講的所有操作，三種部署都適用。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>哪一種最便宜？</summary>
+          <div class="body"><p>三種都不含模型費用，那筆錢一樣按框架與模型記在 Usage 頁，跟部署方式無關。真正的差別是你的時間：安裝一次、升級很多次、出事的時候要翻幾層。最便宜的通常是你已經有機器、而且半夜修得動的那一種。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>一定要有 Home Assistant 才能走第一條路嗎？</summary>
+          <div class="body"><p>是。附加元件是裝在 Home Assistant 裡面的東西，沒有 Home Assistant 就沒有地方裝它。單純為了裝 Omnigent 而先去架一套 Home Assistant，不划算——那種情況直接看第 21 章的單機做法。</p></div>
+        </details>
+        <details class="faq">
+          <summary>我不會 Kubernetes，可以選 k3s 版嗎？</summary>
+          <div class="body"><p>技術上可以，實務上不建議。它裝完的那一天沒問題，問題會在第一次升級或第一次出事的時候出現，而那時你要在四層以上的東西裡面找原因。除非你需要多台執行端，或身邊有人本來就在顧叢集，否則前兩條路線更適合。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch18_runner_troubleshooting.html">
         <span class="label">← Previous</span>

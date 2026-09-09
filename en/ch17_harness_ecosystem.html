@@ -15,14 +15,14 @@
   <meta property="og:title" content="Chapter 17 · Harness 生態：pi、Claude Code、Codex 怎麼選 · WoowTech Omnigent 完整指南" />
   <meta property="og:description" content="第 17 章比較常見 harness 的能力邊界、認證方式與適用情境，並說明混用時的注意事項。" />
   <meta property="og:url" content="https://omnigent-guide.woowtech.io/en/ch17_harness_ecosystem.html" />
-  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch17/01_harness_picker.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Chapter 17 · Harness 生態：pi、Claude Code、Codex 怎麼選 · WoowTech Omnigent 完整指南" />
   <meta name="twitter:description" content="第 17 章比較常見 harness 的能力邊界、認證方式與適用情境，並說明混用時的注意事項。" />
-  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch17/01_harness_picker.png" />
   <meta name="theme-color" content="#6183FC" />
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.en" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -73,9 +73,12 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#catalog">目錄裡有什麼</a>
+      <a href="#setup">needs setup 的意思</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
+      <a href="#mixing">混用注意事項</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
       <a href="#faq">常見問題</a>
@@ -95,63 +98,169 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>第 16 章把你自己的機器接上來之後，Composer 中間那個 <code>Runs with</code> 下拉就不再只有一個選項。點開來會看到十一個框架加上四個代理，其中一大半後面掛著橘色的 <code>needs setup</code> 徽章。</p>
+        <p>這一章只回答三個問題：<strong>那些名字是什麼、為什麼有的能選有的不能、你該用哪一個。</strong>先講結論：<strong>你不需要全部設定</strong>，多數人長期只用一到兩個。</p>
+        <div class="callout tip">
+          <p>本書不逐一評測各框架的產出品質。事實庫記錄的是 Omnigent 這一側看得見的東西——目錄有哪些項目、設定狀態怎麼標、費用歸給誰。各框架自己的能力與計價，以它們自己的文件為準。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">兩個區塊：框架與代理</h2>
+        <p><code>Runs with</code> 打開之後是分兩區的。這個分區不是排版好看，它代表兩種不同的東西。</p>
+        <div class="callout terminology">
+          <p><strong>框架（harness）</strong>：真正在你那台機器上跑起來、動手改檔案的 AI 編碼工具。Omnigent 自己不含模型，它把你的話轉給框架，再把框架的動作播回瀏覽器。</p>
+          <p><strong>代理（agent）</strong>：下拉的第二區。它們在目錄裡另外歸一類，其中兩個項目自帶說明標籤——Polly 標 <code>Multi-agent coding</code>、Debby 標 <code>Multi-agent debate</code>。</p>
+        </div>
+        <p>同一份清單會在三個地方出現，長得一模一樣：Composer 的 <code>Runs with</code>（決定這個 session 由誰執行）、New automation 對話框的 <code>Runs with</code>（決定排程開火時由誰執行，第 10 章）、以及 Settings 的 <code>Import sessions</code> 頁（那裡是篩選條件，預設 <code>All harnesses</code>）。認得這份清單，三個畫面就一起認得了。</p>
+        <figure class="shot">
+          <img src="../assets/screenshots/ch17/01_harness_picker.png" alt="Runs with 選單分成 Harnesses 與 Agents 兩區，未設定的項目標示 needs setup" />
+          <figcaption><strong>圖 17-1</strong>框架選單。上半是 Harnesses、下半是 Agents，兩者不是同一種東西；標著 needs setup 的表示那台機器上還沒設定好。</figcaption>
+        </figure>
+            </section>
+
+      <section id="catalog" data-nav="目錄裡有什麼">
+        <h2 data-icon="records">目錄裡實際有什麼</h2>
+        <p>下拉不會一次全部攤開。第一層只放三個框架，其餘收在 <code>More</code> 的展開箭頭底下；代理區的最後一項則是 <code>Custom agents</code> 的展開箭頭。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Runs with 下拉的分區與項目資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">位置</th><th scope="col">項目</th><th scope="col">數量</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">框架區，不用展開</th><td>Claude Code、Codex、Pi</td><td>3</td></tr>
+              <tr><th scope="row">框架區，收在 <code>More</code> 裡</th><td>OpenCode、Cursor、Antigravity、Kiro、Qwen Code、Goose、Kimi、Hermes</td><td>8</td></tr>
+              <tr><th scope="row">代理區</th><td>Polly、Debby、Grok Build、Devin</td><td>4</td></tr>
+              <tr><th scope="row">代理區最後一項</th><td><code>Custom agents</code> 展開箭頭</td><td>看你自己加了幾個</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>框架合計十一個。這個數字會隨版本變動，看到跟書上不同不必緊張——要記的是分區邏輯，不是數量。</p>
       </section>
+
+      <section id="setup" data-nav="needs setup 的意思">
+        <h2 data-icon="login">橘色的 needs setup 是什麼意思</h2>
+        <p>這是整章最容易誤解的一件事。<code>needs setup</code> <strong>不是</strong>「Omnigent 不支援這個框架」，而是「<strong>你現在選的這台主機上，還沒把它設定好</strong>」。三個推論直接跟著出來：</p>
+        <ul>
+          <li><strong>狀態是逐台主機算的。</strong>同一個框架在 A 主機可用、在 B 主機標 <code>needs setup</code>，完全正常。在 Host picker 換一台機器，這份清單的標記就會跟著換一輪。</li>
+          <li><strong>設定動作不在瀏覽器裡。</strong>要讓一個框架從 <code>needs setup</code> 變成可用，做的是在那台機器上把該工具裝起來、登入好。事實庫沒有記錄任何在 Omnigent 網頁內輸入金鑰或帳密的畫面，本書因此不描述那樣的流程。</li>
+          <li><strong>看不順眼可以整批藏起來。</strong>Settings 的 <code>Appearance</code> 分頁有 <code>Hide unconfigured harnesses</code> 開關，打開之後這些項目會被隱藏，而不是標記。</li>
+        </ul>
+        <div class="callout warning">
+          <p>藏起來只是視覺乾淨，那些框架既沒有被停用，也沒有被設定好。之後你換到另一台主機、發現某個選項「不見了」，第一件事就是回 <code>Appearance</code> 把這個開關關掉再看一次。</p>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
-        <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="plan">挑之前先問自己三個問題</h2>
+        <ol>
+          <li><strong>這台主機上已經設定好哪一個？</strong>沒有標 <code>needs setup</code> 的那些就是。這是最強也最省事的篩選條件——照能用的挑，比照喜好挑務實。</li>
+          <li><strong>你要單一代理還是多代理？</strong>第一區是單一框架；第二區的 Polly 與 Debby 在目錄裡就標著 multi-agent，一個標協作寫程式、一個標互相辯論。</li>
+          <li><strong>事後需不需要分得開帳？</strong>Usage 頁有 <code>Cost by harness</code> 與 <code>Cost by model</code> 兩塊。同一件工作換不同框架各做一次，帳面上分得開（第 13 章）。</li>
+        </ol>
+        <div class="callout">
+          <p>事實庫沒有記錄各框架之間的能力差異或價目，所以本書不給「哪個比較強」的排名。真的想比，就用第三點：實測兩次，看 Usage 的數字。那是你自己這台機器、你自己這種工作的答案。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">實際挑一個來用</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先確認主機，再看框架</h3>
+            <p>Composer 底部三個 picker，第一個是 Host，名稱長得像 <code>Pi Web ChatGPT (pi5)</code>，前面有綠點表示線上。<strong>框架清單是跟著這台主機走的</strong>；主機選錯，後面看到的標記全部沒有意義。</p>
+          </li>
+          <li>
+            <h3>打開 Runs with，分清楚兩個區塊</h3>
+            <p>上半是框架、下半是代理。第一層只有三個框架，其餘要點 <code>More</code> 展開，代理區底下的 <code>Custom agents</code> 同理。第一次打開花十秒把兩區看完，之後就不會再找不到東西。</p>
+          </li>
+          <li>
+            <h3>挑一個沒有標 needs setup 的</h3>
+            <p>標了的選下去也不會動起來，缺的東西在主機那一側。如果你非用某個標著 <code>needs setup</code> 的不可，那是要到那台機器上做的事，不是在這個下拉裡能解決的。</p>
+          </li>
+          <li>
+            <h3>把 Model 與 Effort 留在 Default</h3>
+            <p>這兩個下拉預設都是 <code>Default</code>。官方說明寫得很清楚：<code>Leave on Default to use the agent's configured model, effort, and permission mode.</code>——留著不動，就是用該框架自己已經設好的那一組。還不熟的時候，這是最不容易出錯的選擇。</p>
+          </li>
+          <li>
+            <h3>用同一句話試兩個，再回 Usage 對帳</h3>
+            <p>開兩個 session、下一模一樣的指令、換框架跑，這比讀任何評測都準。隔天到 Usage 把期間切到 <code>30 days</code>，看 <code>Cost by harness</code>，兩個框架的花費會分開列。</p>
+          </li>
+          <li>
+            <h3>把用不到的藏起來</h3>
+            <p>確定長期只用一兩個之後，到 <code>Appearance</code> 打開 <code>Hide unconfigured harnesses</code>。清單會瞬間變短，往後每次開 session 都少一次猶豫。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>五個都成立，這章就算過了：</p>
+        <ul>
+          <li><code>Runs with</code> 打得開，而且你分得出上下兩區各是什麼</li>
+          <li>你打算用的那一個<strong>沒有</strong>橘色的 <code>needs setup</code></li>
+          <li>送出一句話之後真的有回覆（沒有的話，第 18 章專門處理）</li>
+          <li>Usage 的 <code>Cost by harness</code> 裡出現了那個框架的名字</li>
+          <li>打開 New automation 對話框，那裡的 <code>Runs with</code> 是同一份清單</li>
+        </ul>
       </section>
+
+      <section id="mixing" data-nav="混用注意事項">
+        <h2 data-icon="warning">混用時的三件事</h2>
+        <p>不同 session 用不同框架是常態，但有三個地方會咬人。</p>
+        <h3>一、Default 的內容會跟著框架換</h3>
+        <p><code>Model</code>、<code>Effort</code>、<code>Permission mode</code> 預設都是 <code>Default</code>，而 <code>Default</code> 的意思是「用該框架自己設定好的那一組」。所以<strong>換了框架，這三欄的實際內容就換了</strong>，即使畫面上三個字沒變。覺得「同樣設定怎麼行為不一樣」的時候，多半就是這個原因。</p>
+        <h3>二、排程用的框架不能挑會停下來問的模式</h3>
+        <p>New automation 對話框底下那段話值得整段記住：<code>Automations run unattended, so a prompting mode (Manual or Plan) will wait for approval that never comes.</code>排程時沒有人在旁邊，挑到會停下來等核准的模式，任務就卡在那裡直到你自己去看。</p>
+        <h3>三、一個 session 綁一個框架</h3>
+        <p>事實庫沒有記錄「session 進行到一半換框架」的介面。要換就開新的 session，這樣 Usage 的 <code>Cost by harness</code> 也切得乾淨。</p>
+      </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>下拉裡找不到某個框架</strong>：兩個地方看。第一，<code>Appearance</code> 是不是開了 <code>Hide unconfigured harnesses</code>；第二，它是不是收在 <code>More</code> 或 <code>Custom agents</code> 的展開箭頭裡沒點開。</li>
+          <li><strong>選項標著 needs setup，選了沒反應</strong>：這台主機上還沒把那個工具設定好。要處理就得回到那台機器上安裝並登入該工具，網頁裡沒有可以補設定的地方。</li>
+          <li><strong>換一台主機之後清單標記整個變了</strong>：正常，不是壞掉。<code>needs setup</code> 是逐台主機判定的，換機器就換一份狀態。</li>
+          <li><strong>同樣的問題，換個框架答案差很多</strong>：先看 <code>Model</code> 與 <code>Effort</code>。兩邊都顯示 <code>Default</code> 不代表兩邊一樣，<code>Default</code> 指向的是各自框架設定好的模型與力度。</li>
+          <li><strong>排程用某個框架永遠跑不完</strong>：檢查 <code>Permission mode</code>。<code>Manual</code> 或 <code>Plan</code> 這類會提示的模式，在無人值守的排程裡等的是一個永遠不會來的核准。</li>
+          <li><strong>Usage 的 Cost by harness 少了一個名字</strong>：先把期間從 <code>7 days</code> 切到 <code>30 days</code> 或 <code>All time</code> 再看。期間內沒有花費的框架不會出現在那一塊。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品邊界說法以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
         </ul>
+        <p>框架與代理的目錄、<code>needs setup</code> 徽章、<code>Hide unconfigured harnesses</code> 開關與各欄位的原文提示，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>十一個框架我全部都要設定嗎？</summary>
+          <div class="body"><p>不用，而且不建議。每設定一個，就多一組要維護的帳號與一個會過期的登入。先讓一個能穩定跑起來，真的遇到它做不好的事再加第二個。清單長不代表你要全用。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>代理區的 Polly、Debby 跟上面那些框架差在哪？</summary>
+          <div class="body"><p>目錄把它們分在不同區，而且兩個項目自帶標籤：Polly 是 <code>Multi-agent coding</code>、Debby 是 <code>Multi-agent debate</code>，字面上就是多個代理協作或互相辯論。更細的行為差異事實庫沒有記錄，本書不臆測——想知道就各開一個 session 用同一句話試，然後比結果與 Usage 的花費。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以自己加一個進去嗎？</summary>
+          <div class="body"><p>代理區最後一項是 <code>Custom agents</code> 的展開箭頭，代表這個清單容得下自訂項目。但建立自訂代理的完整流程不在本站的實機記錄範圍內，本書不寫步驟。做這件事之前，先確定手上這台主機的框架已經能穩定跑。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>為什麼同一個框架換一台電腦就要重設一次？</summary>
+          <div class="body"><p>因為框架是裝在機器上、用那台機器的帳號登入的。Omnigent 只是派工的一方，它不保管那些登入。這也是 <code>needs setup</code> 逐台主機標記的原因：它報告的是那台機器的實情，不是你的帳號設定。</p></div>
+        </details>
+        <details class="faq">
+          <summary>換框架會不會影響已經開好、跑到一半的 session？</summary>
+          <div class="body"><p>不會。框架是在開 session 的時候決定的，已經開著的照舊。事實庫沒有記錄中途換框架的介面，要換就開新的一個；分開跑，Usage 的 <code>Cost by harness</code> 也才切得乾淨。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch16_register_host.html">
         <span class="label">← Previous</span>

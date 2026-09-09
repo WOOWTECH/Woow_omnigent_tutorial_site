@@ -73,6 +73,9 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#hosts">選機器</a>
+      <a href="#harness">選代理</a>
+      <a href="#choose">怎麼挑</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
@@ -95,63 +98,187 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>同一句「把這個目錄整理一下」，丟到 A 機器動的是 A 機器上的檔案，丟到 B 機器動的是 B 機器上的檔案。這件事聽起來理所當然，但在聊天視窗用慣的人常常忘記——因為聊天視窗沒有「機器」這個變數。</p>
+        <p>Omnigent 有兩個變數：<strong>在哪裡跑</strong>，以及<strong>由誰跑</strong>。前者是 Host，後者是 Harness 或 Agent。這一章把這兩個選擇器講清楚，包括那個小綠點到底保證了什麼、以及本書對狀態顯示有哪些是不敢亂寫的。</p>
+        <div class="callout tip">
+          <p>如果你現在畫面上一台機器都沒有，先看第 16 章把主機註冊起來再回來。本章假設至少有一台可選。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：地點與人手是兩件事</h2>
+        <p>把一個 session 想成派工單，上面有兩欄要填：去哪裡、找誰。</p>
+        <div class="callout terminology">
+          <p><strong>主機（Host）</strong>：實際執行的那台機器。代理讀寫的是這台機器上的檔案，跑的是這台機器上的指令。<br />
+          <strong>框架（Harness）</strong>：實際幹活的 AI 編碼工具，例如 Claude Code、Codex、Pi。Omnigent 自己不寫程式，寫程式的是它們。</p>
+        </div>
+        <p>兩者互相獨立：同一個框架可以派到不同機器上，同一台機器上也可以換不同框架。介面上它們也分屬兩處——Host 在 Composer 下層的第一個選擇器，框架在標著 <code>Runs with</code> 的下拉選單裡。</p>
       </section>
+
+      <section id="hosts" data-nav="選機器">
+        <h2 data-icon="remote">Host 選擇器：選機器，並看懂那個綠點</h2>
+        <p>Composer 下層由左到右是三個選擇器，第一個就是 Host。實機記錄裡的顯示樣子是機器名稱前面帶一個綠點，例如 <code>Pi Web ChatGPT (pi5)</code>。</p>
+        <p>綠點的意思是<strong>這台機器目前連著</strong>。同一個線上狀態在設定裡的 <code>Import sessions</code> 頁也看得到，那裡的 <code>Machine</code> 欄位會在機器名稱旁邊直接標一個 <code>ONLINE</code> 徽章。兩處是同一件事的兩種畫法。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="主機狀態顯示查證狀況資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">狀態</th><th scope="col">畫面上怎麼顯示</th><th scope="col">本書查證狀況</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">線上</th><td>Host 選擇器：機器名稱前一個綠點</td><td>已於 2026-09-09 實機確認</td></tr>
+              <tr><th scope="row">線上</th><td>Import sessions 頁：機器名稱旁 <code>ONLINE</code> 徽章</td><td>已於 2026-09-09 實機確認</td></tr>
+              <tr><th scope="row">離線</th><td>未記錄</td><td><strong>本書未查證</strong>：該次記錄中所有機器都是線上，沒有拍到離線時的樣式</td></tr>
+              <tr><th scope="row">忙碌</th><td>未記錄</td><td><strong>本書未查證</strong>：沒有觀察到獨立的忙碌標示</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <p>本書不替離線與忙碌編一個圖示出來。實務上的判斷法是反過來的：<strong>沒有綠點就當它不能用</strong>。要確認機器到底怎麼了，看的是第 18 章的 Runner 排錯流程，不是盯著這個選擇器猜。</p>
+        </div>
+      </section>
+
+      <section id="harness" data-nav="選代理">
+        <h2 data-icon="ai">Runs with：十一個框架與四個代理</h2>
+        <p><code>Runs with</code> 下拉選單分成兩區。上面一區是框架，下面一區是代理。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Runs with 下拉選單目錄資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">區塊</th><th scope="col">直接列出的項目</th><th scope="col">收在子選單的項目</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Harnesses（共 11）</th><td>Claude Code、Codex、Pi</td><td><code>More</code> 底下：OpenCode、Cursor、Antigravity、Kiro、Qwen Code、Goose、Kimi、Hermes</td></tr>
+              <tr><th scope="row">Agents（4 加自訂）</th><td>Polly（Multi-agent coding）、Debby（Multi-agent debate）、Grok Build、Devin</td><td><code>Custom agents</code> 子選單</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>兩區的差別，從實機記錄能確定的是分類與名稱本身：Polly 標為多代理協作寫程式、Debby 標為多代理辯論。也就是說代理這一區裡至少有一部分是「一個名字底下跑多個代理」的組合，而不是單一工具。更細的行為差異在第 17 章。</p>
+        <h3>needs setup 徽章</h3>
+        <p>沒有在該主機上設定好的項目，名稱旁邊會有一個橘色的 <code>needs setup</code> 徽章。這個徽章是<strong>跟著主機走的</strong>：同一個框架在 A 機器設定好了，在 B 機器上仍然可能標著 needs setup。</p>
+        <div class="callout">
+          <p>清單太長看不下去的話，到 <code>Settings</code> → <code>Appearance</code> 打開 <strong>Hide unconfigured harnesses</strong>。開啟後這些標著 needs setup 的項目會被<strong>整個隱藏</strong>，而不只是繼續標記。只用一兩種框架的人建議開，選單會短很多。</p>
+        </div>
+      </section>
+
+      <section id="choose" data-nav="怎麼挑">
+        <h2 data-icon="compare">怎麼挑：三個問題定生死</h2>
+        <p>不需要背十一個框架的特性。每次派工照順序回答三個問題就夠了。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="派工三問與對應選擇器資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">問題</th><th scope="col">對應的選擇器</th><th scope="col">答錯的後果</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">這件事要動哪台機器上的檔案？</th><td>Host</td><td>代理在對的目錄名底下動了錯的機器的檔案</td></tr>
+              <tr><th scope="row">那台機器上，是哪個資料夾？</th><td>工作目錄（下層第二個）</td><td>找不到檔案，或動到不該動的範圍</td></tr>
+              <tr><th scope="row">這件事適合誰做，成本可接受嗎？</th><td>Runs with</td><td>做得出來但花太多，或框架沒設定好直接卡住</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>第三個問題沒有標準答案，但有一個實用的迭代法：<strong>先用你已經設定好、沒有 needs setup 徽章的那一個跑通</strong>，跑完之後到 Usage 頁看 <code>Cost by harness</code> 與 <code>Cost by model</code>，知道這類任務的實際單價之後，再決定要不要換。用猜的挑框架不會比看帳單準。</p>
+        <h3>工作目錄與 Worktree</h3>
+        <p>下層第二、三個選擇器決定代理動手的範圍。第二個是工作目錄，實機記錄的例子是 <code>home</code>；第三個是 <strong>工作樹（worktree）</strong>，決定要不要在 git 專案裡另開一份來改。</p>
+        <p>兩個相關的全域設定在 <code>Settings</code> → <code>Git</code>：</p>
+        <ul>
+          <li><strong>Always use a random worktree</strong>：在任何 git 工作區開新 session 時，一律以隨機命名的新 worktree 起始。注意 Project 自己的 Random worktree 設定會覆寫這個全域值。</li>
+          <li><strong>Default base branch</strong>：命名新 worktree 分支時自動填入的基底分支。留空就不自動填。</li>
+        </ul>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>本章的操作步驟需要：</p>
+        <ul>
+          <li>至少一台 Host 在選擇器裡顯示綠點</li>
+          <li>那台 Host 上至少有一個框架<strong>沒有</strong> <code>needs setup</code> 徽章</li>
+          <li>一個你願意讓代理讀取的目錄。第一次練習不要挑正在上線的專案</li>
+        </ul>
+        <div class="callout warn">
+          <p>選 Host 等於把某台機器的檔案交給代理。挑機器之前先想清楚那台上面有什麼，特別是家目錄。分享設定裡有一個 <code>Read only (restricted)</code> 模式，就是專門針對「工作目錄是家目錄或檔案系統根」的 session 加嚴限制的（第 9 章），這說明產品自己也把這種範圍視為高風險。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">派一個任務到指定機器與指定框架</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先看清楚選擇器裡有幾台機器</h3>
+            <p>在 Composer 點下層第一個選擇器，把清單整個看過一遍。記下哪些有綠點、哪些沒有。沒有綠點的先當它不存在，本步驟不要試著去救它。</p>
+          </li>
+          <li>
+            <h3>挑一台有綠點的機器，並確認它是你以為的那台</h3>
+            <p>機器名稱可能長得很像（實機記錄裡就有 <code>pi1</code> 與 <code>pi5</code> 這種只差一個數字的命名）。挑錯機器的後果不是報錯，是<strong>安靜地在錯的地方做對的事</strong>，這比報錯難發現。</p>
+          </li>
+          <li>
+            <h3>設定工作目錄與 Worktree</h3>
+            <p>第二個選擇器挑資料夾。如果這是一個 git 專案而且你要改程式碼，第三個選擇器另開 worktree。不確定要不要開的話，改程式碼就開，只讀檔案就不用。全域預設可以在 <code>Settings</code> → <code>Git</code> 調整。</p>
+          </li>
+          <li>
+            <h3>打開 Runs with，挑一個沒有 needs setup 的框架</h3>
+            <p>前三個（Claude Code、Codex、Pi）直接列在外面，其餘八個收在 <code>More</code> 底下，代理則在下面那一區。第一次就挑那個沒有橘色徽章的，不要為了試新東西卡在設定上。</p>
+          </li>
+          <li>
+            <h3>送出一個可驗收的小任務，然後回頭對帳</h3>
+            <p>用一個只讀不寫的任務跑通，例如列出該目錄下的檔案。跑完之後到 Usage 看 <code>Cost by harness</code> 與 <code>Cost by model</code>，把「這台機器 + 這個框架」的實際單價記下來。這一步做過一次，之後挑框架就有依據了。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="test">怎麼確認選對了</h2>
+        <p>選對機器與框架的驗收方式不是看設定畫面，是看代理的第一個回合。</p>
+        <ul>
+          <li>代理列出來的檔案，跟你在那台機器上預期看到的一致</li>
+          <li>它沒有一開頭就抱怨找不到目錄或沒有權限</li>
+          <li>Runs with 顯示的框架名稱，跟你以為自己選的那個相同</li>
+          <li>跑完之後 Usage 的 <code>Cost by harness</code> 裡多出來的那一筆，記在你選的那個框架名下</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>Host 選擇器裡一台機器都沒有</strong>：代表還沒有任何主機註冊上來，或全部斷線。這不是選擇器的問題。註冊流程在第 16 章，連線排查在第 18 章。</li>
+          <li><strong>機器在清單裡，但名稱前面沒有綠點</strong>：當它不可用。本書未查證離線狀態的視覺樣式，所以請不要用「有沒有變灰」之類的特徵去判斷；<strong>有綠點才選</strong>是唯一可靠的規則。</li>
+          <li><strong>想用的框架標著橘色 <code>needs setup</code></strong>：這個框架在<strong>這台機器</strong>上沒設定好。兩個選項：換一個沒有徽章的，或依第 17 章把它設定起來。注意換一台機器同一個框架也可能一樣標著徽章。</li>
+          <li><strong>Runs with 選單太長，找不到想要的項目</strong>：前三個之外的八個框架收在 <code>More</code> 子選單裡，自訂代理收在 <code>Custom agents</code> 子選單裡，不在第一層。要一次減短清單，開 <code>Settings</code> → <code>Appearance</code> 的 <strong>Hide unconfigured harnesses</strong>。</li>
+          <li><strong>代理找不到檔案，但你確定檔案在</strong>：先確認機器對不對，再確認工作目錄對不對，最後確認是不是開了 worktree 而代理正看著另一份。這三件事按順序查，不要跳。</li>
+          <li><strong>排程任務跑在你沒預期的機器上</strong>：Automations 的 <code>Host (optional)</code> 欄位預設是 <code>Resolve at fire time</code>，意思是觸發當下才決定跑在哪台已連線的主機上。要指定機器就在那個欄位明確選一台，細節在第 10 章。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品邊界與版本說法，以下列來源的該 commit 內容為準，不以主分支的當下狀態為準。</p>
         <ul>
-          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件（0.1.15）</a></li>
         </ul>
+        <p>框架與代理目錄（11 + 4）、<code>needs setup</code> 徽章、綠點與 <code>ONLINE</code> 徽章、以及 <code>Appearance</code> 與 <code>Git</code> 兩頁的設定名稱，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。離線與忙碌狀態的顯示方式不在該次記錄範圍內，本章據實標示為未查證。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>十一個框架我得全部設定起來嗎？</summary>
+          <div class="body"><p>不用，多數人長期只用一到兩個。沒設定的會標 <code>needs setup</code>，看了礙眼就到 <code>Settings</code> → <code>Appearance</code> 打開 <strong>Hide unconfigured harnesses</strong> 把它們藏起來。要不要加第二個框架，等你在 Usage 頁看過成本、或現有的那個在某類任務上明顯不順手的時候再說，第 17 章有比較材料。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Harness 跟 Agent 這兩區到底差在哪？</summary>
+          <div class="body"><p>從 2026-09-09 的記錄能確定的是分區與名稱：框架區有 11 個既有的 AI 編碼工具，代理區有 4 個加上自訂項，其中 Polly 標為多代理協作寫程式、Debby 標為多代理辯論。也就是代理區至少有一部分是把多個代理組起來的產物。本書沒有逐一實測它們的行為差異，不會替它們寫效果比較；第 17 章會處理這個題目。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>綠點是不是代表這台機器一定能順利跑完任務？</summary>
+          <div class="body"><p>不是。綠點只保證連線，不保證那台機器上有你要的框架、有足夠磁碟、或有存取那個目錄的權限。連線正常但框架沒設定好，你會在 Runs with 那邊看到 <code>needs setup</code>；連線正常但目錄不對，你會在代理的第一個回合看到它找不到檔案。這三個條件要分開檢查。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>選錯機器已經送出了，會怎樣？</summary>
+          <div class="body"><p>代理會在那台機器上照你的指示做事。如果任務是只讀的，後果只是白花一點錢；如果任務會改檔案，那就是在錯的機器上真的改了。這是本章一再強調先確認機器再打字的原因。發現選錯時先按 <code>Esc</code> 停止回應（第 5 章），再到 Workspace 面板看它動了什麼（第 7 章）。</p></div>
+        </details>
+        <details class="faq">
+          <summary>本章的設定會影響 Automations 排程任務嗎？</summary>
+          <div class="body"><p>會，但欄位不同。排程任務在自己的新建對話框裡有 <code>Runs with</code>，也有 <code>Host (optional)</code>；後者預設是 <code>Resolve at fire time</code>，也就是觸發當下才挑一台連線中的主機。另外 <code>Settings</code> → <code>Git</code> 的 worktree 預設是全域的，Project 層級的設定會覆寫它。排程細節在第 10 章。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch5_composer.html">
         <span class="label">← Previous</span>

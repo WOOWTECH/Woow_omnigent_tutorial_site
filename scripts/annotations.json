@@ -1,4 +1,95 @@
 {
-  "_readme": "Approved screenshot definitions will be added only after a clean demo Flow and read-only capture review are available.",
-  "shots": []
+  "_readme": "每張截圖的來源、擷取日與說明。實機截圖以瀏覽器擷取後轉存 PNG；側邊欄含真實專案名的畫面一律不採用。",
+  "captureRules": [
+    "彈出對話框類畫面背景會自動模糊，可直接採用",
+    "/settings/* 頁面使用獨立側邊欄，不含專案清單，可直接採用",
+    "主畫面（Usage／Inbox／Automations／Session）必須先收合側邊欄再擷取",
+    "Members 頁含真實帳號與 email，一律不擷取",
+    "正式站的真實花費數字必須模糊；圖表形狀可保留",
+    "擷取後務必自行複核一次畫面，不要只信擷取當下的印象"
+  ],
+  "shots": [
+    {
+      "chapter": "ch13",
+      "file": "assets/screenshots/ch13/01_usage_overview.png",
+      "caption": "Usage 頁：期間切換、總成本、每日成本與按 harness／按模型的拆分",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09",
+      "redacted": [
+        "Total cost 金額",
+        "Daily cost 的 Y 軸刻度"
+      ],
+      "redactionNote": "正式站的真實花費屬商業資訊，已高斯模糊；圖表形狀、日期與 session 數保留，讀者仍看得懂這頁的結構。"
+    },
+    {
+      "chapter": "ch9",
+      "file": "assets/screenshots/ch9/01_sharing_settings.png",
+      "caption": "Session sharing 的四個層級與獨立的 Public access 開關",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch5",
+      "file": "assets/screenshots/ch5/01_composer_settings.png",
+      "caption": "General 設定的 Composer 區：送出鍵行為與 Always steer",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch5",
+      "file": "assets/screenshots/ch5/02_keyboard_shortcuts.png",
+      "caption": "鍵盤快捷鍵總覽：General、In chats 與 Navigation 三組",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch8",
+      "file": "assets/screenshots/ch8/01_import_sessions.png",
+      "caption": "Import sessions：選機器、選 harness、選筆數",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch7",
+      "file": "assets/screenshots/ch7/01_git_settings.png",
+      "caption": "Git 設定：隨機 worktree 與預設基底分支",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch12",
+      "file": "assets/screenshots/ch12/01_policies_empty.png",
+      "caption": "Global Policies 預設是空的——一條規則都沒啟用",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch12",
+      "file": "assets/screenshots/ch12/02_add_policy_dialog.png",
+      "caption": "Add Global Policy 對話框：可搜尋的內建規則目錄",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch10",
+      "file": "assets/screenshots/ch10/01_automations_list.png",
+      "caption": "Automations 清單：篩選頁籤、既有排程與三個建議範本",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch10",
+      "file": "assets/screenshots/ch10/02_new_automation.png",
+      "caption": "New automation 對話框的完整欄位",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    },
+    {
+      "chapter": "ch17",
+      "file": "assets/screenshots/ch17/01_harness_picker.png",
+      "caption": "Runs with 選單：Harnesses 與 Agents 兩區，未設定者標 needs setup",
+      "source": "https://omnigent.woowtech.io",
+      "captured": "2026-09-09"
+    }
+  ]
 }

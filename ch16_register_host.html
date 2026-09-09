@@ -75,6 +75,7 @@
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
+      <a href="#after">註冊之後</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
       <a href="#faq">常見問題</a>
@@ -89,68 +90,158 @@
     <main class="content" id="main-content">
       <div class="chapter-header">
         <div class="kicker">第 16 章</div>
-        <h1>用 omnigent host 註冊你的第一台主機</h1>
-      </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>第 15 章的結論如果是「我需要自己的執行端」，這一章就是把它接上去的完整流程。做完之後，Composer 底部的主機選單裡會多出一台，前面帶著綠點，你可以把工作交給它。</p>
+        <p>整件事只有一條註冊指令，難的不是指令本身，而是它前後那些容易漏掉的條件：伺服器網址要填對、機器上要先有兩個套件、指令跑起來之後不能關掉。這一章按順序把它們排好。</p>
+        <div class="callout warn">
+          <p>這條指令會讓一個代理擁有那台機器的檔案讀寫能力。在自己的主力工作機上執行之前，先讀完第 12 章的規則與第 14 章的安全基線。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">「註冊」到底做了什麼</h2>
+        <p>指令的名字叫 <code>omnigent host</code>，做的事是：在這台機器上啟動一個執行端行程，讓它<strong>主動撥一條連線回伺服器</strong>，並且在伺服器的主機清單裡登記自己。</p>
+        <div class="callout terminology">
+          <p><strong>撥入（dial-in）</strong>：由內往外建立連線。註冊之後的通道是從你的機器打向伺服器的，所以你這一側不需要固定 IP，也不需要在路由器或防火牆上開任何入站規則。</p>
+        </div>
+        <p>三個推論，先記下來：</p>
+        <ul>
+          <li>需要打得通的是<strong>伺服器那一側</strong>的服務埠。附加元件版預設是區網上的 8000，那個埠同時負責 API、執行端撥入與這條註冊指令。</li>
+          <li>指令是<strong>常駐</strong>的。它不是跑完就結束的安裝程式，而是要一直活著的行程；它停了，主機就離線。</li>
+          <li>憑證是<strong>這台機器自己的</strong>。伺服器端設定的金鑰只給伺服器行程用，執行端帶自己的。</li>
+        </ul>
       </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>備齊四樣東西再開始，中途缺一樣就得從頭來。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="需要準備的項目、內容、怎麼取得資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">要準備的</th><th scope="col">內容</th><th scope="col">怎麼取得</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">伺服器網址</th><td>執行端要撥回去的那個位址，含埠號</td><td>附加元件版預設是區網主機名加上 8000；有設定 <code>base_url</code> 的話以那個為準</td></tr>
+              <tr><th scope="row">網路可達性</th><td>這台機器打得到上面那個網址</td><td>同一個區域網路即可；跨網際網路要先有一條通道</td></tr>
+              <tr><th scope="row">Node.js 與 npm</th><td>用來安裝 pi 代理工具</td><td>依作業系統各自安裝，本書不涵蓋</td></tr>
+              <tr><th scope="row">Python 與 pip</th><td>用來安裝 omnigent 執行端</td><td>同上</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <p>先用瀏覽器在那台機器上打開伺服器網址試一次。看得到登入畫面，代表網路這一關過了；打不開就先解決網路，不要急著跑指令。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">註冊流程</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>確認伺服器網址</h3>
+            <p>附加元件版的服務埠是 8000，官方文件在埠表裡寫明它負責三件事：API、通道撥入、以及 <code>omnigent host</code>。設定裡的 <code>base_url</code> 留空時，系統用的是區網主機名加上這個埠。</p>
+            <p>如果管理者已經把 <code>base_url</code> 改成一個公開網域（第 14 章講過為什麼要改），那就用那個網域，不要用區網位址。兩者混用會導致註冊成功但邀請連結指錯地方。</p>
+          </li>
+          <li>
+            <h3>在那台機器上裝好兩個套件</h3>
+            <p>一個是實際幹活的 pi 代理工具，一個是執行端本身。附加元件文件裡列出的指令是：</p>
+            <p><code>npm install -g @earendil-works/pi-coding-agent@0.85.1</code></p>
+            <p><code>pip install omnigent==0.12.0</code></p>
+            <p>版本號請照<strong>你自己那一版</strong>的文件填。三種部署打包的伺服器版本本來就有落差，本書的固定來源指向的是特定的一次 commit，你手上的可能更新。版本對不上時最常見的症狀是註冊成功但功能行為怪異。</p>
+          </li>
+          <li>
+            <h3>執行註冊指令</h3>
+            <p>把網址換成上一步確認過的那一個：</p>
+            <p><code>omnigent host --server http://homeassistant.local:8000</code></p>
+            <p>這條指令會開一條回伺服器的通道並登記這台機器。它跑起來之後不會結束，這是正常的——讓它留在終端機裡。</p>
+          </li>
+          <li>
+            <h3>回瀏覽器確認主機出現了</h3>
+            <p>開一個新 session，展開 Composer 底部最左邊的主機選單。剛註冊的那台應該出現在清單裡，名字前面帶一個綠點表示線上。</p>
+            <p>選它，然後把旁邊的工作目錄選單改成你要讓代理動的那個目錄。第 7 章講工作目錄的挑法，第 6 章講整排選單的每一個位置。</p>
+          </li>
+          <li>
+            <h3>挑一個框架，開一個小 session 試跑</h3>
+            <p>在 <code>Runs with</code> 選單裡挑一個框架。這台機器上沒設定好的項目會標著橘色的 <code>needs setup</code> 徽章，先避開它們，挑一個沒有徽章的。</p>
+            <p>然後丟一個小到不可能出錯的需求，例如請它列出這個工作目錄底下有哪些檔案。有回應就代表整條路通了。</p>
+          </li>
+          <li>
+            <h3>決定它要不要長期活著</h3>
+            <p>終端機關掉、機器休眠或重開，這個行程就沒了，主機會在清單裡變成離線。臨時用一次沒差；要讓第 10 章的排程任務半夜自己開工，就得把它做成開機自動啟動的服務。Rootless Podman 套件就是用一個常駐容器達成這件事，做法見第 21 章。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>三個地方可以互相印證，不要只看其中一個。</p>
+        <ul>
+          <li><strong>Composer 底部的主機選單</strong>：那台機器出現在清單裡，名字前面有綠點。這是最直接的一個。</li>
+          <li><strong>Settings 的 Import sessions 頁</strong>：<code>Machine</code> 下拉選單裡會出現這台機器，而且帶著 <code>ONLINE</code> 徽章。這一頁本來的用途是把那台機器上既有的本地對話拉進 Omnigent，但它同時是一個很好的線上狀態驗證點。</li>
+          <li><strong>真的跑一次</strong>：前兩項都只證明「連線在」，不證明「做得了事」。開一個小 session 拿到回應，才算完整。</li>
+        </ul>
+        <div class="callout tip">
+          <p>Import sessions 頁還有兩個欄位：<code>Harness</code> 可以只挑某一種框架，<code>How many recent sessions</code> 決定往回抓幾筆。已經匯入過的會自動跳過，重複按不會產生重複資料。</p>
+        </div>
       </section>
+
+      <section id="after" data-nav="註冊之後">
+        <h2 data-icon="done">註冊之後會變成什麼樣子</h2>
+        <p>主機接上之後，好幾個原本按不動的地方會突然活起來，先有個心理準備。</p>
+        <ul>
+          <li><strong>框架選單不再全是灰的</strong>。目錄分成框架與代理兩區，你這台機器上設定好的那些會變成可選。第 17 章逐一介紹它們的差別。</li>
+          <li><strong>排程任務有地方可以跑了</strong>。新增自動化時的主機欄位預設是「觸發時再決定」，意思是交給當時連著的主機執行——在你接上第一台之前，那個預設值等於沒有效果。</li>
+          <li><strong>工作目錄與 worktree 選單開始有意義</strong>。它們列的是那台機器上的目錄，換一台主機，可選的目錄就換一批。</li>
+        </ul>
+        <p>如果之後還會接第二台、第三台，現在就決定命名規則。正式站的主機名稱把機器角色跟編號寫在一起，選單裡一眼就分得出誰是誰；名字取得隨便，第 18 章要你清掉一台失聯主機時，你會不確定該刪哪個。</p>
+      </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>徵狀：主機選單一直是空的</strong>。先確認你是不是裝了純伺服器的版本——附加元件版不打包執行端，清單空的是預期行為，這正是本章存在的理由。已經跑過註冊指令的話，回終端機看那個行程還在不在。</li>
+          <li><strong>徵狀：註冊指令連不上伺服器</strong>。兩種常見原因：主機名解析不到，改用 IP 位址試一次；或者伺服器的服務埠沒有對這台機器開放。用瀏覽器打開同一個網址是最快的判斷方式。</li>
+          <li><strong>徵狀：註冊成功，但對話丟出去沒有任何回應</strong>。官方疑難排解把這一條歸因為 pi 的擴充衝突，處置方式是清掉執行端那台機器上的 <code>~/.pi-agent/plugins/</code> 目錄，並從 <code>~/.pi-agent/auth.json</code> 裡移除 <code>openai-codex</code>，然後重新連線。</li>
+          <li><strong>徵狀：主機列在清單裡，但是灰的</strong>。那個行程停了。終端機被關掉、機器休眠、網路換過，都會造成這個結果。重新跑一次註冊指令即可，重複註冊不會產生第二台。</li>
+          <li><strong>徵狀：框架全部標著 <code>needs setup</code></strong>。連線沒問題，是那台機器上的框架還沒設定好認證。這是第 17 章的題目，跟註冊無關。你也可以在外觀設定裡打開隱藏未設定框架，讓選單只留下能用的那幾個。</li>
+          <li><strong>徵狀：邀請連結給同事之後打不開</strong>。伺服器的 <code>base_url</code> 還指著區網位址。這要在伺服器那一側改，不是在執行端改，做法見第 14 章。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的註冊指令、套件版本與埠用途，以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package/tree/33dd16c985e82e8cfde301f24de385c313477d24" rel="noopener">WoowTech Omnigent Rootless Podman 套件</a></li>
         </ul>
+        <p>主機選單、<code>needs setup</code> 徽章與 Import sessions 頁的欄位，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
           <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <div class="body"><p>註冊流程本身三種都一樣，因為執行端撥入的是同一套伺服器。差別在你需不需要做：純伺服器的附加元件版一定要做；自帶執行端的部署方式裝完就有一台可用，只有在你想額外接自己的機器時才需要這一章。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我需要在防火牆或路由器上開埠嗎？</summary>
+          <div class="body"><p>執行端這一側不用。連線是由你的機器主動撥向伺服器，所以你不需要固定 IP，也不需要任何入站規則。要能被打到的是伺服器那一側的服務埠——那是管理者的事，第 14 章有完整的埠對照表。</p></div>
+        </details>
+        <details class="faq">
+          <summary>註冊之後，代理是不是就能碰我整台機器的檔案？</summary>
+          <div class="body"><p>能碰到的範圍由兩件事決定：你在 session 裡選的工作目錄，以及有沒有規則在擋。預設沒有任何全域規則啟用，所以請務必先看第 12 章，至少把限制寫入範圍或危險指令攔截其中一條打開，再把工作目錄選在專案資料夾而不是家目錄。</p></div>
+        </details>
+        <details class="faq">
+          <summary>同一台機器可以註冊兩次嗎？</summary>
+          <div class="body"><p>重跑註冊指令不會多出第二台，它會重新接上原本那一台。真正會產生多餘項目的是另一種情況：機器換了識別或重建之後，舊的那筆會留在清單裡且再也連不上。那屬於第 18 章要處理的失聯主機。</p></div>
         </details>
         <details class="faq">
           <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
-        </details>
-        <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <div class="body"><p>指令裡的兩個版本號最容易對不上，那是版本差異，照你自己那一版的文件填就好。但如果 Composer 底部沒有那排選單，或是 Settings 裡找不到 Import sessions，比較可能是你在的畫面不對——那排選單只出現在新 session 的輸入區，Import sessions 則在 Settings 的個人分頁那一組裡。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch15_why_own_runner.html">
         <span class="label">← 上一章</span>

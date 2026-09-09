@@ -72,6 +72,8 @@
       <h2>本章</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#compare">四個名詞對照</a>
+      <a href="#where">它們在畫面哪裡</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
@@ -93,63 +95,174 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>接下來十九章裡，有四個詞會不斷出現：Server、Host、Runner、Harness。它們長得都很像「跑東西的地方」，但指的是四件完全不同的事。</p>
+        <p>混淆它們的代價很具體。最常見的一種是：你交辦了一件事，代理回你「找不到這個檔案」，你確定檔案就在眼前——因為它在你的筆電上，而代理跑在另一台機器上。這不是 bug，是你選錯了 Host。</p>
+        <p>這一章沒有要你設定任何東西，只要你能把這四個詞各自對應到畫面上的哪一個位置。</p>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：一句話定義四個名詞</h2>
+        <p>先把四句話讀完，再看它們怎麼串起來。</p>
+        <div class="callout terminology">
+          <p><strong>Server（伺服器）</strong>：你瀏覽器連上去的那一套 Omnigent 本身。所有 session、Project、設定、成本紀錄都存在這裡。你在網址列看到的就是它。</p>
+        </div>
+        <div class="callout terminology">
+          <p><strong>Host（主機）</strong>：被指揮的那台機器。代理實際讀寫檔案、跑指令的地方。畫面上它有名字，例如 <code>Pi Web ChatGPT (pi5)</code>。</p>
+        </div>
+        <div class="callout terminology">
+          <p><strong>Runner（執行端）</strong>：住在 Host 上、負責跟 Server 保持連線、聽命令並實際動手的常駐程式。沒有它，那台機器對 Server 來說就不存在。</p>
+        </div>
+        <div class="callout terminology">
+          <p><strong>Harness（框架）</strong>：真正會寫程式的那個 AI 工具，例如 Claude Code、Codex、Pi。Omnigent 自己不寫程式，寫程式的是它。</p>
+        </div>
+        <p>串起來就是一句話：<strong>你在 Server 上派工，Server 透過 Host 上的 Runner，去啟動一個 Harness，讓它在那台機器上幹活。</strong>四個名詞是一條鏈，缺任何一環都動不了。</p>
       </section>
+
+      <section id="compare" data-nav="四個名詞對照">
+        <h2 data-icon="compare">四個名詞對照表</h2>
+        <p>如果只能記一張表，記這張。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="四個核心名詞對照資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">名詞</th><th scope="col">它是什麼</th><th scope="col">在畫面上哪裡看到</th><th scope="col">缺了它會怎樣</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Server</th><td>指揮中心，存放全部紀錄</td><td>瀏覽器網址列；整個介面就是它</td><td>連不上，什麼都做不了</td></tr>
+              <tr><th scope="row">Host</th><td>被指揮的機器</td><td>輸入區底部第一個下拉，例 <code>Pi Web ChatGPT (pi5)</code></td><td>沒有機器可派工，清單是空的</td></tr>
+              <tr><th scope="row">Runner</th><td>Host 上的常駐程式</td><td>沒有直接寫出這個字；你看到的是名字前面的綠點與 <code>ONLINE</code> 徽章</td><td>Host 出現在清單裡但沒有綠點，派工過去不會有反應</td></tr>
+              <tr><th scope="row">Harness</th><td>實際幹活的 AI 工具</td><td><code>Runs with</code> 下拉的第一區</td><td>指揮台是空的，沒有東西可以派</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <p>一個記憶方法：Server 是辦公室，Host 是工地，Runner 是工地上那支永遠開著的對講機，Harness 是被派去工地的工人。對講機沒開，辦公室就叫不動任何人。</p>
+        </div>
+      </section>
+
+      <section id="where" data-nav="它們在畫面哪裡">
+        <h2 data-icon="what">它們在畫面上分別長什麼樣</h2>
+        <p>四個名詞裡有三個集中在同一個地方：新對話輸入區的底部。那裡有三個並排的下拉選單。</p>
+        <ul>
+          <li><strong>第一個是 Host</strong>：顯示機器名稱，前面有一個綠點代表線上，例如 <code>Pi Web ChatGPT (pi5)</code>。</li>
+          <li><strong>第二個是工作目錄</strong>：代理會在這台機器的哪個資料夾裡動手，例如 <code>home</code>。</li>
+          <li><strong>第三個是 Worktree</strong>：Git 的工作樹，決定代理改的是原本那份還是另外開一份。第 7 章會詳談。</li>
+        </ul>
+        <p>Harness 則在另一個下拉，名字叫 <code>Runs with</code>。打開它會看到清單分成兩區：上面是 <strong>Harnesses</strong>，下面是 <strong>Agents</strong>。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="可派工對象清單資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">分區</th><th scope="col">清單內容</th><th scope="col">數量</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Harnesses</th><td>Claude Code、Codex、Pi 三個直接顯示；其餘收在 More 底下：OpenCode、Cursor、Antigravity、Kiro、Qwen Code、Goose、Kimi、Hermes</td><td>11</td></tr>
+              <tr><th scope="row">Agents</th><td>Polly（多代理協作寫程式）、Debby（多代理互相辯論）、Grok Build、Devin，另有 Custom agents 可展開</td><td>4 加自訂</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>清單裡沒有在那台 Host 上設定好的項目，會被標上橘色的 <code>needs setup</code> 徽章。這個徽章是<strong>跟著 Host 走的</strong>：同一個 Harness 在 A 機器上設好了、在 B 機器上沒設，換 Host 之後徽章就會出現。</p>
+        <div class="callout tip">
+          <p>覺得清單太長，可以到設定的 <code>Appearance</code> 打開 <code>Hide unconfigured harnesses</code>。打開之後那些標 <code>needs setup</code> 的項目會直接消失，而不是被標記。清單變短了不是壞掉，是這個開關。</p>
+        </div>
+        <p>Runner 是唯一一個介面上沒有直接寫出名字的。你在兩個地方會看到它存在的證據：Host 名稱前面的綠點，以及設定裡 <code>Import sessions</code> 分頁的 <code>Machine</code> 欄位，那裡機器名稱旁邊會掛一個 <code>ONLINE</code> 徽章。</p>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>這一章全程只看不改，所以要準備的東西很少：</p>
+        <ul>
+          <li>已經照第 2 章登入，而且看得到 <code>New session</code> 畫面與底下那排下拉。</li>
+          <li>手邊有紙筆或一個記事檔。等一下你會抄下四樣東西：Server 網址、Host 名稱、哪幾台是綠點、以及可用的 Harness。</li>
+          <li>知道你將來要處理的檔案放在哪一台機器上。不知道也沒關係，這一章正好會讓你發現這件事必須先搞清楚。</li>
+        </ul>
+        <div class="callout tip">
+          <p>如果你的環境目前一台 Host 都沒有，這一章還是讀得完，只是第 2 到第 5 步會看到空清單。名詞觀念先建立起來，等第 16 章接上第一台機器再回來對一次畫面。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">操作步驟：五分鐘把四個名詞對到畫面上</h2>
+        <p>這一輪全部只看不改。目標是讓每個名詞在你腦中都有一個對應的畫面位置。</p>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>找出 Server</h3>
+            <p>看瀏覽器網址列。那個網址就是 Server。把它記下來或加到書籤——之後你所有的 session 都住在這裡，換一個網址就是換一整套資料。</p>
+          </li>
+          <li>
+            <h3>找出 Host</h3>
+            <p>回到 <code>New session</code>，看輸入框底下第一個下拉，展開它。清單裡每一台都是一個 Host。注意哪些名字前面有綠點，那些才是現在叫得動的。</p>
+          </li>
+          <li>
+            <h3>找出 Runner 的證據</h3>
+            <p>進設定的 <code>Import sessions</code> 分頁，看 <code>Machine</code> 欄位。線上的機器旁邊會有 <code>ONLINE</code> 徽章。這個徽章跟第 2 步的綠點是同一件事的兩種畫法：那台機器上的 Runner 正在跑。</p>
+          </li>
+          <li>
+            <h3>找出 Harness</h3>
+            <p>回到輸入區，展開 <code>Runs with</code>。數一數上半區有幾個（連同 More 底下的，共十一個），下半區的 Agents 有幾個（四個加上自訂）。順便看看哪些被標了 <code>needs setup</code>，那些是現在不能用的。</p>
+          </li>
+          <li>
+            <h3>把工作目錄看清楚</h3>
+            <p>展開輸入區底部第二個下拉。這是代理將要動手的資料夾。<strong>這一格選錯，是新手最常見的「檔案不見了」原因</strong>，比選錯 Host 更常發生，因為選錯 Host 至少會很明顯。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="test">怎麼確認你分清楚了</h2>
+        <p>用自己的話回答這五題。答不出來的往回翻，不要硬往下讀第 4 章。</p>
+        <ul>
+          <li>你的 Server 網址是什麼？</li>
+          <li>你手上有幾台 Host？其中幾台現在是綠點？</li>
+          <li>綠點代表什麼在跑？（答案是那台機器上的 Runner）</li>
+          <li><code>Runs with</code> 清單裡，你這台 Host 上有哪幾個 Harness 沒有標 <code>needs setup</code>？</li>
+          <li>如果你要代理讀你筆電上的一個檔案，光把檔名貼給它夠不夠？（不夠，那個檔案必須在某台 Host 上）</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>Host 下拉是空的</strong>：這套 Server 底下還沒有註冊任何機器。這不是設定跑掉，是少了一整個步驟。第 16 章專門講怎麼註冊第一台主機，第 15 章先說明為什麼需要。</li>
+          <li><strong>Host 在清單裡，但名字前面沒有綠點</strong>：機器登記過，但它上面的 Runner 現在沒有在跑，或跑起來了但連不回 Server。派工過去不會有反應。第 18 章有完整的排查順序。</li>
+          <li><strong>想用的 Harness 標著 <code>needs setup</code></strong>：那個 AI 工具在<strong>這台</strong> Host 上還沒設定好，換一台 Host 可能就正常。要在這台補上設定，看第 6 章與第 17 章。</li>
+          <li><strong><code>Runs with</code> 清單比書上列的短</strong>：先檢查設定的 <code>Appearance</code> 裡 <code>Hide unconfigured harnesses</code> 是不是開著。它會把未設定的項目整個藏起來，不是刪掉。</li>
+          <li><strong>代理說找不到檔案，但你確定檔案存在</strong>：依序檢查三件事——選的 Host 是不是你以為的那一台、工作目錄是不是對的那一層、以及檔案是不是根本在你自己的電腦上而不在任何 Host 上。第三種情況最常見，也最容易被誤判成 bug。</li>
+          <li><strong>換了 Host 之後，原本用得好好的 Harness 不見了</strong>：正常。<code>needs setup</code> 與可用清單都是跟著 Host 走的，不是全站共用一份設定。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品架構與名詞邊界，以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
         </ul>
+        <p>工具與代理清單、<code>needs setup</code> 徽章、綠點與 <code>ONLINE</code> 徽章的位置，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。介面上沒有直接寫出 Runner 這個字，本章對它的描述因此以「綠點與徽章代表什麼」為限。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Runner 跟 Host 是同一件事嗎？</summary>
+          <div class="body"><p>不是。Host 是那台機器，Runner 是機器上跑著的那支程式。同一台機器，Runner 停掉它就變成離線的 Host——名字還在清單裡，但前面沒有綠點，派工過去不會有反應。把它想成機器與機器上的對講機，機器沒搬走，但對講機關了。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>一台 Host 上可以有好幾個 Harness 嗎？</summary>
+          <div class="body"><p>可以，而且這是常態。<code>Runs with</code> 清單是每次開 session 時逐次挑的，同一台機器上可以裝好幾個 AI 工具，哪個設定好了就哪個可用，沒設定好的會標 <code>needs setup</code>。反過來，同一個工具也可以裝在好幾台 Host 上。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Agents 那一區的 Polly、Debby 算不算 Harness？</summary>
+          <div class="body"><p>介面把它們放在同一個 <code>Runs with</code> 下拉裡，但分成兩區：上面標 Harnesses，下面標 Agents，底下還有 Custom agents 可以展開。從你的操作角度看，兩區都是「可以派工的對象」，選法一模一樣。本書在需要精確區分的地方會分開講，其餘場合統稱可派工對象。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Server 重開的話，跑到一半的 session 會怎樣？</summary>
+          <div class="body"><p>本書的實機記錄沒有測過這個情境，所以這裡不給結論。可以確定的是紀錄存在 Server 上，而執行發生在 Host 上，兩邊是分開的。如果你正在評估重開的風險，第 18 章與附錄 B 有相關的排查方向，但實際行為請以你自己那套環境的實測為準。</p></div>
+        </details>
+        <details class="faq">
+          <summary>Host 下拉裡那些名字是誰取的？</summary>
+          <div class="body"><p>是註冊那台機器的時候取的，所以你會看到像 <code>Pi Web ChatGPT (pi5)</code> 這種混了用途與編號的名字。名字只是給人看的標籤，跟機器的能力無關。多台機器的環境裡，取名取得夠清楚會直接減少選錯 Host 的次數，第 16 章註冊主機時會再提醒一次。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch2_first_login.html">
         <span class="label">← 上一章</span>

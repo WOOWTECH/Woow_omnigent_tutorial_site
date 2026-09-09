@@ -75,6 +75,9 @@
       <a href="#concepts">核心觀念</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
+      <a href="#volumes">資料放在哪</a>
+      <a href="#access">對外連線</a>
+      <a href="#ops">日常操作</a>
       <a href="#verify">怎麼確認做對了</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
@@ -95,64 +98,182 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>你沒有 Home Assistant，也不想為了一個服務去架 Kubernetes——這一章就是為這種情況存在的。一台 Linux、一個非 root 帳號、三個容器，交給 systemd 管理開機自啟與重啟。</p>
+        <p>它跟第 20 章那條路有一個關鍵差異：<strong>這個套件自帶一個常駐執行端。</strong>裝完之後主機清單不是空的，直接就有一台會幹活的機器，而且它掛的是跟其他 WoowTech 套件共用的那一份 pi 狀態。</p>
+        <div class="callout tip">
+          <p>本章會用到終端機。指令不多，但你需要能 ssh 進那台機器，並且那個帳號可以跑 <code>systemctl --user</code>。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="docker">三個容器各做一件事</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Podman 部署三個容器資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">容器</th><th scope="col">映像</th><th scope="col">角色</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>omnigent-postgres</code></th><td><code>postgres:16-alpine</code></td><td>自己的資料庫，自己的磁碟區，完全不對外開埠</td></tr>
+              <tr><th scope="row"><code>omnigent-server</code></th><td>上游官方映像</td><td>編排與網頁介面，只 publish 到 <code>127.0.0.1:8000</code></td></tr>
+              <tr><th scope="row"><code>omnigent-runner</code></th><td>本套件自行建置</td><td>常駐執行端，內含 pi 與共用磁碟區的包裝腳本，主動撥回伺服器</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout terminology">
+          <p><strong>Quadlet</strong>：用一個 systemd 單元檔描述一個容器，交給使用者層級的 systemd 去啟動、重啟與排順序。相較於 compose 檔，它的好處是重開機後不需要任何額外的守護行程就會自己起來。需要 Podman 4.4 以上。</p>
+        </div>
+        <p>另外還有一個三十秒跑一次的健康檢查計時器，負責更新伺服器容器的健康狀態。三個容器共用一個私有的 Podman 橋接網路，資料庫只在這個網路內可見。</p>
+        <h3>為什麼要一個常駐執行端</h3>
+        <p>Omnigent 的伺服器只做編排與介面，代理實際上跑在另一個執行端行程裡，靠 WebSocket 撥回來。要補上這一塊有兩條路：讓每個人在自己的筆電上跑一個執行端，各自帶各自的 pi 狀態；或是在伺服器同一台機器上跑一個常駐執行端，掛共用的狀態磁碟區。<strong>這個套件選後者</strong>——網頁介面上開的任何 session 選了 pi，供應商與技能設定都已經是準備好的。</p>
       </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <ul>
+          <li>Podman <strong>4.4 以上</strong>，而且用非 root 帳號跑（rootless）</li>
+          <li>那台機器連得到 GitHub 與容器登錄站，安裝過程要拉映像檔並在本地建置執行端映像</li>
+          <li><strong>強烈建議先裝姊妹套件</strong> <code>Woow_podman_pi_agent_package</code>。它會建立共用的 pi 狀態磁碟區並把供應商與技能設定好；沒裝的話本套件會建一顆空的，你得從頭設一次供應商</li>
+          <li>想過的話先想好對外要怎麼開。伺服器預設只綁在本機迴路位址上，不會自動對區域網路開放</li>
+        </ul>
+        <div class="callout warning">
+          <p>安裝腳本裡的預設管理員憑證同時是<strong>執行端撥回登入用的憑證</strong>，也是人類管理員的帳號。它只有一份，改的時候兩邊會一起變——這是刻意設計，但也代表你不能只改一半。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">安裝步驟</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>取得套件</h3>
+            <p>把 <code>Woow_podman_omnigent_package</code> 這個倉庫 clone 到那台機器上，切進目錄。裡面有 <code>quadlet/</code>（三個容器的單元檔）、<code>systemd/</code>（健康檢查計時器）、<code>scripts/</code>（安裝與移除）與 <code>tests/</code>（三支驗收腳本）。</p>
+          </li>
+          <li>
+            <h3>先改掉預設密碼，再安裝</h3>
+            <p>執行端的單元檔裡有一組管理員帳密的預設值。<strong>在跑安裝腳本之前就改掉它</strong>，這樣第一次開機建立的管理員就是你自己的憑證，不必事後補救。另外一個選項是取消伺服器單元檔裡那行初始管理員密碼的註解，先把密碼種進去。</p>
+          </li>
+          <li>
+            <h3>跑安裝腳本</h3>
+            <p>執行 <code>./scripts/install.sh</code>。它會建置執行端映像、安裝所有單元檔，然後依 <code>omnigent-postgres</code> → <code>omnigent-server</code> → <code>omnigent-runner</code> 的順序啟動。已經建過映像、只想重裝單元檔的話，用 <code>OD_SKIP_BUILD=1 ./scripts/install.sh</code> 跳過建置。</p>
+          </li>
+          <li>
+            <h3>等它自己把管理員建好</h3>
+            <p>腳本會一直等到伺服器的 <code>/health</code> 回傳 <code>{"status":"ok"}</code> 才收工，接著自動把管理員憑證送去建立第一個帳號。管理員已存在時它會收到重複的回應並靜默略過，所以重跑安裝是安全的。</p>
+          </li>
+          <li>
+            <h3>跑三支驗收腳本</h3>
+            <p><code>tests/smoke-container.sh</code> 驗三個容器都起來、伺服器健康、資料庫可連；<code>tests/smoke-pi-integration.sh</code> 驗 pi、包裝腳本、磁碟區與環境變數都對；<code>tests/smoke-runner-dialin.sh</code> 驗執行端連得到伺服器。三支全綠才算裝好。</p>
+          </li>
+          <li>
+            <h3>開介面登入</h3>
+            <p>在那台機器上開 <code>http://127.0.0.1:8000/</code>，用你設的帳密登入。輸入區底部的主機選單裡應該已經有一台綠點主機，那就是常駐執行端。</p>
+          </li>
         </ol>
       </section>
+
+      <section id="volumes" data-nav="資料放在哪">
+        <h2 data-icon="records">資料放在哪，哪一份是共用的</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Podman 部署資料磁碟區資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">磁碟區</th><th scope="col">內容</th><th scope="col">誰在用</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>omnigent-postgres-data</code></th><td>資料庫，也就是 session、成本與帳號</td><td>本套件獨佔</td></tr>
+              <tr><th scope="row"><code>omnigent-server-data</code></th><td>伺服器的工作檔案</td><td>本套件獨佔</td></tr>
+              <tr><th scope="row"><code>pi-agent-data</code></th><td>pi 的供應商設定、技能與狀態</td><td><strong>四個套件共用</strong>：本套件、pi 網頁版、OpenDesign 版、code-server 版</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>共用那一份是整個設計的重點：你在 pi 網頁版設好的供應商，Omnigent 這邊開 session 選 pi 就直接能用，不必再設一次。做法是執行端容器用<strong>使用者命名空間對映（UserNS keep-id）</strong>把主機上的使用者身分和容器內對齊，共用磁碟區讀寫不需要改權限。</p>
+        <div class="callout danger">
+          <p>共用磁碟區的磁碟格式<strong>沒有版本化</strong>。升級本套件裡的 pi 版本時，必須同步升級姊妹套件的 pi 版本，否則兩邊會用不同版本去寫同一份狀態。這是這個設計唯一真正的代價。</p>
+        </div>
+        <p>移除時 <code>./scripts/uninstall.sh</code> 只停掉並移除容器，保留本套件自己的兩個資料磁碟區；加上 <code>--purge</code> 才會一併刪除。共用的 pi 狀態磁碟區<strong>在任何情況下都不會被動</strong>，因為那是姊妹套件的。</p>
+      </section>
+
+      <section id="access" data-nav="對外連線">
+        <h2 data-icon="network">對外連線怎麼處理</h2>
+        <p>預設是保守的：伺服器只發布到 <code>127.0.0.1:8000</code>，資料庫完全不發布。也就是說裝完之後，只有那台機器上的人連得到。</p>
+        <p>要讓其他人連進來，套件建議的做法是走 Tailscale 的 HTTPS 服務，把本機迴路的 8000 埠掛到 tailnet 上的一個 HTTPS 埠：</p>
+        <p><code>tailscale serve --bg --https=9444 http://127.0.0.1:8000</code></p>
+        <p>這條指令要在跑 Tailscale 的容器裡執行。掛好之後用 <code>https://&lt;你的 tailnet 主機名&gt;:9444/</code> 連線，憑證由 Tailscale 代為申請，瀏覽器不會跳自簽警告。</p>
+        <div class="callout warning">
+          <p>兩件事不要做。第一，不要把驗證關掉——那個開關存在是為了完全信任的封閉網段，一旦有對外通道就等於門戶大開。第二，注意<strong>首次開機的空窗期</strong>：管理員名單還空著的時候，建立第一個管理員的端點是不需要驗證的，誰先打到誰就是管理員。對策是照第 2 步先把密碼種好，或是開好之後立刻自己搶下來。</p>
+        </div>
+      </section>
+
+      <section id="ops" data-nav="日常操作">
+        <h2 data-icon="advanced">日常操作與升級</h2>
+        <p>三個容器分開看日誌，問題通常一眼就分得出來是誰的。</p>
+        <ul>
+          <li><code>podman ps</code> 看三個容器的狀態，這是最快的一眼確認</li>
+          <li><code>podman logs -f omnigent-server</code> 看介面與編排事件</li>
+          <li><code>podman logs -f omnigent-runner</code> 看執行端的撥入與代理狀態</li>
+          <li><code>journalctl --user -u omnigent-server -f</code> 看 systemd 這一層的啟停紀錄</li>
+          <li><code>systemctl --user restart omnigent-server</code> 只重啟伺服器，不動資料庫與執行端</li>
+        </ul>
+        <p>升級分兩邊。<strong>伺服器</strong>改單元檔裡的映像標籤（可以釘在特定版本），然後重啟該單元。<strong>執行端</strong>改建置檔裡的版本參數，重跑一次安裝腳本讓它重新建置，再重啟執行端單元。</p>
+      </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <ul>
+          <li>三支驗收腳本全綠。姊妹套件相關的那幾條在共用磁碟區是空的時候會跳過而不是失敗，這是預期行為</li>
+          <li><code>podman ps</code> 三個容器都是執行中，伺服器那個顯示健康</li>
+          <li>介面登得進去，主機選單裡的常駐執行端前面是綠點</li>
+          <li>開一個 session 選 pi，真的收到回覆，而且不需要你重新設定供應商</li>
+        </ul>
+        <div class="callout danger">
+          <p><strong>絕對不要拿 <code>/healthz</code> 當健康檢查。</strong>介面是單頁應用，它的萬用路由會把 <code>/healthz</code> 變成回傳首頁並給你一個成功狀態碼——就算後端 API 已經死了，探針也會永遠是綠燈。要用的是 <code>/health</code>，它回的是真正的 JSON 狀態。</p>
+        </div>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>安裝腳本卡在等待伺服器健康</strong>：伺服器根本沒起來。開另一個終端機看 <code>podman logs -f omnigent-server</code>，常見原因是資料庫還沒準備好或映像拉取失敗。</li>
+          <li><strong>健康檢查一直綠燈，介面卻沒反應</strong>：你打的是 <code>/healthz</code>。改成 <code>/health</code> 再看一次，多半會發現後端其實是死的。</li>
+          <li><strong>執行端一直沒出現在主機選單</strong>：執行端登入失敗時會停在等待狀態不再重試，需要重啟 <code>omnigent-runner</code> 單元。第 22 章的 k3s 版用一個前置容器等到伺服器完成初始化才啟動執行端，就是為了避開這個情況。</li>
+          <li><strong>改了管理員密碼之後執行端掉線</strong>：那組憑證同時是執行端撥回登入用的。改密碼要連執行端單元檔一起改，然後重啟執行端。</li>
+          <li><strong>選了 pi 但沒有可用的供應商</strong>：共用磁碟區是空的。先裝姊妹的 pi 套件把供應商設好，或是進執行端容器手動設定一次。</li>
+          <li><strong>重裝之後舊資料不見了</strong>：你大概加了 <code>--purge</code>。不加的話移除腳本會保留資料磁碟區，重裝可以直接接上去。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的容器組成、磁碟區、腳本行為與安全建議，以下列來源的該 commit 內容為準。</p>
         <ul>
-          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package/tree/33dd16c985e82e8cfde301f24de385c313477d24" rel="noopener">WoowTech Omnigent Rootless Podman 套件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件（版本基準對照）</a></li>
         </ul>
+        <p>介面本身的畫面與文案，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>一定要先裝那個 pi 的姊妹套件嗎？</summary>
+          <div class="body"><p>不是硬性的，但不裝的話共用磁碟區會是空的，你得自己進執行端容器把供應商與技能設一遍。先裝姊妹套件的好處是設定只做一次，pi 網頁版、OpenDesign、code-server 與這裡四個地方都吃同一份。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>這個部署可以有幾個執行端？能不能加第二個？</summary>
+          <div class="body"><p>套件設計是一個常駐執行端。你當然可以另外在別的機器上手動跑執行端撥進來，介面上會多出一台主機；但如果你的需求本來就是多台執行端各自獨立，第 22 章的 k3s 版是照這個需求設計的，每台主機一個部署、一顆自己的磁碟區。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我沒有 Tailscale，可以直接把 8000 埠開到區域網路嗎？</summary>
+          <div class="body"><p>技術上可以，改單元檔的發布位址就行。但那等於把一個能在你機器上跑指令的服務暴露在區域網路上，而且是 HTTP 沒有加密。真的要這樣做，至少先確認驗證是開著的、密碼不是預設值，並且理解區域網路上的任何裝置都打得到它。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>升級伺服器需要重新建置映像嗎？</summary>
+          <div class="body"><p>不用。伺服器用的是上游官方映像，改單元檔裡的標籤再重啟就好。需要重新建置的是執行端，因為那個映像是本套件自己組的，pi 與 Omnigent 的版本寫在建置檔的參數裡。</p></div>
+        </details>
+        <details class="faq">
+          <summary>為什麼健康檢查一定要打 /health 而不是 /healthz？</summary>
+          <div class="body"><p>因為 <code>/healthz</code> 不是後端的端點。介面是單頁應用，任何沒被後端接走的路徑都會落到萬用路由，回傳首頁和一個成功狀態碼。用它當探針的結果是後端死了也永遠綠燈，你會完全看不到故障。<code>/health</code> 才是真的健康端點。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch20_ha_addon.html">
         <span class="label">← Previous</span>

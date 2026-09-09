@@ -75,6 +75,9 @@
       <a href="#concepts">核心觀念</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
+      <a href="#runners">多個執行端</a>
+      <a href="#pool">資料庫連線池</a>
+      <a href="#access">對外通道</a>
       <a href="#verify">怎麼確認做對了</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
@@ -95,64 +98,183 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>前兩章各有一個天花板。附加元件版沒有執行端，Podman 版只有一個。當你要的是<strong>好幾台執行端、一個固定的對外網址、以及一套能重複部署的描述檔</strong>，就會走到這一章。</p>
+        <p>這也是本書實機記錄的來源：那些畫面就是從一套照本章方式部署的正式站上抓下來的。</p>
+        <div class="callout warning">
+          <p>這一章假設你已經有一個能用的 k3s 叢集，也知道 Helm 是什麼。它不教你架 Kubernetes。如果讀到這裡覺得吃力，回第 21 章——那條路能做到的事有九成相同。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">Chart 裡有哪些東西</h2>
+        <p>一次 <code>helm install</code> 會長出這些物件，各自負責一件事。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Helm chart 元件資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">物件</th><th scope="col">型態</th><th scope="col">角色</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">postgres</th><td>StatefulSet</td><td>PostgreSQL 16，掛一顆獨佔讀寫的持久磁碟區</td></tr>
+              <tr><th scope="row">server</th><td>Deployment</td><td>編排與網頁介面，可選一個連線池側車</td></tr>
+              <tr><th scope="row">runner</th><td>N 個 Deployment</td><td>依設定裡的主機名字產生，每個配一顆自己的磁碟區</td></tr>
+              <tr><th scope="row">cloudflared</th><td>Deployment（兩個副本）</td><td>對外通道，設定由 Cloudflare 端管理</td></tr>
+              <tr><th scope="row">setup-admin</th><td>安裝後 Job</td><td>自動建立第一個管理員，安裝與升級後各跑一次</td></tr>
+              <tr><th scope="row">host-gc</th><td>CronJob</td><td>每天掃一次離線主機。上游還不支援刪除，目前只是空跑</td></tr>
+              <tr><th scope="row">smoke</th><td>helm test Pod</td><td>驗健康端點、管理員已建立、至少一台主機上線</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout terminology">
+          <p><strong>獨佔讀寫磁碟區（RWO PVC）</strong>：一次只能被一個節點掛載的持久磁碟區。這個限制在本章出現兩次——執行端各有各的磁碟區不能共用，以及既有的 pi 狀態不能直接被兩個 Pod 同時掛。</p>
+        </div>
+        <p>跟第 21 章的 Podman 版相比，差異集中在四處：管理單位從 systemd 單元變成 Helm chart、執行端從一個變成多個、pi 狀態從一份共用變成各自獨立、對外通道從 Tailscale 換成 Cloudflare。健康檢查的規矩則完全一樣，就緒與存活探針都打 <code>/health</code>，絕不打 <code>/healthz</code>。</p>
       </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <ul>
+          <li>一個可用的 k3s 叢集，<strong>1.29 以上</strong>，以及一個指得到它的 kubeconfig context</li>
+          <li>本機有 <code>helm</code>（3.8 以上才支援從登錄站直接安裝）、<code>kubectl</code> 與 <code>jq</code></li>
+          <li>叢集有能提供獨佔讀寫磁碟區的儲存方案。預設每個執行端要一顆二十 GB</li>
+          <li>一個 Cloudflare 帳號、一個你控制的網域，以及一組同時具備 DNS 編輯與通道建立權限的 API 權杖</li>
+        </ul>
+        <div class="callout danger">
+          <p>Chart 的預設檔裡有一組管理員帳密。<strong>部署到信任邊界以外之前一定要覆蓋它</strong>，用安裝時的參數覆寫，或準備一份不進版控的私有設定檔。通道憑證那個 JSON 檔同理，絕對不要提交進倉庫。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">安裝步驟</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先建好對外通道</h3>
+            <p>在 Cloudflare 的控制台或用 API 建立一個通道，把回應裡的帳號代號、通道代號與通道密鑰存成一個 JSON 檔放在本機。接著推送通道的入口設定並建立指向它的 DNS 記錄。這一步做完，你就有了一個固定的對外網址。</p>
+          </li>
+          <li>
+            <h3>選一種安裝方式</h3>
+            <p>兩種都可以。<strong>從倉庫安裝</strong>：clone 之後設好 kubeconfig context 與通道憑證檔的路徑，跑 <code>scripts/apply.sh install</code>。<strong>從登錄站安裝</strong>：不用 clone，直接 <code>helm install</code> 指向 OCI 位址的 chart，用參數把憑證檔讀進去。後者適合你只想用釋出版本、不打算改 chart 的情況。</p>
+          </li>
+          <li>
+            <h3>釘住版本</h3>
+            <p>登錄站上有兩種標籤：每次推上主分支會產生一個帶提交碼的預覽版，每次正式釋出會產生一個穩定版號。<strong>正式環境一律用 <code>--version</code> 釘穩定版號</strong>；帶提交碼的那種只是拿來追主分支，不保證會一直存在。</p>
+          </li>
+          <li>
+            <h3>跑 helm test</h3>
+            <p>安裝完執行 <code>helm test</code>。它會驗三件事：健康端點有回應、資訊端點顯示管理員已經建立、以及至少有一台主機在線。三項都過才算部署成功，只看 Pod 都是 Running 是不夠的。</p>
+          </li>
+          <li>
+            <h3>開網址登入並立刻換掉預設憑證</h3>
+            <p>用你在第 1 步設定的網址開介面。如果安裝時沒有覆蓋預設帳密，現在馬上進 Settings 改掉；那組預設值是寫在公開倉庫裡的。</p>
+          </li>
+          <li>
+            <h3>需要的話把既有的 pi 狀態搬進來</h3>
+            <p>新裝的執行端磁碟區是空的。倉庫裡的搬移腳本可以從現有的 pi 服務把狀態打包後倒進執行端的磁碟區，讓供應商與技能設定不必重設。這一步是選配的，跳過只是要重新設定一次。</p>
+          </li>
         </ol>
       </section>
+
+      <section id="runners" data-nav="多個執行端">
+        <h2 data-icon="remote">多個執行端是怎麼回事</h2>
+        <p>設定檔裡有一份主機名字的清單，chart 會照那份清單，<strong>每個名字產生一個 Deployment 加一顆自己的磁碟區</strong>。它們各自向伺服器註冊成獨立的主機，所以介面上的主機選單會出現對應數量的項目，你選哪一個，session 就跑在哪一個上面。</p>
+        <p>要注意的是這些名字<strong>只是操作上的習慣</strong>，對應到叢集裡原本就有的機器編號，方便人記。它不代表任何自動的關聯，改成別的名字完全沒問題。</p>
+        <div class="callout warning">
+          <p>執行端之間的 pi 狀態<strong>不共享</strong>，這跟第 21 章的 Podman 版正好相反。原因是磁碟區是獨佔讀寫的，而既有的 pi 服務已經佔用了它自己那一顆，第二個 Pod 掛不上去。所以每個執行端都是一份全新的狀態，供應商要各設一次，或用搬移腳本各倒一次。</p>
+        </div>
+        <p>成本也要算進去：執行端數量乘以每顆磁碟區的大小就是你要付出的儲存空間。pi 的狀態其實不大，覺得二十 GB 太浪費的話，在設定裡把磁碟區大小調小即可。</p>
+      </section>
+
+      <section id="pool" data-nav="資料庫連線池">
+        <h2 data-icon="advanced">資料庫連線池為什麼是必要的</h2>
+        <p>伺服器的 Pod 裡多了一個連線池側車，夾在伺服器與資料庫之間，只在 Pod 內部監聽，不對外開服務。</p>
+        <p>它解決的是一個很具體的問題。沒有這一層時，資料庫重啟之後伺服器手上的連線池會抱著一堆壞掉的連線不放，只能等存活探針失敗、由叢集把伺服器 Pod 殺掉重建才會恢復——實測那段時間大約是<strong>兩分鐘</strong>。加上這一層之後，資料庫重啟對伺服器是透明的，目標恢復時間在三十秒以內，而且伺服器 Pod 完全不必重啟。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="連線池可調參數資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">參數</th><th scope="col">預設</th><th scope="col">說明</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>enabled</code></th><td>開啟</td><td>關掉就跳過連線池直連資料庫</td></tr>
+              <tr><th scope="row"><code>poolMode</code></th><td><code>session</code></td><td>連線的重用粒度。<strong>不要改</strong>，理由見下方</td></tr>
+              <tr><th scope="row"><code>maxClientConn</code></th><td>100</td><td>連線池對外接受的最大連線數</td></tr>
+              <tr><th scope="row"><code>defaultPoolSize</code></th><td>25</td><td>連線池對資料庫實際維持的連線數</td></tr>
+              <tr><th scope="row"><code>serverLifetime</code></th><td>3600</td><td>後端連線的最長存活秒數</td></tr>
+              <tr><th scope="row"><code>serverIdleTimeout</code></th><td>600</td><td>後端連線閒置多久後回收</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout danger">
+          <p>模式必須維持在 <code>session</code>。伺服器的非同步資料庫層是靠預備語句運作的，改成交易層級或語句層級的重用模式會直接壞掉。這不是效能取捨，是相容性問題。</p>
+        </div>
+        <p>把連線池關掉時，伺服器的連線字串會自動退回直連資料庫的形式，側車不會被產生。這個開關留著是為了讓你能比較有池與無池的差異，或是相容更早期沒有這個側車的部署。</p>
+      </section>
+
+      <section id="access" data-nav="對外通道">
+        <h2 data-icon="network">對外通道怎麼建</h2>
+        <p>對外走的是 Cloudflare 的通道側車，兩個副本，入口設定放在 Cloudflare 端而不是叢集裡。好處是叢集不需要對外開任何埠，也不需要公開 IP。</p>
+        <p>通道憑證存在一個 Kubernetes Secret 裡。用倉庫的安裝腳本時，它會從你指定的 JSON 檔自動建立這個 Secret；用登錄站直接安裝時，則是把檔案內容當成參數讀進去。<strong>那個 JSON 是憑證，不要提交進版控，也不要貼在聊天視窗裡。</strong></p>
+        <p>對外網址完全由你的通道設定決定，chart 只是照著跑。網址換掉時記得同步檢查介面裡跟公開連結有關的設定，否則分享出去的連結會指向舊網域。</p>
+      </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <ul>
+          <li><code>helm test</code> 三項全過：健康端點、管理員已建立、至少一台主機在線</li>
+          <li>資料庫、伺服器、每個執行端與通道的 Pod 都在執行中，沒有反覆重啟</li>
+          <li>用對外網址（不是叢集內位址）開得起介面並登入成功</li>
+          <li>主機選單裡的項目數量等於你設定的執行端數量，而且每個前面都是綠點</li>
+          <li>挑其中一台開 session，回覆正常；換另一台再開一次，也正常</li>
+        </ul>
+        <div class="callout tip">
+          <p>只看 Pod 狀態不足以判斷部署成功。伺服器可以在資料庫還沒好、管理員還沒建立的情況下顯示為執行中，所以 <code>helm test</code> 那三項才是驗收標準。</p>
+        </div>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>執行端 Pod 在跑，但主機選單裡一直不出現</strong>：執行端在登入失敗後會停住不再重試。Chart 用一個前置容器等到伺服器完成初始化才放它啟動，正是為了避開這件事；用舊版 chart 或自己改過的話，手動重啟那個 Deployment。</li>
+          <li><strong>資料庫重啟後介面掛很久才恢復</strong>：你大概把連線池關掉了。沒有連線池時要等存活探針失敗、伺服器 Pod 重建才會好，實測大約兩分鐘。把連線池打開。</li>
+          <li><strong>改了連線重用模式之後伺服器整個壞掉</strong>：改回 <code>session</code>。伺服器的資料庫層依賴預備語句，其他模式不相容。</li>
+          <li><strong>對外網址打不開，但叢集內連得到</strong>：問題在通道那一層。先確認憑證 Secret 有建起來、通道 Pod 沒有一直重啟，再回 Cloudflare 端看入口設定與 DNS 記錄是否指到這個通道。</li>
+          <li><strong>移除之後資料還在，或反過來資料不見了</strong>：移除腳本預設保留持久磁碟區，方便重裝續用；加上清除參數才會連磁碟區、Secret 與命名空間一起刪掉。獨佔讀寫磁碟區一旦刪掉，沒有快照就沒得救。</li>
+          <li><strong>想沿用現有 pi 服務的狀態，但掛不上去</strong>：那顆磁碟區是獨佔讀寫的，正在被原本的服務佔用，第二個 Pod 掛不了。用倉庫的搬移腳本複製一份進執行端的磁碟區。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的 chart 結構、連線池設定、執行端配置與通道做法，以下列來源的該 commit 內容為準。</p>
         <ul>
-          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
-          <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件 · chart 0.1.0</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件（版本基準對照）</a></li>
         </ul>
+        <p>介面本身的畫面與文案，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。那台正式站就是照本章的方式部署的。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>一定要用 Cloudflare 嗎？</summary>
+          <div class="body"><p>Chart 預設是這樣，因為它不需要公開 IP 也不需要對外開埠。但通道那部分是可以關掉或替換的，你原本就有 Ingress 控制器或其他反向代理的話，把服務接上去即可。本章之所以照 Cloudflare 寫，是因為來源鎖定的那個版本就是這樣出貨的。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>執行端的名字可以改嗎？改了會怎樣？</summary>
+          <div class="body"><p>可以改，那只是設定裡的一份字串清單。改名等於換一組主機，chart 會產生新的 Deployment 與新的磁碟區，舊的那些不會自動搬過去。所以要改就在一開始改，已經在用之後改名等於重來一次。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>連線池可以關掉嗎？</summary>
+          <div class="body"><p>可以，設定裡有開關，關掉之後伺服器會直連資料庫。但除非你是要做有池無池的比較，否則沒有理由關——它換到的是資料庫重啟時從兩分鐘恢復縮短到三十秒以內，而且伺服器不必重啟。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我該用哪一個 chart 版本？</summary>
+          <div class="body"><p>正式環境用穩定版號並且明確釘住。登錄站上另外有一種帶提交碼的預覽版，那是每次推上主分支自動產生的，用來追最新進度，不保證會一直存在，也不保證兩次之間沒有破壞性變更。</p></div>
+        </details>
+        <details class="faq">
+          <summary>k3s 版和 Podman 版可以共用同一份 pi 狀態嗎？</summary>
+          <div class="body"><p>不行。Podman 版靠的是同一台機器上的共用磁碟區，四個服務掛同一份；k3s 版的磁碟區是獨佔讀寫的，跨 Pod 就掛不了，跨機器更不用說。要把狀態帶過去只能用複製的方式，也就是倉庫裡那支搬移腳本。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch21_podman.html">
         <span class="label">← Previous</span>

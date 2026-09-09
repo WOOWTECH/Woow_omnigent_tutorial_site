@@ -14,14 +14,14 @@
   <meta property="og:title" content="第 10 章 · Automations：用排程讓代理自己跑 · WoowTech Omnigent 完整指南" />
   <meta property="og:description" content="第 10 章介紹 Automations 的建立流程、RRULE 排程語法、執行紀錄檢視，以及最短間隔限制這個常見的坑。" />
   <meta property="og:url" content="https://omnigent-guide.woowtech.io/ch10_automations.html" />
-  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.png" />
+  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch10/01_automations_list.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="第 10 章 · Automations：用排程讓代理自己跑 · WoowTech Omnigent 完整指南" />
   <meta name="twitter:description" content="第 10 章介紹 Automations 的建立流程、RRULE 排程語法、執行紀錄檢視，以及最短間隔限制這個常見的坑。" />
-  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.png" />
+  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch10/01_automations_list.png" />
   <meta name="theme-color" content="#6183FC" />
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,6 +72,9 @@
       <h2>本章</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#list">清單頁</a>
+      <a href="#fields">七組欄位</a>
+      <a href="#permission">權限模式的坑</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
@@ -93,63 +96,174 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>有些工作每天都一樣：早上看一遍昨天的錯誤紀錄、掃一遍還沒合併的變更、把幾個來源整理成一份摘要。這些事不難，難的是「每天記得做」。</p>
+        <p>Automations 就是為這種工作設計的。側邊欄第二個入口（網址是 <code>/tasks</code>）上寫著它的定義：「Run agent sessions on a recurring schedule. Tasks fire on a connected host.」——<strong>照週期起 session，任務在一台已連線的主機上觸發。</strong></p>
+        <p>這一章講怎麼建立一個排程、排程欄位實際長什麼樣、以及一個很容易踩、踩了會完全沒反應的坑：權限模式選錯，任務會在那裡等一個永遠不會來的核准。</p>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：它產生的是一條真的 Session</h2>
+        <div class="callout terminology">
+          <p><strong>自動化（Automation）</strong>：一組「提示詞 + 執行者 + 時間」的設定。時間到了，Omnigent 就用那組設定自動開一條 session 跑起來，過程與結果跟你手動開的沒有兩樣。</p>
+        </div>
+        <p>這裡有兩個推論，先想清楚後面才不會意外。</p>
+        <ul>
+          <li><strong>它會花錢。</strong>排程跑出來的 session 一樣會計入用量與成本。每天一次的自動化，一個月就是三十條 session，這筆數字會出現在第 13 章的 Usage 頁上。</li>
+          <li><strong>它沒有人看著。</strong>設定頁的原文用了 <code>unattended</code> 這個字：「Automations run unattended.」意思是任何需要你按一下的環節，在排程情境下都不會有人按。</li>
+        </ul>
+        <p>所以寫自動化提示詞的方式跟聊天不一樣：不要留「你覺得呢？」這種需要回話的句子，把要它做的事一次寫完整。</p>
+        <figure class="shot">
+          <img src="assets/screenshots/ch10/01_automations_list.png" alt="Automations 清單頁有搜尋框、三個篩選頁籤、既有排程與三個建議範本" />
+          <figcaption><strong>圖 10-1</strong>Automations 清單。上排三個頁籤篩選全部／啟用中／已暫停；最下面三個是官方建議的排程範本，可以當起手式。</figcaption>
+        </figure>
+            </section>
+
+      <section id="list" data-nav="清單頁">
+        <h2 data-icon="records">清單頁與三個現成範本</h2>
+        <p>點側邊欄的 <code>Automations</code> 進來，這一頁只有幾個東西：</p>
+        <ul>
+          <li><strong>搜尋框</strong>：自動化多起來之後用它找。</li>
+          <li><strong>三個篩選頁籤</strong>：<code>All</code>、<code>Active</code>、<code>Paused</code>。找不到某條自動化時，先確認你不是停在 <code>Active</code> 而它已經被暫停。</li>
+          <li><strong><code>Suggestions</code> 區塊</strong>：三個現成範本，<code>Follow-up monitor</code>（追蹤後續）、<code>PR sweep</code>（掃過待處理的變更）、<code>News digest</code>（做一份摘要）。</li>
+        </ul>
+        <p><code>Paused</code> 這個頁籤本身就是一個有用的資訊：自動化可以暫停，而暫停之後它仍然存在，不是被刪掉。要停掉一條每天跑的任務，暫停比刪除安全。</p>
       </section>
+
+      <section id="fields" data-nav="七組欄位">
+        <h2 data-icon="calendar">New automation 對話框的七組欄位</h2>
+        <p>建立自動化的對話框由上而下是七組欄位，順序固定：</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="New automation 欄位資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">欄位</th><th scope="col">預設或提示</th><th scope="col">怎麼填</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Name</th><td>佔位文字 <code>daily-brief</code></td><td>寫得像檔名，之後才搜尋得到</td></tr>
+              <tr><th scope="row">Prompt</th><td>佔位文字 <code>What should the agent do each run?</code></td><td>每次執行要做的事，一次寫完整，不要留問句</td></tr>
+              <tr><th scope="row">Runs with</th><td>框架或代理下拉</td><td>跟手動開 session 時同一份清單，標了 <code>needs setup</code> 的不要選</td></tr>
+              <tr><th scope="row">Model／Effort</th><td>兩個都預設 <code>Default</code></td><td>沒有特別理由就留 Default</td></tr>
+              <tr><th scope="row">Permission mode</th><td>預設 <code>Default</code></td><td>這是最容易出事的一格，見下一節</td></tr>
+              <tr><th scope="row">Frequency／Time</th><td>例如 <code>Daily</code> 與 <code>09:00 AM</code></td><td>頻率是下拉選單，時間是時間欄</td></tr>
+              <tr><th scope="row">Host (optional)</th><td>預設 <code>Resolve at fire time</code></td><td>留著不動，就用觸發當下你連線中的主機</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>排程實際上怎麼設定</h3>
+        <p>排程只有兩格：<code>Frequency</code> 下拉加上 <code>Time</code> 時間欄。<strong>介面上沒有 RRULE 之類的排程字串輸入框</strong>，也沒有 cron 表示式的欄位。如果你在別的資料上看過「用排程字串描述週期」的說法，那不是這個版本的畫面。</p>
+        <p>同樣地，本書的實機記錄<strong>沒有觀察到任何關於最短間隔的提示文字</strong>。這代表兩件事：不要假設有一個固定的分鐘下限，也不要假設一定可以設到很密。實際能選到多細，以你畫面上 <code>Frequency</code> 下拉裡列出的選項為準。</p>
+        <h3>Host 留空是什麼意思</h3>
+        <p><code>Host (optional)</code> 的預設值 <code>Resolve at fire time</code> 底下寫著「Leave unset to run on your connected host when the task fires.」——時間到的時候，才去看你有哪台主機連線著，用那台跑。方便，但代價是：<strong>那個時間點沒有主機連線，任務就沒地方跑。</strong>如果這條自動化非跑不可，指定一台長期開機的主機比較保險。</p>
+      </section>
+
+      <section id="permission" data-nav="權限模式的坑">
+        <h2 data-icon="warning">最容易踩的一格：Permission mode</h2>
+        <p>對話框裡有一段提示，值得整段照抄：</p>
+        <div class="callout danger">
+          <p>「Leave on Default to use the agent's configured model, effort, and permission mode. Automations run unattended, so a prompting mode (Manual or Plan) will wait for approval that never comes.」</p>
+          <p>翻成白話：<strong>會跳出來問你的權限模式（Manual 或 Plan），在排程情境下等於讓任務永遠卡住</strong>，因為沒有人在旁邊按核准。</p>
+        </div>
+        <p>這個坑之所以難查，是因為它不會報錯。清單上那條自動化看起來有在動，時間也對，就是永遠沒有產出。看到「有觸發但沒結果」，第一個要檢查的就是這一格。</p>
+        <p>同一段提示也解釋了 <code>Default</code> 的意思：留在 Default，就是沿用你在 <code>Runs with</code> 選的那個代理自己設定好的模型、投入程度與權限模式。所以真正該調的往往不是這個對話框，而是那個代理的設定。</p>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <ul>
+          <li><strong>先手動跑一次一模一樣的提示詞</strong>。用同一個框架、同一台主機、同樣的句子開一條 session。手動跑不出來的東西，排程也跑不出來，而且排程失敗更難查。</li>
+          <li><strong>確認要用的主機會在那個時間點連線</strong>。清單頁的說明寫著任務在已連線的主機上觸發。挑一台長期開著的機器，不要挑你晚上會關機的筆電。</li>
+          <li><strong>先估一下成本</strong>。每天一次就是每月三十條 session。如果這條提示詞會讓代理讀很多檔案，先在 Usage 頁看一下手動那次花了多少，乘以三十。</li>
+        </ul>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">建立第一個每日排程</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>從側邊欄進 Automations，先看範本</h3>
+            <p>進 <code>/tasks</code> 之後，先看 <code>Suggestions</code> 裡的三個範本：<code>Follow-up monitor</code>、<code>PR sweep</code>、<code>News digest</code>。如果你要做的事跟其中一個相近，從它開始改，比從空白開始快。</p>
+          </li>
+          <li>
+            <h3>命名成搜尋得到的樣子</h3>
+            <p><code>Name</code> 欄的佔位文字是 <code>daily-brief</code>，這個示範已經說明了風格：像檔名、小寫、看得出頻率與用途。三個月後你會有十條自動化，名字取得好，搜尋框才有用。</p>
+          </li>
+          <li>
+            <h3>把 Prompt 寫成一份完整的交辦</h3>
+            <p><code>Prompt</code> 欄問的是「What should the agent do each run?」——每一次執行要做什麼。把範圍、要看的位置、要產出的格式全部寫進去。不要寫「有問題再問我」，沒有人會在那裡回答。</p>
+          </li>
+          <li>
+            <h3>Model、Effort、Permission mode 三格都留 Default</h3>
+            <p>第一次建立時不要動這三格。Default 的意思是沿用代理自己的設定；等到你確定要換模型或調投入程度，再回來改。特別不要把 Permission mode 改成 Manual 或 Plan。</p>
+          </li>
+          <li>
+            <h3>設定 Frequency 與 Time，決定 Host 要不要指定</h3>
+            <p>從 <code>Frequency</code> 下拉挑週期（例如 <code>Daily</code>），在 <code>Time</code> 填時間（例如 <code>09:00 AM</code>）。挑一個你隔天會看結果的時間。<code>Host (optional)</code> 留在 <code>Resolve at fire time</code> 就是用當下連線的主機；要求穩定的話指定一台。</p>
+          </li>
+          <li>
+            <h3>建立之後回清單頁確認它在 Active</h3>
+            <p>切到 <code>Active</code> 頁籤，這條應該在裡面。不在的話，看 <code>Paused</code>。這一步只花三秒，但可以省下「隔天早上為什麼沒跑」的疑惑。</p>
+          </li>
         </ol>
-      </section>
+        <figure class="shot">
+          <img src="assets/screenshots/ch10/02_new_automation.png" alt="New automation 對話框依序有名稱、提示、執行框架、模型、力度、權限模式、頻率與時間" />
+          <figcaption><strong>圖 10-2</strong>建立排程的完整欄位。注意權限模式底下那行提示：排程是無人值守執行的，選了需要人工核准的模式，它會一直等一個永遠不會來的核准。</figcaption>
+        </figure>
+            </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>建立當下看不出對錯，真正的驗收在第一次觸發之後。</p>
+        <ul>
+          <li>觸發時間過後回到側邊欄，應該多出一條由這個自動化產生的 session，而且它有真正的產出，不是停在等待狀態。</li>
+          <li>清單頁的 <code>Active</code> 頁籤裡看得到這條自動化。</li>
+          <li>到 Usage 頁把期間切到 <code>7 days</code>，session 數量應該比前一天多一條，成本也對得上。</li>
+          <li>如果指定了主機，那台主機在觸發時間是連線狀態（Composer 的 Host 下拉裡前面有綠點）。</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>時間到了完全沒動靜</strong>：先看主機。任務在已連線的主機上觸發，而 <code>Host (optional)</code> 留在 <code>Resolve at fire time</code> 的話，觸發當下沒有任何主機連線就無處可跑。改成指定一台長期開機的主機。</li>
+          <li><strong>有開出 session，但它停在那裡沒有產出</strong>：檢查 <code>Permission mode</code>。選成 Manual 或 Plan 會讓它等一個永遠不會來的核准。改回 <code>Default</code>。</li>
+          <li><strong>清單上找不到剛建立的自動化</strong>：確認你在哪個頁籤。<code>All</code>、<code>Active</code>、<code>Paused</code> 是三個不同的檢視，被暫停的不會出現在 Active。真的找不到就用搜尋框打名字。</li>
+          <li><strong>想貼一段排程字串卻沒有欄位可貼</strong>：這個版本的排程就是 <code>Frequency</code> 下拉加 <code>Time</code> 時間欄，介面上沒有 RRULE 或 cron 的輸入框。要更複雜的週期，只能建立多條自動化來組合。</li>
+          <li><strong>成本比預期高很多</strong>：排程是每個週期都真的開一條 session。到 Usage 頁把期間切到 <code>30 days</code>，看 <code>Cost by harness</code> 與 <code>Cost by model</code>，就能認出是哪一條在吃錢。先把它暫停，再回頭改提示詞的範圍。</li>
+          <li><strong>選了某個框架但它標著 needs setup</strong>：那代表這台主機上還沒把那個框架設定好，排程照樣會失敗。先在手動 session 裡把它跑通，再回來建自動化。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
         </ul>
+        <p>清單頁文案、New automation 的七組欄位與兩段提示原文，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。該記錄明確推翻了「用排程字串描述週期」與「有固定最短間隔」兩種說法：實機畫面上沒有那些欄位與提示。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以設定每五分鐘跑一次嗎？</summary>
+          <div class="body"><p>以你畫面上 <code>Frequency</code> 下拉實際列出的選項為準。本書的實機記錄看到的是下拉選單加時間欄的組合（例如 <code>Daily</code> 加 <code>09:00 AM</code>），沒有記錄到分鐘級的自訂，也沒有看到任何關於最短間隔的提示文字。所以這裡既不保證做得到，也不會告訴你有某個固定下限——打開下拉看一眼最快。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Automation 跟我自己開的 Session 是同一種東西嗎？</summary>
+          <div class="body"><p>自動化本身是一組設定，它每次觸發會產生一條真正的 session。那條 session 跟你手動開的一樣：一樣有紀錄、一樣佔用主機、一樣計入成本。差別只在沒有人在旁邊看著它。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Model 跟 Effort 留在 Default 會用到什麼？</summary>
+          <div class="body"><p>用你在 <code>Runs with</code> 選的那個代理自己設定好的值。對話框的提示寫得很明白：留在 Default 就是沿用該代理已設定的模型、投入程度與權限模式。想換模型的話，通常改代理的設定比在這個對話框裡逐條覆寫更好維護。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>暫停一條自動化，之前跑過的紀錄會不會消失？</summary>
+          <div class="body"><p>暫停的是未來的觸發。清單頁有獨立的 <code>Paused</code> 頁籤，被暫停的自動化仍然在那裡，隨時可以切回來。已經產生的 session 是獨立存在的紀錄，不會因為你暫停或修改自動化而改變。要停一條每天跑的任務，暫停比刪除安全。</p></div>
+        </details>
+        <details class="faq">
+          <summary>Suggestions 裡的三個範本可以直接拿來用嗎？</summary>
+          <div class="body"><p><code>Follow-up monitor</code>、<code>PR sweep</code>、<code>News digest</code> 是起點而不是成品。它們幫你把欄位填成一個合理的形狀，但提示詞裡該看哪個位置、該產出什麼格式，還是要你自己補。建議照本章的步驟，先手動跑一次改好的提示詞，確定結果符合預期再存成排程。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch9_inbox_sharing.html">
         <span class="label">← 上一章</span>

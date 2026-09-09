@@ -70,12 +70,16 @@
     </ol>
     <div class="toc-in-chapter">
       <h2>本章</h2>
-      <a href="#why">為何需要本章</a>
-      <a href="#concepts">核心觀念</a>
-      <a href="#prep">開始之前</a>
-      <a href="#steps">操作步驟</a>
-      <a href="#verify">怎麼確認做對了</a>
-      <a href="#troubleshoot">故障排除</a>
+      <a href="#why">這份對照表怎麼用</a>
+      <a href="#concepts">四個核心名詞</a>
+      <a href="#prep">查詞之前先知道</a>
+      <a href="#records">介面與導覽</a>
+      <a href="#modes">執行與代理</a>
+      <a href="#security">治理與安全</a>
+      <a href="#docker">部署與基礎設施</a>
+      <a href="#steps">查詞的四個步驟</a>
+      <a href="#verify">自我檢測</a>
+      <a href="#troubleshoot">最常搞混的配對</a>
       <a href="#sources">固定來源</a>
       <a href="#faq">常見問題</a>
     </div>
@@ -91,65 +95,234 @@
         <div class="kicker">附錄 C</div>
         <h1>附錄 C：中英名詞對照表</h1>
       </div>
-      <section id="why" data-nav="為何需要本章">
-        <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+      <section id="why" data-nav="這份對照表怎麼用">
+        <h2 data-icon="why">這份對照表怎麼用</h2>
+        <p>Omnigent 的介面是英文的，這本書是中文的。中間那道翻譯落差在你只是點按鈕的時候不成問題，但只要你開始讀英文的原始文件、看記錄檔、或跟別人討論，落差就會變成阻力。</p>
+        <p>這份附錄把全書出現過的名詞收成幾張<strong>中文 → English → 一句話定義</strong>的表，按用途分四類。它的用途不是從頭讀，而是<strong>查</strong>：讀到一個詞卡住，翻到這裡，看完一句話定義，回去繼續讀。</p>
+        <div class="callout tip">
+          <p>每一列都標了章次。一句話定義只夠讓你不卡住，要真的搞懂那個概念，還是要回去讀那一章。</p>
+        </div>
       </section>
-      <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+
+      <section id="concepts" data-nav="四個核心名詞">
+        <h2 data-icon="concept">先把四個核心名詞釘死</h2>
+        <p>整本書最容易搞混的就是這四個，而且它們常常在同一個句子裡出現。第 3 章用一整章講它們，這裡是壓縮版。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="四個核心名詞的中英對照資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">中文</th><th scope="col">English</th><th scope="col">一句話定義</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">指揮中心</th><td>Server</td><td>存帳號、Session、排程與成本紀錄的那一台，網頁介面也由它提供</td></tr>
+              <tr><th scope="row">主機</th><td>Host</td><td>被指揮的那台機器，在介面上是你可以挑選的執行目標</td></tr>
+              <tr><th scope="row">執行端</th><td>Runner</td><td>常駐在主機上的行程，負責接下任務並在那台機器上真的跑起來</td></tr>
+              <tr><th scope="row">框架</th><td>Harness</td><td>實際寫程式的 AI 工具，例如 Claude Code、Codex、Pi</td></tr>
+              <tr><th scope="row">後設框架</th><td>meta-harness</td><td>管理多個框架的那一層，也就是 Omnigent 自己；它不含模型</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout terminology">
+          <p>最短的區分法：<strong>Server 是指揮的人，Host 是被指揮的機器，Runner 是那台機器上聽命令的人，Harness 是他手上的工具。</strong>一台主機上通常只有一個執行端，但同一個執行端可以提供好幾種框架。</p>
+        </div>
       </section>
-      <section id="prep" data-nav="開始之前">
-        <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+
+      <section id="prep" data-nav="查詞之前先知道">
+        <h2 data-icon="plan">查詞之前先知道三件事</h2>
+        <ul>
+          <li><strong>產品名與框架名一律不譯</strong>：Omnigent、Home Assistant、Claude Code、Codex、Pi、Podman、Helm、k3s 這些在中文句子裡也維持原字。硬翻只會讓你在英文文件裡找不到對應。</li>
+          <li><strong>介面標籤保留英文原字</strong>：介面上沒有中文，所以本書提到某個按鈕或分頁時，會用它畫面上的英文原字。中文只出現在解釋裡。</li>
+          <li><strong>「版本」這個詞有兩層意思</strong>：一個是部署套件自己的版本（例如附加元件 0.1.15），另一個是它裡面那份 Omnigent 核心的版本（例如 0.12.0）。看到版本號先問是哪一層，附錄 A 有對照表。</li>
+        </ul>
       </section>
-      <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+
+      <section id="records" data-nav="介面與導覽">
+        <h2 data-icon="records">介面與導覽名詞</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="介面與導覽名詞的中英對照資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">中文</th><th scope="col">English</th><th scope="col">一句話定義</th><th scope="col">章次</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">工作階段</th><td>Session</td><td>一次完整的人機往返紀錄，關掉分頁也繼續存在</td><td>第 4、8 章</td></tr>
+              <tr><th scope="row">專案</th><td>Project</td><td>Session 的分組容器，側邊欄可展開看底下的 Session 清單</td><td>第 8 章</td></tr>
+              <tr><th scope="row">輸入區</th><td>Composer</td><td>開新任務的那個輸入框，底部帶主機、工作目錄與 worktree 三個選單</td><td>第 5 章</td></tr>
+              <tr><th scope="row">工作區面板</th><td>Workspace</td><td>右側面板，分成 Files、Changes、Agents、Terminal 四個分頁</td><td>第 7 章</td></tr>
+              <tr><th scope="row">待辦匣</th><td>Inbox</td><td>收攏需要你回應的事件；沒事的時候就是空的</td><td>第 9 章</td></tr>
+              <tr><th scope="row">用量</th><td>Usage</td><td>成本頁，可切 7 天／30 天／90 天／全部時間／自訂期間</td><td>第 13 章</td></tr>
+              <tr><th scope="row">排程</th><td>Automations</td><td>讓代理照設定的頻率與時間自己開工，觸發時會落在一台連線中的主機上</td><td>第 10 章</td></tr>
+              <tr><th scope="row">釘選</th><td>Pinned</td><td>側邊欄上方的常用 Session 捷徑區</td><td>第 8 章</td></tr>
+              <tr><th scope="row">封存的工作階段</th><td>Archived sessions</td><td>設定裡的獨立分頁，放不想出現在清單但還不想刪的 Session</td><td>第 8 章</td></tr>
+              <tr><th scope="row">匯入工作階段</th><td>Import sessions</td><td>把某台機器上的近期本機對話拉進來；已匯入過的會被跳過</td><td>第 8 章</td></tr>
+              <tr><th scope="row">斜線指令</th><td>Slash command</td><td>在輸入區打斜線叫出的建議選單，可用方向鍵移動、Tab 套用</td><td>第 5 章</td></tr>
+              <tr><th scope="row">對話檢視／終端檢視</th><td>Chat view / Terminal view</td><td>紀錄的兩種呈現方式，預設哪一種可在外觀設定裡改</td><td>第 4、7 章</td></tr>
+              <tr><th scope="row">分享</th><td>Share</td><td>把某個 Session 給別人看的機制，可分讀取、編輯、管理三種層級</td><td>第 9 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="modes" data-nav="執行與代理">
+        <h2 data-icon="modes">執行與代理名詞</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="執行與代理名詞的中英對照資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">中文</th><th scope="col">English</th><th scope="col">一句話定義</th><th scope="col">章次</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">代理</th><td>Agent</td><td>介面上與框架並列的另一區選項，例如多代理協作或多代理辯論那類組合式選擇</td><td>第 6、17 章</td></tr>
+              <tr><th scope="row">子代理</th><td>Sub-agent</td><td>代理在一個回合裡派生出去分工的下一層；Workspace 的 Agents 分頁看得到</td><td>第 7 章</td></tr>
+              <tr><th scope="row">模型</th><td>Model</td><td>實際被呼叫的那個語言模型；不指定時用該代理自己設定好的</td><td>第 5 章</td></tr>
+              <tr><th scope="row">運算力度</th><td>Effort</td><td>與模型並排的選項，同樣預設沿用代理自己的設定</td><td>第 5、10 章</td></tr>
+              <tr><th scope="row">權限模式</th><td>Permission mode</td><td>決定代理動手前要不要先問你；無人值守的排程必須維持預設</td><td>第 10、12 章</td></tr>
+              <tr><th scope="row">工具呼叫</th><td>Tool call</td><td>代理每一次讀檔、寫檔、跑指令的動作，是規則攔截的基本單位</td><td>第 7、12 章</td></tr>
+              <tr><th scope="row">介入</th><td>Steer</td><td>把後續訊息直接送進進行中的回合，而不是排隊等下一輪</td><td>第 5 章</td></tr>
+              <tr><th scope="row">工作目錄</th><td>Working directory</td><td>這個 Session 從哪個目錄開始；決定代理看得到哪些檔案</td><td>第 4、6 章</td></tr>
+              <tr><th scope="row">工作樹</th><td>Worktree</td><td>Git 的平行工作副本；可設定每個新 Session 都開一個隨機命名的新工作樹</td><td>第 7、8 章</td></tr>
+              <tr><th scope="row">基底分支</th><td>Base branch</td><td>命名新工作樹分支時自動帶入的起點；留空就不自動帶</td><td>第 7 章</td></tr>
+              <tr><th scope="row">待設定</th><td>needs setup</td><td>橘色徽章，表示這台主機上還沒把那個框架設好；外觀設定可改成整個隱藏</td><td>第 6、17 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="security" data-nav="治理與安全">
+        <h2 data-icon="security">治理與安全名詞</h2>
+        <p>這一區的詞集中出現在第 11、12、14 章。內建規則目錄共 25 條，<strong>預設一條都沒有啟用</strong>。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="治理與安全名詞的中英對照資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">中文</th><th scope="col">English</th><th scope="col">一句話定義</th><th scope="col">章次</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">規則</th><td>Policy</td><td>在代理動手前介入判斷的條件；本身不是設定頁的欄位，要一條一條加</td><td>第 12 章</td></tr>
+              <tr><th scope="row">全域規則</th><td>Global policy</td><td>套用到所有 Session 的規則；沒設定時該頁會明說沒有任何全域規則</td><td>第 12 章</td></tr>
+              <tr><th scope="row">詢問</th><td>ASK</td><td>規則判定的其中一種結果：先停下來問人</td><td>第 12 章</td></tr>
+              <tr><th scope="row">拒絕</th><td>DENY</td><td>規則判定的另一種結果：直接不准這次動作</td><td>第 12 章</td></tr>
+              <tr><th scope="row">個人可識別資料</th><td>PII</td><td>身分證號、信用卡、電子郵件、電話這類資料；有規則專門掃描並攔截</td><td>第 12、14 章</td></tr>
+              <tr><th scope="row">沙箱</th><td>Sandbox</td><td>限制代理能碰到什麼的隔離環境；有規則可在代理啟動時強制指定</td><td>第 12 章</td></tr>
+              <tr><th scope="row">風險分數</th><td>Session risk score</td><td>由高風險工具呼叫與敏感結果累積的分數，達標就介入</td><td>第 12 章</td></tr>
+              <tr><th scope="row">花費上限</th><td>Cost budget</td><td>以累計花費設閘，分成單一 Session 與每位使用者每日兩種</td><td>第 12、13 章</td></tr>
+              <tr><th scope="row">只報告不動手</th><td>Report-only</td><td>拒絕所有會改檔的工具，讓代理只能回報</td><td>第 12 章</td></tr>
+              <tr><th scope="row">意圖式授權</th><td>Intent based authorization</td><td>以第一則訊息為權威意圖，後續行為必須符合它</td><td>第 12 章</td></tr>
+              <tr><th scope="row">運算式規則</th><td>CEL expression policy</td><td>用運算式對每一個規則事件求值，給需要自訂條件的人用</td><td>第 12 章</td></tr>
+              <tr><th scope="row">角色</th><td>Admin / Member</td><td>成員的兩種角色；重設密碼與移除成員這類動作只有管理員做得到</td><td>第 11 章</td></tr>
+              <tr><th scope="row">公開存取</th><td>Public access</td><td>獨立開關，允許用連結公開唯讀分享；關掉之後已公開的仍維持公開直到撤銷</td><td>第 9、14 章</td></tr>
+              <tr><th scope="row">唯讀（受限）</th><td>Read only (restricted)</td><td>分享模式之一：只能唯讀，且工作目錄在家目錄或檔案系統根的 Session 完全不可分享</td><td>第 9、14 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="docker" data-nav="部署與基礎設施">
+        <h2 data-icon="docker">部署與基礎設施名詞</h2>
+        <p>這一區只有第五部與附錄 A 用得到。前十四章的讀者可以整段跳過。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="部署與基礎設施名詞的中英對照資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">中文</th><th scope="col">English</th><th scope="col">一句話定義</th><th scope="col">章次</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">附加元件</th><td>Add-on</td><td>Home Assistant 的擴充套件形式，由 Supervisor 安裝、啟動與備份</td><td>第 20 章</td></tr>
+              <tr><th scope="row">內嵌入口</th><td>Ingress</td><td>Home Assistant 側邊欄裡直接開啟附加元件介面的通道，只有 Supervisor 能代理進去</td><td>第 20 章</td></tr>
+              <tr><th scope="row">容器單元</th><td>Quadlet</td><td>Podman 把容器描述成 systemd 單元的格式，讓容器像系統服務一樣被管理</td><td>第 21 章</td></tr>
+              <tr><th scope="row">無根模式</th><td>Rootless</td><td>容器以一般使用者身分執行，不需要系統管理員權限</td><td>第 21 章</td></tr>
+              <tr><th scope="row">資料卷</th><td>Volume</td><td>容器之外的持久儲存；解除安裝腳本預設不刪它</td><td>第 21 章</td></tr>
+              <tr><th scope="row">套件</th><td>Helm chart</td><td>Kubernetes 的套件格式，一份 chart 描述一整組要一起部署的資源</td><td>第 22 章</td></tr>
+              <tr><th scope="row">發佈</th><td>Release</td><td>一份 chart 實際裝上叢集之後的那個具名實例</td><td>第 22 章</td></tr>
+              <tr><th scope="row">持久卷宣告</th><td>PersistentVolumeClaim（PVC）</td><td>Kubernetes 裡對儲存空間的申請；每個執行端各自一份，彼此不共用</td><td>第 22 章</td></tr>
+              <tr><th scope="row">附屬容器</th><td>Sidecar</td><td>跟主容器同在一個單位裡協助它的容器，例如連線池與對外通道</td><td>第 22 章</td></tr>
+              <tr><th scope="row">連線池</th><td>Connection pool</td><td>擋在伺服器與資料庫之間的中介，讓資料庫重啟時伺服器不會抱著死掉的連線</td><td>第 22 章</td></tr>
+              <tr><th scope="row">通道</th><td>Tunnel</td><td>把內網服務安全地開到外網的連線方式，本書涉及 cloudflared 與 Tailscale 兩種</td><td>第 14、21、22 章</td></tr>
+              <tr><th scope="row">健康檢查</th><td>Health probe</td><td>定時打某個路徑確認服務還活著；本書明確要求用 <code>/health</code> 而不是 <code>/healthz</code></td><td>第 20 到 22 章</td></tr>
+              <tr><th scope="row">映像檔標籤</th><td>Image tag</td><td>指定要跑哪一版容器映像檔的字串；升級就是改它</td><td>第 21、22 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="steps" data-nav="查詞的四個步驟">
+        <h2 data-icon="steps">查詞的四個步驟</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先判斷它屬於哪一類</h3>
+            <p>看得到、點得到的是介面名詞；跟「誰去跑、用什麼跑」有關的是執行名詞；跟「准不准、花多少」有關的是治理名詞；只在安裝時出現的是部署名詞。分類錯了會找很久。</p>
+          </li>
+          <li>
+            <h3>用英文原字找</h3>
+            <p>介面是英文的，記錄檔也是英文的。表格的第二欄就是給你這樣用的：先在英文那一欄掃過去，比在中文欄找快得多，也不會被不同的譯法卡住。</p>
+          </li>
+          <li>
+            <h3>讀完一句話定義就回去</h3>
+            <p>一句話定義的目的是讓你不卡住，不是讓你搞懂。看完就回到原本在讀的那一段，讀完整段之後如果還是不確定，再照章次翻過去。</p>
+          </li>
+          <li>
+            <h3>跟英文文件對照時保留原字</h3>
+            <p>要去讀上游或部署倉庫的英文文件時，用表格第二欄的原字搜尋。中文譯名是本書為了讀起來順而取的，上游文件裡不存在。</p>
+          </li>
+          <li>
+            <h3>表裡沒有的詞怎麼辦</h3>
+            <p>這份表只收本書用得到的。介面上出現、書裡沒提到的詞，代表本書的實機記錄沒有涵蓋到它——那種情況不要猜，以你自己在畫面上看到的行為為準。</p>
+          </li>
         </ol>
       </section>
-      <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
-      </section>
-      <section id="troubleshoot" data-nav="故障排除">
-        <h2 data-icon="troubleshoot">故障排除</h2>
+
+      <section id="verify" data-nav="自我檢測">
+        <h2 data-icon="test">自我檢測</h2>
+        <p>不用背這份表。但下面四題答不出來的話，回去讀對應的章。</p>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li>用一句話說出 <strong>Host 和 Runner 的差別</strong>。（提示：一個是機器，一個是機器上的行程）</li>
+          <li>說出 <strong>Harness 和 Model 各自決定什麼</strong>。（提示：一個是工具，一個是工具背後呼叫的模型）</li>
+          <li>說出 <strong>Project、Session、Worktree 三者的包含關係</strong>。（提示：只有前兩個有包含關係，第三個是 Git 那邊的概念）</li>
+          <li>說出 <strong>ASK 和 DENY 的差別</strong>，以及為什麼排程任務不該碰到 ASK。</li>
         </ul>
       </section>
+
+      <section id="troubleshoot" data-nav="最常搞混的配對">
+        <h2 data-icon="troubleshoot">最常搞混的五組配對</h2>
+        <ul>
+          <li><strong>Server 與 Host</strong>：Server 只有一個，是你登入的那個網址；Host 可以有很多個，是清單裡讓你挑的機器。安裝時裝的是 Server，接上去的是 Host。</li>
+          <li><strong>Host 與 Runner</strong>：Host 是機器，Runner 是那台機器上跑著的行程。主機顯示離線幾乎都是 Runner 掛了，機器本身還開著。</li>
+          <li><strong>Harness、Agent 與 Model</strong>：介面上 Harness 與 Agent 是同一個下拉選單裡的兩區，Model 是另一個選單。Harness 是工具，Agent 是預先組好的多代理選項，Model 是背後被呼叫的模型。三者可以獨立更換，這也是排查時「一次只換一項」的依據。</li>
+          <li><strong>Project、Session 與 Worktree</strong>：Project 裝 Session，這是介面上的分組；Worktree 是 Git 的平行副本，跟 Project 沒有關係。設定裡可以要求每個新 Session 都開一個新的 Worktree，這是兩個系統的交界處，也是最常被誤會成「我的檔案不見了」的地方。</li>
+          <li><strong>套件版本與核心版本</strong>：附加元件、Podman 套件、Helm chart 各有自己的版號，裡面包的 Omnigent 核心又是另一個版號。兩者不會同步，看到數字先問是哪一層。</li>
+        </ul>
+      </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>部署與基礎設施那一區的名詞定義，以下列來源在該 commit 的內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package/tree/33dd16c985e82e8cfde301f24de385c313477d24" rel="noopener">WoowTech Omnigent Rootless Podman 套件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件</a></li>
         </ul>
+        <p>介面名詞、規則目錄與設定頁的英文原字，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。本書的中英譯名政策記在 <code>i18n/glossary.json</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>為什麼有些詞不翻成中文？</summary>
+          <div class="body"><p>因為介面沒有中文。把 Composer 翻成「編寫器」，你在畫面上找不到那個字，去搜尋英文文件也搜不到。本書的做法是：產品名、框架名、按鈕與分頁的標籤保留原字，解釋用中文。這份表的第二欄就是那些原字。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Agent 和 Harness 到底差在哪？</summary>
+          <div class="body"><p>它們在介面上是同一個下拉選單裡的兩個區塊。Harness 那區是單一的 AI 編碼工具，Pi、Claude Code、Codex 這些；Agent 那區是預先組好的多代理選項，例如多代理協作或多代理辯論。你每個 Session 只會從其中挑一個。要選哪一種的判斷在第 6 章與第 17 章。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>表裡的詞在我的畫面上找不到怎麼辦？</summary>
+          <div class="body"><p>先當成版本差異。這份表對應的是 2026-09-09 那次實機記錄，而三種部署方式的版本本來就不同步。以你畫面上實際看到的為準，不要為了對上書而去改設定。真的差很多的話，看該部署的固定來源確認你手上是哪一版。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我只是要用，需要記住這些嗎？</summary>
+          <div class="body"><p>不需要。真正必須分清楚的只有第一張表那四個——Server、Host、Runner、Harness——因為後面每一個設定畫面都預設你知道它們的差別。其餘的用到再查就好，這份表存在的目的就是讓你不用記。</p></div>
+        </details>
+        <details class="faq">
+          <summary>英文版的書會用同一套譯名嗎？</summary>
+          <div class="body"><p>方向是相反的：英文版直接用原字，不需要譯名。本書的翻譯政策明訂產品名、框架名、設定鍵、指令、檔名、版本與佔位值都保持原樣，而且不會把任何憑證寫成看起來可用的值。中英兩版的章節結構、表格列數與 FAQ 則數都保持一致。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="appendix_troubleshooting.html">
         <span class="label">← 附錄 B</span>

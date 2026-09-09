@@ -73,8 +73,10 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#roles">兩種角色</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
+      <a href="#sharing">分享的四個層級</a>
       <a href="#verify">怎麼確認做對了</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
@@ -95,63 +97,162 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>一個人用 Omnigent 的時候，權限這件事不存在：所有 session 都是你開的，所有機器都是你接的，帳也算在你頭上。第二個人一進來，三個問題同時出現——他能不能看到你正在跑的 session？他能不能把 session 的連結貼給公司外面的人？他離職那天，你要按哪一顆按鈕？</p>
+        <p>這一章處理的就是這三件事。它不教你怎麼架伺服器，只教你在「設定（Settings）」底下的兩個分頁——<code>Members</code> 與 <code>Sharing</code>——把人加進來，並且把可見範圍收到你能接受的程度。</p>
+        <div class="callout warn">
+          <p>先講清楚本章的界線：本書的畫面描述來自 2026-09-09 對正式站的實機記錄。<strong>邀請對話框按下去之後長什麼樣子、有沒有產生一條可分享的連結、連結多久過期，實機沒有記錄到。</strong>本書不會替它編一套流程；下面只寫得出可以指得出來的東西，其餘留白並標明。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：成員清單管「誰進得來」，分享設定管「誰看得到」</h2>
+        <p>很多人第一次找權限設定會在同一頁翻半天，因為他們預期它是一件事。在 Omnigent 它是兩件事，分在兩個分頁：</p>
+        <div class="callout terminology">
+          <p><strong>成員（Members）</strong>：能登入這台 Omnigent 的帳號清單。決定「誰進得來」。<br />
+          <strong>分享（Sharing）</strong>：一個 session 可以被交出去到什麼程度。決定「進來之後、或根本沒進來的人，看得到什麼」。</p>
+        </div>
+        <p>把兩者分開想很重要，因為它們的失效方式不一樣。成員清單設錯，是有人登得進來；分享設錯，是有人根本不用登入就看得到內容。後者的破口大得多，所以本章把 <code>Sharing</code> 拉到跟 <code>Members</code> 同等份量來講。</p>
+        <p>設定頁一共十一個分頁，大致分三組：<code>Account</code>、<code>General</code>、<code>Appearance</code>、<code>Git</code>、<code>Keyboard shortcuts</code>、<code>Import sessions</code> 是個人偏好，只影響你自己；<code>Members</code>、<code>Policies</code>、<code>Sharing</code> 是管理設定，影響整台；<code>Archived sessions</code> 是封存區。本章用到的是管理那組的第一與第三個。</p>
       </section>
+
+      <section id="roles" data-nav="兩種角色">
+        <h2 data-icon="persons">兩種角色與那張成員表</h2>
+        <p><code>Members</code> 頁是一張表格，四個欄位，右上角一顆 <code>Invite member</code>。表格本身就是全部的資訊量，沒有隱藏頁籤：</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="成員表格欄位與意義資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">欄位</th><th scope="col">顯示什麼</th><th scope="col">你會拿它做什麼</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>USERNAME</code></th><td>登入用的帳號</td><td>對照是誰；這一欄含真實個資</td></tr>
+              <tr><th scope="row"><code>ROLE</code></th><td><code>Admin</code> 或 <code>Member</code></td><td>判斷這個人動得了管理設定嗎</td></tr>
+              <tr><th scope="row"><code>LAST LOGIN</code></th><td>最後一次登入時間</td><td>找出早就不用、該移除的帳號</td></tr>
+              <tr><th scope="row"><code>ACTIONS</code></th><td><code>Reset</code> 與 <code>Remove</code> 兩個動作</td><td>重設與移除</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>角色只有兩種：<code>Admin</code> 與 <code>Member</code>。沒有第三種，也沒有逐項打勾的細部權限表。這代表你的權限規劃只有一個決定要下——<strong>這個人需不需要動管理設定</strong>。需要就是 Admin，不需要就是 Member，中間沒有灰階。</p>
+        <p>要限制「代理可以做到什麼程度」，靠的不是角色，而是第 12 章的規則。角色管的是介面上的管理權，規則管的是代理執行時的邊界，兩者互不取代。</p>
+        <div class="callout warn">
+          <p><code>Reset</code> 與 <code>Remove</code> 這兩個動作，實機只記錄到按鈕存在，<strong>沒有記錄按下去之後的確認對話框與後續行為</strong>。按之前先假設它立刻生效、且無法復原，尤其 <code>Remove</code>。要試就找一個你自己開的測試帳號試。</p>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>三件事先確定，不然你會在中途卡住：</p>
+        <ul>
+          <li><strong>你自己是 Admin</strong>。<code>Members</code>、<code>Policies</code>、<code>Sharing</code> 是管理分頁，Member 角色看不看得到、看得到能不能改，實機沒有以 Member 身分登入驗證過。如果你在設定頁找不到這三個分頁，先確認自己的角色。</li>
+          <li><strong>先想好分享的上限，再邀人</strong>。分享設定的變更<strong>只影響之後新建立的分享</strong>，先開放後收緊，收不回已經發出去的那些。順序反了會留下尾巴。</li>
+          <li><strong>準備好給新成員的第一句話</strong>。他登入後看到的是空的側邊欄，不會知道要先選哪一台機器。第 2 到 4 章就是給他讀的。</li>
+        </ul>
+        <p>還有一件跟操作無關但值得先說：<strong>不要對 <code>Members</code> 頁截圖</strong>。那頁列的是真實帳號，本書全書也沒有收錄這一頁的截圖，原因就是這個。</p>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">把第二個人加進來</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先到 Sharing 決定天花板</h3>
+            <p>開設定，切到 <code>Sharing</code>。在人進來之前先把 <code>Session sharing</code> 選到你能接受的層級，並決定 <code>Public access</code> 要不要開。理由在上一節：這個設定只約束新的分享，晚設等於白設。四個層級的差別下一節有完整對照。</p>
+          </li>
+          <li>
+            <h3>切到 Members，按 Invite member</h3>
+            <p>右上角那顆 <code>Invite member</code> 就是入口。實機記錄到的是按鈕本身；對話框裡要填帳號、還是產生一條連結給對方，本書沒有可以引用的畫面，請以你眼前的對話框為準。填完之後回到表格確認新的一列出現。</p>
+          </li>
+          <li>
+            <h3>把角色定成 Member，除非他真的要管設定</h3>
+            <p>預設就給 <code>Member</code>。Admin 只給需要改 <code>Policies</code>、<code>Sharing</code>、或需要移除其他成員的人。團隊裡有兩個 Admin 是合理的（一個人休假時另一個人動得了），三個以上通常代表你其實想控制的是別的東西——那件事該用規則做，不是用角色做。</p>
+          </li>
+          <li>
+            <h3>告訴他登入後先做三件事</h3>
+            <p>第一，在 Composer 底部確認 <code>Host</code> 那顆是不是綠點，綠點才代表那台機器線上；第二，把 <code>Runs with</code> 拉開看看哪些框架沒有 <code>needs setup</code> 橘色徽章，只有那些能直接用；第三，先開一個無關緊要的 session 試手。這三件事對應本書第 4 與第 6 章。</p>
+          </li>
+          <li>
+            <h3>把 LAST LOGIN 排進你的例行檢查</h3>
+            <p><code>LAST LOGIN</code> 這一欄是你唯一的離職偵測工具。每個月看一次，久未登入而且已經沒有業務關係的帳號就 <code>Remove</code>。這件事沒有自動提醒，不排進行事曆就不會發生。</p>
+          </li>
         </ol>
       </section>
+
+      <section id="sharing" data-nav="分享的四個層級">
+        <h2 data-icon="security">分享的四個層級與公開存取</h2>
+        <p><code>Sharing</code> 頁上是兩個獨立的東西：一組四選一的 <code>Session sharing</code>，以及一個單獨的 <code>Public access</code> 開關。先看四選一：</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Session sharing 四個層級對照資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">層級</th><th scope="col">實際行為</th><th scope="col">適合什麼場合</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>On</code></th><td>有 manage 權限的人可以用任一層級分享（read、edit、manage），也可以切換公開或工作區唯讀</td><td>小團隊、彼此都信任、需要互相接手 session</td></tr>
+              <tr><th scope="row"><code>Read only</code></th><td>新的分享上限就是 read；試圖給 edit 或 manage 會被拒絕</td><td>要給人看結果，但不要別人改到你的 session</td></tr>
+              <tr><th scope="row"><code>Read only (restricted)</code></th><td>唯讀，而且工作目錄是家目錄或檔案系統根的 session <strong>完全不可分享</strong></td><td>怕有人不小心把整台機器的檔案樹分享出去</td></tr>
+              <tr><th scope="row"><code>Off</code></th><td>停用分享，Share 控制項直接從介面上消失</td><td>單機自用，或內容一律不得離開這台</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><code>Read only (restricted)</code> 那一條值得多看一眼。它擋的不是「權限」，是「範圍」：一個工作目錄開在家目錄的 session，代理翻得到的東西遠超過那個任務本身，分享出去等於連帶把周邊全部交出去。這條規則替你把那種 session 直接排除在可分享之外。</p>
+        <p><code>Public access</code> 是另一個開關，管的是「能不能用一條連結公開唯讀分享」。關掉之後，Share 對話框裡的公開切換會隱藏，新的公開分享會被拒絕。</p>
+        <div class="callout danger">
+          <p>最重要的一句話，原文是：<strong>變更只影響新的分享，既有的授權（包含已經公開的 session）在被撤銷之前仍然有效。</strong>所以關掉 <code>Public access</code> <strong>不會</strong>讓已經公開出去的 session 變成私密。真的要收回，得逐一撤銷那些既有的分享。</p>
+        </div>
+      </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>四個可以當場檢查的點：</p>
+        <ul>
+          <li><code>Members</code> 表格裡新成員那一列存在，<code>ROLE</code> 是你想給的那一種，而且 <code>LAST LOGIN</code> 在他第一次登入之後有值。<code>LAST LOGIN</code> 一直空白，代表他其實還沒進來過。</li>
+          <li>回頭再開一次 <code>Sharing</code>，確認你選的層級真的留在那裡，而不是你切走前忘了套用。</li>
+          <li>如果你把 <code>Session sharing</code> 設成 <code>Off</code>，隨便開一個 session，Share 控制項應該整個看不到。看得到就是設定沒生效。</li>
+          <li>如果你關掉了 <code>Public access</code>，去 Share 對話框確認公開切換已經不見。同時提醒自己：這不代表舊的公開連結失效了。</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>徵狀：設定頁裡找不到 <code>Members</code> 分頁</strong>。這三個管理分頁（<code>Members</code>、<code>Policies</code>、<code>Sharing</code>）與個人偏好分頁並列在同一個設定頁裡。找不到的第一個假設是你目前的角色不是 <code>Admin</code>，請另一位 Admin 到成員表看你那一列的 <code>ROLE</code>。第二個假設是你在看瀏覽器縮太窄的版面，分頁清單被折起來了。</li>
+          <li><strong>徵狀：關掉 <code>Public access</code> 之後，舊的公開連結還打得開</strong>。這不是故障，是設計。設定變更只作用在新的分享上，既有授權要逐一撤銷才會失效。把那些 session 找出來一個一個撤，別指望總開關幫你追溯。</li>
+          <li><strong>徵狀：對方說他分享不了，只能給唯讀</strong>。看 <code>Session sharing</code> 是不是停在 <code>Read only</code> 或 <code>Read only (restricted)</code>。若是 restricted，還要看那個 session 的工作目錄是不是家目錄或根目錄——是的話，它本來就完全不可分享，改權限層級也沒用，要改的是開 session 時選的工作目錄。</li>
+          <li><strong>徵狀：新成員登入後側邊欄空空的，說「沒有東西可以點」</strong>。這是正常畫面。Project 與 session 清單是各自的工作內容，不會因為加入就自動看到別人的。要他看得到你的某個 session，走的是分享，不是成員身分。</li>
+          <li><strong>徵狀：成員離開了，但不確定 <code>Remove</code> 會不會連他的 session 一起刪掉</strong>。實機沒有記錄到 <code>Remove</code> 的確認對話框內容，本書無法斷言。在你自己的環境上，先用一個測試帳號完整走一次再對真人按；若那些 session 有保留價值，先確認內容已經另外存下來。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品邊界說法以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
         </ul>
+        <p>成員表欄位、角色種類、分享四個層級與 <code>Public access</code> 的原文行為，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。邀請對話框的欄位、<code>Reset</code> 與 <code>Remove</code> 的後續行為不在該記錄範圍內，本章因此沒有描述。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>可以只讓某個成員看到某一個 Project 嗎？</summary>
+          <div class="body"><p>角色只有 <code>Admin</code> 與 <code>Member</code> 兩種，沒有針對單一 Project 的授權設定，實機也沒有看到這樣的介面。要讓別人看到特定內容，走的是 session 的分享（read / edit / manage 三個層級），不是把人綁在某個 Project 上。想在組織上分得更乾淨，比較實際的做法是分成不同的工作區或不同台。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>成員之間的花費會混在一起算嗎？</summary>
+          <div class="body"><p>Usage 頁的統計方式是按期間、按框架、按模型拆分，實機記錄裡沒有出現「按成員拆分」這個維度，所以本書不敢斷言它是每人各自一份還是整台合計。要按人設上限，第 12 章的規則目錄裡有一條 <code>Per-User Daily Cost Budget</code>，那條明確是以擁有者當日的累計花費為準，可以拿來做人均控管。細節見第 13 章。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Read only 跟 Read only (restricted) 差在哪，一般團隊該選哪個？</summary>
+          <div class="body"><p>前者是把分享權限的上限壓到唯讀；後者在唯讀之上多加一條：工作目錄開在家目錄或檔案系統根的 session，完全不能分享。差別在於後者擋的是「範圍太大的 session 根本不該被交出去」。如果你的團隊常常隨手在家目錄開 session，選 restricted；如果大家都固定在專案目錄裡工作，兩者實務上差不多，選 <code>Read only</code> 就夠。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以先開放分享，出事再收緊嗎？</summary>
+          <div class="body"><p>不建議，而且這是本章最想讓你記住的一件事。設定變更只影響新的分享，既有授權（包含已經公開的 session）在撤銷前都繼續有效。「出事再收緊」收到的只有未來，過去那些照樣打得開。正確順序是先把 <code>Sharing</code> 設到你能接受的最緊，之後真的需要再放寬。</p></div>
+        </details>
+        <details class="faq">
+          <summary>為什麼這一章沒有邀請流程的截圖？</summary>
+          <div class="body"><p>兩個原因。第一，<code>Members</code> 頁上是真實帳號，截圖會外洩個資，本書的截圖規範直接把這一頁列為不拍。第二，邀請對話框的內容不在 2026-09-09 那次實機記錄裡，本書的規則是沒看過的畫面就不寫、也不畫，寧可留白也不編一套看起來很像的流程給你照著做。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch10_automations.html">
         <span class="label">← Previous</span>

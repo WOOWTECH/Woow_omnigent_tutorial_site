@@ -15,14 +15,14 @@
   <meta property="og:title" content="Chapter 13 · Usage：看懂每一塊錢花在哪 · WoowTech Omnigent 完整指南" />
   <meta property="og:description" content="第 13 章解讀 Usage 頁的總覽數字、每日成本曲線，以及按 harness 與按模型的成本拆分，並說明如何據此調整模型選擇。" />
   <meta property="og:url" content="https://omnigent-guide.woowtech.io/en/ch13_usage_cost.html" />
-  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch13/01_usage_overview.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Chapter 13 · Usage：看懂每一塊錢花在哪 · WoowTech Omnigent 完整指南" />
   <meta name="twitter:description" content="第 13 章解讀 Usage 頁的總覽數字、每日成本曲線，以及按 harness 與按模型的成本拆分，並說明如何據此調整模型選擇。" />
-  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch13/01_usage_overview.png" />
   <meta name="theme-color" content="#6183FC" />
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.en" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -73,6 +73,8 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#blocks">四個區塊</a>
+      <a href="#periods">期間怎麼選</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
@@ -95,64 +97,158 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>Omnigent 自己不收你錢，但它指揮的每一個框架都用你自己的帳號或金鑰在跑。錢是實際從你的模型供應商帳戶扣的，只是扣的時候你不在現場——尤其是排程任務，它半夜自己開工，你隔天早上才看到結果。</p>
+        <p>側邊欄的 <code>Usage</code> 就是那本帳。這一章教你讀它：四個區塊各自回答什麼問題、看到數字之後可以做哪些具體調整，以及哪些問題這一頁其實回答不了。</p>
+        <div class="callout tip">
+          <p>這一章跟第 12 章是一組的。Usage 頁告訴你「花了多少」，規則告訴系統「最多能花多少」。先看帳再設上限，順序反過來只能亂猜金額。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：這頁算的是模型花費，不是訂閱費</h2>
+        <p>先把「這頁在算什麼」界定清楚，不然後面每個數字都會被誤讀。</p>
+        <div class="callout terminology">
+          <p><strong>用量（Usage）</strong>：Omnigent 對它經手的模型呼叫所累積出來的花費統計。單位是美金——第 12 章的 <code>Session Cost Budget</code> 明確以累計的美金花費設閘，兩處算的是同一種錢。</p>
+        </div>
+        <p>三個推論：</p>
+        <ul>
+          <li>這頁的錢<strong>不是</strong> Omnigent 的訂閱費，也不是這台伺服器的機器成本。它是你的模型供應商那一側的消耗。</li>
+          <li>因此它跟供應商帳單不會逐分逐角吻合。方向與比例是可靠的，絕對值當估算看。</li>
+          <li>它只涵蓋<strong>經過 Omnigent 的呼叫</strong>。你在別的地方直接用同一組金鑰花掉的錢，不會出現在這裡。</li>
+        </ul>
+        <p>還有一件本書不會替你補上的事：這份統計是每個人各自一份、還是整台合計，2026-09-09 的實機記錄沒有涵蓋，本書因此不下定論。你在自己的環境上要確認很簡單：請另一位成員同時打開 <code>Usage</code>，比對兩邊的 <code>Total cost</code> 是否一樣。</p>
+        <figure class="shot">
+          <img src="../assets/screenshots/ch13/01_usage_overview.png" alt="Usage 頁有期間切換、總成本卡片、每日成本長條圖與按 harness、按模型的成本拆分" />
+          <figcaption><strong>圖 13-1</strong>Usage 頁的四個區塊。本圖的金額與 Y 軸刻度已刻意模糊——你自己的畫面會顯示真實數字。</figcaption>
+        </figure>
+            </section>
+
+      <section id="blocks" data-nav="四個區塊">
+        <h2 data-icon="records">四個區塊各自回答什麼</h2>
+        <p><code>Usage</code> 頁上的內容固定是四塊，由上而下。每一塊回答的是不同的問題，別把它們當成同一張圖的四種畫法：</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Usage 頁四個區塊與用途資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">區塊</th><th scope="col">它回答的問題</th><th scope="col">你據此做的決定</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>Total cost</code></th><td>這段期間總共花了多少，跑了幾個 session</td><td>算出「每個 session 平均多少錢」，這是設預算上限的基準</td></tr>
+              <tr><th scope="row"><code>Daily cost</code></th><td>錢是平均分布，還是集中在某幾天</td><td>找出異常尖峰那一天，回去翻那天開了什麼</td></tr>
+              <tr><th scope="row"><code>Cost by harness</code></th><td>哪一個框架吃掉最多</td><td>決定要不要把某類工作換到另一個框架</td></tr>
+              <tr><th scope="row"><code>Cost by model</code></th><td>哪一個模型吃掉最多</td><td>決定哪些工作可以降級到便宜的模型</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><code>Total cost</code> 底下附帶的 session 數是這頁最被低估的數字。單看總額你只知道貴不貴，總額除以 session 數才知道<strong>貴在哪裡</strong>：是每個 session 都貴，還是有一兩個離群值把平均拉高。舉例來說，實機在三十天的期間看到的是二十個 session；同樣的總額，二十個 session 跟兩百個 session 的意義完全不同——前者代表單價高，後者代表用得兇。</p>
       </section>
+
+      <section id="periods" data-nav="期間怎麼選">
+        <h2 data-icon="history">期間怎麼選</h2>
+        <p>頁面上方是期間切換：<code>7 days</code>、<code>30 days</code>、<code>90 days</code>、<code>All time</code>、<code>Custom</code>。同一份資料換個期間看，結論可能相反，所以選哪一個不是隨便按。</p>
+        <ul>
+          <li><strong><code>7 days</code></strong>：看「最近是不是出事了」。剛改過模型設定、剛開了新的排程之後，用這個。</li>
+          <li><strong><code>30 days</code></strong>：設預算上限的基準期間。一個月足以蓋掉週末與假日的起伏，又不會被三個月前的舊習慣稀釋。</li>
+          <li><strong><code>90 days</code></strong>：看趨勢。是穩定的、在爬升的、還是一次性的？只有這個長度看得出來。</li>
+          <li><strong><code>All time</code></strong>：回答「從開站到現在總共花了多少」。適合寫報告，不適合拿來設上限。</li>
+          <li><strong><code>Custom</code></strong>：對齊你自己的計費週期，或框住某一次事故的區間。</li>
+        </ul>
+        <div class="callout warn">
+          <p>拿 <code>All time</code> 的平均值去設每日上限是常見錯誤。開站初期的試用期通常花得少，把它算進平均，會讓上限低到擋掉現在的正常工作。設上限請用 <code>30 days</code>。</p>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>看帳之前先累積帳。剛裝好的環境打開 <code>Usage</code> 只會看到接近零的數字，那不代表便宜，只代表還沒開始用。</p>
+        <ul>
+          <li><strong>至少累積一週的實際使用</strong>，而且要包含你平常真的會做的工作類型，不是只有測試用的一句話。</li>
+          <li><strong>如果已經在跑排程，把它跑過至少一個完整週期</strong>。排程的花費特徵跟人工操作不一樣：它穩定、可預測，但沒有人看著，所以它常常是月底那筆意外的來源。第 10 章講排程本身，這一章只負責看它花了多少。</li>
+          <li><strong>手邊留著第 12 章的規則清單</strong>。這一章的結論多半會變成那邊的一條設定。</li>
+        </ul>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">一次完整的看帳流程</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先用 30 days 抓基準</h3>
+            <p>側邊欄點 <code>Usage</code>，期間切到 <code>30 days</code>。記下兩個數字：<code>Total cost</code>，以及它附帶的 session 數。兩者相除得到「每個 session 平均多少錢」。這個數字是後面每一步的量尺，寫下來。</p>
+          </li>
+          <li>
+            <h3>看 Daily cost 找尖峰</h3>
+            <p>看那張長條圖是平的還是有明顯尖刺。有尖刺就記下是哪一天，回到那天的 session 清單去找當天開了什麼——通常是某個一路跑很久的長任務，或某個排程重複觸發。平的則代表花費由日常使用構成，該調的是習慣而不是抓兇手。</p>
+          </li>
+          <li>
+            <h3>看 Cost by harness 決定要不要換框架</h3>
+            <p>比對每個框架的花費跟它替你完成的工作量。某個框架佔了大半花費卻只負責少數任務，就值得檢討：是那類任務本來就重，還是它被拿去做了不適合的事。要換之前先讀第 17 章，換框架會連帶影響能不能用的功能。</p>
+          </li>
+          <li>
+            <h3>看 Cost by model 找可以降級的工作</h3>
+            <p>這一塊最容易換到現金。最貴的模型應該只出現在真正困難的工作上；如果它佔比很高，代表大量瑣事也在用它。做法有兩個：在 Composer 的模型下拉裡對簡單任務手動選便宜的模型（第 5 章），或直接開第 12 章的 <code>Deny Trivial Tasks on Expensive Models</code> 讓系統自己判。</p>
+          </li>
+          <li>
+            <h3>把結論寫回規則，然後一週後回來對</h3>
+            <p>用第一步算出的平均值當基準，設定 <code>Session Cost Budget</code>（例如平均值的五到十倍）與 <code>Per-User Daily Cost Budget</code>。一週後回到 <code>Usage</code>，用 <code>7 days</code> 看曲線有沒有下來。沒有回頭驗證的調整，等於沒有調整。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>做完上面五步，你手上應該有四個具體的東西：</p>
+        <ul>
+          <li>一個寫下來的「每 session 平均花費」數字，而不是「大概還好」這種印象。</li>
+          <li>對 <code>Daily cost</code> 上每一根明顯的尖峰，你都說得出那天發生了什麼。說不出來的尖峰就是還沒查完的線索。</li>
+          <li><code>Cost by harness</code> 與 <code>Cost by model</code> 的第一名，都是你認同它應該排第一名的那一個。不認同就是有調整空間。</li>
+          <li>至少一條已經生效的花費類規則，而且你知道它的上限是怎麼算出來的。</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>徵狀：<code>Usage</code> 頁一片空白或都是零</strong>。先確認期間不是切在一個沒有使用紀錄的區間（例如 <code>7 days</code>，但你這週都沒用）。切到 <code>All time</code> 若還是零，代表這台從來沒有成功完成過任何一次模型呼叫，那是連線或框架設定的問題，不是統計的問題，往第 6 章與第 18 章找。</li>
+          <li><strong>徵狀：數字跟供應商帳單對不起來</strong>。這是預期內的。這頁只統計經過 Omnigent 的呼叫，你在其他工具用同一組金鑰花的錢不會計入；計價與換算方式也可能有落差。把它當成分配比例的依據，不要當成對帳單。</li>
+          <li><strong>徵狀：某一天的成本突然暴衝，但那天沒人上班</strong>。第一個要查的是排程。無人值守的任務照樣花錢，而且會安靜地重複。到 <code>Automations</code> 的清單頁把該任務切到 <code>Paused</code>，觀察隔天的 <code>Daily cost</code> 有沒有掉下來，就能確認是不是它。</li>
+          <li><strong>徵狀：<code>Cost by harness</code> 裡出現你以為沒在用的框架</strong>。框架目錄裡有十一種，沒設定好的會標 <code>needs setup</code>；會出現在花費統計裡，代表它確實被設定過也被用過。可能是別的成員在用，也可能是某個排程任務的 <code>Runs with</code> 設成了它。</li>
+          <li><strong>徵狀：開了花費上限之後，工作被擋但 <code>Usage</code> 上的數字看起來還沒到上限</strong>。兩者的計算範圍不同：<code>Per-User Daily Cost Budget</code> 是以 UTC 的一天為界，跨所有 session 累計；而你在 <code>Usage</code> 上看的可能是別的期間或別的切分方式。比對前先把期間對齊，並記得台灣時間比 UTC 早八小時。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品邊界說法以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件</a></li>
         </ul>
+        <p><code>Usage</code> 頁的期間切換與四個區塊，以及實機在三十天期間觀察到的 session 數，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。統計是否按成員拆分不在該記錄範圍內，本章因此沒有下定論。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>這頁的錢是誰在收？我要付給 WoowTech 嗎？</summary>
+          <div class="body"><p>不是。Omnigent 不含模型額度，它指揮的每個框架都用你自己的帳號或金鑰，錢從你的模型供應商那邊扣。這頁只是把那些消耗整理成看得懂的樣子。自架的部署方式另外還有機器本身的成本，那個不會出現在這一頁。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>可以看到是哪一個成員花的嗎？</summary>
+          <div class="body"><p>頁面上的拆分維度是期間、每日、按框架、按模型，實機記錄裡沒有出現按成員拆分的區塊，本書不敢斷言它有或沒有。要按人控管花費，比較確定的路是第 12 章的 <code>Per-User Daily Cost Budget</code>，那條明確以擁有者當日的累計花費為判準。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>排程任務的花費會算進來嗎？</summary>
+          <div class="body"><p>會。排程跑的就是一般的代理 session，只是沒有人在旁邊看。這也是為什麼本章一直提醒你把排程跑滿一個週期再看帳：它是最容易被忽略、也最穩定累積的那一塊。懷疑某個排程是元兇時，把它切到 <code>Paused</code> 一天再回來比對 <code>Daily cost</code>。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我該多久看一次這一頁？</summary>
+          <div class="body"><p>穩定之後每個月一次，用 <code>30 days</code> 對一次基準就夠。三種情況要提早看：剛新增排程、剛加入新成員、剛換模型或框架設定。這三件事都會改變花費結構，早看幾天，發現異常的成本就只是幾天而不是一個月。</p></div>
+        </details>
+        <details class="faq">
+          <summary>如果我只想把錢壓下來，最有效的一件事是什麼？</summary>
+          <div class="body"><p>看 <code>Cost by model</code>，把瑣碎任務從最貴的模型移開。多數環境的花費集中在少數幾個模型上，而其中相當比例的呼叫其實不需要那個等級。做法可以是人工在 Composer 挑模型，也可以開 <code>Deny Trivial Tasks on Expensive Models</code> 讓系統自己判。換框架通常影響比較小，因為真正的成本來自模型而不是外面那層。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch12_policies.html">
         <span class="label">← Previous</span>

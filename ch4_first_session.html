@@ -74,6 +74,8 @@
       <a href="#concepts">核心觀念</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
+      <a href="#reading">看懂回覆串</a>
+      <a href="#keys">跑到一半能按什麼</a>
       <a href="#verify">怎麼確認做對了</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
@@ -93,63 +95,166 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>前三章都在讀。這一章你會第一次真的送出東西，並且拿到回覆。</p>
+        <p>之所以值得單獨一章，是因為送出之前有四個下拉要選，而<strong>這四個選擇決定了代理會在哪一台機器、哪一個資料夾裡動手</strong>。第一次就選對，你會覺得這東西很好用；選錯，你會花半小時找一個根本不在那裡的檔案。</p>
+        <div class="callout warn">
+          <p>代理不是在跟你聊天，它會在你指定的那台機器上真的執行動作。第一次練習請挑一個不重要的資料夾，並且把任務句寫成唯讀的，本章步驟五有現成的示範句可以照抄。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：一個 Session 由四件事決定</h2>
+        <p>按下送出的那一刻，這四件事就被綁定了：</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="送出前四個決定資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">要決定的</th><th scope="col">在哪裡選</th><th scope="col">選錯的後果</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">在哪台機器</th><td>輸入區底部第一個下拉（Host）</td><td>代理看不到你以為它看得到的檔案</td></tr>
+              <tr><th scope="row">在哪個資料夾</th><td>底部第二個下拉（工作目錄）</td><td>路徑對不上，或動到不該動的東西</td></tr>
+              <tr><th scope="row">改哪一份</th><td>底部第三個下拉（Worktree）</td><td>直接改到原本那份，而不是另開一份</td></tr>
+              <tr><th scope="row">派給誰</th><td><code>Runs with</code> 下拉</td><td>選到標著 <code>needs setup</code> 的，根本跑不起來</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>這四個名詞如果還沒有畫面感，回第 3 章看一遍再回來，不會浪費時間。</p>
+        <p>還有兩件事值得先知道：session 送出之後<strong>是在伺服器端持續執行的</strong>，關掉分頁它照跑；而且每一個 session 都會被記進成本統計，第 13 章的 Usage 頁看得到 session 數與累計金額。</p>
       </section>
+
       <section id="prep" data-nav="開始之前">
-        <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="plan">開始之前：三個確認</h2>
+        <p>動手前花三十秒確認這三件事，可以省下之後大半的挫折。</p>
+        <ul>
+          <li><strong>至少有一台 Host 是綠點</strong>。展開第一個下拉看一眼。全部沒有綠點就先停下來，去第 18 章排查，硬送出不會有結果。</li>
+          <li><strong>至少有一個 Harness 沒有標 <code>needs setup</code></strong>。展開 <code>Runs with</code> 看一眼。全部都標著，代表這台機器上還沒設定好任何 AI 工具，第 6、17 章處理這件事。</li>
+          <li><strong>你知道要用哪個資料夾</strong>。第一次練習挑一個內容你熟、但弄壞也無所謂的目錄。實機記錄裡的示範值是 <code>home</code>。</li>
+        </ul>
+        <div class="callout tip">
+          <p>如果那個目錄是 Git 工作區，可以在設定的 <code>Git</code> 分頁打開 <code>Always use a random worktree</code>。開啟之後，每個新 session 都會在一個隨機命名的新工作樹裡起始，代理改的東西跟你原本那份是分開的。同一頁的 <code>Default base branch</code> 則決定命名新工作樹分支時預設帶哪個基底，留空就不自動填。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">操作步驟：送出第一個任務</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>開一個新的 session</h3>
+            <p>按左欄的 <code>New session</code>，或直接按 <code>⌘N</code>。中間出現輸入框，提示文字是 <code>Describe a task to start a new session…</code>，就對了。</p>
+          </li>
+          <li>
+            <h3>選 Host</h3>
+            <p>展開輸入框底部第一個下拉，挑一台<strong>名字前面有綠點</strong>的機器。沒有綠點的不要選。多台機器的環境裡，先確認你要動的檔案是在哪一台上面。</p>
+          </li>
+          <li>
+            <h3>選工作目錄與 Worktree</h3>
+            <p>第二個下拉選資料夾，第三個下拉選工作樹。第一次可以兩個都用預設值，但務必看清楚第二格顯示的是什麼——這是代理將要動手的位置。</p>
+          </li>
+          <li>
+            <h3>選 Runs with，模型與 Effort 留 Default</h3>
+            <p>展開 <code>Runs with</code>，從沒有標 <code>needs setup</code> 的項目裡挑一個。旁邊的模型與強度先不要動，留在 <code>Default</code> 就是用該工具自己設定好的那一組。第一次跑不需要調參數。</p>
+          </li>
+          <li>
+            <h3>寫下第一句任務</h3>
+            <p>第一次請寫一句明確唯讀的任務，例如：<code>列出這個工作目錄底下有哪些檔案和資料夾，然後用三行說明這看起來是什麼專案。不要修改或刪除任何檔案。</code>這句話同時測到三件事：代理連得上、看得到檔案、而且聽得懂中文。</p>
+          </li>
+          <li>
+            <h3>送出</h3>
+            <p>按 <code>Start session</code> 按鈕。如果你偏好用鍵盤：預設是 <code>Enter</code> 送出、<code>Shift+Enter</code> 換行；若你在設定的 <code>General</code> 開了 <code>Submit with ⌘ + Enter on desktop</code>，就反過來變成 <code>Enter</code> 換行、<code>⌘+Enter</code> 送出。</p>
+          </li>
         </ol>
       </section>
+
+      <section id="reading" data-nav="看懂回覆串">
+        <h2 data-icon="records">送出之後畫面會發生什麼</h2>
+        <p>送出後畫面會轉成對話串，代理開始一段一段回應。這裡先講清楚一件事：<strong>本書的實機記錄沒有逐項記錄回覆串裡每一種區塊的樣式</strong>，所以這一節只寫得出可以驗證的部分，不猜。</p>
+        <p>可以確定的有三件：</p>
+        <ul>
+          <li><strong>回覆串有兩種檢視</strong>。設定的 <code>Appearance</code> 裡有一項 <code>Default transcript view</code>，值是 <code>Chat</code> 或 <code>Terminal</code>。你的預設看到哪一種，由這一項決定。覺得畫面跟同事的不一樣，先查這裡。</li>
+          <li><strong>旁邊有一個工作區面板</strong>。同樣在 <code>Appearance</code> 裡，<code>Workspace panel</code> 可以設成預設展開或收合，隨時用 <code>⌘⌥]</code> 切換。它是第 7 章的主題。</li>
+          <li><strong>代理可能會停下來等你點頭</strong>。這種時候按 <code>⌘↵</code> 接受核准提示。如果你人不在畫面前，需要你回應的事情會出現在 <code>Inbox</code>，第 9 章講它。</li>
+        </ul>
+        <div class="callout warn">
+          <p>代理停在那裡不動，最常見的原因不是當掉，是在等核准。先看畫面上有沒有等待回應的提示，再去查別的。</p>
+        </div>
+      </section>
+
+      <section id="keys" data-nav="跑到一半能按什麼">
+        <h2 data-icon="tips">跑到一半，你能按什麼</h2>
+        <p>session 跑起來之後這幾個鍵最常用，記起來比翻書快。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="對話進行中的快捷鍵資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">按鍵</th><th scope="col">作用</th><th scope="col">什麼時候用</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>Esc</code></th><td>停止回應</td><td>發現任務講歪了，馬上叫停</td></tr>
+              <tr><th scope="row"><code>⌘↵</code></th><td>接受核准提示</td><td>代理在等你同意它做某件事</td></tr>
+              <tr><th scope="row"><code>↑</code> / <code>↓</code></th><td>回溯上一則、下一則提示</td><td>想重下一次剛剛那句，不用重打</td></tr>
+              <tr><th scope="row"><code>⌘⌥V</code></th><td>語音輸入</td><td>任務句很長，懶得打字</td></tr>
+              <tr><th scope="row"><code>⌘↑</code> / <code>⌘↓</code></th><td>切到上一個、下一個 session</td><td>同時開了好幾個任務時來回看</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>還有一個行為值得先知道：代理還在跑的時候你又打了第二句話，這句話是插進當前這一輪、還是排隊等下一輪，取決於設定 <code>General</code> 裡的 <code>Always steer</code>。開啟時後續訊息會直接送進進行中的回合；工具支援的話會折進當前工作，不支援就留到下一回合處理。</p>
+      </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>第一個 session 算不算成功，看這四點：</p>
+        <ul>
+          <li>代理有回你，而且回的內容<strong>對得上那個資料夾的真實內容</strong>。如果它列出來的檔案你完全不認得，八成是 Host 或工作目錄選錯了。</li>
+          <li>回應結束後，這個 session 出現在左欄的清單裡，關掉分頁再回來它還在。</li>
+          <li>去 <code>Usage</code> 頁，期間切到 <code>7 days</code>，總成本區塊的 session 數應該比你開始之前多一。金額可能很小甚至顯示為零，那沒關係，session 數才是這裡要看的。</li>
+          <li>你說了「不要修改任何檔案」，而它確實沒有改。這一點請自己到那台機器上確認一次，第一次建立信任值得多花這三十秒。</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>按 <code>Enter</code> 只是換行，送不出去</strong>：設定 <code>General</code> 的 <code>Submit with ⌘ + Enter on desktop</code> 是開著的。要嘛改用 <code>⌘+Enter</code> 送出，要嘛把那個開關關掉。</li>
+          <li><strong>送出後完全沒有反應</strong>：先確認你選的 Host 名字前面有綠點。沒有綠點代表那台機器上的常駐程式沒在跑，指令送不過去。排查順序在第 18 章。</li>
+          <li><strong>代理停在半路不動</strong>：先假設它在等核准，看畫面上有沒有等待回應的提示，有的話按 <code>⌘↵</code>。順便看一下 <code>Inbox</code>，需要你點頭的事情會集中在那裡。</li>
+          <li><strong>選好的 Harness 標著 <code>needs setup</code>，還是被我選到了</strong>：那個工具在這台 Host 上沒設定好，換一個沒有標記的重開 session。要把它補設定好，看第 6 章與第 17 章。</li>
+          <li><strong>代理列出來的檔案完全不是我要的</strong>：依序檢查 Host、工作目錄、Worktree 三格。三格全對還是不對，那個檔案可能根本在你自己的電腦上，而不在任何一台 Host 上。</li>
+          <li><strong>任務跑歪了想立刻停</strong>：按 <code>Esc</code>。停下來之後把任務句改寫得更具體再送一次，不要在同一句上反覆補充。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品行為與版本說法，以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
         </ul>
+        <p>輸入區的下拉配置、<code>Start session</code> 按鈕、送出鍵行為、<code>Always steer</code> 與 <code>Default transcript view</code> 的原文說明，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。回覆串內部各種區塊的呈現方式不在該次記錄範圍內，本章因此沒有描述。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>關掉瀏覽器分頁，跑到一半的工作會停嗎？</summary>
+          <div class="body"><p>不會。執行發生在你選的那台機器上，由伺服器端統籌，不是靠你的瀏覽器撐著。分頁關掉再回來，session 還在左欄清單裡，內容也還在。這也是第 10 章的排程功能能成立的前提：沒有人開著畫面，任務照樣會在指定時間跑起來。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>第一句任務要寫多細？</summary>
+          <div class="body"><p>比你以為的再細一點。至少講清楚三件事：要它做什麼、以什麼形式回覆、以及不准做什麼。第一次練習尤其要把「不要修改或刪除任何檔案」這句寫進去，這是你在還不熟悉它行為時最便宜的保險。寫得太模糊，代理會自己補完你沒講的部分，而它補的方向不一定是你要的。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>代理真的會直接改我的檔案嗎？</summary>
+          <div class="body"><p>會，這正是它跟一般聊天視窗的差別。而且要特別注意：內建的規則目錄裡雖然有「檔案與 shell 操作前先要求核准」這類條目，但那些規則<strong>預設一條都沒有啟用</strong>。想要一道系統性的防線，得自己去第 12 章打開；在那之前，靠的是你怎麼寫任務句、以及選對工作目錄。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>session 開到一半可以換 Host 或換工具嗎？</summary>
+          <div class="body"><p>本書的實機記錄沒有測過中途更換的行為，所以這裡不給答案。實務上的建議是：選錯了就按 <code>Esc</code> 停下來，重開一個 session 選對再跑。重開的成本很低，猜半天的成本比較高。</p></div>
+        </details>
+        <details class="faq">
+          <summary>這一個 session 花了我多少錢？</summary>
+          <div class="body"><p>去 <code>Usage</code> 頁看。期間可以切 <code>7 days</code>、<code>30 days</code>、<code>90 days</code>、<code>All time</code> 或自訂區間，頁面上有總成本（含 session 數）、每日成本長條圖，以及按工具與按模型的兩份拆分。單一 session 的細節怎麼追，第 13 章會完整說明。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch3_four_nouns.html">
         <span class="label">← 上一章</span>

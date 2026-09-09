@@ -74,6 +74,9 @@
       <a href="#concepts">核心觀念</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
+      <a href="#entrances">六個入口各管什麼</a>
+      <a href="#settings">設定頁地圖</a>
+      <a href="#shortcuts">先記三個快捷鍵</a>
       <a href="#verify">怎麼確認做對了</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
@@ -93,64 +96,200 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>你手上大概只有三樣東西：一個網址、一組帳號、一句「登進去就知道了」。實際登進去之後，左邊會出現一整欄英文字，每一個都只有一兩個字，沒有任何一個告訴你該先按哪個。</p>
+        <p>這一章只做兩件事：<strong>把你登進去</strong>，然後<strong>把左欄每一個入口對上它負責的那一類問題</strong>。做完之後你不會再點錯地方，後面十九章講到「去 Usage 看」「去 Inbox 收」的時候，你會知道那是哪裡。</p>
+        <div class="callout tip">
+          <p>這一章不會叫你改任何設定。看到設定頁只是認位置，真正要動的設定從第 5 章才開始。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：整個畫面只有三塊</h2>
+        <p>介面看起來項目很多，但結構很簡單，只有三塊：</p>
+        <ul>
+          <li><strong>左欄</strong>：導覽與清單。決定「你要去哪裡」，本身不做事。</li>
+          <li><strong>中間</strong>：對話與輸入區。真正派工的地方，第 4、5 章整整兩章都在講它。</li>
+          <li><strong>左欄頂端三個圖示</strong>：搜尋（Search）、設定（Settings）、收合側邊欄（Close sidebar）。設定就藏在這裡，不在右上角。</li>
+        </ul>
+        <p>還沒有任何對話的時候，中間那塊就是<strong>輸入區（Composer）</strong>，輸入框裡的提示文字是 <code>Describe a task to start a new session…</code>。看到這行字就代表你在正確的起點上。</p>
+        <div class="callout terminology">
+          <p><strong>Session（工作階段）</strong>：一次完整的派工往返，從你寫下任務到代理做完為止。它是這套介面裡最基本的單位，第 4 章會實際開一個出來。</p>
+        </div>
       </section>
+
       <section id="prep" data-nav="開始之前">
-        <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="plan">開始之前：你需要哪三樣東西</h2>
+        <p>本書假設服務已經有人架好了。開始之前，先確認你手上有這三樣：</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="登入前需要準備的東西資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">你需要的</th><th scope="col">從哪裡來</th><th scope="col">沒有的話</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">網址</th><td>架站的人給你，形式是一個一般的 https 網址</td><td>問管理員；或照第 19 到 22 章自己架一套</td></tr>
+              <tr><th scope="row">帳號</th><td>管理員在 Members 頁替你建立</td><td>請管理員建；不要跟別人共用一組</td></tr>
+              <tr><th scope="row">密碼</th><td>管理員給你的初始密碼，本書一律寫成 <code>&lt;your-password&gt;</code></td><td>管理員可在 Members 頁的 ACTIONS 欄按 Reset 重設</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <p>不要多人共用一組帳號。Members 頁會列出每個人的 <code>LAST LOGIN</code>，共用之後那一欄就失去意義；而且第 12 章的規則目錄裡有一條是以「擁有者當日累計花費」設上限的，帳號一共用，那條規則就管不住任何人。</p>
+        </div>
+        <p>瀏覽器方面，本書的實機記錄是在桌面瀏覽器上做的。書中所有快捷鍵寫的都是桌面鍵盤按鍵。</p>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">操作步驟：登入並走完一圈</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>打開管理員給你的網址</h3>
+            <p>直接貼進網址列。第一次連上可能要等幾秒，服務在雲端或在別人的機器上，不是在你的電腦裡。畫面一直轉圈超過半分鐘，先跳到本章「故障排除」。</p>
+          </li>
+          <li>
+            <h3>輸入帳號與密碼</h3>
+            <p>填入管理員給你的那一組，也就是 <code>&lt;your-username&gt;</code> 與 <code>&lt;your-password&gt;</code>。本書的事實庫沒有逐欄記錄登入畫面的欄位名稱，畫面上寫什麼就填什麼；如果登入方式跟這裡描述的不同（例如走單一登入），以管理員的說明為準。</p>
+          </li>
+          <li>
+            <h3>確認你落在起始畫面</h3>
+            <p>登入後看中間那塊。輸入框裡出現 <code>Describe a task to start a new session…</code>，就代表你在 <code>New session</code> 起始畫面上，一切正常。先不要打字。</p>
+          </li>
+          <li>
+            <h3>把左欄從上到下看一遍</h3>
+            <p>由上而下依序是頂端三個圖示、四個主要入口（<code>New session</code>、<code>Automations</code>、<code>Inbox</code>、<code>Usage</code>），再往下是 <code>Pinned</code> 與 <code>Projects</code> 兩個區塊。每一個是什麼，下一節有完整對照表。</p>
+          </li>
+          <li>
+            <h3>打開設定，只看不改</h3>
+            <p>按左欄頂端的 Settings 圖示。裡面有十一個分頁，如果你只看得到其中一部分，那不是壞掉，是你的角色不是管理員，本章「故障排除」有說明。看完就關掉，這一章不改任何一項。</p>
+          </li>
+          <li>
+            <h3>叫出快捷鍵表</h3>
+            <p>按 <code>⌘/</code>。這會列出全部快捷鍵，是你之後忘記按鍵時最快的求助方式，比翻書快。看完按 <code>Esc</code> 關掉。</p>
+          </li>
         </ol>
       </section>
+
+      <section id="entrances" data-nav="六個入口各管什麼">
+        <h2 data-icon="what">左欄六個入口各管什麼</h2>
+        <p>左欄的每個項目都對應一類問題。與其記名字，不如記「什麼時候該來這裡」。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="側邊欄入口與用途對照資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">入口</th><th scope="col">什麼時候來這裡</th><th scope="col">本書章次</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">New session</th><td>要交辦一件新的事。這是最常按的一個</td><td>第 4、5 章</td></tr>
+              <tr><th scope="row">Automations</th><td>要讓某件事按時自動跑，不需要你在場。網址路徑是 <code>/tasks</code></td><td>第 10 章</td></tr>
+              <tr><th scope="row">Inbox</th><td>代理需要你點頭，或有人在檔案上留了意見。網址路徑是 <code>/inbox</code></td><td>第 9 章</td></tr>
+              <tr><th scope="row">Usage</th><td>想知道這段時間花了多少錢、開了幾個 session。網址路徑是 <code>/usage</code></td><td>第 13 章</td></tr>
+              <tr><th scope="row">Pinned</th><td>釘選起來、你會反覆回去看的 session</td><td>第 8 章</td></tr>
+              <tr><th scope="row">Projects</th><td>依專案分組的 session 清單，可以展開，每個 Project 底下是它自己的 session</td><td>第 8 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>頂端三個圖示的分工也很單純：<strong>Search</strong> 開啟搜尋、<strong>Settings</strong> 進設定、<strong>Close sidebar</strong> 把整條左欄收起來換取畫面寬度（快捷鍵 <code>⌘⌥[</code>）。</p>
+        <p>剛登入時，<code>Inbox</code> 大機率是空的，畫面會寫「Nothing waiting on you」，底下補一句說明：代理需要你的輸入、或有人對檔案留言時，東西才會出現在這裡。這是正常狀態，不是漏掉了什麼。</p>
+      </section>
+
+      <section id="settings" data-nav="設定頁地圖">
+        <h2 data-icon="modes">設定頁地圖：十一個分頁分成三群</h2>
+        <p>設定裡的十一個分頁不是平列的，它們分成三群，看懂分群就不會找錯地方。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="設定分頁分群資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">分群</th><th scope="col">分頁</th><th scope="col">影響範圍</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">個人</th><td><code>Account</code>、<code>General</code>、<code>Appearance</code>、<code>Git</code>、<code>Keyboard shortcuts</code>、<code>Import sessions</code></td><td>只影響你自己，改壞了不會波及同事</td></tr>
+              <tr><th scope="row">管理</th><td><code>Members</code>、<code>Policies</code>、<code>Sharing</code></td><td>影響整個團隊，通常只有管理員角色看得到</td></tr>
+              <tr><th scope="row">封存</th><td><code>Archived sessions</code></td><td>收納已經封存的 session</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>這一章你只要記住三件事，之後會反覆用到：</p>
+        <ul>
+          <li><code>General</code> 裡有一個 <code>Submit with ⌘ + Enter on desktop</code>。關著的時候 Enter 送出、Shift+Enter 換行；打開之後兩者互換。第 4 章按 Enter 沒反應時第一個就查它。</li>
+          <li><code>Appearance</code> 裡有 <code>Hide unconfigured harnesses</code>。打開之後，那些還沒設定好的 AI 工具會直接消失，而不是被標記出來，這會讓第 6 章的清單看起來比書上短。</li>
+          <li><code>Members</code>、<code>Policies</code>、<code>Sharing</code> 是管理員的地盤。看不到它們代表你的角色是 <code>Member</code>，不是壞了。</li>
+        </ul>
+        <p>另外，<code>Appearance</code> 的色彩主題預設是名為 <code>Omnigent</code> 的配色，那是這個產品的招牌粉色外觀。整頁還可以調整介面字級與字型、程式碼字級與字型、側邊欄透光、預設的回覆串檢視（Chat 或 Terminal）與工作區面板預設展開或收合，並且能整組匯出、匯入或還原成預設值。</p>
+      </section>
+
+      <section id="shortcuts" data-nav="先記三個快捷鍵">
+        <h2 data-icon="tips">先記三個快捷鍵就好</h2>
+        <p>快捷鍵表裡有二十幾個，第一天全記沒有意義。先記這三個，剩下的按 <code>⌘/</code> 現場查。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="第一天需要的快捷鍵資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">按鍵</th><th scope="col">做什麼</th><th scope="col">為什麼先記它</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>⌘N</code></th><td>開一個新的 session</td><td>最高頻的動作，不用每次回左欄按</td></tr>
+              <tr><th scope="row"><code>⌘K</code></th><td>叫出命令面板</td><td>忘記某個功能在哪裡時的萬用入口</td></tr>
+              <tr><th scope="row"><code>⌘/</code></th><td>顯示快捷鍵表</td><td>記住這一個，就等於記住其他全部</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>另外三組值得知道它們存在，等第 4 章實際跑 session 時再用：<code>Esc</code> 停止回應、<code>⌘↵</code> 接受核准提示、<code>⌘↑</code> 與 <code>⌘↓</code> 在上一個與下一個 session 之間跳。切換工作區側邊欄是 <code>⌘⌥]</code>，跟收合對話側邊欄的 <code>⌘⌥[</code> 剛好是一對。</p>
+      </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>這一章沒有產出物，驗收的是「你認得畫面」。四個問題答得出來就可以往下走：</p>
+        <ul>
+          <li>你能不看書指出 <code>New session</code>、<code>Automations</code>、<code>Inbox</code>、<code>Usage</code> 四個入口的位置嗎？</li>
+          <li>設定按鈕在哪裡？（在左欄頂端，不在右上角）</li>
+          <li>要看這個月花了多少錢，該去哪一頁？</li>
+          <li>你的角色是管理員還是一般成員？（看得到 <code>Members</code> 分頁就是管理員）</li>
+        </ul>
+        <p>另外開一下 <code>Usage</code> 頁確認它會顯示：期間切換有 <code>7 days</code>、<code>30 days</code>、<code>90 days</code>、<code>All time</code>、<code>Custom</code> 五個選項，底下是總成本、每日成本長條圖，以及按工具與按模型的成本拆分。全新帳號看到的數字是零或接近零，這是對的。</p>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>網址打不開或一直轉圈</strong>：這是服務端的問題，不是你操作錯誤。先問管理員服務是否還在跑；如果這台是你自己架的，第 18 章與附錄 B 有完整的排查順序。</li>
+          <li><strong>帳號密碼被拒絕</strong>：先確認大小寫與有沒有多打空白。確定沒錯就請管理員到 <code>Members</code> 頁，在你那一列的 <code>ACTIONS</code> 欄按 <code>Reset</code> 重設密碼。一般成員自己沒有這個按鈕。</li>
+          <li><strong>左欄整條不見了</strong>：多半是不小心按到頂端的 <code>Close sidebar</code>。按 <code>⌘⌥[</code> 切回來。</li>
+          <li><strong>看不到 <code>Members</code>、<code>Policies</code>、<code>Sharing</code> 三個分頁</strong>：正常。這三頁只有 <code>Admin</code> 角色看得到，<code>Member</code> 角色看不到。需要的話請管理員調整角色，做法在第 11 章。</li>
+          <li><strong><code>Projects</code> 底下空空的</strong>：正常。新環境還沒有人建立任何 Project。第 8 章會教你建第一個。</li>
+          <li><strong>按 <code>Automations</code> 之後網址變成 <code>/tasks</code></strong>：正常。介面上的名稱是 Automations，網址路徑是 <code>/tasks</code>，兩個指的是同一頁。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的部署與版本說法，以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件</a></li>
         </ul>
+        <p>側邊欄項目、設定分頁清單、快捷鍵與各頁文案，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。登入畫面的欄位細節不在該次記錄範圍內，本章因此沒有逐欄描述。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以用手機開嗎？</summary>
+          <div class="body"><p>本書的實機記錄是在桌面瀏覽器上做的，沒有記錄手機版的畫面與行為，所以這裡不做保證。可以確定的是書中所有快捷鍵都是桌面鍵盤按鍵，手機上沒有對應操作。真的要在手機上用，建議只做查看，派工還是回桌機。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>為什麼 Automations 的網址是 /tasks？</summary>
+          <div class="body"><p>顯示名稱與內部路徑不同步是常見情形，這裡就是這樣：介面寫 Automations，路徑是 <code>/tasks</code>。看到路徑跟名稱對不上不用擔心，兩個是同一頁。第 10 章講排程的時候還會再遇到一次。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我看不到 Members 分頁，是不是裝壞了？</summary>
+          <div class="body"><p>不是。角色有 <code>Admin</code> 與 <code>Member</code> 兩種，<code>Members</code>、<code>Policies</code>、<code>Sharing</code> 這三個管理分頁只有 <code>Admin</code> 看得到。一般成員看到八個分頁是正常的。要確認自己的角色，最快是請管理員打開 <code>Members</code> 頁看你那一列的 <code>ROLE</code> 欄。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>可以先把介面換成中文再往下讀嗎？</summary>
+          <div class="body"><p>本書的實機記錄裡，<code>Appearance</code> 分頁記到的是模式、終端機主題、色彩主題、側邊欄透光、預設回覆串檢視、工作區面板、隱藏未設定工具、字級與字型這些項目，沒有記錄到介面語言的切換選項。所以本書一律用英文原字寫按鈕名稱，並在旁邊補中文說明。看到書上寫 <code>Start session</code>，畫面上就是那幾個字。</p></div>
+        </details>
+        <details class="faq">
+          <summary>登入之後我應該先改哪個設定？</summary>
+          <div class="body"><p>第一天什麼都不用改。真的想動，優先看 <code>General</code> 的 <code>Submit with ⌘ + Enter on desktop</code>，決定你要 Enter 直接送出還是 Enter 換行；這會直接影響第 4 章送出第一句話的手感。其餘設定等你遇到具體不順的地方再回頭調，不要一開始就把十一個分頁都翻過一遍。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch1_what_is_omnigent.html">
         <span class="label">← 上一章</span>

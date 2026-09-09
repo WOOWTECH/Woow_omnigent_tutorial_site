@@ -73,10 +73,12 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#what">它實際上做什麼</a>
+      <a href="#compare">跟聊天視窗的差別</a>
       <a href="#prep">開始之前</a>
-      <a href="#steps">操作步驟</a>
+      <a href="#steps">怎麼讀這本書</a>
       <a href="#verify">怎麼確認做對了</a>
-      <a href="#troubleshoot">故障排除</a>
+      <a href="#troubleshoot">常見誤解</a>
       <a href="#sources">固定來源</a>
       <a href="#faq">常見問題</a>
     </div>
@@ -95,63 +97,154 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>你大概已經用過某個 AI 聊天視窗寫程式。它很好用，但有三件事它做不到：它看不到你另一台機器上的檔案、它一次只能是一個模型、而且你關掉分頁，那段工作就停在那裡。</p>
+        <p>Omnigent 處理的就是這三件事。這一章不教任何操作，只回答一個問題：<strong>它到底是什麼，以及它為什麼長這樣。</strong>把這件事想清楚，後面二十一章的每個畫面才會各就各位。</p>
+        <div class="callout tip">
+          <p>如果你只想趕快動手，可以直接跳到第 2 章登入，回頭再讀這章。但第 3 章的四個名詞會假設你讀過這裡。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：它是指揮台，不是 AI</h2>
+        <p>最容易誤解的一點：<strong>Omnigent 自己不是 AI。</strong>它一個字也不會幫你寫。</p>
+        <p>它是一層指揮介面——業界把這種角色叫做<strong>後設框架（meta-harness）</strong>。真正幹活的是 Claude Code、Codex、Pi 這些既有的 AI 編碼工具，Omnigent 做的是把它們、以及它們要動手的那些機器，收攏到同一個瀏覽器分頁底下，讓你在一個地方派工、看進度、算帳。</p>
+        <div class="callout terminology">
+          <p><strong>後設框架（meta-harness）</strong>：框架的框架。單一 AI 編碼工具是一個框架（harness）；管理多個框架的那層就是 meta-harness。</p>
+        </div>
+        <p>用一個比喻：如果 Claude Code 是一位工程師，Omnigent 不是更厲害的工程師，而是<strong>派工的人</strong>——決定哪位工程師、去哪台機器、做哪件事，並且在事後把工時算給你看。</p>
       </section>
+
+      <section id="what" data-nav="它實際上做什麼">
+        <h2 data-icon="what">它實際上做什麼</h2>
+        <p>拆開來看，Omnigent 提供五件單一聊天視窗給不了的東西。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="能力、實際意義、在本書哪一章資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">能力</th><th scope="col">實際意義</th><th scope="col">本書章次</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>跨機器執行</td><td>代理跑在你指定的那台機器上，直接讀寫那台機器的檔案</td><td>第 6、15、16 章</td></tr>
+              <tr><td>多框架並存</td><td>同一個介面下可選 Claude Code、Codex、Pi 等十一種框架</td><td>第 6、17 章</td></tr>
+              <tr><td>工作持續進行</td><td>關掉分頁，代理繼續跑；回來還在那裡</td><td>第 4、8 章</td></tr>
+              <tr><td>排程自動執行</td><td>設定好時間，代理自己開工，不需要你在場</td><td>第 10 章</td></tr>
+              <tr><td>成本與權限治理</td><td>看得到每一塊錢花在哪，也擋得住不該做的事</td><td>第 12、13 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="compare" data-nav="跟聊天視窗的差別">
+        <h2 data-icon="compare">跟你熟悉的聊天視窗差在哪</h2>
+        <p>兩者不是替代關係。差別在於「代理能碰到什麼」。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="面向、單一聊天視窗、Omnigent 資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">面向</th><th scope="col">單一聊天視窗</th><th scope="col">Omnigent</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>檔案</td><td>你貼給它什麼，它看到什麼</td><td>直接讀寫目標機器上的工作目錄</td></tr>
+              <tr><td>指令</td><td>它給你指令，你自己去跑</td><td>它自己跑，你看結果</td></tr>
+              <tr><td>模型</td><td>固定一家</td><td>逐個 session 挑框架與模型</td></tr>
+              <tr><td>離線</td><td>關掉就中斷</td><td>伺服器端持續執行</td></tr>
+              <tr><td>成本</td><td>看不到明細</td><td>按框架、按模型、按日拆分</td></tr>
+              <tr><td>邊界</td><td>靠你自己克制</td><td>二十五條可套用的規則</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warning">
+          <p>能力越大代價越高。代理能直接在你的機器上跑指令，意思是<strong>一個講錯的需求可能真的刪掉東西</strong>。第 12 章的規則與第 14 章的安全基線不是選讀章節。</p>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>本書假設<strong>服務已經架好</strong>——有人給了你一個網址跟一組帳號。你不需要先會 Docker、Kubernetes 或任何一種容器技術。</p>
+        <p>如果現在還沒有人幫你架，兩個選擇：</p>
+        <ul>
+          <li>先讀第 19 章的決策表，挑一種部署方式，照第 20 到 22 章其中一章裝起來</li>
+          <li>或直接跳到附錄 A 的安裝速查，那裡是壓縮版的指令清單</li>
+        </ul>
+        <p>本書的版本基準是 Home Assistant 附加元件版；其他部署方式的差異會在各章標明。</p>
       </section>
-      <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+
+      <section id="steps" data-nav="怎麼讀這本書">
+        <h2 data-icon="steps">怎麼讀這本書</h2>
+        <p>二十二章分成五部，是照「你會依序遇到的問題」排的，不是照功能表排的。</p>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先把介面用熟（第 1–5 章）</h3>
+            <p>登入、認得每個入口、開出第一個 session、把輸入框的隱藏功能挖出來。做完這五章，你已經能用它做事了。</p>
+          </li>
+          <li>
+            <h3>再把工作交出去（第 6–10 章）</h3>
+            <p>選機器、選框架、看代理改了什麼、把任務分門別類，最後讓它照排程自己跑。</p>
+          </li>
+          <li>
+            <h3>然後處理人與錢（第 11–14 章）</h3>
+            <p>團隊一起用的時候誰看得到什麼、怎麼設邊界、每個月花多少、以及上線前必做的安全動作。</p>
+          </li>
+          <li>
+            <h3>最後才碰基礎設施（第 15–22 章）</h3>
+            <p>接上自己的機器，然後如果你想，自己架一整套。這兩部是給想更進一步的人，跳過不影響前面十四章的使用。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
-      </section>
-      <section id="troubleshoot" data-nav="故障排除">
-        <h2 data-icon="troubleshoot">故障排除</h2>
+        <h2 data-icon="test">怎麼確認你抓到重點了</h2>
+        <p>讀完這章，你應該能用自己的話回答下面四個問題。答不出來的往回翻，不要硬往下讀。</p>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li>Omnigent 自己會不會寫程式？（答案是不會，寫程式的是它指揮的那些框架）</li>
+          <li>為什麼它需要「機器」這個概念，而聊天視窗不需要？</li>
+          <li>關掉瀏覽器分頁之後，跑到一半的工作會怎樣？</li>
+          <li>它比聊天視窗多出來的能力，換來的風險是什麼？</li>
         </ul>
       </section>
+
+      <section id="troubleshoot" data-nav="常見誤解">
+        <h2 data-icon="troubleshoot">四個常見誤解</h2>
+        <ul>
+          <li><strong>「它是另一個 ChatGPT」</strong>：不是。它沒有自己的模型，你得自備框架與帳號。沒有設定好任何框架的 Omnigent 是空的指揮台。</li>
+          <li><strong>「裝好就能用」</strong>：不一定。部分部署方式不內建執行端（runner），裝完伺服器還得另外接一台機器上去。第 15 章專門講這件事。</li>
+          <li><strong>「代理在雲端跑，碰不到我的東西」</strong>：正好相反。它就是為了碰得到你的檔案而存在的。第 14 章的安全基線因此是必讀。</li>
+          <li><strong>「規則預設會保護我」</strong>：不會。內建目錄有二十五條規則，但<strong>預設一條都沒啟用</strong>。要保護就得自己開。</li>
+        </ul>
+      </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品邊界說法以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
         </ul>
+        <p>框架清單、規則目錄與各設定頁的文案，來自 2026-09-09 對正式站的實機記錄，
+        整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我沒有寫程式的背景，這本書適合我嗎？</summary>
+          <div class="body"><p>第 1 到 14 章適合。那十四章講的是操作介面、派工、看結果、管成本與權限，不需要你會寫程式。第 15 章之後開始碰指令列與伺服器，沒有相關背景會比較吃力，但那兩部跳過不影響前面的使用。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>用 Omnigent 需要另外付費給 AI 供應商嗎？</summary>
+          <div class="body"><p>需要。Omnigent 不含模型額度，它指揮的每一個框架都用你自己的帳號或金鑰。這也是為什麼它有一整頁在算成本——那些錢是實際從你的供應商帳戶扣的。第 13 章會教你怎麼看那頁。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以只用一種框架嗎？</summary>
+          <div class="body"><p>可以，而且多數人一開始就是這樣。框架清單裡沒設定過的項目會標上 <code>needs setup</code>，你也可以在外觀設定裡把它們整個藏起來，介面會乾淨很多。第 17 章再回頭看要不要加第二種。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>這本書寫的版本跟我手上的不一樣怎麼辦？</summary>
+          <div class="body"><p>先看該章「固定來源」區塊指向的 commit——本書所有版本說法都以那個 commit 的內容為準，不是以主分支的當下狀態為準。三種部署方式的版本本來就存在落差，各章會標明差異。畫面若對不上，多半是版本差異而非你操作錯誤。</p></div>
+        </details>
+        <details class="faq">
+          <summary>書裡的帳號密碼可以直接照用嗎？</summary>
+          <div class="body"><p>不行，而且書裡不會出現任何一組真的能登入的帳密——全部是佔位值。這是刻意的：本倉庫把真實憑證字串列為禁用詞，任何一章寫進真密碼，CI 會直接擋下來。你自己架的時候也請立刻換掉安裝預設值，理由見第 14 章。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="tutorial.html">
         <span class="label">← 回目錄</span>

@@ -15,14 +15,14 @@
   <meta property="og:title" content="Chapter 5 · Composer 完全指南：斜線指令、@ 提及、模型挑選與中斷 · WoowTech Omnigent 完整指南" />
   <meta property="og:description" content="第 5 章詳解 Composer 的斜線指令、@ 檔案提及、模型下拉選單、附件上傳、語音輸入，以及任務跑歪時該怎麼中斷。" />
   <meta property="og:url" content="https://omnigent-guide.woowtech.io/en/ch5_composer.html" />
-  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch5/01_composer_settings.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Chapter 5 · Composer 完全指南：斜線指令、@ 提及、模型挑選與中斷 · WoowTech Omnigent 完整指南" />
   <meta name="twitter:description" content="第 5 章詳解 Composer 的斜線指令、@ 檔案提及、模型下拉選單、附件上傳、語音輸入，以及任務跑歪時該怎麼中斷。" />
-  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch5/01_composer_settings.png" />
   <meta name="theme-color" content="#6183FC" />
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.en" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -73,6 +73,9 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#anatomy">每一個零件</a>
+      <a href="#keys">鍵盤操作</a>
+      <a href="#slash">斜線指令與提及</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
@@ -95,63 +98,203 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>第 4 章你已經在輸入框打了一句話、按下送出、拿到回覆。那個輸入框叫 <strong>Composer</strong>，它看起來只是一個文字方塊，實際上是整個 Omnigent 裡你按最多次的地方。</p>
+        <p>多數人用它的方式是：打字、按 Enter、等。這樣能用，但你會錯過三件事——把檔案一起帶進去、用鍵盤直接叫出既有的指令、以及在代理跑歪的當下把它停住。這一章把 Composer 上每一個看得見的控制項拆開講。</p>
+        <div class="callout tip">
+          <p>本章的畫面描述來自 2026-09-09 對正式站的實機記錄。凡是那次記錄沒有涵蓋的細節，本章會直接寫「本書未查證」，不會替你猜一個畫面出來。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：你送出的不只是那段文字</h2>
+        <p>按下送出的那一刻，被打包送走的有五樣東西：你寫的任務描述、要在<strong>哪台機器</strong>上跑、在那台機器的<strong>哪個資料夾</strong>裡動手、由<strong>哪個代理</strong>執行、用<strong>哪個模型設定</strong>。前四樣全部在 Composer 上，而且全部在你打字之前就要決定。</p>
+        <p>這也是 Composer 跟一般聊天輸入框最大的差別。聊天輸入框只有一個變數，就是文字；Composer 有五個，其中四個是靜靜待在角落的下拉選單，很容易被忽略。</p>
+        <div class="callout terminology">
+          <p><strong>Composer（撰寫區）</strong>：畫面下方的任務輸入區。空白時的佔位文字是 <code>Describe a task to start a new session…</code>，直譯就是「描述一個任務來開始新的 session」。這句話說明了它的設計意圖：它要的是一個任務，不是一句閒聊。</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/screenshots/ch5/01_composer_settings.png" alt="Omnigent 設定頁的 General 分頁，Composer 區有送出鍵行為與 Always steer 兩個開關" />
+          <figcaption><strong>圖 5-1</strong>「設定 → General」的 Composer 區。上面那顆開關決定 Enter 是送出還是換行；下面的 Always steer 決定你追加的訊息是插進正在跑的回合，還是排隊等下一輪。</figcaption>
+        </figure>
+            </section>
+
+      <section id="anatomy" data-nav="每一個零件">
+        <h2 data-icon="what">Composer 上的每一個零件</h2>
+        <p>以 2026-09-09 的實機記錄為準，Composer 由上下兩層構成。上層是輸入欄與四個按鈕，下層是三個選擇器。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Composer 控制項與作用資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">控制項</th><th scope="col">位置</th><th scope="col">它決定什麼</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">任務描述欄</th><td>上層主體</td><td>代理要做的事。空白時顯示 <code>Describe a task to start a new session…</code></td></tr>
+              <tr><th scope="row">Attach files</th><td>上層按鈕</td><td>把檔案一起帶進這則訊息</td></tr>
+              <tr><th scope="row">Voice dictation</th><td>上層按鈕</td><td>用講的代替打字</td></tr>
+              <tr><th scope="row">兩個下拉選單</th><td>上層按鈕列</td><td>模型與相關設定（見下方說明）</td></tr>
+              <tr><th scope="row">Start session</th><td>上層最右</td><td>建立 session 並開始執行</td></tr>
+              <tr><th scope="row">Host</th><td>下層第一個</td><td>代理跑在哪台機器。名稱前面有一個綠點代表線上</td></tr>
+              <tr><th scope="row">工作目錄</th><td>下層第二個</td><td>代理在那台機器上的哪個資料夾動手，例如 <code>home</code></td></tr>
+              <tr><th scope="row">Worktree</th><td>下層第三個</td><td>是否在 git 工作樹（worktree）裡另開一份來改</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>關於那兩個下拉選單：實機記錄把它們標記為「模型與設定」，但沒有把它們展開逐項拍下來，所以<strong>本書不列出它們的完整選項</strong>。可以確定的參照點是，同一套設定在 Automations 的新建對話框裡是三個具名欄位——<code>Model</code>、<code>Effort</code> 與 <code>Permission mode</code>，三者的預設值都是 <code>Default</code>，官方提示是「留在 Default 就會沿用該代理自己設定好的模型、力度與權限模式」。第 10 章會完整處理那個對話框。</p>
+        <div class="callout">
+          <p>下層那三個選擇器不是本章的主題，它們是第 6 章的整章內容。這裡你只要記得一件事：<strong>它們在你打字之前就已經生效</strong>，改它們不會改到你已經送出的訊息。</p>
+        </div>
       </section>
+
+      <section id="keys" data-nav="鍵盤操作">
+        <h2 data-icon="tips">鍵盤：送出、換行、回溯與喊停</h2>
+        <p>Composer 幾乎所有動作都有鍵盤對應。以下整份取自設定裡的 <code>Keyboard shortcuts</code> 頁。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Composer 相關鍵盤快捷鍵資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">動作</th><th scope="col">快捷鍵</th><th scope="col">分類</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">開新 session</th><td><code>⌘N</code></td><td>General</td></tr>
+              <tr><th scope="row">叫出命令面板</th><td><code>⌘K</code></td><td>General</td></tr>
+              <tr><th scope="row">顯示快捷鍵表</th><td><code>⌘/</code></td><td>General</td></tr>
+              <tr><th scope="row">送出</th><td><code>↵</code></td><td>In chats</td></tr>
+              <tr><th scope="row">換行</th><td><code>⇧↵</code></td><td>In chats</td></tr>
+              <tr><th scope="row">回溯上一則提示</th><td><code>↑</code></td><td>In chats</td></tr>
+              <tr><th scope="row">下一則提示</th><td><code>↓</code></td><td>In chats</td></tr>
+              <tr><th scope="row">接受核准提示</th><td><code>⌘↵</code></td><td>In chats</td></tr>
+              <tr><th scope="row">語音輸入</th><td><code>⌘⌥V</code></td><td>In chats</td></tr>
+              <tr><th scope="row">停止回應</th><td><code>Esc</code></td><td>In chats</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <p>上表的第 4、5 列會被一個設定整組對調。設定路徑是 <code>Settings</code> → <code>General</code> → <strong>Submit with ⌘ + Enter on desktop</strong>：</p>
+          <ul>
+            <li>關閉（預設）：<code>Enter</code> 送出，<code>Shift+Enter</code> 換行</li>
+            <li>開啟：<code>Enter</code> 換行，<code>⌘+Enter</code> 送出</li>
+          </ul>
+          <p>寫多行任務描述的人建議開啟，寫短句的人建議關閉。這是全域設定，不是逐個 session 設定。</p>
+        </div>
+        <p>另一個值得先知道的設定在同一頁：<strong>Always steer</strong>。開啟後，你在代理還在跑的時候送出的訊息會直接送進那個進行中的回合，而不是排隊等它做完。代理所用的框架支援時，它會把新指示折進當前工作；不支援時則留到下一回合處理。任務跑歪的時候，這個設定決定你「補一句話」會多快生效。</p>
+      </section>
+
+      <section id="slash" data-nav="斜線指令與提及">
+        <h2 data-icon="advanced">斜線指令，以及 @ 提及的實情</h2>
+        <p>在任務描述欄輸入斜線會跳出建議選單。實機記錄下來的是這個選單的三個操作鍵：</p>
+        <ul>
+          <li><code>↑</code> <code>↓</code>：在建議項目之間移動</li>
+          <li><code>Tab</code>：套用目前選中的項目</li>
+          <li><code>Esc</code>：關閉建議選單</li>
+        </ul>
+        <div class="callout warn">
+          <p><strong>本書未查證</strong>：斜線指令的完整目錄。2026-09-09 的記錄只涵蓋選單的操作方式，沒有列出可用指令清單。合理的預期是這份清單會隨你選的代理而不同（Claude Code 與 Codex 各自帶自己的指令集），但這是推論，不是本書查證過的畫面。要看你這台實際有哪些，直接在輸入欄打一個斜線就會列出來。</p>
+        </div>
+        <p>關於 <strong>@ 提及</strong>：本章標題列了它，但 2026-09-09 的實機記錄沒有涵蓋 <code>@</code> 觸發的行為，所以本書不描述它的選單長相或可提及的對象範圍。可以確定的相關事實只有一條——Inbox 的空狀態文案寫著「當代理需要你的輸入，<strong>或有人在某個檔案上留言</strong>，就會出現在這裡」，這說明檔案層級的協作在產品裡是存在的。那條路徑走的是 Inbox，屬於第 9 章。</p>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>要把這一章走完，你需要三樣東西：</p>
+        <ul>
+          <li>能登入的帳號，並且看得到左側欄的 <code>New session</code></li>
+          <li>至少一台 Host，名稱前面顯示綠點。沒有綠點的話先跳到第 6 章與第 16 章</li>
+          <li>知道你想動哪個資料夾。第一次練習建議挑一個沒有重要資料的目錄</li>
+        </ul>
+        <div class="callout warn">
+          <p>代理是真的會在那台機器上動檔案的。練習用的第一個任務請挑「只讀不寫」的內容，例如「列出這個目錄下最大的五個檔案」，不要一開始就叫它整理或刪除。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">送出一個任務的完整順序</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先確定送出鍵的行為</h3>
+            <p>到 <code>Settings</code> → <code>General</code> 看 <strong>Submit with ⌘ + Enter on desktop</strong> 是開還是關。這一步只做一次，但沒做過的人會在寫第一段多行任務時就把半句話送出去。</p>
+          </li>
+          <li>
+            <h3>選 Host，確認它有綠點</h3>
+            <p>回到 Composer，點下層第一個選擇器，挑一台名稱前面有綠點的機器（實機記錄裡的例子是 <code>Pi Web ChatGPT (pi5)</code>）。沒有綠點的機器不要選，那是第 18 章的題目。</p>
+          </li>
+          <li>
+            <h3>選工作目錄與 Worktree</h3>
+            <p>第二個選擇器決定代理在哪個資料夾動手，實機記錄的例子是 <code>home</code>。第三個選擇器決定要不要另開一份 git 工作樹來改。改既有專案的程式碼時，另開 worktree 比較安全；只是讀檔案或整理資料則不需要。</p>
+          </li>
+          <li>
+            <h3>把任務寫成一句可驗收的話</h3>
+            <p>寫的時候問自己：做完之後我要看什麼才知道它做對了。「檢查一下設定檔」不可驗收，「把這個目錄下所有 .yaml 檔的縮排錯誤列出來，只列不改」可驗收。要寫多行就照第一步的設定換行。</p>
+          </li>
+          <li>
+            <h3>需要的檔案用 Attach files 帶進去</h3>
+            <p>如果任務需要參照你手上的檔案（規格、記錄檔、截圖），用 <code>Attach files</code> 附上去，不要把內容整段貼進輸入欄。附件與貼上的差別在於前者代理可以逐段讀取。本書未查證檔案大小與型別的上限，附件被拒絕時以畫面上的訊息為準。</p>
+          </li>
+          <li>
+            <h3>按 Start session，然後盯著它做什麼</h3>
+            <p>送出後不要立刻切走。第一個回合最容易看出方向對不對：它讀了哪些檔、要不要跑指令、有沒有跳出核准提示。跳出核准提示時，<code>⌘↵</code> 是接受；覺得不對就按 <code>Esc</code> 停止回應，然後改寫任務描述重來。</p>
+          </li>
         </ol>
-      </section>
+        <figure class="shot">
+          <img src="../assets/screenshots/ch5/02_keyboard_shortcuts.png" alt="鍵盤快捷鍵頁列出 General、In chats 與 Navigation 三組快捷鍵" />
+          <figcaption><strong>圖 5-2</strong>「設定 → Keyboard shortcuts」。這頁是唯一的權威清單——記不住就回來看，不要憑印象猜。</figcaption>
+        </figure>
+            </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="test">怎麼確認你把 Composer 用熟了</h2>
+        <p>下面五件事你應該都能不查資料直接做到。做不到的往回翻該節。</p>
+        <ul>
+          <li>不用滑鼠，只用鍵盤開出一個新 session（提示：<code>⌘N</code>）</li>
+          <li>說得出你這台的 <code>Enter</code> 是送出還是換行，以及在哪裡改</li>
+          <li>在輸入欄打一個斜線，用 <code>↑↓</code> 選一項、<code>Tab</code> 套用、再用 <code>Esc</code> 關掉</li>
+          <li>送出一個任務後，在它跑到一半時用 <code>Esc</code> 把它停下來</li>
+          <li>指著 Composer 下層三個選擇器，說出每一個決定的是什麼</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>按 Enter 只換行，訊息送不出去</strong>：<code>Settings</code> → <code>General</code> 的 <strong>Submit with ⌘ + Enter on desktop</strong> 是開啟狀態，這時送出鍵是 <code>⌘+Enter</code>。要改回 Enter 送出就把它關掉。</li>
+          <li><strong>打了斜線但選單沒反應，或選錯項目</strong>：建議選單開著時 <code>↑↓</code> 是移動、<code>Tab</code> 才是套用（不是 <code>Enter</code>）。要放棄就 <code>Esc</code> 關掉選單，這時 <code>Esc</code> 關的是選單，不是停止回應。</li>
+          <li><strong>Host 沒有綠點，或選擇器裡根本沒有機器</strong>：這不是 Composer 的問題。Composer 只負責顯示，機器要先註冊並保持連線才會出現。處理方式在第 16 章（註冊主機）與第 18 章（連線排錯）。</li>
+          <li><strong>代理跑歪了，按 Esc 之後不知道怎麼接</strong>：<code>Esc</code> 是停止回應，不是撤銷已經做過的事。停下來之後先看 Workspace 面板確認它改了什麼（第 7 章），再決定是補一句修正還是整個 session 重開。</li>
+          <li><strong>補送的訊息好像沒被理會</strong>：看 <code>Settings</code> → <code>General</code> 的 <strong>Always steer</strong>。關閉時你的新訊息會排隊等當前回合結束；開啟時會直接送進進行中的回合，但代理所用的框架不支援折進當前工作時，仍然會留到下一回合。</li>
+          <li><strong><code>↑</code> 叫不回上一則提示</strong>：這個鍵在斜線建議選單開著時是移動選項。先確認選單已關閉再試。本書未查證輸入欄已有多行文字時 <code>↑</code> 的行為，遇到叫不回來時把輸入欄清空再按一次。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品邊界與版本說法，以下列來源的該 commit 內容為準，不以主分支的當下狀態為準。</p>
         <ul>
-          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件（0.1.15）</a></li>
         </ul>
+        <p>Composer 的控制項名稱、佔位文字、快捷鍵表與 <code>General</code> 頁的兩個設定，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。本章所有標示「本書未查證」的段落，指的就是那份記錄沒有涵蓋的部分。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>這一章講的操作在三種部署方式上都一樣嗎？</summary>
+          <div class="body"><p>Composer 是網頁介面的一部分，三種部署方式（Home Assistant 附加元件、Rootless Podman、k3s Helm）跑的是同一套前端，控制項與快捷鍵不會因為部署方式而不同。會不同的是 Host 選擇器裡列出哪些機器，那取決於你接了什麼上去。版本落差以本章「固定來源」指向的 commit 為準。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>為什麼書上不直接列出斜線指令有哪些？</summary>
+          <div class="body"><p>因為 2026-09-09 的實機記錄沒有拍到那份清單，本書的規矩是沒查證過的畫面不寫。而且這份清單很可能隨你選的代理而變動，即使列出來也只對某一種代理成立。要看你這台實際有什麼，在輸入欄打一個斜線就會跳出來，那份才是準的。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我按了 Esc，代理已經改掉的檔案會還原嗎？</summary>
+          <div class="body"><p>不會。<code>Esc</code> 對應的是「停止回應」，它讓代理停止繼續動作，不會把已經寫下去的變更倒回來。這也是為什麼建議改既有專案時在 Composer 下層第三個選擇器另開一份 git 工作樹——改壞了丟掉那份就好。已經動到的檔案要怎麼看，在第 7 章。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>模型下拉選單裡挑錯會怎樣，可以中途換嗎？</summary>
+          <div class="body"><p>本書未查證這兩個下拉選單展開後的完整選項，也未查證 session 開始後能不能改。可以確定的是不同模型的花費差很多，而且 Usage 頁面會把成本按模型拆開列給你看，所以挑錯的代價是看得見的。判讀那一頁在第 13 章。實務上比較安全的做法是先用預設值跑通，等你知道這類任務要花多少之後再調。</p></div>
+        </details>
+        <details class="faq">
+          <summary>畫面上的按鈕跟書上寫的名字對不上，是版本差異還是我看錯？</summary>
+          <div class="body"><p>先比對本章「固定來源」指向的 commit。本書記的是 2026-09-09 那天正式站上的英文原標籤，例如 <code>Attach files</code>、<code>Start session</code>；如果你的畫面顯示的是別的語言或別的措辭，多半是版本較新或介面語言不同，不是你操作錯誤。功能位置（上層按鈕列、下層三個選擇器）比標籤文字穩定，先照位置找。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch4_first_session.html">
         <span class="label">← Previous</span>

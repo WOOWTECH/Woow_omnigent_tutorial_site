@@ -70,12 +70,14 @@
     </ol>
     <div class="toc-in-chapter">
       <h2>本章</h2>
-      <a href="#why">為何需要本章</a>
-      <a href="#concepts">核心觀念</a>
+      <a href="#why">這份速查怎麼用</a>
+      <a href="#concepts">三條路線的共同骨架</a>
+      <a href="#compare">三條路線對照</a>
       <a href="#prep">開始之前</a>
-      <a href="#steps">操作步驟</a>
+      <a href="#steps">五步通用流程</a>
       <a href="#verify">怎麼確認做對了</a>
-      <a href="#troubleshoot">故障排除</a>
+      <a href="#security">裝完立刻做的事</a>
+      <a href="#troubleshoot">安裝期故障排除</a>
       <a href="#sources">固定來源</a>
       <a href="#faq">常見問題</a>
     </div>
@@ -91,67 +93,186 @@
         <div class="kicker">附錄 A</div>
         <h1>附錄 A：三種部署的安裝速查表</h1>
       </div>
-      <section id="why" data-nav="為何需要本章">
-        <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+      <section id="why" data-nav="這份速查怎麼用">
+        <h2 data-icon="why">這份速查怎麼用</h2>
+        <p>第 19 到 22 章把三種部署方式各講了一遍，包含為什麼那樣設計、每個選項的意義、以及裝完之後要怎麼運維。這份附錄不重複那些，它只做一件事：<strong>把你真正要打的指令、要點的按鈕、要等的訊號，壓成可以邊看邊做的表。</strong></p>
+        <p>建議的用法是：第一次安裝先讀正文那一章，第二次以後直接看這裡。表格裡每一列都會標出對應章次，忘記為什麼要這樣做的時候翻回去。</p>
+        <div class="callout warn">
+          <p>這份附錄<strong>不是</strong>正文的替代品。三條路線都不是一鍵完成，每一條都有一個「裝完但還不能用」的中間狀態——最常見的就是伺服器起來了、介面登得進去，但主機清單是空的。看到那個畫面不代表你裝錯了，代表你還差最後一步。</p>
+        </div>
       </section>
-      <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+
+      <section id="concepts" data-nav="三條路線的共同骨架">
+        <h2 data-icon="concept">三條路線的共同骨架</h2>
+        <p>不管你選哪一條，裝起來的東西都是同一組零件：一個 <strong>Postgres 資料庫</strong>、一個 <strong>Omnigent Server</strong>（含網頁介面與 API），以及一個或多個 <strong>Runner</strong>（在被指揮的機器上常駐、把工作真正做掉的那個行程）。</p>
+        <p>三條路線的差別只有兩個：<strong>誰負責把這些零件叫起來</strong>，以及 <strong>Runner 從哪裡來</strong>。把這兩件事記住，下面的表就不需要背。</p>
+        <div class="callout terminology">
+          <p><strong>附加元件（add-on）</strong>：Home Assistant 的擴充套件形式，由 Supervisor 負責安裝、啟動與備份。<br /><strong>Quadlet</strong>：Podman 用來把容器描述成 systemd 單元的設定格式，讓容器像系統服務一樣被管理。<br /><strong>Helm chart</strong>：Kubernetes 的套件格式，一份 chart 描述一整組要一起部署的資源。</p>
+        </div>
+        <p>版本方面，三個套件目前存在已知的落差，這件事本身被記在 <code>source-lock.json</code> 的 <code>versionDriftKnown</code> 欄位裡，不是筆誤。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="三種部署方式的版本基準資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">部署方式</th><th scope="col">套件版本</th><th scope="col">該 commit 所載的 Omnigent 核心</th><th scope="col">正文章次</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Home Assistant 附加元件</th><td>0.1.15（全書版本基準）</td><td>0.12.0</td><td>第 20 章</td></tr>
+              <tr><th scope="row">Rootless Podman</th><td>以固定 commit 為準，未標獨立版號</td><td>0.11.0</td><td>第 21 章</td></tr>
+              <tr><th scope="row">k3s Helm</th><td>Chart 0.1.0</td><td>0.11.0（chart 的 appVersion）</td><td>第 22 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <p>版本號對不上不代表你裝錯。本書的版本說法一律以「固定來源」區塊指向的那個 commit 為準，不是以主分支的當下狀態為準。三個套件各自跟著上游走，落差是常態。</p>
+        </div>
       </section>
+
+      <section id="compare" data-nav="三條路線對照">
+        <h2 data-icon="compare">三條路線對照</h2>
+        <p>決策細節在第 19 章，這裡只放結論。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="三種部署方式的前置需求與架構差異資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">項目</th><th scope="col">Home Assistant 附加元件</th><th scope="col">Rootless Podman</th><th scope="col">k3s Helm</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">前置需求</th><td>一台跑 Home Assistant OS 的機器</td><td>Podman 4.4 以上，rootless 模式</td><td>可用的 k3s 叢集，外加 <code>helm</code>、<code>kubectl</code>、<code>jq</code></td></tr>
+              <tr><th scope="row">啟動單元</th><td>Supervisor 管的附加元件</td><td><code>systemd --user</code> 的 Quadlet 單元</td><td>一個 Helm release</td></tr>
+              <tr><th scope="row">內建 Runner</th><td><strong>沒有</strong>，只有伺服器</td><td>有，一個常駐 sidecar</td><td>有，每個主機名稱一個 Deployment</td></tr>
+              <tr><th scope="row">介面怎麼開</th><td>Home Assistant 側邊欄的 Ingress 面板</td><td><code>127.0.0.1:8000</code>，對外靠 Tailscale</td><td>cloudflared sidecar 提供的公開網址</td></tr>
+              <tr><th scope="row">Runner 撥入的位址</th><td>區網的 8000 埠</td><td>Podman 私有橋接網路內部</td><td>叢集內部 Service</td></tr>
+              <tr><th scope="row">資料放在哪</th><td>附加元件的 <code>/data</code>，隨 Home Assistant 備份一起收</td><td>Podman volume，解除安裝預設保留</td><td>Longhorn 的持久卷（PersistentVolumeClaim，PVC）</td></tr>
+              <tr><th scope="row">最花時間的一步</th><td>接第一台 Runner</td><td>建 runner 映像檔</td><td>申請並設定對外通道（tunnel）憑證</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
-        <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
-      </section>
-      <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
-        <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
-        </ol>
-      </section>
-      <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
-      </section>
-      <section id="troubleshoot" data-nav="故障排除">
-        <h2 data-icon="troubleshoot">故障排除</h2>
+        <h2 data-icon="plan">開始之前：五件先決定好的事</h2>
+        <p>這五件事三條路線都會問你，臨時想會拖慢整個安裝。</p>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>Server 要放哪台機器</strong>：它要長時間開著，而且 Runner 要連得到它。</li>
+          <li><strong>第一個管理員帳密</strong>：三個套件都帶了預設值，而且<strong>都寫在設定檔裡</strong>。安裝當下就換掉，不要留到「之後再說」。本書不列出任何一組實際值。</li>
+          <li><strong>對外通道要不要開</strong>：只在區網用就不用開。要從外面連，Podman 版走 Tailscale、k3s 版走 cloudflared、Home Assistant 版可以搭 Cloudflared 附加元件。</li>
+          <li><strong>Runner 要跑在哪</strong>：這決定代理實際能碰到哪些檔案。Home Assistant 版一定要另外接一台，理由見第 15 章。</li>
+          <li><strong>資料怎麼備份</strong>：Postgres 裡有全部的 session、成本紀錄與管理員資料。三條路線的備份機制不一樣，見下面的驗證表。</li>
         </ul>
       </section>
+
+      <section id="steps" data-nav="五步通用流程">
+        <h2 data-icon="steps">五步通用流程</h2>
+        <p>不管走哪一條，順序都是這五步。每一步下面按路線分列。</p>
+        <ol class="steps">
+          <li>
+            <h3>選定路線</h3>
+            <p>照上面的對照表挑一條。判斷不出來就用這個順序：家裡已經有 Home Assistant 就選附加元件；有一台常開的 Linux 機器就選 Podman；已經在跑 k3s 才選 Helm。三條可以並存，但沒有必要——它們是三套獨立的資料庫，session 不互通。</p>
+          </li>
+          <li>
+            <h3>把套件裝上去</h3>
+            <p><strong>Home Assistant</strong>：Supervisor → Add-on Store → 右上三點 → Repositories → 貼上附加元件倉庫網址 → 安裝 <strong>Woow Omnigent</strong> → 在 Configuration 分頁改掉預設帳密 → Start。首次開機要等大約 30 到 60 秒，Postgres 要先初始化。</p>
+            <p><strong>Podman</strong>：<code>git clone</code> 套件倉庫後進入目錄，執行 <code>./scripts/install.sh</code>。它會依序把 <code>omnigent-postgres</code>、<code>omnigent-server</code>、<code>omnigent-runner</code> 叫起來。不想重建 runner 映像檔時加 <code>OD_SKIP_BUILD=1</code>。</p>
+            <p><strong>k3s</strong>：先備妥 cloudflared 通道憑證的 JSON 檔，再執行 <code>CF_CREDS_JSON=/path/to/creds.json scripts/apply.sh install</code>（需要指定叢集時另外帶 <code>KUBECONTEXT</code>）。不想 clone 倉庫的話，chart 也發佈成 OCI 產物，可以直接 <code>helm install omnigent oci://ghcr.io/woowtech/charts/omnigent --version 0.1.0 --create-namespace -n omnigent --set-file cloudflared.credentials=creds.json</code>。</p>
+          </li>
+          <li>
+            <h3>等伺服器回應健康檢查</h3>
+            <p>三條路線的安裝腳本都會等 <code>/health</code> 回 <code>{"status":"ok"}</code> 才算完成。<strong>不要改用 <code>/healthz</code></strong>：那個路徑會被前端的萬用路由接走，就算 API 已經死了也回 200，健康檢查永遠不會失敗。這是套件文件裡特別標紅的一條。</p>
+          </li>
+          <li>
+            <h3>換掉預設管理員憑證並登入</h3>
+            <p>三個套件都會在第一次開機時自動宣告管理員（<code>POST /auth/setup</code>），值取自設定檔。<strong>在把服務給任何其他人看到之前先換掉。</strong>Home Assistant 版改 Configuration 分頁的 <code>admin_username</code> 與 <code>admin_password</code>；Podman 版改 Quadlet 單元裡的環境變數；k3s 版用 <code>--set admin.username=…</code>、<code>--set admin.password=…</code> 或一份私有的 values 檔覆寫。</p>
+          </li>
+          <li>
+            <h3>接上第一台 Runner</h3>
+            <p>Podman 與 k3s 版自帶 Runner，這一步可以跳過。<strong>Home Assistant 版一定要做</strong>，因為附加元件只包伺服器。在任何一台同區網的機器上安裝 pi 與 omnigent 命令列工具（<code>npm install -g @earendil-works/pi-coding-agent@0.85.1</code> 與 <code>pip install omnigent==0.12.0</code>），然後執行 <code>omnigent host --server http://homeassistant.local:8000</code> 註冊。詳細步驟與版本對應在第 16 章。</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="verify" data-nav="怎麼確認做對了">
+        <h2 data-icon="test">怎麼確認做對了</h2>
+        <p>先跑該路線的檢查，再回到介面上做兩個肉眼確認。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="三種部署方式的驗證方法資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">部署方式</th><th scope="col">驗證方法</th><th scope="col">通過的長相</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Home Assistant 附加元件</th><td>點側邊欄的 Ingress 面板；看附加元件的記錄</td><td>出現登入表單；記錄開頭沒有 <code>init-postgres</code> 的錯誤</td></tr>
+              <tr><th scope="row">Rootless Podman</th><td>依序跑 <code>tests/smoke-container.sh</code>、<code>tests/smoke-pi-integration.sh</code>、<code>tests/smoke-runner-dialin.sh</code></td><td>三支全綠；三個容器都在跑，<code>/health</code> 回 JSON</td></tr>
+              <tr><th scope="row">k3s Helm</th><td><code>helm test omnigent -n omnigent</code></td><td>驗到 <code>/health</code>、管理員已宣告、至少一台主機在線</td></tr>
+              <tr><th scope="row">三者共通（介面上）</th><td>登入後看 Composer 底部的 Host 選單</td><td>至少一台主機，名稱前面有綠點</td></tr>
+              <tr><th scope="row">三者共通（跑一次）</th><td>照第 4 章開一個 Session，送一句話</td><td>代理回話，Usage 頁的 Total cost 開始有數字</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <p>綠點出現、但你送出的第一句話沒有回應，先不要重裝。那是 Runner 端的問題，附錄 B 有對應的徵狀列，第 18 章有完整的診斷流程。</p>
+        </div>
+      </section>
+
+      <section id="security" data-nav="裝完立刻做的事">
+        <h2 data-icon="security">裝完立刻做的四件事</h2>
+        <p>這四件事在正文第 14 章有完整說明，這裡只列動作。</p>
+        <ul>
+          <li><strong>換掉預設管理員帳密</strong>：三個套件的預設值都寫在公開倉庫的設定檔裡，任何人都查得到。這是四件事裡唯一不能延後的。</li>
+          <li><strong>確認 Postgres 沒有對外</strong>：三條路線的預設都是不對外發佈資料庫連接埠，升級或改設定時不要不小心打開。</li>
+          <li><strong>不要關掉內建帳號驗證</strong>：Podman 套件用 <code>OMNIGENT_AUTH_ENABLED</code> 控制，關掉之後任何連得到網址的人都是管理員。只有在完全信任的網段內才考慮，而且沒什麼理由這樣做。</li>
+          <li><strong>處理第一次開機的空窗</strong>：管理員名冊還是空的時候，宣告管理員的那個端點不需要驗證——先開到網址的人就拿走整台機器。做法是安裝前先在設定檔預先填好密碼，或者裝完自己第一個開。</li>
+        </ul>
+        <div class="callout warn">
+          <p>還有第五件事值得馬上做，但它不在安裝腳本裡：<strong>去 Settings → Policies 開規則</strong>。內建目錄有 25 條，<strong>預設一條都沒啟用</strong>，新裝好的站台在 Global Policies 會顯示沒有設定任何全域規則。細節見第 12 章。</p>
+        </div>
+      </section>
+
+      <section id="troubleshoot" data-nav="安裝期故障排除">
+        <h2 data-icon="troubleshoot">安裝期故障排除</h2>
+        <p>這裡只收安裝當下會遇到的。裝完之後的日常故障在附錄 B。</p>
+        <ul>
+          <li><strong>介面開得起來，但一直停在登入表單</strong>：自動宣告管理員成功了，是你用的密碼不對。回設定檔看 <code>admin_username</code> 與 <code>admin_password</code> 實際被設成什麼，不要憑印象輸入。</li>
+          <li><strong>登入之後主機清單是空的</strong>：Home Assistant 版的預期行為，附加元件不包 Runner。回到第五步接一台上去。Podman 與 k3s 版出現這個狀況才是異常，先看 runner 容器的記錄。</li>
+          <li><strong>宣告管理員的請求回 500</strong>：幾乎都是 Postgres 沒起來。看記錄最前面有沒有初始化資料庫的錯誤，那段每次開機都會印在最上面。</li>
+          <li><strong>Runner 註冊成功了，但對話沒反應</strong>：pi 的擴充套件衝突。清掉 Runner 那台機器上 pi 的外掛目錄，並把衝突的登入設定從 pi 的驗證檔裡移除，然後重新連線。</li>
+          <li><strong>健康檢查一直是綠的，但 API 其實是死的</strong>：你把探針指到 <code>/healthz</code> 了。前端的萬用路由會對那個路徑回 200，換回 <code>/health</code>。</li>
+          <li><strong>k3s：Postgres 重啟之後伺服器很久才恢復</strong>：chart 內建 pgbouncer sidecar 就是為了這件事。確認它沒有被關掉；連線池模式必須維持在 <code>session</code>，換成其他模式會打壞伺服器用的預備語句。</li>
+        </ul>
+      </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本附錄的指令、預設值與版本說法，以下列三個倉庫在該 commit 的內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package/tree/33dd16c985e82e8cfde301f24de385c313477d24" rel="noopener">WoowTech Omnigent Rootless Podman 套件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a" rel="noopener">WoowTech Omnigent k3s Helm 套件</a></li>
         </ul>
+        <p>介面文案與畫面行為的部分，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以先把伺服器裝起來，過幾天再接 Runner 嗎？</summary>
+          <div class="body"><p>可以。Home Assistant 版本來就是這樣設計的——附加元件只包伺服器，主機清單空著是正常狀態。你可以先登入把介面摸熟、把成員邀好、把規則設好，等要真的派工的時候再接機器。Podman 與 k3s 版自帶 Runner，反而沒有這個選擇。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>三種部署可以同時裝嗎？</summary>
+          <div class="body"><p>技術上可以，它們互相不知道對方存在。但實務上沒什麼理由這樣做：每一套有自己的 Postgres，session、成本紀錄、成員名單、規則設定全部各自獨立，不會同步。你只會得到三個要各自維護、各自備份的站台。要換路線的做法是重裝，不是並存。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>為什麼 Podman 版用 Tailscale，k3s 版用 cloudflared？</summary>
+          <div class="body"><p>因為兩者的對外情境不同。Podman 版預設只把伺服器綁在本機迴路上，對外那道門交給 Tailscale，適合「只有我和我的裝置要連」。k3s 版預設要一個公開網址，所以用 cloudflared 打通道。兩者都不是硬性規定，只是套件預設；Home Assistant 版則可以搭 Cloudflared 附加元件走同樣的通道模式。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>套件版本跟這裡寫的不一樣，要更新嗎？</summary>
+          <div class="body"><p>不一定。三個套件各自跟著上游走，版本落差是已知且被記錄下來的狀態，不是壞掉。判斷標準是「功能對不對得上」而不是「數字一不一樣」：介面上找不到書裡提到的東西，才需要看是不是版本太舊。真的要更新，看該套件倉庫的升級說明，不要直接把映像檔標籤改掉。</p></div>
+        </details>
+        <details class="faq">
+          <summary>一定要用 pi 這個代理嗎？</summary>
+          <div class="body"><p>不用。pi 只是三個套件預設先接好的那一個，因為 Runner 映像檔裡已經裝好它。介面上的代理清單有十一種框架與四個內建代理，沒設定過的會標上 <code>needs setup</code>。你完全可以只用 Claude Code 或 Codex，把其他的藏起來——外觀設定裡有一個開關可以隱藏未設定的項目。第 17 章比較各家的取捨。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch22_k3s.html">
         <span class="label">← 上一章</span>

@@ -14,14 +14,14 @@
   <meta property="og:title" content="第 8 章 · 用 Project 與 Session 把工作分門別類 · WoowTech Omnigent 完整指南" />
   <meta property="og:description" content="第 8 章介紹 Project 的分組方式、Session 的命名與釘選、封存時機，以及如何在數十個 Session 之間快速找回想要的那一個。" />
   <meta property="og:url" content="https://omnigent-guide.woowtech.io/ch8_projects_sessions.html" />
-  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.png" />
+  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch8/01_import_sessions.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="第 8 章 · 用 Project 與 Session 把工作分門別類 · WoowTech Omnigent 完整指南" />
   <meta name="twitter:description" content="第 8 章介紹 Project 的分組方式、Session 的命名與釘選、封存時機，以及如何在數十個 Session 之間快速找回想要的那一個。" />
-  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.png" />
+  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/screenshots/ch8/01_import_sessions.png" />
   <meta name="theme-color" content="#6183FC" />
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,8 +72,11 @@
       <h2>本章</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#sidebar">側邊欄的結構</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
+      <a href="#shortcuts">鍵盤移動</a>
+      <a href="#archive">封存與匯入</a>
       <a href="#verify">怎麼確認做對了</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
@@ -93,63 +96,174 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>前七章結束時你手上大概有三到五個 session。這個數量下，側邊欄捲一下就找到了，命名叫什麼都無所謂。</p>
+        <p>問題出在第三十個之後。session 不會自己消失，而每一條的標題都長得像「幫我看一下這個錯誤」。等到你想回頭確認上週那個代理改了哪個檔，翻不到就等於沒做過。</p>
+        <p>這一章講組織法：<strong>Project 怎麼分、Session 怎麼命名與釘選、什麼時候該封存，以及在幾十條裡怎麼快速找回想要的那一條。</strong>沒有一個動作是強制的，但不做的代價會在兩週後找上你。</p>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">核心觀念：四個層次，不要混在一起</h2>
+        <div class="callout terminology">
+          <p><strong>專案（Project）</strong>：側邊欄裡可展開的分組，底下掛著一串 session。<strong>工作階段（Session）</strong>：一次完整的對話與執行，關掉分頁它還在跑。本書之後沿用介面上的 <code>Project</code> 與 <code>Session</code> 兩個字，因為畫面上寫的就是這兩個字。</p>
+        </div>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="四個層次的分工資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">層次</th><th scope="col">它決定什麼</th><th scope="col">在哪裡設定</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Project</th><td>這串 session 在側邊欄歸在哪一組</td><td>側邊欄下半部的 <code>Projects</code></td></tr>
+              <tr><th scope="row">Session</th><td>一次對話、一次執行、一份紀錄</td><td>Composer 送出後自動產生</td></tr>
+              <tr><th scope="row">工作目錄</th><td>代理實際會讀寫哪個資料夾</td><td>Composer 底部第二個下拉（例如 <code>home</code>）</td></tr>
+              <tr><th scope="row">Worktree</th><td>改動落在原分支還是另一個 git 工作樹</td><td>Composer 底部第三個下拉</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>最容易踩的一句話是：<strong>換 Project 不會換工作目錄。</strong>Project 只是側邊欄上的分組；代理碰得到哪些檔案，永遠由工作目錄那個下拉決定。你可以把兩個指向完全不同資料夾的 session 放進同一組，介面不會攔你。</p>
+        <p>另一個跟 Project 綁在一起的是 worktree。設定的 <code>Git</code> 分頁有一項 <strong>Always use a random worktree</strong>，開啟後在任何 git 工作區起新 session 都會先開一個隨機命名的新 worktree；而<strong>個別 Project 自己的 Random worktree 設定會覆寫這個全域開關</strong>。所以同一個帳號下有些 Project 會自動開 worktree、有些不會，這是預期行為。</p>
       </section>
+
+      <section id="sidebar" data-nav="側邊欄的結構">
+        <h2 data-icon="book">側邊欄由上而下是什麼</h2>
+        <p>組織 session 之前，先把要用的那塊面板看清楚。側邊欄從上到下有四段：</p>
+        <ul>
+          <li><strong>頂端三個圖示</strong>：Search、Settings、Close sidebar。Search 是找回舊 session 最快的路，Close sidebar 是截圖前一定要按的那個。</li>
+          <li><strong>四個入口</strong>：New session、Automations（走 <code>/tasks</code>）、Inbox（<code>/inbox</code>）、Usage（<code>/usage</code>）。</li>
+          <li><strong>Pinned</strong>：你釘上去的 session，當天的主線放這裡。</li>
+          <li><strong>Projects</strong>：可展開，每個 Project 底下是它自己的 session 清單。這是本章的主角。</li>
+        </ul>
+        <div class="callout warning">
+          <p>側邊欄會直接顯示真實的 Project 名稱與 session 標題。要截圖、投影或把畫面貼進工單之前，先按 <code>Close sidebar</code> 或 <code>⌘⌥[</code> 收起來。這是本書拍所有示範畫面的固定第一步。</p>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <ul>
+          <li><strong>你已經能順利開出 session</strong>。Composer 底部 Host 前面不是綠點就先回第 6 章把主機接上。</li>
+          <li><strong>你想好了分組軸線</strong>。常見的是照客戶分、照機器分、照工作型態分（修 bug／寫新功能／查資料）。挑一種，混用等於沒分。</li>
+          <li><strong>你知道自己主要的工作目錄叫什麼</strong>。示範站上顯示的是 <code>home</code>。把工作目錄相同的放一起，之後省事很多。</li>
+        </ul>
+        <p>本書的實機記錄沒有涵蓋「建立新 Project」對話框的完整欄位。畫面上若有本章沒提到的欄位，那是版本差異，照畫面的說明填即可。</p>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">五個養成後不會再亂的習慣</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>開 session 之前先把三個下拉看一遍</h3>
+            <p>Composer 底部三個 picker 是 Host、工作目錄、Worktree。送出的那一刻它們就決定了這條 session 的身份。事後你可以改標題、可以搬釘選，但代理已經在哪台機器的哪個資料夾動過手，改不回來。</p>
+          </li>
+          <li>
+            <h3>讓標題描述結果，不要描述心情</h3>
+            <p>「幫我看一下」「這個怪怪的」在當下很自然，兩週後全部長一樣。把檔名、錯誤字串或功能名稱寫進標題，例如「結帳頁 500 錯誤追查」。你之後會用 Search 找它，而 Search 只找得到你當時寫下的字。</p>
+          </li>
+          <li>
+            <h3>把當天的主線釘到 Pinned</h3>
+            <p>釘上去後可以用 <code>⌘⌥1</code> 到 <code>⌘⌥0</code> 直接跳。這一區要保持短，超過十條就失去意義，因為快捷鍵只有十個位置。</p>
+          </li>
+          <li>
+            <h3>用 Search 或命令面板找回舊的那一條</h3>
+            <p>不要用捲的。側邊欄頂端的 Search 圖示，或鍵盤上的 <code>⌘K</code> 命令面板，都是設計來直接跳的。找得到的前提是當初寫下了關鍵字。</p>
+          </li>
+          <li>
+            <h3>收工時把結案的 session 封存</h3>
+            <p>設定裡有獨立的 <code>Archived sessions</code> 分頁，代表結案的 session 是被移出視線而不是被丟掉，之後還找得回來。做完的東西留在側邊欄，只會讓下一次搜尋多出雜訊。</p>
+          </li>
         </ol>
+        <figure class="shot">
+          <img src="assets/screenshots/ch8/01_import_sessions.png" alt="Import sessions 頁可選擇機器、harness 與要匯入的最近筆數" />
+          <figcaption><strong>圖 8-1</strong>「設定 → Import sessions」。機器名稱後面的 ONLINE 徽章是綠色才匯得進來；灰的表示那台目前沒連上。</figcaption>
+        </figure>
+            </section>
+
+      <section id="shortcuts" data-nav="鍵盤移動">
+        <h2 data-icon="tips">用鍵盤在 session 之間移動</h2>
+        <p>下面是設定 <code>Keyboard shortcuts</code> 分頁裡跟 session 導覽有關的部分。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="Session 導覽快捷鍵資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">動作</th><th scope="col">按鍵</th><th scope="col">什麼時候用</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">新 session</th><td><code>⌘N</code></td><td>想到就開，不要把兩件事塞進同一條</td></tr>
+              <tr><th scope="row">命令面板</th><td><code>⌘K</code></td><td>找特定舊 session，或不記得功能藏在哪一頁</td></tr>
+              <tr><th scope="row">上一個／下一個</th><td><code>⌘↑</code>／<code>⌘↓</code></td><td>在兩條相鄰的工作之間來回比對</td></tr>
+              <tr><th scope="row">跳到釘選 session</th><td><code>⌘⌥1</code> 到 <code>⌘⌥0</code></td><td>釘選區第一到第十條，這是 Pinned 真正的價值</td></tr>
+              <tr><th scope="row">切換對話側邊欄</th><td><code>⌘⌥[</code></td><td>要專心讀輸出，或準備截圖時</td></tr>
+              <tr><th scope="row">顯示快捷鍵</th><td><code>⌘/</code></td><td>忘記時直接叫出來，不用回設定頁</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><code>⌘⌥]</code> 切換的是工作區側邊欄，屬於第 7 章的面板。兩個鍵長得很像，按錯時不要以為壞了。</p>
       </section>
+
+      <section id="archive" data-nav="封存與匯入">
+        <h2 data-icon="restore">封存、找回，以及把舊對話搬進來</h2>
+        <p>本書的實機記錄沒有涵蓋「在 session 上按哪裡封存」的入口，請在 session 本身的選單裡找；封存後的去處固定是設定的 <code>Archived sessions</code> 分頁。反方向的動作是匯入：在某台機器上用命令列跑過的對話可以搬進來，設定的 <code>Import sessions</code> 分頁寫著「Pull your recent local chats from a machine you're running into Omnigent. Sessions already imported are skipped.」，四個欄位是：</p>
+        <ul>
+          <li><code>Machine</code>：要從哪一台拉，線上的機器會帶一個 <code>ONLINE</code> 徽章</li>
+          <li><code>Harness</code>：預設 <code>All harnesses</code>，可以只拉某一種框架的紀錄</li>
+          <li><code>How many recent sessions</code>：預設 <code>Last 25</code></li>
+          <li><code>Import</code> 按鈕</li>
+        </ul>
+        <p>「已匯入的會被跳過」這句很重要：重複按不會產生兩份，所以可以先拉 25 條看效果再決定要不要拉更多。</p>
+      </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>用下面四個動作驗收，每個都應該在十秒內完成。做不到的那一項就是還沒整理好。</p>
+        <ul>
+          <li>展開 <code>Projects</code>，你能說出每一組的分類軸線，而且沒有混用不同軸線。</li>
+          <li>按 <code>⌘⌥1</code>，跳到的是今天真的在做的那條，不是上週忘記取消釘選的殘留。</li>
+          <li>挑一條三天前的 session，用 Search 打兩三個關鍵字就找得到，不需要捲清單。</li>
+          <li>按 <code>Close sidebar</code> 之後截一張圖，畫面上沒有任何客戶名稱或專案代號。</li>
+        </ul>
       </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>剛開的 session 在側邊欄找不到</strong>：先確認側邊欄沒被收合（<code>⌘⌥[</code> 切回來）。還是找不到的話，它多半掛在某個沒展開的 Project 底下，收起來的那組不會顯示清單。</li>
+          <li><strong>兩條 session 標題一模一樣</strong>：命名沒寫進具體對象。打開其中一條，看 Composer 底部的工作目錄與 Host，用那個資訊重新命名。</li>
+          <li><strong><code>⌘⌥1</code> 跳到的不是預期的那條</strong>：釘選區的順序決定編號，不是你釘上去的時間順序；超過十條之後就沒有對應的快捷鍵。定期把結案的取消釘選。</li>
+          <li><strong>同一個 Project 底下有些 session 自動開了新 worktree、有些沒有</strong>：這是設定衝突不是故障。全域的 <strong>Always use a random worktree</strong> 會被個別 Project 的 Random worktree 設定覆寫，要一致就把兩邊調成同一個值。</li>
+          <li><strong>本機跑過的舊對話沒出現在 Omnigent 裡</strong>：它們不會自動同步，要走 <code>Import sessions</code> 手動拉。來源機器必須顯示 <code>ONLINE</code>，而且預設只拉最近 25 條。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
         </ul>
+        <p>側邊欄結構、快捷鍵表、Git 與 Import sessions 兩個設定分頁的文案，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。本章標示為「實機記錄未涵蓋」的段落，請以你畫面上的實際說明為準。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>Project 跟磁碟上的資料夾是同一件事嗎？</summary>
+          <div class="body"><p>不是。Project 是側邊欄上的分組，只影響 session 清單怎麼排。代理實際讀寫哪個資料夾，由 Composer 底部第二個下拉決定。你可以把指向兩個不同資料夾的 session 放進同一個 Project，介面不會阻止，但那樣分組就失去意義了。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>已經開好的 Session 可以搬到別的 Project 嗎？</summary>
+          <div class="body"><p>本書的實機記錄沒有涵蓋搬移入口，所以這裡不給步驟。替代作法有兩個：把重要的那條釘到 <code>Pinned</code>，位置就固定了；或重新命名，把 Project 的名字寫進標題讓 Search 找得到。如果你的版本上有搬移選項，照畫面操作即可，不會影響已跑完的紀錄。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我需要為每個 Project 都開 worktree 嗎？</summary>
+          <div class="body"><p>不需要，看你怕不怕代理直接改動當前分支。<code>Git</code> 分頁開啟 <strong>Always use a random worktree</strong>，改動就會落在隨機命名的新 worktree 上，原分支不動；個別 Project 可以覆寫這個開關。只讀性質的查詢不需要，會動到程式碼的工作建議開。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>封存跟刪除是一樣的嗎？</summary>
+          <div class="body"><p>不一樣。設定裡有獨立的 <code>Archived sessions</code> 分頁，封存過的 session 落在那裡，是移出視線而不是消失。這也是為什麼結案時建議封存：成本紀錄與執行過程都還在，之後要對帳或回溯都找得到。</p></div>
+        </details>
+        <details class="faq">
+          <summary>我在自己筆電上跑過的對話，能不能拉進來一起管理？</summary>
+          <div class="body"><p>可以，走設定的 <code>Import sessions</code>。選來源機器（要顯示 <code>ONLINE</code>）、選框架、選最近幾條（預設 <code>Last 25</code>），按 Import。介面明講已經匯入過的會被跳過，所以重複按不會產生重複資料。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch7_workspace.html">
         <span class="label">← 上一章</span>

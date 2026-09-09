@@ -74,7 +74,10 @@
       <a href="#concepts">核心觀念</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
+      <a href="#options">設定頁欄位</a>
+      <a href="#access">三種進入方式</a>
       <a href="#verify">怎麼確認做對了</a>
+      <a href="#backup">備份與還原</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
       <a href="#faq">常見問題</a>
@@ -93,63 +96,194 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>如果你手上已經有一台跑 Home Assistant OS 的機器，這是三種部署裡最短的一條路：加一個倉庫、按一次安裝、填兩個欄位、按開始。不用開終端機，也不用先懂容器。</p>
+        <p>但有一個邊界要先講清楚。<strong>這個附加元件只裝伺服器，不裝執行端。</strong>裝完你會得到一個能登入的介面，然後主機清單是空的——還沒有任何一台機器願意接工作。本章帶你把伺服器裝起來、把設定頁每個欄位弄懂、選對進入方式，最後接上第一台真的會幹活的機器。</p>
+        <div class="callout tip">
+          <p>還沒決定用哪一種部署，先回第 19 章的決策表。三種都跑同一套介面，差別在你願意維運到什麼程度。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">附加元件裡面裝了什麼</h2>
+        <p>Home Assistant 的<strong>附加元件（add-on）</strong>就是一個由 Supervisor 管理的容器。這一個容器裡塞了四樣東西。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="附加元件內含元件資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">元件</th><th scope="col">版本</th><th scope="col">在裡面做什麼</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">omnigent</th><td>0.12.0</td><td>編排伺服器本體</td></tr>
+              <tr><th scope="row">PostgreSQL</th><td>16</td><td>內建資料庫，只綁 loopback，資料放在 <code>/data/postgres</code></td></tr>
+              <tr><th scope="row">nginx</th><td>latest</td><td>把網頁介面的路徑改寫成側邊欄面板能用的形式</td></tr>
+              <tr><th scope="row">s6-overlay</th><td>3.2.1.0</td><td>容器內的行程管理，負責啟動順序</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout terminology">
+          <p><strong>伺服器版建置（server-only build）</strong>：只含編排伺服器與網頁介面，不含 pi、Claude Code、Codex 的命令列，也不含執行端。外部執行端自己撥進來註冊。這個取捨換到的是映像檔維持在四百 MB 以內。</p>
+        </div>
+        <p>按下開始之後，容器內部依序做六件事：讀設定檔、初始化資料庫叢集、啟動資料庫、在 <code>0.0.0.0:8000</code> 啟動伺服器、用你填的帳密建立第一個管理員、由 nginx 把面板端起來。第一次開機要初始化資料庫，會花上三十到六十秒。</p>
+        <div class="callout warning">
+          <p><strong>版本落差是已知的。</strong>本書鎖定的附加元件版本是 <code>0.1.15</code>，它裡面的 Omnigent 是 <code>0.12.0</code>；第 21、22 章那兩種部署在同一份來源鎖定裡是 <code>0.11.0</code>。附加元件版本號和它包起來的 Omnigent 版本號是兩回事，不要混用。</p>
+        </div>
       </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>動手前先確認這五件事，缺一件都會在中途卡住。</p>
+        <ul>
+          <li>一台跑 Home Assistant OS 或 Supervised 的機器。附加元件只支援 <code>amd64</code> 與 <code>aarch64</code></li>
+          <li>你的帳號是管理員，看得到「設定 → 附加元件」</li>
+          <li>磁碟留餘裕。內建資料庫會在 <code>/data</code> 底下建整個叢集，隨 session 累積長大</li>
+          <li><strong>另外一台機器</strong>當執行端。可以是你的筆電，也可以是同一台機器上的其他附加元件；沒有它，裝完只是一個空的指揮台</li>
+          <li>要讓家裡以外的機器連進來，先把 Cloudflared 附加元件準備好</li>
+        </ul>
+        <div class="callout">
+          <p>執行端怎麼挑、註冊之後會發生什麼事，第 15、16 章講得比這裡細。本章只走最短路徑。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">安裝步驟</h2>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>把倉庫加進附加元件商店</h3>
+            <p>設定 → 附加元件 → 附加元件商店，右上角三點選單 → 儲存庫，貼上 <code>https://github.com/WOOWTECH/Woow_ha_omnigent_addon</code> 後按新增。商店頁重新整理後會多出一個「Woow Omnigent」區塊。</p>
+          </li>
+          <li>
+            <h3>安裝 Woow Omnigent</h3>
+            <p>點進去按安裝。Supervisor 會依機器架構拉對應映像檔，時間取決於你的網路。安裝完成前先不要按開始。</p>
+          </li>
+          <li>
+            <h3>在設定分頁填好管理員帳密</h3>
+            <p>把 <code>admin_username</code> 與 <code>admin_password</code> 改成你自己的值。<strong>不要沿用安裝預設值</strong>——那組值公開在原始碼裡，任何看得到倉庫的人都知道它是什麼。填完按儲存。</p>
+          </li>
+          <li>
+            <h3>按開始，等三十到六十秒</h3>
+            <p>第一次開機比之後每次啟動都慢。這段時間切到日誌分頁看它跑到哪；資料庫初始化的錯誤訊息會出現在每次開機日誌的最上面。</p>
+          </li>
+          <li>
+            <h3>從側邊欄開面板登入</h3>
+            <p>準備好之後左側會多一個「Woow Omnigent」面板。用上一步的帳密登入，看到 <code>New session</code>、<code>Automations</code>、<code>Inbox</code>、<code>Usage</code> 四個入口就是成功了。</p>
+          </li>
+          <li>
+            <h3>接上第一台執行端</h3>
+            <p>到另一台機器上裝好執行端所需套件，執行 <code>omnigent host --server http://homeassistant.local:8000</code>。這條指令會從那台機器往附加元件開一條通道並註冊成一台主機。回介面重新整理，主機選單裡就會出現它。</p>
+          </li>
         </ol>
       </section>
+
+      <section id="options" data-nav="設定頁欄位">
+        <h2 data-icon="records">設定頁的每個欄位</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="附加元件設定欄位資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">欄位</th><th scope="col">型別</th><th scope="col">作用</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>admin_username</code></th><td>字串</td><td>第一次開機時建立的本機管理員帳號</td></tr>
+              <tr><th scope="row"><code>admin_password</code></th><td>密碼</td><td>這組管理員的登入密碼。安裝預設值務必改掉</td></tr>
+              <tr><th scope="row"><code>base_url</code></th><td>選填字串</td><td>執行端撥進來時用的公開網址。留空等於 <code>http://homeassistant.local:8000</code></td></tr>
+              <tr><th scope="row"><code>features</code></th><td>選填字串</td><td>逗號分隔的功能旗標，轉成 <code>OMNIGENT_FEATURES=</code> 傳進伺服器</td></tr>
+              <tr><th scope="row"><code>env_vars</code></th><td>清單</td><td>任意環境變數直通，每一筆是一組 key 與 value</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>三個功能旗標有記載：<code>usage_page</code> 開啟用量報表分頁、<code>web_harness_setup</code> 開啟每台主機的框架設定介面、<code>harness_install</code> 允許從網頁一鍵安裝框架。</p>
+        <div class="callout warning">
+          <p>沒有記載的旗標名稱會讓伺服器<strong>直接拒絕啟動</strong>。改了 <code>features</code> 之後附加元件起不來，先把它改回文件列出的那幾個值。</p>
+        </div>
+        <p><code>env_vars</code> 的 key 必須符合 <code>^[A-Z][A-Z0-9_]*$</code>：大寫字母開頭，只能有大寫字母、數字與底線。這裡填的環境變數只給伺服器行程看得到，執行端的模型金鑰各自帶各自的，不會從這裡繼承。金鑰填進去之後會明文顯示在設定分頁上，截圖或螢幕分享前先把那一區收起來。</p>
+      </section>
+
+      <section id="access" data-nav="三種進入方式">
+        <h2 data-icon="network">三種進入方式，差在誰進得來</h2>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="附加元件三種存取路徑資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">路徑</th><th scope="col">網址</th><th scope="col">給誰用</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">側邊欄面板</th><td>Home Assistant 內建的 Ingress 路徑</td><td>Home Assistant 使用者，不必知道任何 IP</td></tr>
+              <tr><th scope="row">區域網路直連</th><td><code>http://&lt;你的 HA 位址&gt;:8000</code></td><td>執行端撥入，以及 <code>omnigent host</code></td></tr>
+              <tr><th scope="row">Cloudflared 路由</th><td><code>https://&lt;你的網域&gt;</code></td><td>外網的執行端與遠端使用者</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>面板走的是 8080 埠，而這個埠<strong>鎖死在 Supervisor 的位址</strong>，只有 Supervisor 能代理進來，區域網路上的其他機器打不到。真正對外的是 8000 埠。</p>
+        <p>設了 Cloudflared 路由，記得同時把 <code>base_url</code> 填成那個公開網址。伺服器產生的邀請連結與回呼網址照這個欄位寫；填錯的話連結會指回內網位址，外面的人點了打不開。</p>
+        <div class="callout tip">
+          <p>面板下的 Settings 有十一個分頁。舊版在面板裡點 Members、Policies、Sharing 會整頁變黑，那是延遲載入的檔案在 Ingress 路徑下抓不到造成的，<code>0.1.15</code> 修好了。看到黑畫面先確認版本。</p>
+        </div>
+      </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
         <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <p>五個檢查點。前三項只驗伺服器，後兩項才驗整條路。</p>
+        <ul>
+          <li>側邊欄出現「Woow Omnigent」面板，點進去看得到登入表單</li>
+          <li>用設定頁的帳密登入成功，左邊出現 <code>New session</code> 到 <code>Usage</code> 四個入口</li>
+          <li>Settings 的十一個分頁逐一點過去都不會變成黑畫面</li>
+          <li>輸入區底部的主機選單裡至少有一個項目，而且前面是綠點</li>
+          <li>挑那台主機開一個 session，隨便問一句，代理真的回話</li>
+        </ul>
+        <p>第四項最常卡住：主機清單空的不是壞掉，是這個附加元件本來就不帶執行端。</p>
       </section>
+
+      <section id="backup" data-nav="備份與還原">
+        <h2 data-icon="restore">備份與還原</h2>
+        <p>附加元件備份會把整個 <code>/data</code> 包進去：資料庫叢集、產出的檔案、管理員憑證與所有 session 狀態。日誌與資料庫的預寫日誌被排除在外，因為它們既大又沒有還原價值。</p>
+        <p>備份模式是<strong>冷備份（cold backup）</strong>：Supervisor 會先停下附加元件再打包，資料庫不會被拍到寫到一半的狀態，代價是備份期間服務中斷。還原之後資料庫與管理員身分都會回來，執行端會在下一次握手時自己重新註冊，不需要你到每台機器上重跑指令。</p>
+        <div class="callout danger">
+          <p>備份檔裡有管理員憑證和所有對話內容，跟你的 Home Assistant 快照一樣敏感。不要丟到公開的雲端資料夾。</p>
+        </div>
+      </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>面板打得開，但一直停在登入表單</strong>：自動建立管理員那一步跑過了，是你輸入的帳密不對。回設定分頁對照 <code>admin_username</code> 與 <code>admin_password</code>。</li>
+          <li><strong>主機清單是空的</strong>：預期行為，不是故障。附加元件不含執行端，至少要從區域網路或 Cloudflared 路由註冊一台進來。</li>
+          <li><strong>日誌出現建立管理員失敗的五百錯誤</strong>：多半是資料庫根本沒起來。看日誌最上面的初始化區段，錯誤都在那裡。</li>
+          <li><strong>執行端註冊上了，但對話送出去沒反應</strong>：pi 的擴充套件衝突。清掉那台執行端的 <code>~/.pi-agent/plugins/</code> 目錄，把 <code>openai-codex</code> 從它的 <code>auth.json</code> 移除，再重新連一次。</li>
+          <li><strong>Settings 的某幾個分頁一片黑</strong>：版本舊於 <code>0.1.15</code>。升級即可，不必重裝。</li>
+          <li><strong>面板一直重新導向、瀏覽器報導向次數過多</strong>：也是舊版問題。升到本書鎖定的版本；升級前的暫時解法是改用區域網路的 8000 埠。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的欄位、埠號、啟動順序與版本說法，以下列來源的該 commit 內容為準，不以主分支的當下狀態為準。</p>
         <ul>
-          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
+          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件 · 0.1.15</a></li>
         </ul>
+        <p>介面本身的畫面與文案，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>這個附加元件會不會順便幫我裝好 AI 工具？</summary>
+          <div class="body"><p>不會。它是伺服器版建置，裡面沒有 pi、Claude Code、Codex 的命令列，也沒有執行端。那些東西裝在你另外註冊進來的機器上。這個取捨換到的是映像檔小、啟動快、升級不會連帶動到你的工具鏈。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以只用側邊欄面板，不要開 8000 埠嗎？</summary>
+          <div class="body"><p>人可以，機器不行。面板走的 8080 埠只有 Supervisor 進得來，用起來完全沒問題；但執行端是靠 8000 埠撥進來註冊的，關掉就沒有任何機器能接工作。除非你的執行端跟附加元件在同一台機器上，否則 8000 埠必須留著。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>附加元件版本 0.1.15 和裡面的 Omnigent 0.12.0 是同一個東西嗎？</summary>
+          <div class="body"><p>不是。<code>0.1.15</code> 是 WoowTech 這個封裝的版本號，記錄的是打包方式與面板修正這類改動；<code>0.12.0</code> 是被包在裡面的上游 Omnigent 版本。升級附加元件不一定會換掉裡面的 Omnigent，反過來也一樣。回報問題時兩個號碼都要講。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我在設定頁改了管理員密碼，重啟之後為什麼登入不了？</summary>
+          <div class="body"><p>因為建立管理員只發生在「還沒有任何管理員」的時候。第一次開機把帳號建好之後，再改設定頁的欄位，重啟時那一步會被略過，資料庫裡的密碼不變。要改密碼請在介面裡改；設定頁那兩欄從此只影響全新安裝或清空資料後的重建。</p></div>
+        </details>
+        <details class="faq">
+          <summary>我跑的是 Home Assistant Container，也能裝這個附加元件嗎？</summary>
+          <div class="body"><p>不行。附加元件是 Supervisor 的機制，純 Docker 版的 Home Assistant 沒有 Supervisor，商店根本不存在。那種情況請走第 21 章的 Rootless Podman 版，它不依賴 Home Assistant，而且自帶一個常駐執行端。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch19_choose_deployment.html">
         <span class="label">← 上一章</span>

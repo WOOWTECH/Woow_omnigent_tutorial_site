@@ -73,9 +73,12 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#symptoms">徵狀對照</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
+      <a href="#orphan">孤兒主機</a>
+      <a href="#scheduled">排程打不到主機</a>
       <a href="#troubleshoot">故障排除</a>
       <a href="#sources">固定來源</a>
       <a href="#faq">常見問題</a>
@@ -95,63 +98,183 @@
       </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>Host picker 上那個綠點很好認，也很容易被過度解讀。它只說明一件事：<strong>Omnigent 這一側收得到那台主機的訊號。</strong>它不保證你選的框架已經登入、不保證排程開火的那一刻機器還醒著、更不保證你會拿到一段有內容的回覆。</p>
+        <p>這一章把「代理沒動」拆成可以逐層排除的幾種情況，並且給每一種一個明確的下一步。<strong>綠點不代表真的能用</strong>，是這章從頭到尾的主軸。</p>
+        <div class="callout tip">
+          <p>本章的多數處置，最後一步都落在那台機器上，不在瀏覽器裡。如果那台機器不是你的（同事的筆電、機房裡的伺服器），你能做的是把問題辨識清楚，然後交給管得到它的人——這件事本身就很有價值，因為多數往返都浪費在講不清楚徵狀。</p>
+        </div>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">三層要分開看</h2>
+        <p>從你按下送出到拿到回覆，中間至少疊了三層，而且它們是各自獨立的。</p>
+        <div class="callout terminology">
+          <p><strong>執行端（runner）</strong>：真正在機器上把代理跑起來的那一端。Omnigent 的網頁只負責派工與顯示，動手的是它。</p>
+        </div>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="三層與各自的指示燈資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">層</th><th scope="col">在問什麼</th><th scope="col">介面上的指示燈</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">第一層　主機連線</th><td>那台機器現在連得上嗎</td><td>Host picker 名稱前的綠點；<code>Import sessions</code> 頁的 <code>ONLINE</code> 徽章</td></tr>
+              <tr><th scope="row">第二層　框架可用性</th><td>那台機器上有把這個框架設好嗎</td><td><code>Runs with</code> 下拉的 <code>needs setup</code> 徽章</td></tr>
+              <tr><th scope="row">第三層　框架的帳號認證</th><td>那個框架自己的登入還有效嗎</td><td><strong>沒有</strong>。事實庫沒有記錄任何顯示框架登入狀態的畫面</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>第三層沒有指示燈，這是本章存在的主要理由。<strong>綠點亮著、框架也沒標 <code>needs setup</code>，仍然可能因為第三層而拿不到回覆</strong>，而且畫面上不會有任何一行字告訴你是這個原因。你只能從徵狀反推。</p>
       </section>
+
+      <section id="symptoms" data-nav="徵狀對照">
+        <h2 data-icon="compare">徵狀對照表</h2>
+        <p>先用這張表把問題丟到正確的那一層，再往下做。省下來的時間比想像中多。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="徵狀、對應層級與第一步處置資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">你看到的</th><th scope="col">最可能的層</th><th scope="col">第一步</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">主機根本不在 Host picker 清單裡</th><td>第一層</td><td>那台機器從來沒註冊成功，回第 16 章重跑註冊</td></tr>
+              <tr><th scope="row">在清單裡，但前面沒有綠點</th><td>第一層</td><td>機器關機、睡眠或斷網。先讓它醒著</td></tr>
+              <tr><th scope="row">同一台機器在清單裡出現兩次</th><td>第一層（孤兒）</td><td>選有綠點的那一筆，見下方孤兒主機一節</td></tr>
+              <tr><th scope="row">框架選項標著 <code>needs setup</code></th><td>第二層</td><td>到那台機器上把該工具裝好登入好（第 17 章）</td></tr>
+              <tr><th scope="row">送出後回覆是空的，或一送出就結束</th><td>第三層</td><td>該框架的帳號認證多半過期了，要在那台機器上重新登入</td></tr>
+              <tr><th scope="row">排程時間到了，什麼都沒發生</th><td>第一層加設定</td><td>檢查排程的頁籤、<code>Host</code> 欄與 <code>Permission mode</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
-        <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="plan">開始之前先蒐集三件事</h2>
+        <p>動手之前，把這三件事寫在便條紙上。沒有它們，你會在同一個畫面上來回猜。</p>
+        <ul>
+          <li><strong>哪一台主機</strong>：抄下 Host picker 顯示的完整名稱，包含括號裡的那一段，例如 <code>Pi Web ChatGPT (pi5)</code>。名稱相近的多台是誤判的主要來源。</li>
+          <li><strong>哪一個框架</strong>：<code>Runs with</code> 選到的那一個。換框架之後徵狀會變，不記下來就對不起來。</li>
+          <li><strong>最後一次好過是什麼時候</strong>：昨天還能用，跟從來沒用過，要查的方向完全不同。</li>
+        </ul>
+        <div class="callout warning">
+          <p>還有一件要先想清楚的事：<strong>你碰得到那台機器嗎？</strong>本章一半以上的修法要在機器上執行，不是在網頁裡點。碰不到就先把辨識做完，再找人。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">分階段診斷</h2>
+        <p>照順序做，不要跳。每一步都是在排除一整層，跳過就等於把可能性留著。</p>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>確認你看的是同一台主機</h3>
+            <p>Composer 底部第一個 picker 就是 Host。把它展開，確認選中的名稱跟你便條紙上那一行完全一樣，而且前面有綠點。<strong>先排除選錯機器</strong>，這是最常見也最尷尬的原因。</p>
+          </li>
+          <li>
+            <h3>用 Import sessions 交叉驗證第一層</h3>
+            <p>到 Settings 的 <code>Import sessions</code> 分頁。那裡的 <code>Machine</code> 欄會列出同一批機器，線上的會帶一個 <code>ONLINE</code> 徽章。兩個畫面都說線上，第一層就可以劃掉了。</p>
+          </li>
+          <li>
+            <h3>排除第二層</h3>
+            <p>回 Composer 打開 <code>Runs with</code>，看你要用的那個框架有沒有橘色的 <code>needs setup</code>。有的話問題就在這裡，往第 17 章走，本章後面的內容都用不上。</p>
+          </li>
+          <li>
+            <h3>用一句最小的話測第三層</h3>
+            <p>開一個新 session，只送一句最短的指令，例如請它回覆兩個字。<strong>有內容的回覆代表三層都通</strong>；如果是空白、或幾乎沒等就結束，指向第三層的帳號認證。</p>
+          </li>
+          <li>
+            <h3>用 Usage 反查它曾經跑起來過</h3>
+            <p>到 Usage 把期間切到 <code>30 days</code>，看 <code>Cost by harness</code>。那個框架有花費，就代表它在這段期間真的跑起來過，問題是「後來壞了」而不是「從來沒通」。這兩件事的查法不一樣。</p>
+          </li>
+          <li>
+            <h3>最後才去動那台機器</h3>
+            <p>確定問題在第三層之後，處置只有一種：在那台機器上把該框架重新登入一次。這件事必須有人實際操作那台機器，網頁裡沒有可以續期的地方。第一層沒過的話，則是回第 16 章重跑註冊。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="test">怎麼確認真的修好了</h2>
+        <p>五個條件同時成立，才算修好，少一個都可能是錯覺：</p>
+        <ul>
+          <li>Host picker 裡對應這台機器<strong>只有一筆</strong>，而且有綠點</li>
+          <li><code>Import sessions</code> 的 <code>Machine</code> 欄顯示 <code>ONLINE</code></li>
+          <li><code>Runs with</code> 裡你要用的那個框架沒有 <code>needs setup</code></li>
+          <li>最小測試句在同一個 session 內拿到<strong>非空</strong>回覆</li>
+          <li>隔天到 Usage 把期間切到 <code>7 days</code>，看得到這次產生的花費</li>
+        </ul>
+        <div class="callout">
+          <p>早期一份端對端測試報告的結尾寫著某個框架「依然不會回覆」。2026-09-09 的實機記錄已經推翻它：Usage 顯示三十天內有二十個 session 與累計成本，主機也顯示綠點。碰到疑似「這個框架根本不會回」的時候，先照上面五點跑一遍，不要直接下結論——把問題歸給產品，往往只是漏掉了第三層。</p>
+        </div>
       </section>
+
+      <section id="orphan" data-nav="孤兒主機">
+        <h2 data-icon="remote">孤兒主機：清單裡那筆永遠不會亮的</h2>
+        <p>機器重開、或註冊流程被跑了第二次之後，清單裡可能留下一筆再也不會亮綠點的舊項目。它的名稱有時跟現役那一台<strong>一模一樣</strong>，這是它麻煩的地方。</p>
+        <ul>
+          <li><strong>怎麼辨識</strong>：綠點是唯一可靠的判準，名稱不是。兩筆同名就挑亮的那一筆。</li>
+          <li><strong>為什麼危險</strong>：在 Composer 選到孤兒，送出去會沒有反應；更麻煩的是 Automations 的 <code>Host</code> 欄如果指定到孤兒，任務到點開火時打不到任何人，而且不會有人在旁邊發現。</li>
+          <li><strong>怎麼避免</strong>：Automations 的 <code>Host (optional)</code> 欄留在預設值 <code>Resolve at fire time</code>。官方說明是 <code>Leave unset to run on your connected host when the task fires.</code>——不綁死，就不會綁到孤兒。</li>
+          <li><strong>怎麼清掉</strong>：事實庫沒有記錄刪除主機的介面，所以本書不寫步驟。真的要清，得由管得到那套部署的人處理。在那之前，靠綠點辨識就足以正常使用。</li>
+        </ul>
+      </section>
+
+      <section id="scheduled" data-nav="排程打不到主機">
+        <h2 data-icon="auto">排程到點卻什麼都沒發生</h2>
+        <p>Automations 頁自己那句說明就是線索：<code>Run agent sessions on a recurring schedule. Tasks fire on a connected host.</code>關鍵字是 <strong>connected</strong>——排程需要開火那一刻有一台線上的主機，不是設定當下有就好。</p>
+        <p>依序檢查三件事，多數情況在第一或第二項就找到了：</p>
+        <ol>
+          <li><strong>它是不是被暫停了</strong>：Automations 清單頁上方有 <code>All</code>、<code>Active</code>、<code>Paused</code> 三個篩選頁籤。切到 <code>Paused</code> 看看你要找的那條在不在裡面。</li>
+          <li><strong>開火時有沒有線上主機</strong>：如果 <code>Host</code> 綁死到某一台，那台在半夜是關機的，任務就落空。改回 <code>Resolve at fire time</code> 通常就解決了。</li>
+          <li><strong><code>Permission mode</code> 是不是會停下來問</strong>：對話框裡寫得很直白，<code>a prompting mode (Manual or Plan) will wait for approval that never comes</code>。無人值守的排程配上會提示的模式，等於永遠卡住。</li>
+        </ol>
+        <div class="callout warning">
+          <p>排程失敗最麻煩的地方是<strong>它是安靜的</strong>。沒有人在旁邊，也不會有紅字跳出來。如果某件事重要到要排程，就要有人定期回頭看 Usage 與 Inbox 確認它真的跑過。</p>
+        </div>
+      </section>
+
       <section id="troubleshoot" data-nav="故障排除">
         <h2 data-icon="troubleshoot">故障排除</h2>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li><strong>主機有綠點，但送出去完全沒反應</strong>：綠點只覆蓋第一層。往下查第二層的 <code>needs setup</code>，再用最小測試句判斷第三層。三層都通還是沒反應，記下時間與主機名稱再找人。</li>
+          <li><strong>回覆是空的，或一送出就結束</strong>：最可能是那個框架的帳號認證過期。這件事必須有人在那台機器上重新登入該工具；Omnigent 網頁裡沒有可以續期的地方，等再久也不會自己好。</li>
+          <li><strong>清單裡有兩台名字一樣的主機</strong>：選有綠點的那一筆，另一筆是孤兒。順手把 Automations 的 <code>Host</code> 欄改回 <code>Resolve at fire time</code>，免得排程綁到死的那一筆。</li>
+          <li><strong>排程到點沒跑</strong>：依序看三件事——清單頁籤是不是停在 <code>Paused</code>、<code>Host</code> 欄是不是綁到不在線的主機、<code>Permission mode</code> 是不是 <code>Manual</code> 或 <code>Plan</code>。</li>
+          <li><strong>不確定代理是不是在等你回答</strong>：看 Inbox。沒東西時它會寫 <code>Nothing waiting on you</code>，那代表確實沒有人在等你，而不是通知掉了。</li>
+          <li><strong>換一台主機之後一切正常</strong>：那就確定問題在原本那台機器上，不在 Omnigent。把主機名稱、框架名稱與時間交給管那台機器的人，比反覆重試有用。</li>
         </ul>
       </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的產品邊界說法以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
         </ul>
+        <p>綠點與 <code>ONLINE</code> 徽章、<code>Resolve at fire time</code> 預設值、Automations 的頁籤與原文提示、Inbox 空狀態文案，以及推翻「某框架不會回覆」的那組觀察，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
-          <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>綠點是即時更新的嗎？</summary>
+          <div class="body"><p>事實庫只記錄了它代表線上，沒有記錄更新頻率，所以本書不給秒數。要交叉驗證就用 <code>Import sessions</code> 的 <code>ONLINE</code> 徽章：兩個畫面都說線上，可信度比盯著一個點高。</p></div>
         </details>
         <details class="faq">
-          <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我可以在網頁裡把一台不用的主機刪掉嗎？</summary>
+          <div class="body"><p>本站的實機記錄裡沒有刪除主機的畫面，所以本書不寫步驟，也不建議你亂試。孤兒主機不會主動害你，只要記得靠綠點而不是靠名稱挑，就能正常使用。真的要清理，交給管那套部署的人。</p></div>
         </details>
         <details class="faq">
-          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>認證過期為什麼不能由 Omnigent 自動處理？</summary>
+          <div class="body"><p>因為那些帳號屬於各個框架，登入動作發生在主機上，不在 Omnigent 這一側。它派得動工具，但不保管工具的登入。這也是為什麼第三層沒有指示燈——它看不到那一層。</p></div>
         </details>
         <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <summary>我怎麼知道問題出在 Omnigent 還是那台機器？</summary>
+          <div class="body"><p>用三層法。第一層有問題（沒有綠點、清單裡沒有那台機器），問題在機器或網路。第二、三層有問題，問題在那台機器上的框架設定或登入。三層都通卻還是沒回覆，那才輪到懷疑服務本身，而且那時你手上已經有一組清楚的徵狀可以交出去。</p></div>
+        </details>
+        <details class="faq">
+          <summary>之前有人說某個框架根本不會回覆，是真的嗎？</summary>
+          <div class="body"><p>那個說法已經被推翻。2026-09-09 的實機記錄顯示，Usage 有三十天二十個 session 的用量與累計成本，主機也是綠點。當時看到的很可能是第二層或第三層的問題被誤讀成產品缺陷。這正是本章要你先跑完五點檢查再下結論的原因。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch17_harness_ecosystem.html">
         <span class="label">← Previous</span>

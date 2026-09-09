@@ -73,6 +73,8 @@
       <h2>This chapter</h2>
       <a href="#why">為何需要本章</a>
       <a href="#concepts">核心觀念</a>
+      <a href="#split">哪些部署自帶執行端</a>
+      <a href="#compare">借別人的還是跑自己的</a>
       <a href="#prep">開始之前</a>
       <a href="#steps">操作步驟</a>
       <a href="#verify">怎麼確認做對了</a>
@@ -91,68 +93,165 @@
       <div class="callout i18n-pending"><strong>This chapter has not been translated yet.</strong> You are reading the original Chinese text. <a href="../ch15_why_own_runner.html" hreflang="zh-Hant">Open the Chinese version</a></div>
       <div class="chapter-header">
         <div class="kicker">Chapter 15</div>
-        <h1>為什麼你需要自己的 Runner</h1>
-      </div>
       <section id="why" data-nav="為何需要本章">
         <h2 data-icon="why">為何需要本章</h2>
-        <p>待撰寫。</p>
+        <p>如果你照第 20 章把 Home Assistant 附加元件裝起來，登入之後會遇到一個讓人愣住的畫面：Composer 底下的主機選單是空的，一台機器都沒有。</p>
+        <p>這不是安裝失敗。附加元件版是<strong>只有伺服器的版本</strong>，官方文件把「主機清單空的」直接列在疑難排解裡，並註明「這是預期行為」。要讓它動起來，你得自己接一台機器上去。</p>
+        <p>這一章不教指令，只回答一個問題：<strong>為什麼會有這個設計，以及你到底需不需要自己跑一台。</strong>想清楚了，第 16 章的每一步才不會是照抄。</p>
       </section>
+
       <section id="concepts" data-nav="核心觀念">
-        <h2 data-icon="concept">核心觀念</h2>
-        <p>待撰寫。</p>
+        <h2 data-icon="concept">伺服器與執行端是兩個東西</h2>
+        <p>Omnigent 拆成兩半，這是理解整個第四部的關鍵。</p>
+        <ul>
+          <li><strong>伺服器（server）</strong>：負責編排、存資料、提供你正在看的這個網頁介面。它不執行代理。</li>
+          <li><strong>執行端（runner）</strong>：代理真正跑起來的地方。它是一個獨立的行程，跑在某一台實體或虛擬機器上，用 WebSocket 主動撥回伺服器。</li>
+        </ul>
+        <div class="callout terminology">
+          <p><strong>執行端（runner）</strong>：實際跑代理的那個行程。在介面上，一個註冊好的執行端會以一台<strong>主機（host）</strong>的樣子出現在選單裡。本書之後提到「主機」時，指的就是某一台上面跑著執行端的機器。</p>
+        </div>
+        <p>方向很重要：<strong>執行端主動撥出去找伺服器，不是伺服器連進來找它。</strong>所以你的筆電不需要有固定 IP，也不需要在防火牆上開任何一個入站的埠。需要開著的是伺服器那一側的服務埠，第 14 章的表格說明了它是哪一個。</p>
+        <p>為什麼要拆？因為代理要碰得到檔案才有用。如果代理只跑在伺服器容器裡，它看得到的就只有那個容器內部；你真正想讓它改的專案在你的筆電上、在辦公室那台開發機上、在某台樹莓派上。把執行端放到那些機器上，代理才有東西可以動。</p>
       </section>
+
+      <section id="split" data-nav="哪些部署自帶執行端">
+        <h2 data-icon="what">哪些部署自帶執行端</h2>
+        <p>三種部署方式對這件事的處理不一樣，這是第 19 章決策表裡最實際的一項差異。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="部署方式、是否自帶執行端、你要做的事資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">部署方式</th><th scope="col">自帶執行端</th><th scope="col">你要做的事</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Home Assistant 附加元件</th><td>沒有，純伺服器</td><td>一定要另外註冊至少一台，見第 16 章</td></tr>
+              <tr><th scope="row">Rootless Podman 套件</th><td>有，一個常駐的執行端容器</td><td>裝完就有一台可選；想接自己的筆電再另外註冊</td></tr>
+              <tr><th scope="row">k3s Helm 套件</th><td>有，數量由部署者決定</td><td>細節見第 22 章</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Podman 套件的選擇很有代表性。它的說明文件把兩條路並列寫出來：一是使用者在自己的筆電上跑執行端指令，用自己的狀態；二是讓一台機器上長期跑著一個執行端，掛載共用的資料磁區，於是網頁介面開的每一個 session 都能直接選用那份已經設定好供應商與技能的環境。那個套件選了第二條。</p>
+        <p>附加元件版選了另一種取捨：Home Assistant OS 上的資源有限，而且多數人真正想讓代理改的東西不在 Home Assistant 裡，所以它乾脆不打包執行端，把那件事留給你決定。</p>
+      </section>
+
+      <section id="compare" data-nav="借別人的還是跑自己的">
+        <h2 data-icon="compare">借別人的機器，還是跑自己的</h2>
+        <p>假設你的團隊已經有一台共用的執行端，你還要不要在自己的筆電上再跑一台？下面這張表是判斷依據。</p>
+        <div class="table-scroll" role="region" tabindex="0" aria-label="面向、用共用執行端、用自己的執行端資料表">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">面向</th><th scope="col">用共用的執行端</th><th scope="col">在自己機器上跑一台</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">代理看得到的檔案</th><td>那台機器上的工作目錄</td><td>你自己的專案，包含還沒推上去的分支</td></tr>
+              <tr><th scope="row">憑證</th><td>那台機器上設定好的那一組</td><td>你自己的帳號與金鑰</td></tr>
+              <tr><th scope="row">開機狀態</th><td>常駐，隨時可派工</td><td>機器睡了就離線</td></tr>
+              <tr><th scope="row">設定成本</th><td>零，選了就用</td><td>要裝套件、跑註冊、之後自己維護</td></tr>
+              <tr><th scope="row">風險</th><td>你的需求會影響到共用機器上的檔案</td><td>出事只影響你自己那台</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>實務上多數人兩台都要：共用的那台負責跑排程與長時間任務，自己那台負責碰私有專案。第 10 章的自動化正好對應前者——排程任務的主機欄位預設是「觸發時再決定」，也就是交給當時連著的主機去跑，這件事只有在有一台常駐主機時才成立。</p>
+        <div class="callout warn">
+          <p>選共用主機之前先確認一件事：那台機器上的工作目錄是誰的。代理讀寫的是那台機器的真實檔案系統，不是一個沙箱副本。第 12 章的規則與第 14 章的分享設定就是為了這件事存在。</p>
+        </div>
+      </section>
+
       <section id="prep" data-nav="開始之前">
         <h2 data-icon="plan">開始之前</h2>
-        <p>待撰寫。</p>
+        <p>要判斷自己屬於哪一種情況，先把下面三件事查清楚：</p>
+        <ul>
+          <li><strong>你的 Omnigent 是哪一種部署</strong>。不確定的話，看網址：走 Home Assistant 側邊欄進去的是附加元件版；獨立網域多半是 k3s 版或 Podman 版。</li>
+          <li><strong>主機選單現在有沒有東西</strong>。開一個新 session，看 Composer 底部最左邊那個選單。有項目而且前面有綠點，代表已經有人接好了至少一台。</li>
+          <li><strong>你真正想讓代理改的檔案在哪台機器上</strong>。這一題的答案就是你要在哪台機器上跑執行端。</li>
+        </ul>
+        <div class="callout tip">
+          <p>綠點只代表那台機器現在連著伺服器，不代表它上面的框架都設定好了。框架選單裡沒設定完成的項目會標上 <code>needs setup</code>，第 17 章專門講這件事。</p>
+        </div>
       </section>
+
       <section id="steps" data-nav="操作步驟">
-        <h2 data-icon="steps">操作步驟</h2>
+        <h2 data-icon="steps">怎麼決定要不要自己跑一台</h2>
+        <p>照順序走完這四步，你會得到一個明確的答案，而不是「好像應該要」。</p>
         <ol class="steps">
-          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
-          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+          <li>
+            <h3>先確認清單是不是真的空的</h3>
+            <p>開一個新 session，展開 Composer 底部的主機選單。如果一台都沒有，你沒有選擇——必須照第 16 章接一台，否則整套系統無法派工。如果已經有項目，往下走。</p>
+          </li>
+          <li>
+            <h3>問「我要改的東西在不在那台上面」</h3>
+            <p>把你接下來一週最想交出去的三件事列出來，看看它們要動的檔案在哪。全部都在共用主機上，那你不需要自己的執行端；只要有一件在你自己的機器上，答案就是要。</p>
+          </li>
+          <li>
+            <h3>檢查憑證歸屬</h3>
+            <p>執行端各自帶自己的憑證，伺服器端設定的金鑰只給伺服器行程用，不會下發給執行端。所以「共用主機能不能用我的帳號額度」的答案是不能——它用的是那台機器上設定好的那一組。要用自己的帳號，就要有自己的執行端。</p>
+          </li>
+          <li>
+            <h3>決定它要不要常駐</h3>
+            <p>只是臨時試一次，就在終端機裡跑著，用完關掉。要讓排程任務半夜自己開工，那台機器就得一直開著、指令也得一直活著。前者照第 16 章做完即可，後者要把執行端做成開機自動啟動的服務，Podman 套件的做法可以參考第 21 章。</p>
+          </li>
+          <li>
+            <h3>寫下這台主機的名字與用途</h3>
+            <p>兩台以上之後，主機選單會變成一排看起來很像的名字。現在花三十秒決定命名規則，比之後在選單裡猜哪台是哪台省事。第 18 章會提到一種常見狀況：重啟後留下一台再也連不上的舊主機，如果名字亂取，你會分不出該刪哪一個。</p>
+          </li>
         </ol>
       </section>
+
       <section id="verify" data-nav="怎麼確認做對了">
-        <h2 data-icon="test">怎麼確認做對了</h2>
-        <p>待撰寫。</p>
-      </section>
-      <section id="troubleshoot" data-nav="故障排除">
-        <h2 data-icon="troubleshoot">故障排除</h2>
+        <h2 data-icon="test">怎麼確認你抓到重點了</h2>
+        <p>讀完這章，你應該能回答下面四個問題。答不出來的往回翻。</p>
         <ul>
-          <li><strong>徵狀 1</strong>：待撰寫。</li>
-          <li><strong>徵狀 2</strong>：待撰寫。</li>
-          <li><strong>徵狀 3</strong>：待撰寫。</li>
-          <li><strong>徵狀 4</strong>：待撰寫。</li>
+          <li>伺服器跟執行端各自負責什麼？哪一個實際跑代理？</li>
+          <li>連線是誰主動撥給誰？這件事對你的防火牆設定有什麼影響？</li>
+          <li>為什麼 Home Assistant 附加元件版裝完之後主機清單是空的？</li>
+          <li>用共用主機跟用自己的執行端，在「憑證用誰的」這一題上差在哪？</li>
         </ul>
       </section>
+
+      <section id="troubleshoot" data-nav="故障排除">
+        <h2 data-icon="troubleshoot">常見誤解</h2>
+        <ul>
+          <li><strong>「裝好伺服器就能開始派工」</strong>：附加元件版不行。它是純伺服器，主機清單空的是預期行為，寫在官方疑難排解的第一條。</li>
+          <li><strong>「執行端等於一個帳號」</strong>：不是。執行端是一台機器上的一個行程，它跟登入這個網頁介面的帳號是兩回事。同一個帳號可以派工到多台主機，同一台主機也可以被多個成員選用。</li>
+          <li><strong>「我要在路由器上開埠，別人的伺服器才連得到我的筆電」</strong>：不用。執行端是主動撥出去的那一方，需要對外開放的是伺服器那一側，不是你的筆電。</li>
+          <li><strong>「代理跑在雲端，碰不到我的檔案」</strong>：正好相反。執行端跑在哪台機器上，代理就讀寫哪台機器的檔案系統，而且是真實檔案，不是副本。這正是它比聊天視窗有用的原因，也是它需要規則的原因。</li>
+          <li><strong>「主機顯示綠點就代表一切正常」</strong>：綠點只代表連線還在。框架沒設定好、憑證過期、工作目錄被刪掉，都可能讓一台綠點主機給不出任何有用的回應。第 18 章逐一拆解這幾種狀況。</li>
+        </ul>
+      </section>
+
       <section id="sources" data-nav="固定來源">
         <h2 data-icon="url">固定來源</h2>
+        <p>本章的架構說法——伺服器與執行端分離、附加元件不打包執行端、執行端主動撥入——以下列來源的該 commit 內容為準。</p>
         <ul>
           <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
           <li><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package/tree/33dd16c985e82e8cfde301f24de385c313477d24" rel="noopener">WoowTech Omnigent Rootless Podman 套件</a></li>
         </ul>
+        <p>主機選單、綠點與 <code>needs setup</code> 徽章的畫面描述，來自 2026-09-09 對正式站的實機記錄，整理在本倉庫的 <code>docs/research/ui-facts-2026-09-09.md</code>。</p>
       </section>
+
       <section id="faq" data-nav="常見問題">
         <h2 data-icon="faq">常見問題</h2>
         <details class="faq">
           <summary>這一章的內容適用於哪些部署方式？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <div class="body"><p>三種都適用，因為講的是伺服器與執行端的分工，那是同一套上游架構。差別只在「裝完之後手上有沒有現成的執行端」，這一點在本章的對照表裡列得很清楚。</p></div>
+        </details>
+        <details class="faq">
+          <summary>一台機器可以同時是伺服器又是執行端嗎？</summary>
+          <div class="body"><p>可以，Rootless Podman 套件就是這樣：伺服器容器與執行端容器跑在同一台機器上，透過內部網路互相溝通。這不改變兩者的分工，只是把它們放在同一塊硬體上。附加元件版沒有這樣做，原因見本章的第三節。</p></div>
         </details>
         <details class="faq">
           <summary>做完這一章之後我應該看到什麼？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <div class="body"><p>這一章沒有要你改任何設定，成果是一個決定：你需不需要在自己的機器上跑執行端。答案是「需要」的話，直接進第 16 章；答案是「不需要」的話，跳到第 17 章挑框架，第 16 章之後真的要接機器時再回來。</p></div>
+        </details>
+        <details class="faq">
+          <summary>我可以接幾台主機？</summary>
+          <div class="body"><p>本書引用的來源沒有寫出上限，實務上的限制通常是你有幾台機器、以及你分不分得清誰是誰。正式站的主機選單本身就同時列著多台，選單會把每一台的線上狀態用綠點標出來。多台的命名建議見本章操作步驟的最後一步。</p></div>
         </details>
         <details class="faq">
           <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
-          <div class="body"><p>待撰寫。</p></div>
-        </details>
-        <details class="faq">
-          <summary>這一章提到的設定會影響其他章節嗎？</summary>
-          <div class="body"><p>待撰寫。</p></div>
+          <div class="body"><p>這一章描述的畫面只有一個——Composer 底部的主機選單。如果連那個選單都找不到，先確認你是在新 session 的輸入區，而不是在已經開始的對話裡。至於清單空不空，那不是版本差異，是你的部署方式決定的，對照本章表格就知道自己屬於哪一種。</p></div>
         </details>
       </section>
+
       <nav class="pager" aria-label="章節分頁">
       <a class="prev" href="ch14_security_baseline.html">
         <span class="label">← Previous</span>
