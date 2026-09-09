@@ -5228,15 +5228,17 @@
   },
   "en:ch1_what_is_omnigent.html#what": {
    "status": "pending",
-   "sourceHash": "d83dfc58deaddeac",
+   "sourceHash": "dc3191615efc6eff",
    "targetHash": null,
-   "registeredAt": "2026-09-09"
+   "registeredAt": "2026-09-09",
+   "zhChangedAt": "2026-09-09"
   },
   "en:ch1_what_is_omnigent.html#compare": {
    "status": "pending",
-   "sourceHash": "d5bc4c3b9c332050",
+   "sourceHash": "b1557abadf18e98c",
    "targetHash": null,
-   "registeredAt": "2026-09-09"
+   "registeredAt": "2026-09-09",
+   "zhChangedAt": "2026-09-09"
   },
   "en:ch2_first_login.html#entrances": {
    "status": "pending",
