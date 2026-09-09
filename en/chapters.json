@@ -82,7 +82,7 @@
       "card": "用一句話說清楚 Omnigent 的定位，以及它跟單一 AI 聊天視窗的根本差別。",
       "description": "第 1 章說明 Omnigent 作為 meta-harness 的定位：它不自己當 AI，而是把 pi、Claude Code、Codex 等不同代理與不同機器收攏到同一個介面下指揮。",
       "part": "第一部：先把它用起來",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "02",
@@ -93,7 +93,7 @@
       "card": "從登入畫面到看懂側邊欄每一個入口，五分鐘建立方向感。",
       "description": "第 2 章帶你完成第一次登入，逐一認識 New session、Automations、Inbox、Usage、Pinned 與 Projects 六個入口各自負責什麼。",
       "part": "第一部：先把它用起來",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "03",
@@ -104,7 +104,7 @@
       "card": "分清楚這四個詞，後面所有設定畫面才看得懂。",
       "description": "第 3 章拆解 Omnigent 的四個核心名詞——Server 是指揮中心、Host 是被指揮的機器、Runner 是機器上的常駐代理、Harness 是實際幹活的 AI 工具。",
       "part": "第一部：先把它用起來",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "04",
@@ -115,7 +115,7 @@
       "card": "完成從輸入第一句話到拿到第一個回覆的完整往返。",
       "description": "第 4 章帶你開出第一個 Session，選定 Host 與 Harness，送出第一個任務，並看懂回覆串裡工具呼叫與思考過程的顯示方式。",
       "part": "第一部：先把它用起來",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "05",
@@ -126,7 +126,7 @@
       "card": "把輸入框的每一個隱藏功能都挖出來用。",
       "description": "第 5 章詳解 Composer 的斜線指令、@ 檔案提及、模型下拉選單、附件上傳、語音輸入，以及任務跑歪時該怎麼中斷。",
       "part": "第一部：先把它用起來",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "06",
@@ -137,7 +137,7 @@
       "card": "同一個任務丟到不同機器、不同代理，結果差很多。",
       "description": "第 6 章說明如何為每個 Session 挑選執行的機器與代理，並解釋綠點、離線與忙碌三種狀態各代表什麼。",
       "part": "第二部：把工作交出去",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "07",
@@ -148,7 +148,7 @@
       "card": "在瀏覽器裡看代理改了哪些檔、跑了哪些指令。",
       "description": "第 7 章導覽 Workspace 的四個分頁，說明如何檢視檔案樹、審閱變更差異、觀察子代理，以及直接看終端機輸出。",
       "part": "第二部：把工作交出去",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "08",
@@ -159,7 +159,7 @@
       "card": "任務一多就會亂，這章講組織法。",
       "description": "第 8 章介紹 Project 的分組方式、Session 的命名與釘選、封存時機，以及如何在數十個 Session 之間快速找回想要的那一個。",
       "part": "第二部：把工作交出去",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "09",
@@ -170,7 +170,7 @@
       "card": "代理跑完了要怎麼通知你，結果要怎麼給別人看。",
       "description": "第 9 章說明 Inbox 如何收攏需要你回應的事件，以及 Session 分享連結的產生方式與可見範圍。",
       "part": "第二部：把工作交出去",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "10",
@@ -181,7 +181,7 @@
       "card": "把重複的事交給排程，不必每次自己開 Session。",
       "description": "第 10 章介紹 Automations 的建立流程、RRULE 排程語法、執行紀錄檢視，以及最短間隔限制這個常見的坑。",
       "part": "第二部：把工作交出去",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "11",
@@ -192,7 +192,7 @@
       "card": "團隊一起用的時候，誰看得到誰的東西。",
       "description": "第 11 章說明邀請連結的產生與使用、成員角色差異，以及 Session 與 Project 在成員之間的可見性邊界。",
       "part": "第三部：多人、成本與治理",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "12",
@@ -203,7 +203,7 @@
       "card": "讓代理有邊界，而不是全憑自律。",
       "description": "第 12 章導覽內建 Policy 的分類——成本上限、個資偵測、危險指令攔截——並說明條件式規則的判讀方式。",
       "part": "第三部：多人、成本與治理",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "13",
@@ -214,7 +214,7 @@
       "card": "按 harness、按模型、按天，把帳算清楚。",
       "description": "第 13 章解讀 Usage 頁的總覽數字、每日成本曲線，以及按 harness 與按模型的成本拆分，並說明如何據此調整模型選擇。",
       "part": "第三部：多人、成本與治理",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "14",
@@ -225,7 +225,7 @@
       "card": "預設密碼與公開網址的組合是最常見的破口。",
       "description": "第 14 章說明部署後必做的安全動作——更換預設管理員密碼、檢查對外暴露的埠與網域、確認 Runner 的權限範圍。",
       "part": "第三部：多人、成本與治理",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "15",
@@ -236,7 +236,7 @@
       "card": "代理要能碰到你的檔案，才有辦法幫你做事。",
       "description": "第 15 章解釋 Runner 的角色與必要性，說明為什麼有些部署方式不內建 Runner，以及這個取捨背後的考量。",
       "part": "第四部：接上你自己的機器",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "16",
@@ -247,7 +247,7 @@
       "card": "把自己的電腦變成 Omnigent 的執行機。",
       "description": "第 16 章逐步示範在自己的機器上執行註冊指令、完成配對、確認主機在 Host picker 中出現並顯示為線上。",
       "part": "第四部：接上你自己的機器",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "17",
@@ -258,7 +258,7 @@
       "card": "不同代理擅長的事情不一樣。",
       "description": "第 17 章比較常見 harness 的能力邊界、認證方式與適用情境，並說明混用時的注意事項。",
       "part": "第四部：接上你自己的機器",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "18",
@@ -269,7 +269,7 @@
       "card": "綠點不代表真的能用。",
       "description": "第 18 章整理 Runner 常見故障——顯示離線、重啟後留下孤兒主機、認證過期導致空白回覆——並給出各自的判讀與處置方式。",
       "part": "第四部：接上你自己的機器",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "19",
@@ -280,7 +280,7 @@
       "card": "先決定跑在哪，再決定怎麼裝。",
       "description": "第 19 章用決策表比較 Home Assistant 附加元件、Rootless Podman 與 k3s Helm 三種部署方式的門檻、能力與維運成本。",
       "part": "第五部：自己架一台",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "20",
@@ -291,7 +291,7 @@
       "card": "門檻最低的一條路。",
       "description": "第 20 章說明 Home Assistant 附加元件版的安裝與設定，包含設定頁各欄位的意義、Ingress 面板與 LAN 埠的差別。",
       "part": "第五部：自己架一台",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "21",
@@ -302,7 +302,7 @@
       "card": "單機自架，不需要 Kubernetes。",
       "description": "第 21 章說明以 Quadlet 管理的三容器 Podman 部署，包含資料磁碟區的共用方式與對外連線的處理。",
       "part": "第五部：自己架一台",
-      "status": "planned"
+      "status": "authored"
     },
     {
       "num": "22",
@@ -313,7 +313,7 @@
       "card": "要多台 Runner、要高可用就走這條。",
       "description": "第 22 章說明 k3s 上的 Helm 部署，涵蓋 chart 結構、資料庫與連線池、多 Runner 配置，以及對外通道的建立。",
       "part": "第五部：自己架一台",
-      "status": "planned"
+      "status": "authored"
     }
   ],
   "appendices": [
