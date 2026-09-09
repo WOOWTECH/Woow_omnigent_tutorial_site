@@ -1,0 +1,32 @@
+# Local credentials and browser sessions
+.env
+.env.*
+!.env.example
+storage_state.json
+
+# Installed dependencies
+node_modules/
+
+# Generated validation and browser output
+artifacts/
+playwright-report/
+test-results/
+scripts/probe_login*.png
+
+# Raw and probe screenshots (only reviewed, redacted images may be published)
+assets/screenshots/raw/
+assets/screenshots/raw-screenshots/
+assets/screenshots/**/*.raw.*
+assets/screenshots/**/*-raw.*
+assets/screenshots/**/*probe*.*
+
+# Download artifacts
+downloads/*
+*.download
+*.part
+*.tmp
+*.temp
+*.crdownload
+
+# Generator backup files
+sitemap.xml.bak

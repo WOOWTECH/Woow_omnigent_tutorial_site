@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WoowTech Omnigent 完整指南</title>
+<meta name="description" content="WoowTech 台灣繁體中文 Omnigent 完整指南，22 章涵蓋登入導覽、Session 與 Composer 操作、Automations 排程、成員與 Policy 治理、用量成本判讀，以及 Home Assistant 附加元件、Rootless Podman 與 k3s Helm 三種自架部署。" />
+<meta name="author" content="WoowTech" /><meta name="theme-color" content="#6183FC" />
+<link rel="canonical" href="https://omnigent-guide.woowtech.io/en/" />
+  <!-- i18n:alternates -->
+  <link rel="alternate" hreflang="en" href="https://omnigent-guide.woowtech.io/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://omnigent-guide.woowtech.io/en/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://omnigent-guide.woowtech.io/" />
+  <link rel="alternate" hreflang="zh" href="https://omnigent-guide.woowtech.io/" />
+  <!-- /i18n:alternates -->
+  <meta name="robots" content="index, follow" />
+<meta property="og:type" content="website" /><meta property="og:site_name" content="WoowTech Node-RED 完整指南" /><meta property="og:locale" content="en_US" />
+<!-- i18n:oglocale --><meta property="og:locale:alternate" content="zh_TW" /><!-- /i18n:oglocale -->
+<meta property="og:title" content="WoowTech Omnigent 完整指南" /><meta property="og:description" content="Node-RED 固定版本的 22 章教學、導入評估、60 條提示詞與 AI Agent Skill 手冊。" /><meta property="og:url" content="https://omnigent-guide.woowtech.io/en/" />
+<meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" /><meta property="og:image:type" content="image/png" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="WoowTech Omnigent 完整指南" /><meta name="twitter:description" content="Node-RED 固定版本的 22 章教學、導入評估、60 條提示詞與 AI Agent Skill 手冊。" /><meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.en.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Yellowtail&display=swap" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" /><link rel="stylesheet" href="../assets/css/style.css" />
+<!-- i18n:css --><link rel="stylesheet" href="../assets/css/i18n.css" /><!-- /i18n:css -->
+</head>
+<body><a class="skip-link" href="#main-content">跳到主要內容</a><main class="resource-page" id="main-content" tabindex="-1"><header class="topbar"><a class="site-name" href="index.html">Omnigent 指南</a><nav class="topnav" aria-label="主要導覽"><a class="nav-link" aria-current="page" href="index.html">資源總覽</a><a class="nav-link" href="tutorial.html">教學</a></nav></header><div class="resource-hero">
+      <!-- i18n:switch -->
+      <nav class="lang-switch" aria-label="Language"><a href="../index.html" lang="zh-Hant" hreflang="zh-Hant">中文</a><a class="active" href="index.html" lang="en" aria-current="page">EN</a></nav>
+      <!-- /i18n:switch --><span class="script-accent" aria-hidden="true">orchestrate with care</span><p class="eyebrow">WoowTech · Omnigent 自架指南</p><h1>WoowTech Omnigent 完整指南</h1><p class="lead">自架 AI 代理指揮中心完整教學。22 章繁體中文教學，從第一次登入、開出第一個 Session，一路到接上自己的機器、治理成本與權限，最後自己架起一整套。</p></div>
+<section class="resource-section" aria-labelledby="resources"><h2 id="resources">教學資源</h2><div class="resource-grid">
+<article class="resource-card"><span class="icon-tile" aria-hidden="true"><i class="mdi mdi-book-open-page-variant-outline"></i></span><h2>22 章完整教學</h2><p class="meta">給使用者、團隊管理者與自架維運者</p><p>五個部分循序推進：先把介面用熟，再把工作交給代理，接著處理多人協作與成本治理，然後接上自己的機器，最後自己架一整套 Omnigent。另附三份附錄。</p><div class="card-actions"><a class="button button-primary" href="tutorial.html">開始閱讀</a><a class="button button-secondary" href="https://github.com/WOOWTECH/Woow_omnigent_tutorial_site/archive/refs/heads/main.zip" download>下載整站 ZIP</a></div></article>
+</div></section>
+<div class="notice"><strong>安全提醒：</strong>本書所有帳號與密碼皆為示範用佔位值。自架後請立即更換預設管理員密碼，並確認對外暴露的網域與埠符合你的預期。</div>
+<section class="resource-section" aria-labelledby="official"><h2 id="official">WoowTech 部署套件</h2><div class="link-row"><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon" rel="noopener">Home Assistant 附加元件</a><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package" rel="noopener">Rootless Podman 套件</a><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package" rel="noopener">k3s Helm 套件</a></div></section><footer class="page-footer"><div class="link-row"><a href="https://github.com/WOOWTECH/Woow_omnigent_tutorial_site" rel="noopener">本站原始碼與勘誤</a></div><p><a href="index.html">資源總覽</a><a href="tutorial.html">22 章教學</a><a href="https://creativecommons.org/licenses/by/4.0/deed.en">CC BY 4.0</a></p><p>Omnigent、Home Assistant、Kubernetes 與其他產品名稱及商標屬各自權利人；本站為 WoowTech 獨立製作，與各權利人無隸屬關係。</p></footer></main></body></html>

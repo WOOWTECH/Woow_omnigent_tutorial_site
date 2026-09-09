@@ -1,0 +1,173 @@
+{
+  "_readme": "code 區塊的例外清單：只有列在這裡的 <pre>/<code>/<kbd> 才允許與 zh 不同（通常是程式碼裡的中文註解或中文佔位值）。zh 那邊改了就會對不上而紅燈。由 scripts/apply_code_translations.js 維護。",
+  "allow": [
+    {
+      "file": "ch13_motion_lighting.html",
+      "unit": "#scenario_scope",
+      "zh": "<pre class=\"code-block\"><code>停用的 Events: state / Trigger: state\n  ├─ ACTIVE → 取消候選關燈 → 檢查冷卻與手動覆寫 → 建議開燈 → 停用 Action\n  ├─ CLEAR  → debounce 穩定 → 建立單一候選關燈 → 等待／可被 ACTIVE 取消\n  └─ INVALID → 取消候選關燈 → 遮罩後的診斷 Debug\n\n候選關燈到期\n  → Current State 重查活動、燈光、資料時間、manual_override\n  ├─ 全部明確安全 → 建議關燈 → 停用 Action\n  └─ 任一不明確   → 不動作 → 診斷 Debug</code></pre>",
+      "en": "<pre class=\"code-block\"><code>Disabled Events: state / Trigger: state\n  ├─ ACTIVE → Cancel pending light-off → Check cooldown and manual override → Propose light-on → Disabled Action\n  ├─ CLEAR  → Stable after debounce → Create one pending light-off → Wait / may be canceled by ACTIVE\n  └─ INVALID → Cancel pending light-off → Redacted diagnostic Debug\n\nPending light-off expires\n  → Current State rechecks activity, light, data timestamp, and manual_override\n  ├─ Everything is explicitly safe → Propose light-off → Disabled Action\n  └─ Anything is uncertain        → Take no action → Diagnostic Debug</code></pre>"
+    },
+    {
+      "file": "ch14_notifications_climate.html",
+      "unit": "#openings",
+      "zh": "<pre class=\"code-block\"><code>已知 CLOSED → 已知 OPEN\n  → debounce → 建立 generation → 等待持續時間\n  → 重查仍 OPEN → 通知去重／速率 → 候選通知 → 停用 Action\n\nOPEN → CLOSED\n  → 取消未到期候選 → 標記 resolved\n  → 只有先前確實送過提醒時，才可能建立候選恢復通知\n\n任一 → unknown / unavailable / 缺資料\n  → 取消控制意圖 → anomaly 分支 → 不宣稱門已關閉</code></pre>",
+      "en": "<pre class=\"code-block\"><code>Known CLOSED → known OPEN\n  → debounce → Create generation → Wait for duration\n  → Recheck and still OPEN → Notification deduplication / rate limit → Candidate notification → Disabled Action\n\nOPEN → CLOSED\n  → Cancel unexpired candidate → Mark resolved\n  → Create a candidate recovery notification only if an alert was actually sent earlier\n\nAny state → unknown / unavailable / missing data\n  → Cancel control intent → anomaly branch → Do not claim that the door is closed</code></pre>"
+    },
+    {
+      "file": "ch15_jsonata_templates.html",
+      "unit": "#steps",
+      "zh": "<pre><code class=\"language-jsonata\">{\"攝氏\": payload.temperature, \"華氏\": payload.temperature * 9 / 5 + 32}</code></pre>",
+      "en": "<pre><code class=\"language-jsonata\">{\"Celsius\": payload.temperature, \"Fahrenheit\": payload.temperature * 9 / 5 + 32}</code></pre>"
+    },
+    {
+      "file": "ch15_jsonata_templates.html",
+      "unit": "#steps",
+      "zh": "<code>{\"攝氏\": payload.temperature, \"華氏\": payload.temperature * 9 / 5 + 32}</code>",
+      "en": "<code>{\"Celsius\": payload.temperature, \"Fahrenheit\": payload.temperature * 9 / 5 + 32}</code>"
+    },
+    {
+      "file": "ch15_jsonata_templates.html",
+      "unit": "#mustache",
+      "zh": "<pre><code class=\"language-mustache\">讀值名稱：{{payload.label}}\n讀值結果：{{payload.value}}</code></pre>",
+      "en": "<pre><code class=\"language-mustache\">Reading name: {{payload.label}}\nReading result: {{payload.value}}</code></pre>"
+    },
+    {
+      "file": "ch15_jsonata_templates.html",
+      "unit": "#data_contracts",
+      "zh": "<pre><code class=\"language-json\">{\n  \"input\": {\"temperature\": 25},\n  \"contract\": {\n    \"temperatureType\": \"number\",\n    \"minimum\": -50,\n    \"maximum\": 100\n  },\n  \"output\": {\"攝氏\": 25, \"華氏\": 77}\n}</code></pre>",
+      "en": "<pre><code class=\"language-json\">{\n  \"input\": {\"temperature\": 25},\n  \"contract\": {\n    \"temperatureType\": \"number\",\n    \"minimum\": -50,\n    \"maximum\": 100\n  },\n  \"output\": {\"Celsius\": 25, \"Fahrenheit\": 77}\n}</code></pre>"
+    },
+    {
+      "file": "ch16_function_node.html",
+      "unit": "#steps",
+      "zh": "<pre><code class=\"language-javascript\">if (typeof msg.payload !== \"number\" || !Number.isFinite(msg.payload)) {\n    node.error(new Error(\"payload-validation-failed\"), msg);\n    return null;\n}\nconst 數值 = msg.payload;\nmsg.payload = { 原值: 數值, 平方: 數值 * 數值 };\nreturn msg;</code></pre>",
+      "en": "<pre><code class=\"language-javascript\">if (typeof msg.payload !== \"number\" || !Number.isFinite(msg.payload)) {\n    node.error(new Error(\"payload-validation-failed\"), msg);\n    return null;\n}\nconst value = msg.payload;\nmsg.payload = { originalValue: value, square: value * value };\nreturn msg;</code></pre>"
+    },
+    {
+      "file": "ch16_function_node.html",
+      "unit": "#runtime_model",
+      "zh": "<pre><code class=\"language-javascript\">if (typeof msg.payload !== \"number\" || !Number.isFinite(msg.payload)) {\n    node.error(new Error(\"payload 必須是有限數值\"), msg);\n    return null;\n}\nconst value = msg.payload;\nmsg.payload = { input: value, doubled: value * 2 };\nreturn msg;</code></pre>",
+      "en": "<pre><code class=\"language-javascript\">if (typeof msg.payload !== \"number\" || !Number.isFinite(msg.payload)) {\n    node.error(new Error(\"payload must be a finite number\"), msg);\n    return null;\n}\nconst value = msg.payload;\nmsg.payload = { input: value, doubled: value * 2 };\nreturn msg;</code></pre>"
+    },
+    {
+      "file": "ch16_function_node.html",
+      "unit": "#runtime_model",
+      "zh": "<pre><code class=\"language-javascript\">if (typeof msg.payload !== \"number\" || !Number.isFinite(msg.payload)) {\n    node.error(new Error(\"payload 必須是有限數值\"), msg);\n    node.done();\n    return;\n}\nconst value = msg.payload;\nPromise.resolve(value)\n    .then((input) =&gt; {\n        msg.payload = { input, squared: input * input };\n        node.send(msg);\n        node.done();\n    })\n    .catch((err) =&gt; {\n        node.error(err, msg);\n        node.done();\n    });\nreturn;</code></pre>",
+      "en": "<pre><code class=\"language-javascript\">if (typeof msg.payload !== \"number\" || !Number.isFinite(msg.payload)) {\n    node.error(new Error(\"payload must be a finite number\"), msg);\n    node.done();\n    return;\n}\nconst value = msg.payload;\nPromise.resolve(value)\n    .then((input) =&gt; {\n        msg.payload = { input, squared: input * input };\n        node.send(msg);\n        node.done();\n    })\n    .catch((err) =&gt; {\n        node.error(err, msg);\n        node.done();\n    });\nreturn;</code></pre>"
+    },
+    {
+      "file": "ch17_flow_architecture.html",
+      "unit": "#steps",
+      "zh": "<pre><code>輸入：msg.payload = 4；msg.requestId = \"LC-001\"\nrequest：{ requestId: \"LC-001\", value: 4 }\n正常 Debug：{ requestId: \"LC-001\", doubled: 8 }\ntimeout Catch：error.message = \"timeout\"；正常 Debug 無訊息\n外部 I/O：無；Link Call timeout：2 秒</code></pre>",
+      "en": "<pre><code>Input: msg.payload = 4; msg.requestId = \"LC-001\"\nrequest: { requestId: \"LC-001\", value: 4 }\nNormal Debug: { requestId: \"LC-001\", doubled: 8 }\ntimeout Catch: error.message = \"timeout\"; normal Debug receives no message\nExternal I/O: none; Link Call timeout: 2 seconds</code></pre>"
+    },
+    {
+      "file": "ch17_flow_architecture.html",
+      "unit": "#link_nodes",
+      "zh": "<pre><code class=\"language-javascript\">// 離線 Function：只建立固定目標別名，不做外部 I/O\nconst allowed = { double: \"離線倍增入口\", label: \"離線標籤入口\" };\nif (!Object.hasOwn(allowed, msg.operation)) {\n    node.error(\"UNKNOWN_OPERATION\", msg);\n    return;\n}\nmsg.target = allowed[msg.operation];\nreturn msg;</code></pre>",
+      "en": "<pre><code class=\"language-javascript\">// Offline Function: creates only fixed target aliases; performs no external I/O\nconst allowed = { double: \"Offline doubling entry\", label: \"Offline labeling entry\" };\nif (!Object.hasOwn(allowed, msg.operation)) {\n    node.error(\"UNKNOWN_OPERATION\", msg);\n    return;\n}\nmsg.target = allowed[msg.operation];\nreturn msg;</code></pre>"
+    },
+    {
+      "file": "ch17_flow_architecture.html",
+      "unit": "#subflows",
+      "zh": "<pre><code class=\"language-javascript\">// Subflow 內的純資料 Function\nconst label = env.get(\"DISPLAY_LABEL\") || \"未命名實例\";\nconst current = context.get(\"seen\") || 0;\ncontext.set(\"seen\", current + 1);\nmsg.result = { label, sequence: current + 1 };\nreturn msg;</code></pre>",
+      "en": "<pre><code class=\"language-javascript\">// Pure-data Function inside a Subflow\nconst label = env.get(\"DISPLAY_LABEL\") || \"Unnamed instance\";\nconst current = context.get(\"seen\") || 0;\ncontext.set(\"seen\", current + 1);\nmsg.result = { label, sequence: current + 1 };\nreturn msg;</code></pre>"
+    },
+    {
+      "file": "ch17_flow_architecture.html",
+      "unit": "#import_export",
+      "zh": "<pre><code>分享包說明（不放真實識別資料）\n- 需要：Node-RED 5.0.2 核心節點\n- 輸入：有限數值 msg.payload\n- 設定節點：無\n- 環境屬性：DISPLAY_LABEL（非秘密文字）\n- 外部 I/O：無\n- 啟動時自動執行：無\n- 已測：正常值、缺值、錯誤型別、兩個 instance 隔離</code></pre>",
+      "en": "<pre><code>Shared package notes (no real identifying data)\n- Requires: Node-RED 5.0.2 core nodes\n- Input: finite numeric msg.payload\n- Config nodes: none\n- Environment property: DISPLAY_LABEL (non-secret text)\n- External I/O: none\n- Runs automatically at startup: no\n- Tested: normal value, missing value, wrong type, and isolation between two instances</code></pre>"
+    },
+    {
+      "file": "ch18_debug_testing.html",
+      "unit": "#steps",
+      "zh": "<pre><code>案例 N1：payload = 4      → result = 8，無 Catch\n案例 N2：payload = 0      → result = 0，無 Catch\n案例 X1：payload = \"4\"    → Catch: INVALID_NUMBER\n案例 X2：缺少 payload     → Catch: INVALID_NUMBER\n不變量：輸入 msg.topic 不被修改\n外部 I/O：無</code></pre>",
+      "en": "<pre><code>Case N1: payload = 4      → result = 8; no Catch\nCase N2: payload = 0      → result = 0; no Catch\nCase X1: payload = \"4\"    → Catch: INVALID_NUMBER\nCase X2: payload missing  → Catch: INVALID_NUMBER\nInvariant: input msg.topic is unchanged\nExternal I/O: none</code></pre>"
+    },
+    {
+      "file": "ch18_debug_testing.html",
+      "unit": "#debug_node",
+      "zh": "<pre><code class=\"language-javascript\">// 離線 Function：建立最小診斷投影，不複製完整輸入\nmsg.testResult = {\n    caseName: String(msg.caseName || \"未命名案例\"),\n    payloadType: typeof msg.payload,\n    hasTopic: Object.hasOwn(msg, \"topic\")\n};\nreturn msg;</code></pre>",
+      "en": "<pre><code class=\"language-javascript\">// Offline Function: creates a minimal diagnostic projection without copying the full input\nmsg.testResult = {\n    caseName: String(msg.caseName || \"Unnamed case\"),\n    payloadType: typeof msg.payload,\n    hasTopic: Object.hasOwn(msg, \"topic\")\n};\nreturn msg;</code></pre>"
+    },
+    {
+      "file": "ch18_debug_testing.html",
+      "unit": "#catch_status",
+      "zh": "<pre><code class=\"language-javascript\">// 純資料驗證：沒有網路、檔案或 Home Assistant 操作\nif (!Number.isFinite(msg.payload)) {\n    node.error(\"INVALID_NUMBER\", msg);\n    return;\n}\nmsg.testResult = msg.payload * 2;\nreturn msg;</code></pre>",
+      "en": "<pre><code class=\"language-javascript\">// Pure-data validation: no network, file, or Home Assistant operation\nif (!Number.isFinite(msg.payload)) {\n    node.error(\"INVALID_NUMBER\", msg);\n    return;\n}\nmsg.testResult = msg.payload * 2;\nreturn msg;</code></pre>"
+    },
+    {
+      "file": "ch18_debug_testing.html",
+      "unit": "#complete_node",
+      "zh": "<code>{\"source\":{\"id\":\"b000000000000005\",\"type\":\"function\",\"name\":\"產生有限診斷事件\"}}</code>",
+      "en": "<code>{\"source\":{\"id\":\"b000000000000005\",\"type\":\"function\",\"name\":\"Generate a finite diagnostic event\"}}</code>"
+    },
+    {
+      "file": "ch18_debug_testing.html",
+      "unit": "#troubleshoot",
+      "zh": "<code>node.error(\"分類\", msg)</code>",
+      "en": "<code>node.error(\"category\", msg)</code>"
+    },
+    {
+      "file": "ch19_http_api.html",
+      "unit": "#steps",
+      "zh": "<pre><code>離線契約範本（不是可執行設定）\nmethod: PLACEHOLDER_METHOD\npath: /PLACEHOLDER_HTTP_PATH\nrequest content type: PLACEHOLDER_MEDIA_TYPE\nrequest max bytes: PLACEHOLDER_LIMIT\nsuccess: PLACEHOLDER_STATUS + 固定 shape\nreject: PLACEHOLDER_STATUS + 不含內部細節\nexternal I/O: 禁止執行</code></pre>",
+      "en": "<pre><code>Offline contract template (not executable configuration)\nmethod: PLACEHOLDER_METHOD\npath: /PLACEHOLDER_HTTP_PATH\nrequest content type: PLACEHOLDER_MEDIA_TYPE\nrequest max bytes: PLACEHOLDER_LIMIT\nsuccess: PLACEHOLDER_STATUS + fixed shape\nreject: PLACEHOLDER_STATUS + no internal details\nexternal I/O: do not execute</code></pre>"
+    },
+    {
+      "file": "ch19_http_api.html",
+      "unit": "#http_routes",
+      "zh": "<pre><code class=\"language-javascript\">// 純資料示意；不得接到已啟用 HTTP In\n// 前提：上游仍保留原本 live msg.res\nconst value = msg.payload &amp;&amp; msg.payload.value;\nif (typeof value !== \"string\" || value.length &lt; 1 || value.length &gt; 64) {\n    msg.statusCode = 400;\n    msg.payload = { code: \"INVALID_INPUT\" };\n    return msg;\n}\nmsg.statusCode = 200;\nmsg.payload = { accepted: true };\nreturn msg;</code></pre>",
+      "en": "<pre><code class=\"language-javascript\">// Pure-data illustration; do not connect to an enabled HTTP In node\n// Precondition: the upstream path still retains the original live msg.res\nconst value = msg.payload &amp;&amp; msg.payload.value;\nif (typeof value !== \"string\" || value.length &lt; 1 || value.length &gt; 64) {\n    msg.statusCode = 400;\n    msg.payload = { code: \"INVALID_INPUT\" };\n    return msg;\n}\nmsg.statusCode = 200;\nmsg.payload = { accepted: true };\nreturn msg;</code></pre>"
+    },
+    {
+      "file": "ch19_http_api.html",
+      "unit": "#input_validation",
+      "zh": "<pre><code>400 INVALID_INPUT    欄位或型別不合契約\n401 AUTH_REQUIRED    缺少或無效 authentication\n403 NOT_ALLOWED      身分有效但沒有該資源權限\n404 NOT_FOUND        不揭露不存在或不可見資源細節\n413 BODY_TOO_LARGE   在解析前拒絕超過上限\n415 MEDIA_TYPE       不支援的 Content-Type\n429 RATE_LIMITED     有界速率限制；不含內部計數細節\n500 INTERNAL_ERROR   固定最小 body；詳細原因只進受控 log\n504 UPSTREAM_TIMEOUT outbound 期限已到；不無限重試</code></pre>",
+      "en": "<pre><code>400 INVALID_INPUT    Field or type does not match the contract\n401 AUTH_REQUIRED    Authentication is missing or invalid\n403 NOT_ALLOWED      Identity is valid but lacks permission for this resource\n404 NOT_FOUND        Do not reveal details about absent or invisible resources\n413 BODY_TOO_LARGE   Reject an over-limit body before parsing\n415 MEDIA_TYPE       Unsupported Content-Type\n429 RATE_LIMITED     Bounded rate limit; no internal counter details\n500 INTERNAL_ERROR   Fixed minimal body; details go only to a controlled log\n504 UPSTREAM_TIMEOUT Outbound deadline expired; do not retry indefinitely</code></pre>"
+    },
+    {
+      "file": "ch20_mqtt_extensions.html",
+      "unit": "#steps",
+      "zh": "<pre><code>離線 MQTT 契約（不是連線設定）\nbroker: PLACEHOLDER_MQTT_BROKER_HOST\nclient id: PLACEHOLDER_MQTT_CLIENT_ID\nsubscribe: PLACEHOLDER_MQTT_INPUT_TOPIC\npublish: PLACEHOLDER_MQTT_OUTPUT_TOPIC\nprotocol: PLACEHOLDER_MQTT_VERSION\nmax payload: PLACEHOLDER_LIMIT\ncredentials: 只存受控 credentials store\nnetwork action: 禁止執行</code></pre>",
+      "en": "<pre><code>Offline MQTT contract (not connection configuration)\nbroker: PLACEHOLDER_MQTT_BROKER_HOST\nclient id: PLACEHOLDER_MQTT_CLIENT_ID\nsubscribe: PLACEHOLDER_MQTT_INPUT_TOPIC\npublish: PLACEHOLDER_MQTT_OUTPUT_TOPIC\nprotocol: PLACEHOLDER_MQTT_VERSION\nmax payload: PLACEHOLDER_LIMIT\ncredentials: store only in the controlled credentials store\nnetwork action: do not execute</code></pre>"
+    },
+    {
+      "file": "ch21_backup_security.html",
+      "unit": "#credentials",
+      "zh": "<pre><code class=\"language-text\">復原參照清冊（不是 Add-on 設定，不可執行）\nAdd-on credential secret reference = PLACEHOLDER_SECRET_RECORD_ID\nProject credential secret reference = PLACEHOLDER_PROJECT_SECRET_RECORD_ID\nBackup reference = PLACEHOLDER_BACKUP_ID</code></pre>",
+      "en": "<pre><code class=\"language-text\">Recovery reference inventory (not Add-on configuration; not executable)\nAdd-on credential secret reference = PLACEHOLDER_SECRET_RECORD_ID\nProject credential secret reference = PLACEHOLDER_PROJECT_SECRET_RECORD_ID\nBackup reference = PLACEHOLDER_BACKUP_ID</code></pre>"
+    },
+    {
+      "file": "ch22_troubleshooting.html",
+      "unit": "#safe_mode",
+      "zh": "<pre><code class=\"language-yaml\"># Add-on 22.0.1 的確切 option；本章不套用或重新啟動\nsafe_mode: true</code></pre>",
+      "en": "<pre><code class=\"language-yaml\"># Exact Add-on 22.0.1 option; this chapter does not apply it or restart the Add-on\nsafe_mode: true</code></pre>"
+    },
+    {
+      "file": "ch4_first_flow.html",
+      "unit": "#steps",
+      "zh": "<code>已完成安全轉換</code>",
+      "en": "<code>Safe transformation complete</code>"
+    },
+    {
+      "file": "ch5_messages.html",
+      "unit": "#message_shape",
+      "zh": "<pre><code>// 教學用結構；不是要求你改用 Function\nmsg.payload = { temperature: 23.4 };\nmsg.topic = \"example/room\";\n// msg._msgid 交由 runtime 管理\nreturn msg;</code></pre>",
+      "en": "<pre><code>// Tutorial structure; this does not ask you to switch to a Function node\nmsg.payload = { temperature: 23.4 };\nmsg.topic = \"example/room\";\n// Let the runtime manage msg._msgid\nreturn msg;</code></pre>"
+    },
+    {
+      "file": "ch7_time_context.html",
+      "unit": "#persistence",
+      "zh": "<pre><code>// 概念設定片段，僅供審查；不要未備份就套用\ncontextStorage: {\n  default: \"memoryOnly\",\n  memoryOnly: { module: \"memory\" },\n  durable: { module: \"localfilesystem\" }\n}</code></pre>",
+      "en": "<pre><code>// Conceptual configuration snippet for review only; do not apply it without a backup\ncontextStorage: {\n  default: \"memoryOnly\",\n  memoryOnly: { module: \"memory\" },\n  durable: { module: \"localfilesystem\" }\n}</code></pre>"
+    },
+    {
+      "file": "skills.html",
+      "unit": "#main",
+      "zh": "<pre class=\"code-block\"><code>{\n  \"id\": \"addon-option-log-level\",\n  \"layer\": \"add-on\",\n  \"feature\": \"log_level：Supervisor log level schema（trace 至 fatal，可省略）\",\n  \"version\": \"22.0.1\",\n  \"source\": \"https://github.com/hassio-addons/app-node-red/blob/bcfd5b83d3d322dc12a7bd2a310ca705c130b419/node-red/config.yaml\",\n  \"sourceId\": \"app-node-red-22.0.1\",\n  \"sourcePath\": \"node-red/config.yaml\",\n  \"chapters\": [2, 22],\n  \"status\": \"covered\",\n  \"securityNotes\": \"較詳細的 log 可能暴露訊息內容；排障後降回必要等級。\"\n}</code></pre>",
+      "en": "<pre class=\"code-block\"><code>{\n  \"id\": \"addon-option-log-level\",\n  \"layer\": \"add-on\",\n  \"feature\": \"log_level: Supervisor log level schema (trace through fatal; optional)\",\n  \"version\": \"22.0.1\",\n  \"source\": \"https://github.com/hassio-addons/app-node-red/blob/bcfd5b83d3d322dc12a7bd2a310ca705c130b419/node-red/config.yaml\",\n  \"sourceId\": \"app-node-red-22.0.1\",\n  \"sourcePath\": \"node-red/config.yaml\",\n  \"chapters\": [2, 22],\n  \"status\": \"covered\",\n  \"securityNotes\": \"More detailed logs may expose message content; return to the necessary level after troubleshooting.\"\n}</code></pre>"
+    }
+  ]
+}

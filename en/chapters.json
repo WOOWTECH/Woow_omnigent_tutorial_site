@@ -1,0 +1,355 @@
+{
+  "_readme": "Single source for the en/ site root (nav, SEO, catalog, sitemap). Human-readable fields are translation units tracked in i18n/ledger.json. Rebuild with: SITE_ROOT=en node scripts/build_nav.js",
+  "site": {
+    "title": "WoowTech Omnigent 完整指南",
+    "brand": "Omnigent 指南",
+    "subtitle": "自架 AI 代理指揮中心完整教學",
+    "baseUrl": "https://omnigent-guide.woowtech.io/en",
+    "repoUrl": "https://github.com/WOOWTECH/Woow_omnigent_tutorial_site",
+    "locale": "en_US",
+    "description": "WoowTech 台灣繁體中文 Omnigent 完整指南，22 章涵蓋登入導覽、Session 與 Composer 操作、Automations 排程、成員與 Policy 治理、用量成本判讀，以及 Home Assistant 附加元件、Rootless Podman 與 k3s Helm 三種自架部署。",
+    "ogImage": "assets/og/omnigent-guide.en.png",
+    "license": {
+      "name": "CC BY 4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/deed.en",
+      "holder": "WoowTech"
+    },
+    "strings": {
+      "pagerFirstPrev": "← 回目錄",
+      "pagerFirstPrevTitle": "教學章節目錄"
+    },
+    "footerMeta": "本站為 WoowTech 製作的獨立社群教學；版本與引用來源以各章「固定來源」為準。書中所有帳號密碼皆為示範用佔位值，請勿直接沿用。",
+    "footerLinks": [
+      {
+        "label": "Woow HA Omnigent 附加元件",
+        "href": "https://github.com/WOOWTECH/Woow_ha_omnigent_addon"
+      },
+      {
+        "label": "Woow Omnigent Podman 套件",
+        "href": "https://github.com/WOOWTECH/Woow_podman_omnigent_package"
+      },
+      {
+        "label": "Woow Omnigent k3s 套件",
+        "href": "https://github.com/WOOWTECH/Woow_k3s_omnigent_package"
+      },
+      {
+        "label": "本站原始碼",
+        "href": "repo"
+      }
+    ],
+    "ogImageMeta": {
+      "type": "image/png",
+      "width": 1200,
+      "height": 630
+    },
+    "sitemap": {
+      "lastmod": "none"
+    },
+    "chrome": {
+      "hideEmptyAppendices": false,
+      "catalogGroupClass": "spaced",
+      "firstPrevDisabled": false,
+      "manage404": false,
+      "pagerTag": "nav",
+      "pagerAriaLabel": "章節分頁",
+      "skipLink": true,
+      "mainId": "main-content",
+      "ariaCurrent": true,
+      "authoredTables": true
+    },
+    "htmlLang": "en",
+    "assetBaseUrl": "https://omnigent-guide.woowtech.io",
+    "assetBase": "../",
+    "lang": "en",
+    "localeCode": "en",
+    "localeAlternate": [
+      "zh_TW"
+    ],
+    "fontsUrl": "https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Yellowtail&display=swap"
+  },
+  "hub": {
+    "catalog": "tutorial.html",
+    "navLabel": "資源總覽",
+    "pages": []
+  },
+  "chapters": [
+    {
+      "num": "01",
+      "file": "ch1_what_is_omnigent.html",
+      "navLabel": "Omnigent 是什麼",
+      "title": "Omnigent 是什麼：一個介面，指揮多個 AI 代理",
+      "pagerTitle": "一個介面指揮多個代理",
+      "card": "用一句話說清楚 Omnigent 的定位，以及它跟單一 AI 聊天視窗的根本差別。",
+      "description": "第 1 章說明 Omnigent 作為 meta-harness 的定位：它不自己當 AI，而是把 pi、Claude Code、Codex 等不同代理與不同機器收攏到同一個介面下指揮。",
+      "part": "第一部：先把它用起來",
+      "status": "planned"
+    },
+    {
+      "num": "02",
+      "file": "ch2_first_login.html",
+      "navLabel": "第一次登入",
+      "title": "第一次登入與介面導覽",
+      "pagerTitle": "第一次登入",
+      "card": "從登入畫面到看懂側邊欄每一個入口，五分鐘建立方向感。",
+      "description": "第 2 章帶你完成第一次登入，逐一認識 New session、Automations、Inbox、Usage、Pinned 與 Projects 六個入口各自負責什麼。",
+      "part": "第一部：先把它用起來",
+      "status": "planned"
+    },
+    {
+      "num": "03",
+      "file": "ch3_four_nouns.html",
+      "navLabel": "四個核心名詞",
+      "title": "Server、Runner、Host、Harness：四個名詞一次搞懂",
+      "pagerTitle": "四個核心名詞",
+      "card": "分清楚這四個詞，後面所有設定畫面才看得懂。",
+      "description": "第 3 章拆解 Omnigent 的四個核心名詞——Server 是指揮中心、Host 是被指揮的機器、Runner 是機器上的常駐代理、Harness 是實際幹活的 AI 工具。",
+      "part": "第一部：先把它用起來",
+      "status": "planned"
+    },
+    {
+      "num": "04",
+      "file": "ch4_first_session.html",
+      "navLabel": "開第一個 Session",
+      "title": "開第一個 Session，讓代理回你第一句話",
+      "pagerTitle": "開第一個 Session",
+      "card": "完成從輸入第一句話到拿到第一個回覆的完整往返。",
+      "description": "第 4 章帶你開出第一個 Session，選定 Host 與 Harness，送出第一個任務，並看懂回覆串裡工具呼叫與思考過程的顯示方式。",
+      "part": "第一部：先把它用起來",
+      "status": "planned"
+    },
+    {
+      "num": "05",
+      "file": "ch5_composer.html",
+      "navLabel": "Composer 完全指南",
+      "title": "Composer 完全指南：斜線指令、@ 提及、模型挑選與中斷",
+      "pagerTitle": "Composer 完全指南",
+      "card": "把輸入框的每一個隱藏功能都挖出來用。",
+      "description": "第 5 章詳解 Composer 的斜線指令、@ 檔案提及、模型下拉選單、附件上傳、語音輸入，以及任務跑歪時該怎麼中斷。",
+      "part": "第一部：先把它用起來",
+      "status": "planned"
+    },
+    {
+      "num": "06",
+      "file": "ch6_host_harness_picker.html",
+      "navLabel": "選機器與選代理",
+      "title": "Host picker 與 Harness picker：選機器、選代理",
+      "pagerTitle": "選機器與選代理",
+      "card": "同一個任務丟到不同機器、不同代理，結果差很多。",
+      "description": "第 6 章說明如何為每個 Session 挑選執行的機器與代理，並解釋綠點、離線與忙碌三種狀態各代表什麼。",
+      "part": "第二部：把工作交出去",
+      "status": "planned"
+    },
+    {
+      "num": "07",
+      "file": "ch7_workspace.html",
+      "navLabel": "Workspace 面板",
+      "title": "Workspace 面板：Files、Changes、Agents 與 Terminal",
+      "pagerTitle": "Workspace 面板",
+      "card": "在瀏覽器裡看代理改了哪些檔、跑了哪些指令。",
+      "description": "第 7 章導覽 Workspace 的四個分頁，說明如何檢視檔案樹、審閱變更差異、觀察子代理，以及直接看終端機輸出。",
+      "part": "第二部：把工作交出去",
+      "status": "planned"
+    },
+    {
+      "num": "08",
+      "file": "ch8_projects_sessions.html",
+      "navLabel": "Project 與 Session",
+      "title": "用 Project 與 Session 把工作分門別類",
+      "pagerTitle": "Project 與 Session",
+      "card": "任務一多就會亂，這章講組織法。",
+      "description": "第 8 章介紹 Project 的分組方式、Session 的命名與釘選、封存時機，以及如何在數十個 Session 之間快速找回想要的那一個。",
+      "part": "第二部：把工作交出去",
+      "status": "planned"
+    },
+    {
+      "num": "09",
+      "file": "ch9_inbox_sharing.html",
+      "navLabel": "Inbox 與分享",
+      "title": "Inbox 通知與 Session 分享",
+      "pagerTitle": "Inbox 與分享",
+      "card": "代理跑完了要怎麼通知你，結果要怎麼給別人看。",
+      "description": "第 9 章說明 Inbox 如何收攏需要你回應的事件，以及 Session 分享連結的產生方式與可見範圍。",
+      "part": "第二部：把工作交出去",
+      "status": "planned"
+    },
+    {
+      "num": "10",
+      "file": "ch10_automations.html",
+      "navLabel": "Automations 排程",
+      "title": "Automations：用排程讓代理自己跑",
+      "pagerTitle": "Automations 排程",
+      "card": "把重複的事交給排程，不必每次自己開 Session。",
+      "description": "第 10 章介紹 Automations 的建立流程、RRULE 排程語法、執行紀錄檢視，以及最短間隔限制這個常見的坑。",
+      "part": "第二部：把工作交出去",
+      "status": "planned"
+    },
+    {
+      "num": "11",
+      "file": "ch11_invite_members.html",
+      "navLabel": "邀請成員",
+      "title": "邀請成員與權限隔離",
+      "pagerTitle": "邀請成員",
+      "card": "團隊一起用的時候，誰看得到誰的東西。",
+      "description": "第 11 章說明邀請連結的產生與使用、成員角色差異，以及 Session 與 Project 在成員之間的可見性邊界。",
+      "part": "第三部：多人、成本與治理",
+      "status": "planned"
+    },
+    {
+      "num": "12",
+      "file": "ch12_policies.html",
+      "navLabel": "Policy 治理",
+      "title": "Policy 導覽：成本上限、敏感資料與危險指令",
+      "pagerTitle": "Policy 治理",
+      "card": "讓代理有邊界，而不是全憑自律。",
+      "description": "第 12 章導覽內建 Policy 的分類——成本上限、個資偵測、危險指令攔截——並說明條件式規則的判讀方式。",
+      "part": "第三部：多人、成本與治理",
+      "status": "planned"
+    },
+    {
+      "num": "13",
+      "file": "ch13_usage_cost.html",
+      "navLabel": "看懂用量與成本",
+      "title": "Usage：看懂每一塊錢花在哪",
+      "pagerTitle": "看懂用量與成本",
+      "card": "按 harness、按模型、按天，把帳算清楚。",
+      "description": "第 13 章解讀 Usage 頁的總覽數字、每日成本曲線，以及按 harness 與按模型的成本拆分，並說明如何據此調整模型選擇。",
+      "part": "第三部：多人、成本與治理",
+      "status": "planned"
+    },
+    {
+      "num": "14",
+      "file": "ch14_security_baseline.html",
+      "navLabel": "安全基線",
+      "title": "安全基線：憑證輪替與對外暴露面",
+      "pagerTitle": "安全基線",
+      "card": "預設密碼與公開網址的組合是最常見的破口。",
+      "description": "第 14 章說明部署後必做的安全動作——更換預設管理員密碼、檢查對外暴露的埠與網域、確認 Runner 的權限範圍。",
+      "part": "第三部：多人、成本與治理",
+      "status": "planned"
+    },
+    {
+      "num": "15",
+      "file": "ch15_why_own_runner.html",
+      "navLabel": "為什麼要自己的 Runner",
+      "title": "為什麼你需要自己的 Runner",
+      "pagerTitle": "為什麼要自己的 Runner",
+      "card": "代理要能碰到你的檔案，才有辦法幫你做事。",
+      "description": "第 15 章解釋 Runner 的角色與必要性，說明為什麼有些部署方式不內建 Runner，以及這個取捨背後的考量。",
+      "part": "第四部：接上你自己的機器",
+      "status": "planned"
+    },
+    {
+      "num": "16",
+      "file": "ch16_register_host.html",
+      "navLabel": "註冊第一台主機",
+      "title": "用 omnigent host 註冊你的第一台主機",
+      "pagerTitle": "註冊第一台主機",
+      "card": "把自己的電腦變成 Omnigent 的執行機。",
+      "description": "第 16 章逐步示範在自己的機器上執行註冊指令、完成配對、確認主機在 Host picker 中出現並顯示為線上。",
+      "part": "第四部：接上你自己的機器",
+      "status": "planned"
+    },
+    {
+      "num": "17",
+      "file": "ch17_harness_ecosystem.html",
+      "navLabel": "Harness 生態",
+      "title": "Harness 生態：pi、Claude Code、Codex 怎麼選",
+      "pagerTitle": "Harness 生態",
+      "card": "不同代理擅長的事情不一樣。",
+      "description": "第 17 章比較常見 harness 的能力邊界、認證方式與適用情境，並說明混用時的注意事項。",
+      "part": "第四部：接上你自己的機器",
+      "status": "planned"
+    },
+    {
+      "num": "18",
+      "file": "ch18_runner_troubleshooting.html",
+      "navLabel": "Runner 疑難排解",
+      "title": "Runner 疑難排解：離線、孤兒與無回應",
+      "pagerTitle": "Runner 疑難排解",
+      "card": "綠點不代表真的能用。",
+      "description": "第 18 章整理 Runner 常見故障——顯示離線、重啟後留下孤兒主機、認證過期導致空白回覆——並給出各自的判讀與處置方式。",
+      "part": "第四部：接上你自己的機器",
+      "status": "planned"
+    },
+    {
+      "num": "19",
+      "file": "ch19_choose_deployment.html",
+      "navLabel": "三種部署怎麼選",
+      "title": "三種部署口味怎麼選：決策表",
+      "pagerTitle": "三種部署怎麼選",
+      "card": "先決定跑在哪，再決定怎麼裝。",
+      "description": "第 19 章用決策表比較 Home Assistant 附加元件、Rootless Podman 與 k3s Helm 三種部署方式的門檻、能力與維運成本。",
+      "part": "第五部：自己架一台",
+      "status": "planned"
+    },
+    {
+      "num": "20",
+      "file": "ch20_ha_addon.html",
+      "navLabel": "Home Assistant 版",
+      "title": "部署方式一：Home Assistant 附加元件",
+      "pagerTitle": "Home Assistant 版",
+      "card": "門檻最低的一條路。",
+      "description": "第 20 章說明 Home Assistant 附加元件版的安裝與設定，包含設定頁各欄位的意義、Ingress 面板與 LAN 埠的差別。",
+      "part": "第五部：自己架一台",
+      "status": "planned"
+    },
+    {
+      "num": "21",
+      "file": "ch21_podman.html",
+      "navLabel": "Rootless Podman 版",
+      "title": "部署方式二：Rootless Podman",
+      "pagerTitle": "Rootless Podman 版",
+      "card": "單機自架，不需要 Kubernetes。",
+      "description": "第 21 章說明以 Quadlet 管理的三容器 Podman 部署，包含資料磁碟區的共用方式與對外連線的處理。",
+      "part": "第五部：自己架一台",
+      "status": "planned"
+    },
+    {
+      "num": "22",
+      "file": "ch22_k3s.html",
+      "navLabel": "k3s Helm 版",
+      "title": "部署方式三：k3s Helm Chart",
+      "pagerTitle": "k3s Helm 版",
+      "card": "要多台 Runner、要高可用就走這條。",
+      "description": "第 22 章說明 k3s 上的 Helm 部署，涵蓋 chart 結構、資料庫與連線池、多 Runner 配置，以及對外通道的建立。",
+      "part": "第五部：自己架一台",
+      "status": "planned"
+    }
+  ],
+  "appendices": [
+    {
+      "num": "A",
+      "file": "appendix_install_quickstart.html",
+      "navLabel": "附錄 A · 安裝速查",
+      "title": "附錄 A：三種部署的安裝速查表",
+      "pagerTitle": "安裝速查",
+      "card": "把三條安裝路線壓縮成可以照著打的指令清單。",
+      "description": "附錄 A 以速查表形式列出三種部署方式的前置需求、關鍵指令與驗證方法，供已讀過正文的讀者快速取用。"
+    },
+    {
+      "num": "B",
+      "file": "appendix_troubleshooting.html",
+      "navLabel": "附錄 B · 疑難排解全集",
+      "title": "附錄 B：疑難排解全集",
+      "pagerTitle": "疑難排解全集",
+      "card": "把散在各章的故障徵狀收攏成一張對照表。",
+      "description": "附錄 B 依徵狀分類彙整常見故障與處置方式，涵蓋登入、Runner 連線、Session 無回應、成本異常與升級後的相容性問題。"
+    },
+    {
+      "num": "C",
+      "file": "appendix_glossary.html",
+      "navLabel": "附錄 C · 名詞對照表",
+      "title": "附錄 C：中英名詞對照表",
+      "pagerTitle": "名詞對照表",
+      "card": "中英對照，查詞用。",
+      "description": "附錄 C 收錄全書技術名詞的中英對照與一句話定義，方便讀者在閱讀英文原始文件時對照。"
+    }
+  ],
+  "i18n": {
+    "hreflang": [
+      "zh-Hant",
+      "zh"
+    ],
+    "xDefault": "en"
+  }
+}

@@ -1,0 +1,5016 @@
+{
+ "_readme": "Translation ledger. Key = <locale>:<file>#<unit> or <locale>:chapters.json:<path>. status: pending | complete | stale | manual | localized | excluded | failed. sourceHash = hash of the zh unit; targetHash = hash of the translated unit. Maintained by scripts/check_i18n.js — do not hand-edit hashes.",
+ "units": {
+  "en:index.html#main": {
+   "status": "complete",
+   "sourceHash": "d548703a67d41609",
+   "targetHash": "56da038172676f9d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:tutorial.html#main": {
+   "status": "complete",
+   "sourceHash": "6f08f2cc3137daa5",
+   "targetHash": "718398de775270de",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#header": {
+   "status": "complete",
+   "sourceHash": "c69281b5f472b452",
+   "targetHash": "7bac0735fb4e1fb2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#why": {
+   "status": "complete",
+   "sourceHash": "0bcfefd702226b8b",
+   "targetHash": "0551c990d5a184ca",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#concepts": {
+   "status": "complete",
+   "sourceHash": "3542ceb0857763a6",
+   "targetHash": "f8bf0efef31dce63",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#steps": {
+   "status": "complete",
+   "sourceHash": "a38b53fe65324fde",
+   "targetHash": "cb63969ffacd9e8c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#version_scope": {
+   "status": "complete",
+   "sourceHash": "5d3a1125fa5f5561",
+   "targetHash": "e5daa6901e195915",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#system_roles": {
+   "status": "complete",
+   "sourceHash": "8145fa5bcd7c266d",
+   "targetHash": "068eb7efee5bb4f6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#layer_boundaries": {
+   "status": "complete",
+   "sourceHash": "66e68e2ed8a2042e",
+   "targetHash": "3fc0fc6d4a9ac444",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#learning_path": {
+   "status": "complete",
+   "sourceHash": "c5f2144622d1296b",
+   "targetHash": "4ff9936d92de2d4c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "83e3177af4ea2365",
+   "targetHash": "770090e296e07add",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#sources": {
+   "status": "complete",
+   "sourceHash": "ddd749276a4acf4f",
+   "targetHash": "34c9b45cac24d04b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_overview.html#faq": {
+   "status": "complete",
+   "sourceHash": "a09db28a9fc63eef",
+   "targetHash": "a1847229aa34529e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#header": {
+   "status": "complete",
+   "sourceHash": "6bcf3dadf9fd8c3d",
+   "targetHash": "d998815ff9cc52ea",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#why": {
+   "status": "complete",
+   "sourceHash": "50b2c01de09ee8b6",
+   "targetHash": "ddbbe26b50a8a1f5",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#concepts": {
+   "status": "complete",
+   "sourceHash": "a32c36d386482847",
+   "targetHash": "864169d49d212696",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#steps": {
+   "status": "complete",
+   "sourceHash": "f5a1ca52ffee7d87",
+   "targetHash": "8f46769e66efcd71",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#prerequisites": {
+   "status": "complete",
+   "sourceHash": "ac447d0aaee68e7d",
+   "targetHash": "2e0769b3b1d579c9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#install_path": {
+   "status": "complete",
+   "sourceHash": "2094313e24918608",
+   "targetHash": "f01083fab9fa33b8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#access_boundary": {
+   "status": "complete",
+   "sourceHash": "67f3f6c53789b92a",
+   "targetHash": "e97aa98405d27961",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#security_checklist": {
+   "status": "complete",
+   "sourceHash": "e9c0e926b138faae",
+   "targetHash": "a53d388080860ce6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "1b89e5adf8c6ed13",
+   "targetHash": "fbd7fd88b72f1d4b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#sources": {
+   "status": "complete",
+   "sourceHash": "96853003b9aded2b",
+   "targetHash": "9ff30c8e65b38208",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch2_install.html#faq": {
+   "status": "complete",
+   "sourceHash": "4b4fc59fb8d526b3",
+   "targetHash": "9538285ee8f7d77f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#header": {
+   "status": "complete",
+   "sourceHash": "753d06fea0bcacdb",
+   "targetHash": "a5743843afb4d323",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#why": {
+   "status": "complete",
+   "sourceHash": "369f0a35cad3aa08",
+   "targetHash": "2899c3cc6b859c80",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#concepts": {
+   "status": "complete",
+   "sourceHash": "bb83a09819d442a5",
+   "targetHash": "a0f3c42bb0921ca3",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#steps": {
+   "status": "complete",
+   "sourceHash": "8bb645cda3b11354",
+   "targetHash": "aa6ea45ec9e1a5d5",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#workspace": {
+   "status": "complete",
+   "sourceHash": "3f603529da8b94c1",
+   "targetHash": "ca8ff0244f572a58",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#palette": {
+   "status": "complete",
+   "sourceHash": "36b4480d0c23f852",
+   "targetHash": "84bb4aabf0bb193f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#sidebars": {
+   "status": "complete",
+   "sourceHash": "9160de5fd9ff1810",
+   "targetHash": "16ba8475f3213b0d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#deploy_modes": {
+   "status": "complete",
+   "sourceHash": "62a3211d2fad3962",
+   "targetHash": "d0abc27bb4dfeb17",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "fb674c89019590f5",
+   "targetHash": "9ab51ae7b45cf02b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#sources": {
+   "status": "complete",
+   "sourceHash": "f8d70bf1118a5fe8",
+   "targetHash": "a24857030f22a082",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch3_editor.html#faq": {
+   "status": "complete",
+   "sourceHash": "5d7ae8ed714587af",
+   "targetHash": "a7b268aa75cc9df7",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#header": {
+   "status": "complete",
+   "sourceHash": "5c63fd4f91175f09",
+   "targetHash": "461060dd3382b614",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#why": {
+   "status": "complete",
+   "sourceHash": "efd3458487db5e99",
+   "targetHash": "bc433a2f95b1a860",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#concepts": {
+   "status": "complete",
+   "sourceHash": "9417de2f6993beb6",
+   "targetHash": "d81d5d4ccd208303",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#steps": {
+   "status": "complete",
+   "sourceHash": "ce9c2f2951358830",
+   "targetHash": "9c80f4f24ac10f6a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#flow_goal": {
+   "status": "complete",
+   "sourceHash": "e3ed87157a7670cb",
+   "targetHash": "65ef6cfbdb5c66cf",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#node_sequence": {
+   "status": "complete",
+   "sourceHash": "85b7074b4f3abe91",
+   "targetHash": "b2ace8726ed7e3f8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#message_inspection": {
+   "status": "complete",
+   "sourceHash": "477ba1a4d69974f9",
+   "targetHash": "e6597c29f25392e6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#completion_check": {
+   "status": "complete",
+   "sourceHash": "c23e72329c38e686",
+   "targetHash": "1dd365ad28852cde",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "1786fd3b77ae9847",
+   "targetHash": "17b6ce4611ef2f82",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#sources": {
+   "status": "complete",
+   "sourceHash": "4ce05cab22c325e4",
+   "targetHash": "74fe93eb36bc8127",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch4_first_flow.html#faq": {
+   "status": "complete",
+   "sourceHash": "a586809f8ea8b7af",
+   "targetHash": "7258ebb83d8e0b7f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#header": {
+   "status": "complete",
+   "sourceHash": "62dc63832383bcc2",
+   "targetHash": "75b34f81cdf95224",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#why": {
+   "status": "complete",
+   "sourceHash": "04f8222042e4e1ec",
+   "targetHash": "46251a42a5ed9ba4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#concepts": {
+   "status": "complete",
+   "sourceHash": "31c377407c0662a3",
+   "targetHash": "0312115b2f796512",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#steps": {
+   "status": "complete",
+   "sourceHash": "b5b7d94d42ca9c42",
+   "targetHash": "fb92a58d3a067559",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#message_shape": {
+   "status": "complete",
+   "sourceHash": "870d415029969523",
+   "targetHash": "eee3da8e3173c0c9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#payload_topic": {
+   "status": "complete",
+   "sourceHash": "c45af18561f39e34",
+   "targetHash": "969f0b72be363731",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#objects": {
+   "status": "complete",
+   "sourceHash": "e16767eb822c7ca9",
+   "targetHash": "24d58454915bcd80",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#data_types": {
+   "status": "complete",
+   "sourceHash": "12a254c44003dcc2",
+   "targetHash": "46696c9c5195487f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "a01c6a2583a9855a",
+   "targetHash": "b0a115e1252ae25c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#sources": {
+   "status": "complete",
+   "sourceHash": "5d37261feba43dad",
+   "targetHash": "68db5fa48b992af8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch5_messages.html#faq": {
+   "status": "complete",
+   "sourceHash": "1bf030e774d4e7d4",
+   "targetHash": "1ce9d4f200616e3b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#header": {
+   "status": "complete",
+   "sourceHash": "6216a6a475cd96a1",
+   "targetHash": "4a489503739ac6f2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#why": {
+   "status": "complete",
+   "sourceHash": "39de1c107f7ae626",
+   "targetHash": "abeaacdd56067849",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#concepts": {
+   "status": "complete",
+   "sourceHash": "471e9229c9e40063",
+   "targetHash": "868a539ce9e0afc3",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#steps": {
+   "status": "complete",
+   "sourceHash": "f79030c6155fd4e3",
+   "targetHash": "fb8542e08b52d1ef",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#change_node": {
+   "status": "complete",
+   "sourceHash": "0b23980e0014347f",
+   "targetHash": "47b5cf6fba60b86c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#switch_range": {
+   "status": "complete",
+   "sourceHash": "a52109d80ea0545d",
+   "targetHash": "2e6c98e869724fa1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#split_join": {
+   "status": "complete",
+   "sourceHash": "f3490260f72ab04d",
+   "targetHash": "74a3ca117e7a7cb8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#sort_batch_parts": {
+   "status": "complete",
+   "sourceHash": "f5f809c7049c09b8",
+   "targetHash": "349501690b758c30",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "37d4dff109c74908",
+   "targetHash": "e02583daa39195e4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#sources": {
+   "status": "complete",
+   "sourceHash": "dfc482e11305eafe",
+   "targetHash": "6455b8eacc2c9789",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch6_logic.html#faq": {
+   "status": "complete",
+   "sourceHash": "cebf3266107e4b2b",
+   "targetHash": "fddef1928c46acc6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#header": {
+   "status": "complete",
+   "sourceHash": "f49e4c4af5e21560",
+   "targetHash": "ad1f2543114c2614",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#why": {
+   "status": "complete",
+   "sourceHash": "81e2555c6e9f8ca8",
+   "targetHash": "42cd6662cc816196",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#concepts": {
+   "status": "complete",
+   "sourceHash": "2844ea462a37f700",
+   "targetHash": "5e597d6a54cd756f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#steps": {
+   "status": "complete",
+   "sourceHash": "afe88b7f28bbff27",
+   "targetHash": "159a22db16fb525b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#delay_trigger": {
+   "status": "complete",
+   "sourceHash": "d43b50fd59cb9f11",
+   "targetHash": "11937c2330b1fb70",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#context_scopes": {
+   "status": "complete",
+   "sourceHash": "6f702451a16dae0b",
+   "targetHash": "97c881469d5c8263",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#persistence": {
+   "status": "complete",
+   "sourceHash": "6b08de3c780c61c8",
+   "targetHash": "a1d873a5d92a11f0",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#timer_safety": {
+   "status": "complete",
+   "sourceHash": "cfecff5b4e494c0d",
+   "targetHash": "6a902dfd2255d834",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "ec8467ab3c229fb9",
+   "targetHash": "5e85d81776254db0",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#sources": {
+   "status": "complete",
+   "sourceHash": "3743323f1cf87346",
+   "targetHash": "815bf40529d2f22f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch7_time_context.html#faq": {
+   "status": "complete",
+   "sourceHash": "b52aea7f87234269",
+   "targetHash": "047f7ccf666b316f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#header": {
+   "status": "complete",
+   "sourceHash": "0d17bae7f2406ec5",
+   "targetHash": "7501017d8e0c19c4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#why": {
+   "status": "complete",
+   "sourceHash": "89b41727a629d117",
+   "targetHash": "4be11e656404df69",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#concepts": {
+   "status": "complete",
+   "sourceHash": "5dd02ca0b457b309",
+   "targetHash": "4acd8b254fb887d1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#steps": {
+   "status": "complete",
+   "sourceHash": "3fc687d99360f5cf",
+   "targetHash": "6a6b7a7630d2eca1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#connection": {
+   "status": "complete",
+   "sourceHash": "341cd59ccbb61e0a",
+   "targetHash": "deaa33a05cb47f29",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#node_map": {
+   "status": "complete",
+   "sourceHash": "5f1442e860564318",
+   "targetHash": "0e511c7e370e0f2d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#config_runtime": {
+   "status": "complete",
+   "sourceHash": "e533c11623121eb3",
+   "targetHash": "0292d1e35364e4d9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#compatibility": {
+   "status": "complete",
+   "sourceHash": "8d0f712c7efa2d37",
+   "targetHash": "a2c82a526d72e42f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "12f60af58a5178ac",
+   "targetHash": "2ea792a4dc6c47f7",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#sources": {
+   "status": "complete",
+   "sourceHash": "a3ff2a12ea4484ed",
+   "targetHash": "d03d3edcdd22d084",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch8_ha_nodes.html#faq": {
+   "status": "complete",
+   "sourceHash": "4409f7c546ee6b73",
+   "targetHash": "28a345132c9e543f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#header": {
+   "status": "complete",
+   "sourceHash": "891046e9cc16b5be",
+   "targetHash": "79bf2791ab553c53",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#why": {
+   "status": "complete",
+   "sourceHash": "c084fbbdf38dd22a",
+   "targetHash": "39c001dfe3103f20",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#concepts": {
+   "status": "complete",
+   "sourceHash": "beb47a429bbca376",
+   "targetHash": "cc9e711ed8b0acde",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#steps": {
+   "status": "complete",
+   "sourceHash": "2a65ce8296e789fb",
+   "targetHash": "80da8bbfe4b6f5c3",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#event_model": {
+   "status": "complete",
+   "sourceHash": "e57993d3b8d36899",
+   "targetHash": "32058b3172ac6f97",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#event_output": {
+   "status": "complete",
+   "sourceHash": "11ed500172885475",
+   "targetHash": "6e63f2653f567ad2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#filters": {
+   "status": "complete",
+   "sourceHash": "e19c01224d2befdd",
+   "targetHash": "43018a5f517d81ec",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#trigger_boundaries": {
+   "status": "complete",
+   "sourceHash": "8f1262ffee40f955",
+   "targetHash": "238a1a020a649799",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "9bf3563845c8f4f7",
+   "targetHash": "bcf8fd45e28bd62c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#sources": {
+   "status": "complete",
+   "sourceHash": "b0baf2546d6f030b",
+   "targetHash": "7a181f72dc9facf0",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch9_events_state.html#faq": {
+   "status": "complete",
+   "sourceHash": "b11b16296a9351c3",
+   "targetHash": "4758f124a49cbc29",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#header": {
+   "status": "complete",
+   "sourceHash": "042380738682233b",
+   "targetHash": "875839869bae1469",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#why": {
+   "status": "complete",
+   "sourceHash": "4ef889377c3addf1",
+   "targetHash": "182f6d9b61c45b3c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#concepts": {
+   "status": "complete",
+   "sourceHash": "0d57e7cf908920f5",
+   "targetHash": "7ea6a4f111f7b906",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#steps": {
+   "status": "complete",
+   "sourceHash": "9afae3a332cb7172",
+   "targetHash": "6a63c64a8e0d0cf1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#current_state": {
+   "status": "complete",
+   "sourceHash": "dbcf02f339b79f1d",
+   "targetHash": "b05fd6c7b4ee934c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#get_entities": {
+   "status": "complete",
+   "sourceHash": "560a63efe8c5f29c",
+   "targetHash": "7e034d908081e156",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#history_wait": {
+   "status": "complete",
+   "sourceHash": "43aa34973b87bf2a",
+   "targetHash": "61357216bf6a7029",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#condition_design": {
+   "status": "complete",
+   "sourceHash": "c52edc8ecaa6d56b",
+   "targetHash": "cf8209444401195c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#missing_states": {
+   "status": "complete",
+   "sourceHash": "f3a9ece729db0acd",
+   "targetHash": "818f8379101e37d5",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "5bfe0de12b4bb7dc",
+   "targetHash": "3513cdce4ffb0b98",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#sources": {
+   "status": "complete",
+   "sourceHash": "b389f5e03fb7883d",
+   "targetHash": "f426e4aea99179b7",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch10_state_queries.html#faq": {
+   "status": "complete",
+   "sourceHash": "261b446d06afe934",
+   "targetHash": "3f74aeabc56a53ce",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#header": {
+   "status": "complete",
+   "sourceHash": "bd9d34f60b2d4b0e",
+   "targetHash": "c85f1144af22fdad",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#why": {
+   "status": "complete",
+   "sourceHash": "e129073d99a67fea",
+   "targetHash": "97f236c72bf78703",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#concepts": {
+   "status": "complete",
+   "sourceHash": "4b8d22ffb3c1184b",
+   "targetHash": "63cc695e69d7e045",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#steps": {
+   "status": "complete",
+   "sourceHash": "03f6c2663081060d",
+   "targetHash": "3cfc9388ae8d0a0e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#action_boundary": {
+   "status": "complete",
+   "sourceHash": "93cef919228f6b85",
+   "targetHash": "3bc0b3be9c4d5768",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#targets": {
+   "status": "complete",
+   "sourceHash": "523fe4b6956bdfa2",
+   "targetHash": "6933170d474dfeeb",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#action_data": {
+   "status": "complete",
+   "sourceHash": "51dffc45ff834df6",
+   "targetHash": "d85d74f0af9dafb2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#outputs": {
+   "status": "complete",
+   "sourceHash": "5824e20ae23f0d88",
+   "targetHash": "f5209052c010d276",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "090c57617f3404e1",
+   "targetHash": "df9c47a9eee6fa52",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#sources": {
+   "status": "complete",
+   "sourceHash": "b939bba685241068",
+   "targetHash": "fbbbc4562b622dee",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch11_action_node.html#faq": {
+   "status": "complete",
+   "sourceHash": "5f6a8e3ffd0ca2c8",
+   "targetHash": "73e72b951aa2fe82",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#header": {
+   "status": "complete",
+   "sourceHash": "dec6e9a07e6b3a1d",
+   "targetHash": "cb89acf4598ac078",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#why": {
+   "status": "complete",
+   "sourceHash": "31fe1ea29c528b79",
+   "targetHash": "7a193c11eb99c20b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#concepts": {
+   "status": "complete",
+   "sourceHash": "1b9a224c9c74730c",
+   "targetHash": "205c5553689783bb",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#steps": {
+   "status": "complete",
+   "sourceHash": "a3930d1e1bd39751",
+   "targetHash": "19518e93efc60a82",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#ha_events": {
+   "status": "complete",
+   "sourceHash": "994f2c59d17b9838",
+   "targetHash": "2c1d6446a9d8498d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#device_events": {
+   "status": "complete",
+   "sourceHash": "7ccd19e35c66b3ad",
+   "targetHash": "cda5de3c8b256831",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#time_nodes": {
+   "status": "complete",
+   "sourceHash": "1f85d9ff94e5719e",
+   "targetHash": "fe52e9f0dc20a6d4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#scheduling": {
+   "status": "complete",
+   "sourceHash": "8639823874b84303",
+   "targetHash": "791698e075e1384c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "b0bfc6163163e3be",
+   "targetHash": "ebdbf6cc77fe432b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#sources": {
+   "status": "complete",
+   "sourceHash": "926f1653edad9b6d",
+   "targetHash": "c7eb9997c08e6b8a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch12_events_device_time.html#faq": {
+   "status": "complete",
+   "sourceHash": "100904de36d8979c",
+   "targetHash": "7a8e0942e62392f7",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#header": {
+   "status": "complete",
+   "sourceHash": "fe069eca48de2e83",
+   "targetHash": "13ddc25a354acaa2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#why": {
+   "status": "complete",
+   "sourceHash": "69706223fe12cf88",
+   "targetHash": "24fa7f094d7d30c1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#concepts": {
+   "status": "complete",
+   "sourceHash": "27ebe3834f077cf1",
+   "targetHash": "ab32a7a561030e61",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#steps": {
+   "status": "complete",
+   "sourceHash": "8c115879b89eb564",
+   "targetHash": "89a6f6c1ed61329c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#scenario_scope": {
+   "status": "complete",
+   "sourceHash": "4cdcfbd189ba1952",
+   "targetHash": "5f9c2ed60424e1b2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#motion_states": {
+   "status": "complete",
+   "sourceHash": "a8551cfad9cbef7a",
+   "targetHash": "d50835ab3b9023c3",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#repeat_control": {
+   "status": "complete",
+   "sourceHash": "22b6281ddd383f4d",
+   "targetHash": "2b9844231b6e570b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#safe_validation": {
+   "status": "complete",
+   "sourceHash": "f2d6c8964fa87ceb",
+   "targetHash": "581f28519e0a87c4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "399819a7dea812ec",
+   "targetHash": "c862164315dad9c1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#sources": {
+   "status": "complete",
+   "sourceHash": "232f7c01595204b6",
+   "targetHash": "e807b2832316f0f6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch13_motion_lighting.html#faq": {
+   "status": "complete",
+   "sourceHash": "45f949e4da728a07",
+   "targetHash": "f69f9a9b2b90847e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#header": {
+   "status": "complete",
+   "sourceHash": "4764ea5fa5d87135",
+   "targetHash": "803918878c89281d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#why": {
+   "status": "complete",
+   "sourceHash": "23505d00fcc5a944",
+   "targetHash": "864f5b86f74154e4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#concepts": {
+   "status": "complete",
+   "sourceHash": "6e87f5b7ab033606",
+   "targetHash": "d6593f882c2cc675",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#steps": {
+   "status": "complete",
+   "sourceHash": "a8abc2f35fea9696",
+   "targetHash": "2e1641624ac1ee6b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#notification_plan": {
+   "status": "complete",
+   "sourceHash": "db8afe74dac952e4",
+   "targetHash": "10804c989ee5ee41",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#openings": {
+   "status": "complete",
+   "sourceHash": "789328b4d7cc71cf",
+   "targetHash": "1f251d42266b19b3",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#climate": {
+   "status": "complete",
+   "sourceHash": "22866e40006c4379",
+   "targetHash": "f64fccecdb7d09ab",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#exception_paths": {
+   "status": "complete",
+   "sourceHash": "36ce1c55f9c5e0d9",
+   "targetHash": "aa1cb82be8b7663e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "e8cffefe4aae9fa1",
+   "targetHash": "cc30a2fbf3e4c96a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#sources": {
+   "status": "complete",
+   "sourceHash": "68b46f4c27fa88af",
+   "targetHash": "4a728f0434a7185a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch14_notifications_climate.html#faq": {
+   "status": "complete",
+   "sourceHash": "e880f06e4fef2f21",
+   "targetHash": "e72e3e7925d36749",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#header": {
+   "status": "complete",
+   "sourceHash": "b1ccd2899d0f5b75",
+   "targetHash": "280143778b280145",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#why": {
+   "status": "complete",
+   "sourceHash": "39b78a59353c21dd",
+   "targetHash": "788712b523ae4253",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#concepts": {
+   "status": "complete",
+   "sourceHash": "8cc4b43f65139c33",
+   "targetHash": "d570875217d18798",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#steps": {
+   "status": "complete",
+   "sourceHash": "577adc37f6df76f8",
+   "targetHash": "fc40154d0c6a1c41",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#jsonata": {
+   "status": "complete",
+   "sourceHash": "000d56c76bb676dc",
+   "targetHash": "f86510319a863e07",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#mustache": {
+   "status": "complete",
+   "sourceHash": "99eacf5f5cedc73b",
+   "targetHash": "91ed27e70c763007",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#tool_choice": {
+   "status": "complete",
+   "sourceHash": "c2e5c480ce6553a1",
+   "targetHash": "14a5a3b837869793",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#data_contracts": {
+   "status": "complete",
+   "sourceHash": "9ecab35ef07e5c68",
+   "targetHash": "9448e5d21420c89c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "f34b085d8e2fa832",
+   "targetHash": "2d10e21825d4c689",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#sources": {
+   "status": "complete",
+   "sourceHash": "1c20b96090354809",
+   "targetHash": "407da5badda4bd1c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch15_jsonata_templates.html#faq": {
+   "status": "complete",
+   "sourceHash": "47600d347f69ac59",
+   "targetHash": "1ea87ee83913cb13",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#header": {
+   "status": "complete",
+   "sourceHash": "1c783ea1b74b9464",
+   "targetHash": "6a2596af7f8257f2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#why": {
+   "status": "complete",
+   "sourceHash": "68af2176df7744de",
+   "targetHash": "898106bfd0ae5ec0",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#concepts": {
+   "status": "complete",
+   "sourceHash": "6201ad4191c3136f",
+   "targetHash": "fb5f4b5337e1d2b4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#steps": {
+   "status": "complete",
+   "sourceHash": "c177525a819d728a",
+   "targetHash": "bad2513ff94abe58",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#runtime_model": {
+   "status": "complete",
+   "sourceHash": "5ad32a794b96e34d",
+   "targetHash": "9b02d03869a2492c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#safe_javascript": {
+   "status": "complete",
+   "sourceHash": "9925f14fca6d157f",
+   "targetHash": "d83326e7397bdb6a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#error_handling": {
+   "status": "complete",
+   "sourceHash": "b8a8b618d0ee26e1",
+   "targetHash": "06f370887485155c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#maintainability": {
+   "status": "complete",
+   "sourceHash": "5deeae148a20bdc9",
+   "targetHash": "f8c609dae976a2c4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "2ea445e608960cf0",
+   "targetHash": "aa7825ec410fef90",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#sources": {
+   "status": "complete",
+   "sourceHash": "42cacaf80de083e3",
+   "targetHash": "7b94f02ba8a48a77",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch16_function_node.html#faq": {
+   "status": "complete",
+   "sourceHash": "561eaef515d13ca2",
+   "targetHash": "43a79b6d1bcae1a8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#header": {
+   "status": "complete",
+   "sourceHash": "4196867a0bce67ee",
+   "targetHash": "c5f3adad597c6439",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#why": {
+   "status": "complete",
+   "sourceHash": "36a4614bc729b5da",
+   "targetHash": "0b7a9ff45f52c97c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#concepts": {
+   "status": "complete",
+   "sourceHash": "db320f28285104c7",
+   "targetHash": "8e0a42b39bd2b5d6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#steps": {
+   "status": "complete",
+   "sourceHash": "45e3c6593deb3973",
+   "targetHash": "2107ae646a45fdb7",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#link_nodes": {
+   "status": "complete",
+   "sourceHash": "a640df22edfb7b77",
+   "targetHash": "d3ec798ff845d022",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#subflows": {
+   "status": "complete",
+   "sourceHash": "3a39d506a343c43e",
+   "targetHash": "055a08433cf566d1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#env_library": {
+   "status": "complete",
+   "sourceHash": "e81cb8f6627f2208",
+   "targetHash": "48ac133e6cb8958a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#import_export": {
+   "status": "complete",
+   "sourceHash": "88f8fb1761a03687",
+   "targetHash": "49cc989d9c8ed4cc",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "b844fefd755e0965",
+   "targetHash": "90036daaed18f709",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#sources": {
+   "status": "complete",
+   "sourceHash": "12fe5b8c939d649c",
+   "targetHash": "6d42db1d6582018d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch17_flow_architecture.html#faq": {
+   "status": "complete",
+   "sourceHash": "bdb1823e61a08987",
+   "targetHash": "3f577a7914ef2991",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#header": {
+   "status": "complete",
+   "sourceHash": "6485109d0a3a9a4d",
+   "targetHash": "f9cd7ad4d3b8a663",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#why": {
+   "status": "complete",
+   "sourceHash": "72055f0d31685276",
+   "targetHash": "297ac790caf39ed6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#concepts": {
+   "status": "complete",
+   "sourceHash": "78c31cd7be3dea72",
+   "targetHash": "6f0df219606562fb",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#steps": {
+   "status": "complete",
+   "sourceHash": "3af3fbabdd0f9f4c",
+   "targetHash": "46b2d52dd2e41573",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#debug_node": {
+   "status": "complete",
+   "sourceHash": "a3c127c6c30917b1",
+   "targetHash": "e476cfe3f8699598",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#catch_status": {
+   "status": "complete",
+   "sourceHash": "d3a291e69eeacd1e",
+   "targetHash": "6362d5441d933db1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#complete_node": {
+   "status": "complete",
+   "sourceHash": "c4715d56c277f5cd",
+   "targetHash": "26902067442f36df",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#test_strategy": {
+   "status": "complete",
+   "sourceHash": "28a84ff83533cb53",
+   "targetHash": "7e702f508d96c8b1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "39910771390a68c4",
+   "targetHash": "78ec0c26c44e39ed",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#sources": {
+   "status": "complete",
+   "sourceHash": "6dd68b3706c159f9",
+   "targetHash": "939fc6b22ed5a5b1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch18_debug_testing.html#faq": {
+   "status": "complete",
+   "sourceHash": "0f36f04fad29a7e4",
+   "targetHash": "72aaff273523d577",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#header": {
+   "status": "complete",
+   "sourceHash": "8e9bf3b5197464e0",
+   "targetHash": "07f9f7edcabc4a2f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#why": {
+   "status": "complete",
+   "sourceHash": "cd5bb2bf7d0d1799",
+   "targetHash": "92a4cd8b333d17ed",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#concepts": {
+   "status": "complete",
+   "sourceHash": "5fbcb09434f82069",
+   "targetHash": "495d17137c12ed26",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#steps": {
+   "status": "complete",
+   "sourceHash": "538df75dcc910b69",
+   "targetHash": "567738ed1f419bcd",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#http_routes": {
+   "status": "complete",
+   "sourceHash": "d5924eee115cbaf5",
+   "targetHash": "4571ed8026a56adb",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#http_request": {
+   "status": "complete",
+   "sourceHash": "a653bea5456b430f",
+   "targetHash": "5cd4d49089418076",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#input_validation": {
+   "status": "complete",
+   "sourceHash": "385a6cc606292110",
+   "targetHash": "eb86552d91db37dd",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#api_security": {
+   "status": "complete",
+   "sourceHash": "e8dd28e198ccde8d",
+   "targetHash": "4fbe08331f2068df",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "0b570aa199e58a09",
+   "targetHash": "b91e30a564ede98b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#sources": {
+   "status": "complete",
+   "sourceHash": "475d8c0bd4cb5b66",
+   "targetHash": "440254a9d636a14d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch19_http_api.html#faq": {
+   "status": "complete",
+   "sourceHash": "8b7b96e94d0ae19d",
+   "targetHash": "5554db8dcbdb13f7",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#header": {
+   "status": "complete",
+   "sourceHash": "1dd90d75d951f6d5",
+   "targetHash": "ac753ebf95acef6d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#why": {
+   "status": "complete",
+   "sourceHash": "503e41512efdbc58",
+   "targetHash": "88d6e73cc4a823f6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#concepts": {
+   "status": "complete",
+   "sourceHash": "10a378140b7f12ed",
+   "targetHash": "479b928e19082d0d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#steps": {
+   "status": "complete",
+   "sourceHash": "7e72efb243c99094",
+   "targetHash": "75aeee08a4e84b48",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#mqtt": {
+   "status": "complete",
+   "sourceHash": "404e31214b9a7193",
+   "targetHash": "5bbddd2a12ac8bb3",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#bundled_nodes": {
+   "status": "complete",
+   "sourceHash": "85b6a0fb3b91244a",
+   "targetHash": "c154ca0d14663d3f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#palette_management": {
+   "status": "complete",
+   "sourceHash": "2ef6d4f848f9dd22",
+   "targetHash": "6f63852af5138ba9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#flowfuse_optional": {
+   "status": "complete",
+   "sourceHash": "5ebe7661996d5d3a",
+   "targetHash": "a4e3cc21f2aef692",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "15d1c58e79d07485",
+   "targetHash": "530361dde813ff13",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#sources": {
+   "status": "complete",
+   "sourceHash": "3893861a57e3d484",
+   "targetHash": "35fef83bf2748c16",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch20_mqtt_extensions.html#faq": {
+   "status": "complete",
+   "sourceHash": "5362ddf7c5eb6899",
+   "targetHash": "e24720599501d44e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#header": {
+   "status": "complete",
+   "sourceHash": "0bd8d73f01cab648",
+   "targetHash": "3d5f9505f454d04c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#why": {
+   "status": "complete",
+   "sourceHash": "2b6b3845c323c433",
+   "targetHash": "f05d7146d694bdd1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#concepts": {
+   "status": "complete",
+   "sourceHash": "b7ea737c2565594e",
+   "targetHash": "30dc414b358cc1b6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#steps": {
+   "status": "complete",
+   "sourceHash": "007f319ffa845390",
+   "targetHash": "8b62535cdf085535",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#credentials": {
+   "status": "complete",
+   "sourceHash": "f819dfb547ce1bf8",
+   "targetHash": "720a5ced03bd593a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#backup_restore": {
+   "status": "complete",
+   "sourceHash": "e0afa204b63ba222",
+   "targetHash": "cc11d16163f0541a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#projects": {
+   "status": "complete",
+   "sourceHash": "2c29296ff9134fdf",
+   "targetHash": "9d9eabe1efa241f6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#hardening": {
+   "status": "complete",
+   "sourceHash": "75aee19d9d0bd5b2",
+   "targetHash": "649acb8f04720746",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "8e2b71045b6ec549",
+   "targetHash": "6c3ac75e204698ba",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#sources": {
+   "status": "complete",
+   "sourceHash": "54ba48ccbaa2c0ea",
+   "targetHash": "dd7c4ed109e5c379",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch21_backup_security.html#faq": {
+   "status": "complete",
+   "sourceHash": "2b29d665969feac5",
+   "targetHash": "144bb3d5f99c721d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#header": {
+   "status": "complete",
+   "sourceHash": "9b3197a8b9c01b41",
+   "targetHash": "746761237576ee97",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#why": {
+   "status": "complete",
+   "sourceHash": "051cfdb4490b1aa4",
+   "targetHash": "ed891a5ceb5d806b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#concepts": {
+   "status": "complete",
+   "sourceHash": "f85968d0f11a3c50",
+   "targetHash": "641f8e3b6d995798",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#steps": {
+   "status": "complete",
+   "sourceHash": "b42c11778f664a9e",
+   "targetHash": "cf8ac97d432b3bfb",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#performance": {
+   "status": "complete",
+   "sourceHash": "60b8dbf153920856",
+   "targetHash": "871c87f7ee9ec6ce",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#memory": {
+   "status": "complete",
+   "sourceHash": "5d3bb6ada7e904b4",
+   "targetHash": "30c1035444cbde1c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#safe_mode": {
+   "status": "complete",
+   "sourceHash": "a9f95e4559fceb84",
+   "targetHash": "708ffa7f7b5b3638",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#upgrade_path": {
+   "status": "complete",
+   "sourceHash": "96d9dca96fa33295",
+   "targetHash": "e0bdf1d0908fee81",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#troubleshoot": {
+   "status": "complete",
+   "sourceHash": "c871bef9544a3e31",
+   "targetHash": "f7bb373602b9b412",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#sources": {
+   "status": "complete",
+   "sourceHash": "2f57c47dc22bd67f",
+   "targetHash": "5e2b3452a2762f67",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch22_troubleshooting.html#faq": {
+   "status": "complete",
+   "sourceHash": "fd8b3fef3f2b9ea9",
+   "targetHash": "b76db58287211d94",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:sales.html#main": {
+   "status": "complete",
+   "sourceHash": "073f3e9225242472",
+   "targetHash": "ee623517a77694c7",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:prompts.html#main": {
+   "status": "complete",
+   "sourceHash": "cb765684ad6a27ef",
+   "targetHash": "f1f09af0395f1984",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:skills.html#main": {
+   "status": "complete",
+   "sourceHash": "588e79cd355bc194",
+   "targetHash": "0580b3dc0348a5ba",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.title": {
+   "status": "complete",
+   "sourceHash": "0d128858bc78ebd3",
+   "targetHash": "aafc07485269de86",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.brand": {
+   "status": "complete",
+   "sourceHash": "81644299acfb448f",
+   "targetHash": "c96eb81ed0d9cac0",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.subtitle": {
+   "status": "complete",
+   "sourceHash": "66ef7b81efc02549",
+   "targetHash": "dbf33b1c0be4f032",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.description": {
+   "status": "complete",
+   "sourceHash": "4c91dbbb0cb304dc",
+   "targetHash": "f7c9bbc5a81d9b11",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerMeta": {
+   "status": "complete",
+   "sourceHash": "f87439db277c28f9",
+   "targetHash": "926f87f0894b60e9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:hub.navLabel": {
+   "status": "complete",
+   "sourceHash": "bcb271a8b7054a73",
+   "targetHash": "3f85ca7bdcded287",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.strings.pagerFirstPrev": {
+   "status": "complete",
+   "sourceHash": "f0dbc2206ad805ed",
+   "targetHash": "cc9af19ea30e65f6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.strings.pagerFirstPrevTitle": {
+   "status": "complete",
+   "sourceHash": "47f5dc6f046212ce",
+   "targetHash": "d1dbb8386bc98284",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.0.label": {
+   "status": "complete",
+   "sourceHash": "5344052f01d1abc5",
+   "targetHash": "5344052f01d1abc5",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.1.label": {
+   "status": "complete",
+   "sourceHash": "cde30a28cd8eb347",
+   "targetHash": "3fc27058d3be2ab6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.2.label": {
+   "status": "complete",
+   "sourceHash": "c2d400bf750a2386",
+   "targetHash": "a601b4c1936755a2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.3.label": {
+   "status": "complete",
+   "sourceHash": "3d57597cbaeecfd0",
+   "targetHash": "3d6ce820b62e1146",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.4.label": {
+   "status": "complete",
+   "sourceHash": "6336a26b0c301d7c",
+   "targetHash": "e517264f3d8f75ec",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.5.label": {
+   "status": "complete",
+   "sourceHash": "b032b1974b4dc4ea",
+   "targetHash": "28ddf87f70b80e61",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.6.label": {
+   "status": "complete",
+   "sourceHash": "07d1fb05ffd8dbf5",
+   "targetHash": "b5400103268ac590",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.7.label": {
+   "status": "complete",
+   "sourceHash": "d2989afd1d59f496",
+   "targetHash": "fc5d5686f9fa00b9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:site.footerLinks.8.label": {
+   "status": "complete",
+   "sourceHash": "d6672104bb51e832",
+   "targetHash": "26d95122ed1f554a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch1_overview.html.title": {
+   "status": "complete",
+   "sourceHash": "cd9226a7fd17981a",
+   "targetHash": "05fed3a9727fa7e2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch1_overview.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "664984322773c173",
+   "targetHash": "3a16d573efbb27f2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch1_overview.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "9f44c99887a65844",
+   "targetHash": "3a16d573efbb27f2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch1_overview.html.card": {
+   "status": "complete",
+   "sourceHash": "540b81ab86b63cf5",
+   "targetHash": "763cdd7590adbc21",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch1_overview.html.description": {
+   "status": "complete",
+   "sourceHash": "cd20efc9f6472f3a",
+   "targetHash": "4f7afc11db487cf5",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch1_overview.html.part": {
+   "status": "complete",
+   "sourceHash": "c7b1ac35eb299ab4",
+   "targetHash": "9e4e93d69e682805",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch2_install.html.title": {
+   "status": "complete",
+   "sourceHash": "17bfe62f322e0757",
+   "targetHash": "18484c55891c267a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch2_install.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "31bd8abbf9e400f8",
+   "targetHash": "bce4e985d196e141",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch2_install.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "3ac56e38214dbdb7",
+   "targetHash": "bce4e985d196e141",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch2_install.html.card": {
+   "status": "complete",
+   "sourceHash": "76237c341006395e",
+   "targetHash": "386eb5ce5edde0fb",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch2_install.html.description": {
+   "status": "complete",
+   "sourceHash": "f48898edd9b7a53a",
+   "targetHash": "61b7b37f4def748f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch2_install.html.part": {
+   "status": "complete",
+   "sourceHash": "c7b1ac35eb299ab4",
+   "targetHash": "9e4e93d69e682805",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch3_editor.html.title": {
+   "status": "complete",
+   "sourceHash": "9f8b7c0250a0020c",
+   "targetHash": "7537f2e5aa084fb2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch3_editor.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "f0f09178b16cf45a",
+   "targetHash": "1ac0f93e4524ef00",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch3_editor.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "d64d87f6cee31381",
+   "targetHash": "4bd31c38b6161104",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch3_editor.html.card": {
+   "status": "complete",
+   "sourceHash": "10a2abab43bda8ca",
+   "targetHash": "9cc08305f96730e0",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch3_editor.html.description": {
+   "status": "complete",
+   "sourceHash": "d7d9ea41064cdced",
+   "targetHash": "3a18684b4bdd466c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch3_editor.html.part": {
+   "status": "complete",
+   "sourceHash": "c7b1ac35eb299ab4",
+   "targetHash": "9e4e93d69e682805",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch4_first_flow.html.title": {
+   "status": "complete",
+   "sourceHash": "6036f7bf77872cf1",
+   "targetHash": "58e27997d054c155",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch4_first_flow.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "b2bea7f60ab14916",
+   "targetHash": "0a776502be2efbeb",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch4_first_flow.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "a99613f4f2fc47b7",
+   "targetHash": "71dd5d331e32893b",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch4_first_flow.html.card": {
+   "status": "complete",
+   "sourceHash": "e78de5128768d3fc",
+   "targetHash": "75dd009f701e8144",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch4_first_flow.html.description": {
+   "status": "complete",
+   "sourceHash": "c554b02ee1be99a1",
+   "targetHash": "de42188b0a54b549",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch4_first_flow.html.part": {
+   "status": "complete",
+   "sourceHash": "c7b1ac35eb299ab4",
+   "targetHash": "9e4e93d69e682805",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch5_messages.html.title": {
+   "status": "complete",
+   "sourceHash": "5c3514fd7f92c5b3",
+   "targetHash": "646abf492b934b43",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch5_messages.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "5b7ce31556b22f3a",
+   "targetHash": "4cb9664fdcee1489",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch5_messages.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "634ecb3fbd6789bd",
+   "targetHash": "4cb9664fdcee1489",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch5_messages.html.card": {
+   "status": "complete",
+   "sourceHash": "0cc6cb67af020ab7",
+   "targetHash": "9c0a7eb6659fb67e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch5_messages.html.description": {
+   "status": "complete",
+   "sourceHash": "881aaf7a2dafe57c",
+   "targetHash": "be2e425ab8f66e4f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch5_messages.html.part": {
+   "status": "complete",
+   "sourceHash": "c7b1ac35eb299ab4",
+   "targetHash": "9e4e93d69e682805",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch6_logic.html.title": {
+   "status": "complete",
+   "sourceHash": "a691a549bcc0e23c",
+   "targetHash": "52efff12cb89fc37",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch6_logic.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "cfaa62a7893c0ef1",
+   "targetHash": "bfb7ad7c2182b4e8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch6_logic.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "052274a490b0799d",
+   "targetHash": "cd4a7d6b71bf502a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch6_logic.html.card": {
+   "status": "complete",
+   "sourceHash": "b3837680b755b510",
+   "targetHash": "b556d57f654f4f35",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch6_logic.html.description": {
+   "status": "complete",
+   "sourceHash": "91b38414aa1f0eae",
+   "targetHash": "88e837a904c76f2a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch6_logic.html.part": {
+   "status": "complete",
+   "sourceHash": "c7b1ac35eb299ab4",
+   "targetHash": "9e4e93d69e682805",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch7_time_context.html.title": {
+   "status": "complete",
+   "sourceHash": "901cf178a4d12b18",
+   "targetHash": "7b02ef0e0e41bf78",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch7_time_context.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "bbefcad7b378ccce",
+   "targetHash": "84181484b2d7feea",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch7_time_context.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "a3dc652d5c437569",
+   "targetHash": "c0d727185316f8b9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch7_time_context.html.card": {
+   "status": "complete",
+   "sourceHash": "dfaedc5ca2cbc9da",
+   "targetHash": "8e2f37e4512a268d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch7_time_context.html.description": {
+   "status": "complete",
+   "sourceHash": "3e20e07eba7d83ce",
+   "targetHash": "06e70ab35abe75fe",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch7_time_context.html.part": {
+   "status": "complete",
+   "sourceHash": "c7b1ac35eb299ab4",
+   "targetHash": "9e4e93d69e682805",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch8_ha_nodes.html.title": {
+   "status": "complete",
+   "sourceHash": "62d5e8ed12e3f9bc",
+   "targetHash": "cd90a875bb37fa03",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch8_ha_nodes.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "e8994a195a5caa8a",
+   "targetHash": "2d19435cfc11cd0e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch8_ha_nodes.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "3644f77d8fc781ea",
+   "targetHash": "2d19435cfc11cd0e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch8_ha_nodes.html.card": {
+   "status": "complete",
+   "sourceHash": "2d1048cb07791f87",
+   "targetHash": "4a01796a54d7a9be",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch8_ha_nodes.html.description": {
+   "status": "complete",
+   "sourceHash": "f8c708f1d28c4da9",
+   "targetHash": "27e8bece46e267b2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch8_ha_nodes.html.part": {
+   "status": "complete",
+   "sourceHash": "c7b1ac35eb299ab4",
+   "targetHash": "9e4e93d69e682805",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch9_events_state.html.title": {
+   "status": "complete",
+   "sourceHash": "355d63a5cfcf4f87",
+   "targetHash": "08ea33bc279744d9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch9_events_state.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "a0233282553e823a",
+   "targetHash": "376403adf2fb51b2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch9_events_state.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "80b496c8b20535f2",
+   "targetHash": "376403adf2fb51b2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch9_events_state.html.card": {
+   "status": "complete",
+   "sourceHash": "6a9bebd67699bae7",
+   "targetHash": "e82ecf51cdfae7a1",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch9_events_state.html.description": {
+   "status": "complete",
+   "sourceHash": "e7003c51c0380ccb",
+   "targetHash": "5c5a5d2bc1c69830",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch9_events_state.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch10_state_queries.html.title": {
+   "status": "complete",
+   "sourceHash": "3c8042e1da2f6940",
+   "targetHash": "b8cbfaf611d6ddf2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch10_state_queries.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "5c8545d39ba27cd5",
+   "targetHash": "c88ea96432dddc04",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch10_state_queries.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "34754ba2c0f1cbbb",
+   "targetHash": "68a43b479de2ca90",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch10_state_queries.html.card": {
+   "status": "complete",
+   "sourceHash": "2ed925acdf57a693",
+   "targetHash": "b8028ca5e2011c11",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch10_state_queries.html.description": {
+   "status": "complete",
+   "sourceHash": "3c02bae21191ea4a",
+   "targetHash": "2496485bcb915abd",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch10_state_queries.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch11_action_node.html.title": {
+   "status": "complete",
+   "sourceHash": "757adb2c024bc414",
+   "targetHash": "5560341c83f2d803",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch11_action_node.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "9f88394b4840ad77",
+   "targetHash": "becdb8f46539bbc0",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch11_action_node.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "eeface7bc051f8ec",
+   "targetHash": "2e873199c1605b55",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch11_action_node.html.card": {
+   "status": "complete",
+   "sourceHash": "9f9e2b62905caab5",
+   "targetHash": "5c2d4ad0662dbf87",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch11_action_node.html.description": {
+   "status": "complete",
+   "sourceHash": "f78ba74c6cf0aee5",
+   "targetHash": "455368b9c798f499",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch11_action_node.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch12_events_device_time.html.title": {
+   "status": "complete",
+   "sourceHash": "a8e6d93b0634d473",
+   "targetHash": "e9c057485c7da221",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch12_events_device_time.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "6965b24ea283e911",
+   "targetHash": "9811da615c1eb7f6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch12_events_device_time.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "8bd971360200dd61",
+   "targetHash": "5df134bee0dd68d3",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch12_events_device_time.html.card": {
+   "status": "complete",
+   "sourceHash": "17bc7f7a9757443f",
+   "targetHash": "b4e5af72c8ac35a7",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch12_events_device_time.html.description": {
+   "status": "complete",
+   "sourceHash": "7164eadc17cc313b",
+   "targetHash": "2b2ab2b8a3599916",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch12_events_device_time.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch13_motion_lighting.html.title": {
+   "status": "complete",
+   "sourceHash": "add2b49975ac3226",
+   "targetHash": "6528d7ae97c7823d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch13_motion_lighting.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "6875bf5b9ece64a9",
+   "targetHash": "8e038ef6db4dc257",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch13_motion_lighting.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "d5f478de20301daf",
+   "targetHash": "8a099973a216167a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch13_motion_lighting.html.card": {
+   "status": "complete",
+   "sourceHash": "c1af0453bea836ea",
+   "targetHash": "0ed5a59f0479a48f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch13_motion_lighting.html.description": {
+   "status": "complete",
+   "sourceHash": "8302eea717037a6a",
+   "targetHash": "1b94733fdcfd634c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch13_motion_lighting.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch14_notifications_climate.html.title": {
+   "status": "complete",
+   "sourceHash": "6d9a74a1960b2f41",
+   "targetHash": "a92ee4c1de199830",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch14_notifications_climate.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "37e0ea175a845b49",
+   "targetHash": "7166605c21887ba8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch14_notifications_climate.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "7f259fa1b87e4916",
+   "targetHash": "1ad757b3e6789953",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch14_notifications_climate.html.card": {
+   "status": "complete",
+   "sourceHash": "422841928db99da3",
+   "targetHash": "2a5ed5af9c48014c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch14_notifications_climate.html.description": {
+   "status": "complete",
+   "sourceHash": "44310079bdcea509",
+   "targetHash": "7ff7548b904ff73e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch14_notifications_climate.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch15_jsonata_templates.html.title": {
+   "status": "complete",
+   "sourceHash": "838ab3a7925f9e74",
+   "targetHash": "d529b631de36c5ca",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch15_jsonata_templates.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "9ab52ff3b68b05f7",
+   "targetHash": "2ab30e74f65b79d2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch15_jsonata_templates.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "78ce11ba10344e66",
+   "targetHash": "abe3274511288dc6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch15_jsonata_templates.html.card": {
+   "status": "complete",
+   "sourceHash": "023b72fdb57aeac2",
+   "targetHash": "ef7e35c765cbacb4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch15_jsonata_templates.html.description": {
+   "status": "complete",
+   "sourceHash": "bae2e1fe35c4c0a3",
+   "targetHash": "a814ac2a58b54da2",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch15_jsonata_templates.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch16_function_node.html.title": {
+   "status": "complete",
+   "sourceHash": "cf884c67acc69eb0",
+   "targetHash": "9d69e24add11addb",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch16_function_node.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "0d57d55a0a815e67",
+   "targetHash": "a87257c5ad421ff6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch16_function_node.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "f0af93c72bed7aa9",
+   "targetHash": "1fac2653deb69853",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch16_function_node.html.card": {
+   "status": "complete",
+   "sourceHash": "37271752278f0ef7",
+   "targetHash": "a81c515104d36010",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch16_function_node.html.description": {
+   "status": "complete",
+   "sourceHash": "9642c81e9278a449",
+   "targetHash": "0beeb7793334ac58",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch16_function_node.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch17_flow_architecture.html.title": {
+   "status": "complete",
+   "sourceHash": "80ba7a6d8d80b454",
+   "targetHash": "ec45393fb877ef9f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch17_flow_architecture.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "58cac106ae79225e",
+   "targetHash": "06f5c51a9e7e8a6e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch17_flow_architecture.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "bc12f1172981c75a",
+   "targetHash": "ab67531ab958c3de",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch17_flow_architecture.html.card": {
+   "status": "complete",
+   "sourceHash": "d1941933e560e64c",
+   "targetHash": "ca418b87b326319f",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch17_flow_architecture.html.description": {
+   "status": "complete",
+   "sourceHash": "4307125bc4a6a69f",
+   "targetHash": "bf472e141d08ba7a",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch17_flow_architecture.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch18_debug_testing.html.title": {
+   "status": "complete",
+   "sourceHash": "d61f235636cc59b5",
+   "targetHash": "63a928cab8d2cc9c",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch18_debug_testing.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "e6b2421069aa38f9",
+   "targetHash": "210c54479888b633",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch18_debug_testing.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "276f5d144ca1ec50",
+   "targetHash": "210c54479888b633",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch18_debug_testing.html.card": {
+   "status": "complete",
+   "sourceHash": "663f4a7e4c9e518a",
+   "targetHash": "0279d26f71166a70",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch18_debug_testing.html.description": {
+   "status": "complete",
+   "sourceHash": "18258fd346d092ce",
+   "targetHash": "4f2032c1a935bfe9",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch18_debug_testing.html.part": {
+   "status": "complete",
+   "sourceHash": "3e514943d5ccd9ea",
+   "targetHash": "e0434992e51d7bd4",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch19_http_api.html.title": {
+   "status": "complete",
+   "sourceHash": "c51fc50889dfe60b",
+   "targetHash": "574bdc72ae9918f8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch19_http_api.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "f60686e8eb1b374d",
+   "targetHash": "169bbd7dbb33e10d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch19_http_api.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "ca167c159151bcc1",
+   "targetHash": "b6651f0875b19bbd",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch19_http_api.html.card": {
+   "status": "complete",
+   "sourceHash": "40e936bf8b735cd2",
+   "targetHash": "125b321e447149de",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch19_http_api.html.description": {
+   "status": "complete",
+   "sourceHash": "e4e4da03982959a6",
+   "targetHash": "74b7608befc31b58",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch19_http_api.html.part": {
+   "status": "complete",
+   "sourceHash": "bfa717d63c0b6b8e",
+   "targetHash": "a0b036395a0fa5b6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch20_mqtt_extensions.html.title": {
+   "status": "complete",
+   "sourceHash": "f05be65a958bec0b",
+   "targetHash": "f5fe1c57b0bf0286",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch20_mqtt_extensions.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "d2bb8c831d3eed66",
+   "targetHash": "a573bb9dc524802d",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch20_mqtt_extensions.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "01bc052fa7c3952f",
+   "targetHash": "36a372db5a75bcd3",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch20_mqtt_extensions.html.card": {
+   "status": "complete",
+   "sourceHash": "c14d9c841f1128ea",
+   "targetHash": "ff7192be1e8947b8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch20_mqtt_extensions.html.description": {
+   "status": "complete",
+   "sourceHash": "7e92e84b39b1f807",
+   "targetHash": "3dc5b03132665560",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch20_mqtt_extensions.html.part": {
+   "status": "complete",
+   "sourceHash": "bfa717d63c0b6b8e",
+   "targetHash": "a0b036395a0fa5b6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch21_backup_security.html.title": {
+   "status": "complete",
+   "sourceHash": "11a77c3116e8a127",
+   "targetHash": "a50beda0984e0cec",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch21_backup_security.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "b4c403968934020c",
+   "targetHash": "8d4fed43a5611947",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch21_backup_security.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "8addbd1e0aafd9af",
+   "targetHash": "8d4fed43a5611947",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch21_backup_security.html.card": {
+   "status": "complete",
+   "sourceHash": "5e0f8dd63df69c85",
+   "targetHash": "4d95e0a918f3b0c8",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch21_backup_security.html.description": {
+   "status": "complete",
+   "sourceHash": "9949bfcd00d0e081",
+   "targetHash": "64ac1466fcecaa31",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch21_backup_security.html.part": {
+   "status": "complete",
+   "sourceHash": "bfa717d63c0b6b8e",
+   "targetHash": "a0b036395a0fa5b6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch22_troubleshooting.html.title": {
+   "status": "complete",
+   "sourceHash": "3cbf051d872527a8",
+   "targetHash": "cb835d6a444fdb91",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch22_troubleshooting.html.navLabel": {
+   "status": "complete",
+   "sourceHash": "b647a3a739bfc09a",
+   "targetHash": "e441e2cb48ad75aa",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch22_troubleshooting.html.pagerTitle": {
+   "status": "complete",
+   "sourceHash": "8f6e1f48d6a9657e",
+   "targetHash": "e441e2cb48ad75aa",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch22_troubleshooting.html.card": {
+   "status": "complete",
+   "sourceHash": "42eb1114d201ce25",
+   "targetHash": "d5eb0f4734374386",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch22_troubleshooting.html.description": {
+   "status": "complete",
+   "sourceHash": "f74a69667e97878a",
+   "targetHash": "52dbecffc725e75e",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:chapters.json:ch22_troubleshooting.html.part": {
+   "status": "complete",
+   "sourceHash": "bfa717d63c0b6b8e",
+   "targetHash": "a0b036395a0fa5b6",
+   "registeredAt": "2026-09-03",
+   "translatedAt": "2026-09-05"
+  },
+  "en:ch1_what_is_omnigent.html#header": {
+   "status": "pending",
+   "sourceHash": "e59ea0dd714b0cd3",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch1_what_is_omnigent.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch1_what_is_omnigent.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch1_what_is_omnigent.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch1_what_is_omnigent.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch1_what_is_omnigent.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch1_what_is_omnigent.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#header": {
+   "status": "pending",
+   "sourceHash": "159de37a967c7e76",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#header": {
+   "status": "pending",
+   "sourceHash": "433fa488f7b4b7ce",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#header": {
+   "status": "pending",
+   "sourceHash": "cb517df12951cda0",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#header": {
+   "status": "pending",
+   "sourceHash": "b0eaf39fcfb45bc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#header": {
+   "status": "pending",
+   "sourceHash": "599e037c3fdf0366",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#header": {
+   "status": "pending",
+   "sourceHash": "de62b51dd86cb9da",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#header": {
+   "status": "pending",
+   "sourceHash": "402d196550992b80",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#header": {
+   "status": "pending",
+   "sourceHash": "4c5eaaa6afdcc3da",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#header": {
+   "status": "pending",
+   "sourceHash": "1e4de6c63b7c9598",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#header": {
+   "status": "pending",
+   "sourceHash": "242532adc8e5a65d",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#header": {
+   "status": "pending",
+   "sourceHash": "9b601a8cf66fbc53",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#header": {
+   "status": "pending",
+   "sourceHash": "2c88ef7d59bfbd72",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#header": {
+   "status": "pending",
+   "sourceHash": "02f32312bc7c499a",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#header": {
+   "status": "pending",
+   "sourceHash": "52880932b8ef638b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#header": {
+   "status": "pending",
+   "sourceHash": "47c11f9234c2e7df",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#header": {
+   "status": "pending",
+   "sourceHash": "b14a127f5b69d5ba",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#header": {
+   "status": "pending",
+   "sourceHash": "ee1d05df8a3dd78d",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#header": {
+   "status": "pending",
+   "sourceHash": "f19b43abefe91e4d",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#header": {
+   "status": "pending",
+   "sourceHash": "1e49ac9fa01b2f13",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#header": {
+   "status": "pending",
+   "sourceHash": "d3fed3d448989baa",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#header": {
+   "status": "pending",
+   "sourceHash": "7c22d2776de2779e",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#header": {
+   "status": "pending",
+   "sourceHash": "3e70a5393d73f0a2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#header": {
+   "status": "pending",
+   "sourceHash": "7d36d86eeb0bc859",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#header": {
+   "status": "pending",
+   "sourceHash": "e8708f7ae7f1de81",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#why": {
+   "status": "pending",
+   "sourceHash": "d4d27ec9558d5019",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#concepts": {
+   "status": "pending",
+   "sourceHash": "fbb5bf4e7936c687",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#steps": {
+   "status": "pending",
+   "sourceHash": "96231fe9052729d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#troubleshoot": {
+   "status": "pending",
+   "sourceHash": "6fe977b4d62ce9e4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#sources": {
+   "status": "pending",
+   "sourceHash": "7134b76690e0edc2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#faq": {
+   "status": "pending",
+   "sourceHash": "6ff527273448cc6b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch1_what_is_omnigent.html.title": {
+   "status": "pending",
+   "sourceHash": "4cbcfd9a8c8dea9b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch1_what_is_omnigent.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "0e27c71950db2acd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch1_what_is_omnigent.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "eee2767d773e903a",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch1_what_is_omnigent.html.card": {
+   "status": "pending",
+   "sourceHash": "95b183eb8eb97833",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch1_what_is_omnigent.html.description": {
+   "status": "pending",
+   "sourceHash": "e765f120a73d6a0f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch1_what_is_omnigent.html.part": {
+   "status": "pending",
+   "sourceHash": "04122b7491943864",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch2_first_login.html.title": {
+   "status": "pending",
+   "sourceHash": "63c32bd0d369d5ab",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch2_first_login.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "5c106d0916879b3f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch2_first_login.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "5c106d0916879b3f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch2_first_login.html.card": {
+   "status": "pending",
+   "sourceHash": "85a1ef249ce65e15",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch2_first_login.html.description": {
+   "status": "pending",
+   "sourceHash": "c92cf5b3c06a16a9",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch2_first_login.html.part": {
+   "status": "pending",
+   "sourceHash": "04122b7491943864",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch3_four_nouns.html.title": {
+   "status": "pending",
+   "sourceHash": "cba9fc09f9422b84",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch3_four_nouns.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "00eff2fdc3fbeecd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch3_four_nouns.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "00eff2fdc3fbeecd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch3_four_nouns.html.card": {
+   "status": "pending",
+   "sourceHash": "45bdadd1046da88b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch3_four_nouns.html.description": {
+   "status": "pending",
+   "sourceHash": "73ec615c080a11c0",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch3_four_nouns.html.part": {
+   "status": "pending",
+   "sourceHash": "04122b7491943864",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch4_first_session.html.title": {
+   "status": "pending",
+   "sourceHash": "9c1f152424e7193f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch4_first_session.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "d5d06d670e39bcc9",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch4_first_session.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "d5d06d670e39bcc9",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch4_first_session.html.card": {
+   "status": "pending",
+   "sourceHash": "7b3355a344095ef8",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch4_first_session.html.description": {
+   "status": "pending",
+   "sourceHash": "c4666d7a970e29d0",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch4_first_session.html.part": {
+   "status": "pending",
+   "sourceHash": "04122b7491943864",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch5_composer.html.title": {
+   "status": "pending",
+   "sourceHash": "391ad0cde488c439",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch5_composer.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "07f3f8a7a543b0a4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch5_composer.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "07f3f8a7a543b0a4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch5_composer.html.card": {
+   "status": "pending",
+   "sourceHash": "f47800fbce5bf13e",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch5_composer.html.description": {
+   "status": "pending",
+   "sourceHash": "130cd518aeff33d8",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch5_composer.html.part": {
+   "status": "pending",
+   "sourceHash": "04122b7491943864",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch6_host_harness_picker.html.title": {
+   "status": "pending",
+   "sourceHash": "9b07567ab0b6c2bf",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch6_host_harness_picker.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "5897ce64e6b10ea5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch6_host_harness_picker.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "5897ce64e6b10ea5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch6_host_harness_picker.html.card": {
+   "status": "pending",
+   "sourceHash": "45ef85e69e91751c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch6_host_harness_picker.html.description": {
+   "status": "pending",
+   "sourceHash": "f08caf6649c6570f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch6_host_harness_picker.html.part": {
+   "status": "pending",
+   "sourceHash": "1c8ce7b5480bb0b5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch7_workspace.html.title": {
+   "status": "pending",
+   "sourceHash": "89ada620cc5ff0d8",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch7_workspace.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "9f066b27e9ddf783",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch7_workspace.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "9f066b27e9ddf783",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch7_workspace.html.card": {
+   "status": "pending",
+   "sourceHash": "1810f8e79f521dc9",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch7_workspace.html.description": {
+   "status": "pending",
+   "sourceHash": "b20e50821aeb466b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch7_workspace.html.part": {
+   "status": "pending",
+   "sourceHash": "1c8ce7b5480bb0b5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch8_projects_sessions.html.title": {
+   "status": "pending",
+   "sourceHash": "a553574126cfc01b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch8_projects_sessions.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "b3fc942a7ebd7b71",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch8_projects_sessions.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "b3fc942a7ebd7b71",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch8_projects_sessions.html.card": {
+   "status": "pending",
+   "sourceHash": "27b865bb217cffb9",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch8_projects_sessions.html.description": {
+   "status": "pending",
+   "sourceHash": "1fccd4308ea965b4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch8_projects_sessions.html.part": {
+   "status": "pending",
+   "sourceHash": "1c8ce7b5480bb0b5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch9_inbox_sharing.html.title": {
+   "status": "pending",
+   "sourceHash": "6ea7b7c16d1acc8e",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch9_inbox_sharing.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "83c45ab629a356d9",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch9_inbox_sharing.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "83c45ab629a356d9",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch9_inbox_sharing.html.card": {
+   "status": "pending",
+   "sourceHash": "bc63898c9a8a8180",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch9_inbox_sharing.html.description": {
+   "status": "pending",
+   "sourceHash": "cebb7382b4a3f89c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch9_inbox_sharing.html.part": {
+   "status": "pending",
+   "sourceHash": "1c8ce7b5480bb0b5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch10_automations.html.title": {
+   "status": "pending",
+   "sourceHash": "d27e3cfb567998b3",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch10_automations.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "e81946997dff9ba6",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch10_automations.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "e81946997dff9ba6",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch10_automations.html.card": {
+   "status": "pending",
+   "sourceHash": "bd9f93d91b20de17",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch10_automations.html.description": {
+   "status": "pending",
+   "sourceHash": "f0e0bd4d140f0863",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch10_automations.html.part": {
+   "status": "pending",
+   "sourceHash": "1c8ce7b5480bb0b5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch11_invite_members.html.title": {
+   "status": "pending",
+   "sourceHash": "feab02decfba5fff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch11_invite_members.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "2486f224f4cae9b5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch11_invite_members.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "2486f224f4cae9b5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch11_invite_members.html.card": {
+   "status": "pending",
+   "sourceHash": "b316e3d2fdd560de",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch11_invite_members.html.description": {
+   "status": "pending",
+   "sourceHash": "3c9996de33abd316",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch11_invite_members.html.part": {
+   "status": "pending",
+   "sourceHash": "6c3e5d5df3349627",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch12_policies.html.title": {
+   "status": "pending",
+   "sourceHash": "2073d9dc15ac72e0",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch12_policies.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "6c7c5f295e2ceb9c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch12_policies.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "6c7c5f295e2ceb9c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch12_policies.html.card": {
+   "status": "pending",
+   "sourceHash": "cc075b3aaa860255",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch12_policies.html.description": {
+   "status": "pending",
+   "sourceHash": "3c1f880641022161",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch12_policies.html.part": {
+   "status": "pending",
+   "sourceHash": "6c3e5d5df3349627",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch13_usage_cost.html.title": {
+   "status": "pending",
+   "sourceHash": "a2a2fe9041ba855e",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch13_usage_cost.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "d10c05743c6185d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch13_usage_cost.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "d10c05743c6185d2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch13_usage_cost.html.card": {
+   "status": "pending",
+   "sourceHash": "7a88fa60912b2b6d",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch13_usage_cost.html.description": {
+   "status": "pending",
+   "sourceHash": "a62eb637c31d63da",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch13_usage_cost.html.part": {
+   "status": "pending",
+   "sourceHash": "6c3e5d5df3349627",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch14_security_baseline.html.title": {
+   "status": "pending",
+   "sourceHash": "3e91ea9a3494bf6f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch14_security_baseline.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "bcc7e60ac07ac088",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch14_security_baseline.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "bcc7e60ac07ac088",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch14_security_baseline.html.card": {
+   "status": "pending",
+   "sourceHash": "7d596ce9f513610b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch14_security_baseline.html.description": {
+   "status": "pending",
+   "sourceHash": "b18a8e73415596a0",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch14_security_baseline.html.part": {
+   "status": "pending",
+   "sourceHash": "6c3e5d5df3349627",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch15_why_own_runner.html.title": {
+   "status": "pending",
+   "sourceHash": "513901e19ee2b51c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch15_why_own_runner.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "6ac4272941ce1a26",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch15_why_own_runner.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "6ac4272941ce1a26",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch15_why_own_runner.html.card": {
+   "status": "pending",
+   "sourceHash": "97f7896b6a2a35c6",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch15_why_own_runner.html.description": {
+   "status": "pending",
+   "sourceHash": "caf8c8dcb73c2f68",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch15_why_own_runner.html.part": {
+   "status": "pending",
+   "sourceHash": "2b3ed64e4496f10a",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch16_register_host.html.title": {
+   "status": "pending",
+   "sourceHash": "a24f21e954f0b954",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch16_register_host.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "a3c7cbaed61cfd7c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch16_register_host.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "a3c7cbaed61cfd7c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch16_register_host.html.card": {
+   "status": "pending",
+   "sourceHash": "107a249a9aa0e04c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch16_register_host.html.description": {
+   "status": "pending",
+   "sourceHash": "80636a285322d11d",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch16_register_host.html.part": {
+   "status": "pending",
+   "sourceHash": "2b3ed64e4496f10a",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch17_harness_ecosystem.html.title": {
+   "status": "pending",
+   "sourceHash": "956e45618b772e8f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch17_harness_ecosystem.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "bad849e63c6e76c5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch17_harness_ecosystem.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "bad849e63c6e76c5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch17_harness_ecosystem.html.card": {
+   "status": "pending",
+   "sourceHash": "88fe427b20f127fd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch17_harness_ecosystem.html.description": {
+   "status": "pending",
+   "sourceHash": "5c5e04ef24a7feef",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch17_harness_ecosystem.html.part": {
+   "status": "pending",
+   "sourceHash": "2b3ed64e4496f10a",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch18_runner_troubleshooting.html.title": {
+   "status": "pending",
+   "sourceHash": "a3199ba4ea3735f7",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch18_runner_troubleshooting.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "f81adea5f9713b9b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch18_runner_troubleshooting.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "f81adea5f9713b9b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch18_runner_troubleshooting.html.card": {
+   "status": "pending",
+   "sourceHash": "8da4c433e40c21a6",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch18_runner_troubleshooting.html.description": {
+   "status": "pending",
+   "sourceHash": "37429bd6fe39a683",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch18_runner_troubleshooting.html.part": {
+   "status": "pending",
+   "sourceHash": "2b3ed64e4496f10a",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch19_choose_deployment.html.title": {
+   "status": "pending",
+   "sourceHash": "b3fe9a0cdcf9f965",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch19_choose_deployment.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "b239c4b6f65109a6",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch19_choose_deployment.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "b239c4b6f65109a6",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch19_choose_deployment.html.card": {
+   "status": "pending",
+   "sourceHash": "248b18181b7ca0f6",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch19_choose_deployment.html.description": {
+   "status": "pending",
+   "sourceHash": "4732c9855e5d002b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch19_choose_deployment.html.part": {
+   "status": "pending",
+   "sourceHash": "e3b2a97b0f0d32cd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch20_ha_addon.html.title": {
+   "status": "pending",
+   "sourceHash": "6e0fdb987eb5e3ef",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch20_ha_addon.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "f1bfff66eaadccf7",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch20_ha_addon.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "f1bfff66eaadccf7",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch20_ha_addon.html.card": {
+   "status": "pending",
+   "sourceHash": "ce3a9e786c57de9c",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch20_ha_addon.html.description": {
+   "status": "pending",
+   "sourceHash": "73bd6a8fc7a042a5",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch20_ha_addon.html.part": {
+   "status": "pending",
+   "sourceHash": "e3b2a97b0f0d32cd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch21_podman.html.title": {
+   "status": "pending",
+   "sourceHash": "dbcd4cd2d22104fd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch21_podman.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "4d9d2927cc2ed8a4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch21_podman.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "4d9d2927cc2ed8a4",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch21_podman.html.card": {
+   "status": "pending",
+   "sourceHash": "ac7b2b502ce48b39",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch21_podman.html.description": {
+   "status": "pending",
+   "sourceHash": "749ad212f2df8b1f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch21_podman.html.part": {
+   "status": "pending",
+   "sourceHash": "e3b2a97b0f0d32cd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch22_k3s.html.title": {
+   "status": "pending",
+   "sourceHash": "d0ee13a30c0c9957",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch22_k3s.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "7e94fe94f2ba2da0",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch22_k3s.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "7e94fe94f2ba2da0",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch22_k3s.html.card": {
+   "status": "pending",
+   "sourceHash": "456701c7ff17b025",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch22_k3s.html.description": {
+   "status": "pending",
+   "sourceHash": "08249bef7a71c506",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:ch22_k3s.html.part": {
+   "status": "pending",
+   "sourceHash": "e3b2a97b0f0d32cd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_install_quickstart.html.title": {
+   "status": "pending",
+   "sourceHash": "be4577615b36ae6f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_install_quickstart.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "487d7b8bb5df021a",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_install_quickstart.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "511c9aa468564318",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_install_quickstart.html.card": {
+   "status": "pending",
+   "sourceHash": "ad25e2a90525be3f",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_install_quickstart.html.description": {
+   "status": "pending",
+   "sourceHash": "f445b0a29940dbce",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_troubleshooting.html.title": {
+   "status": "pending",
+   "sourceHash": "7d8d205e0d66fddd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_troubleshooting.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "c88657c548c50e29",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_troubleshooting.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "73600ef6c6939afc",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_troubleshooting.html.card": {
+   "status": "pending",
+   "sourceHash": "9f025e5cc81e0638",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_troubleshooting.html.description": {
+   "status": "pending",
+   "sourceHash": "dfb504d31905b440",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_glossary.html.title": {
+   "status": "pending",
+   "sourceHash": "c4496725d53b4ca2",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_glossary.html.navLabel": {
+   "status": "pending",
+   "sourceHash": "eedd41e4dcc794fd",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_glossary.html.pagerTitle": {
+   "status": "pending",
+   "sourceHash": "3ecd1ed661c332b1",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_glossary.html.card": {
+   "status": "pending",
+   "sourceHash": "8f0d64cb86c7b83d",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:chapters.json:appendix_glossary.html.description": {
+   "status": "pending",
+   "sourceHash": "e8e8eb60b55db82b",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch1_what_is_omnigent.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch1_what_is_omnigent.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch2_first_login.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch3_four_nouns.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch4_first_session.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch5_composer.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch6_host_harness_picker.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch7_workspace.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch8_projects_sessions.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch9_inbox_sharing.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch10_automations.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch11_invite_members.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch12_policies.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch13_usage_cost.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch14_security_baseline.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch15_why_own_runner.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch16_register_host.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch17_harness_ecosystem.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch18_runner_troubleshooting.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch19_choose_deployment.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch20_ha_addon.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch21_podman.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:ch22_k3s.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_install_quickstart.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_troubleshooting.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#prep": {
+   "status": "pending",
+   "sourceHash": "337332139887d114",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  },
+  "en:appendix_glossary.html#verify": {
+   "status": "pending",
+   "sourceHash": "3aaf436dbbf73bff",
+   "targetHash": null,
+   "registeredAt": "2026-09-09"
+  }
+ }
+}

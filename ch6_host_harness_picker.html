@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第 6 章 · Host picker 與 Harness picker：選機器、選代理 · WoowTech Omnigent 完整指南</title>
+  <meta name="description" content="第 6 章說明如何為每個 Session 挑選執行的機器與代理，並解釋綠點、離線與忙碌三種狀態各代表什麼。" />
+  <meta name="author" content="WoowTech" />
+  <link rel="canonical" href="https://omnigent-guide.woowtech.io/ch6_host_harness_picker.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="WoowTech Omnigent 完整指南" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:title" content="第 6 章 · Host picker 與 Harness picker：選機器、選代理 · WoowTech Omnigent 完整指南" />
+  <meta property="og:description" content="第 6 章說明如何為每個 Session 挑選執行的機器與代理，並解釋綠點、離線與忙碌三種狀態各代表什麼。" />
+  <meta property="og:url" content="https://omnigent-guide.woowtech.io/ch6_host_harness_picker.html" />
+  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="第 6 章 · Host picker 與 Harness picker：選機器、選代理 · WoowTech Omnigent 完整指南" />
+  <meta name="twitter:description" content="第 6 章說明如何為每個 Session 挑選執行的機器與代理，並解釋綠點、離線與忙碌三種狀態各代表什麼。" />
+  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.png" />
+  <meta name="theme-color" content="#6183FC" />
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Yellowtail&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/i18n.css" />
+</head>
+<body><a class="skip-link" href="#main-content">true</a>
+  <div class="layout">
+    <aside class="sidebar">
+    <a class="brand" href="tutorial.html">Omnigent 指南</a>
+    <div class="brand-sub">自架 AI 代理指揮中心完整教學</div>
+    <nav class="lang-switch" aria-label="語言"><a class="active" href="ch6_host_harness_picker.html" lang="zh-Hant" aria-current="page">中文</a><a href="en/tutorial.html" lang="en" hreflang="en">EN</a></nav>
+    <a class="hub-link" href="index.html">◂ 資源總覽</a>
+    <h2>章節</h2>
+    <ol>
+      <li class="part-label">第一部：先把它用起來</li>
+      <li><a href="ch1_what_is_omnigent.html">Omnigent 是什麼</a></li>
+      <li><a href="ch2_first_login.html">第一次登入</a></li>
+      <li><a href="ch3_four_nouns.html">四個核心名詞</a></li>
+      <li><a href="ch4_first_session.html">開第一個 Session</a></li>
+      <li><a href="ch5_composer.html">Composer 完全指南</a></li>
+      <li class="part-label">第二部：把工作交出去</li>
+      <li><a href="ch6_host_harness_picker.html" class="active" aria-current="page">選機器與選代理</a></li>
+      <li><a href="ch7_workspace.html">Workspace 面板</a></li>
+      <li><a href="ch8_projects_sessions.html">Project 與 Session</a></li>
+      <li><a href="ch9_inbox_sharing.html">Inbox 與分享</a></li>
+      <li><a href="ch10_automations.html">Automations 排程</a></li>
+      <li class="part-label">第三部：多人、成本與治理</li>
+      <li><a href="ch11_invite_members.html">邀請成員</a></li>
+      <li><a href="ch12_policies.html">Policy 治理</a></li>
+      <li><a href="ch13_usage_cost.html">看懂用量與成本</a></li>
+      <li><a href="ch14_security_baseline.html">安全基線</a></li>
+      <li class="part-label">第四部：接上你自己的機器</li>
+      <li><a href="ch15_why_own_runner.html">為什麼要自己的 Runner</a></li>
+      <li><a href="ch16_register_host.html">註冊第一台主機</a></li>
+      <li><a href="ch17_harness_ecosystem.html">Harness 生態</a></li>
+      <li><a href="ch18_runner_troubleshooting.html">Runner 疑難排解</a></li>
+      <li class="part-label">第五部：自己架一台</li>
+      <li><a href="ch19_choose_deployment.html">三種部署怎麼選</a></li>
+      <li><a href="ch20_ha_addon.html">Home Assistant 版</a></li>
+      <li><a href="ch21_podman.html">Rootless Podman 版</a></li>
+      <li><a href="ch22_k3s.html">k3s Helm 版</a></li>
+    </ol>
+    <div class="toc-in-chapter">
+      <h2>本章</h2>
+      <a href="#why">為何需要本章</a>
+      <a href="#concepts">核心觀念</a>
+      <a href="#prep">開始之前</a>
+      <a href="#steps">操作步驟</a>
+      <a href="#verify">怎麼確認做對了</a>
+      <a href="#troubleshoot">故障排除</a>
+      <a href="#sources">固定來源</a>
+      <a href="#faq">常見問題</a>
+    </div>
+    <div class="toc-in-chapter">
+      <h2>附錄</h2>
+      <a href="appendix_install_quickstart.html">附錄 A · 安裝速查</a>
+      <a href="appendix_troubleshooting.html">附錄 B · 疑難排解全集</a>
+      <a href="appendix_glossary.html">附錄 C · 名詞對照表</a>
+    </div>
+  </aside>
+    <main class="content" id="main-content">
+      <div class="chapter-header">
+        <div class="kicker">第 6 章</div>
+        <h1>Host picker 與 Harness picker：選機器、選代理</h1>
+      </div>
+      <section id="why" data-nav="為何需要本章">
+        <h2 data-icon="why">為何需要本章</h2>
+        <p>待撰寫。</p>
+      </section>
+      <section id="concepts" data-nav="核心觀念">
+        <h2 data-icon="concept">核心觀念</h2>
+        <p>待撰寫。</p>
+      </section>
+      <section id="prep" data-nav="開始之前">
+        <h2 data-icon="plan">開始之前</h2>
+        <p>待撰寫。</p>
+      </section>
+      <section id="steps" data-nav="操作步驟">
+        <h2 data-icon="steps">操作步驟</h2>
+        <ol class="steps">
+          <li><h3>步驟 1</h3><p>待撰寫。</p></li>
+          <li><h3>步驟 2</h3><p>待撰寫。</p></li>
+          <li><h3>步驟 3</h3><p>待撰寫。</p></li>
+          <li><h3>步驟 4</h3><p>待撰寫。</p></li>
+        </ol>
+      </section>
+      <section id="verify" data-nav="怎麼確認做對了">
+        <h2 data-icon="test">怎麼確認做對了</h2>
+        <p>待撰寫。</p>
+      </section>
+      <section id="troubleshoot" data-nav="故障排除">
+        <h2 data-icon="troubleshoot">故障排除</h2>
+        <ul>
+          <li><strong>徵狀 1</strong>：待撰寫。</li>
+          <li><strong>徵狀 2</strong>：待撰寫。</li>
+          <li><strong>徵狀 3</strong>：待撰寫。</li>
+          <li><strong>徵狀 4</strong>：待撰寫。</li>
+        </ul>
+      </section>
+      <section id="sources" data-nav="固定來源">
+        <h2 data-icon="url">固定來源</h2>
+        <ul>
+          <li><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8" rel="noopener">WoowTech Home Assistant Omnigent 附加元件</a></li>
+        </ul>
+      </section>
+      <section id="faq" data-nav="常見問題">
+        <h2 data-icon="faq">常見問題</h2>
+        <details class="faq">
+          <summary>這一章的內容適用於哪些部署方式？</summary>
+          <div class="body"><p>待撰寫。</p></div>
+        </details>
+        <details class="faq">
+          <summary>做完這一章之後我應該看到什麼？</summary>
+          <div class="body"><p>待撰寫。</p></div>
+        </details>
+        <details class="faq">
+          <summary>如果畫面跟書上不一樣，是版本差異還是我做錯了？</summary>
+          <div class="body"><p>待撰寫。</p></div>
+        </details>
+        <details class="faq">
+          <summary>這一章提到的設定會影響其他章節嗎？</summary>
+          <div class="body"><p>待撰寫。</p></div>
+        </details>
+      </section>
+      <nav class="pager" aria-label="章節分頁">
+      <a class="prev" href="ch5_composer.html">
+        <span class="label">← 上一章</span>
+        <span class="title">Composer 完全指南</span>
+      </a>
+      <a class="next" href="ch7_workspace.html">
+        <span class="label">下一章 →</span>
+        <span class="title">Workspace 面板</span>
+      </a>
+    </nav>
+
+    <footer class="site-footer">
+      <p>《WoowTech Omnigent 完整指南》由 <a href="https://github.com/WOOWTECH/Woow_omnigent_tutorial_site" rel="noopener">WoowTech</a> 製作，以 <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant">CC BY 4.0</a> 授權釋出 — 可自由分享與改作，請保留出處。</p>
+      <div class="link-row"><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon" rel="noopener">Woow HA Omnigent 附加元件</a><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package" rel="noopener">Woow Omnigent Podman 套件</a><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package" rel="noopener">Woow Omnigent k3s 套件</a><a href="https://github.com/WOOWTECH/Woow_omnigent_tutorial_site" rel="noopener">本站原始碼</a></div>
+      <p class="footer-meta">本站為 WoowTech 製作的獨立社群教學；版本與引用來源以各章「固定來源」為準。書中所有帳號密碼皆為示範用佔位值，請勿直接沿用。 · <a href="https://github.com/WOOWTECH/Woow_omnigent_tutorial_site" rel="noopener">原始碼與勘誤</a></p>
+    </footer>
+    </main>
+  </div>
+</body>
+</html>

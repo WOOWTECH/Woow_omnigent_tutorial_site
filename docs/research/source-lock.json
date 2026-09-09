@@ -1,0 +1,80 @@
+{
+  "schema": "woowtech-source-lock",
+  "schemaVersion": "1.0.0",
+  "retrievalDate": "2026-09-09",
+  "productionBaseline": {
+    "_note": "版本基準以 Home Assistant 附加元件為準；其餘部署方式的版本差異在各章明列。",
+    "haAddOn": "0.1.15",
+    "k3sChart": "0.1.0",
+    "k3sAppVersion": "0.11.0",
+    "versionDriftKnown": true
+  },
+  "sources": [
+    {
+      "id": "woow-ha-omnigent-addon",
+      "product": "WoowTech Home Assistant Omnigent 附加元件",
+      "layer": "add-on",
+      "version": "0.1.15",
+      "commit": "8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8",
+      "url": "https://github.com/WOOWTECH/Woow_ha_omnigent_addon",
+      "authorityTier": 1,
+      "allowedChapterNumbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "exactCommitUrl": "https://github.com/WOOWTECH/Woow_ha_omnigent_addon/tree/8018b72d1e2ea2cded77e5345d0b39ba5cc75ef8"
+    },
+    {
+      "id": "woow-podman-omnigent-package",
+      "product": "WoowTech Omnigent Rootless Podman 套件",
+      "layer": "podman",
+      "commit": "33dd16c985e82e8cfde301f24de385c313477d24",
+      "url": "https://github.com/WOOWTECH/Woow_podman_omnigent_package",
+      "authorityTier": 1,
+      "allowedChapterNumbers": [
+        15,
+        16,
+        19,
+        21
+      ],
+      "exactCommitUrl": "https://github.com/WOOWTECH/Woow_podman_omnigent_package/tree/33dd16c985e82e8cfde301f24de385c313477d24"
+    },
+    {
+      "id": "woow-k3s-omnigent-package",
+      "product": "WoowTech Omnigent k3s Helm 套件",
+      "layer": "k3s",
+      "version": "0.11.0",
+      "commit": "97e7d523891da0a34c83999c87c9cfdaf20eee6a",
+      "url": "https://github.com/WOOWTECH/Woow_k3s_omnigent_package",
+      "authorityTier": 1,
+      "allowedChapterNumbers": [
+        2,
+        13,
+        14,
+        19,
+        22
+      ],
+      "exactCommitUrl": "https://github.com/WOOWTECH/Woow_k3s_omnigent_package/tree/97e7d523891da0a34c83999c87c9cfdaf20eee6a"
+    }
+  ]
+}

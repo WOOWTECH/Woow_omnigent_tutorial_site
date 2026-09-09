@@ -1,0 +1,5 @@
+# WoowTech Node-RED 指南
+User-agent: *
+Allow: /
+
+Sitemap: https://node-red-guide.woowtech.io/sitemap.xml

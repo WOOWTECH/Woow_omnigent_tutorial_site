@@ -1,0 +1,17 @@
+{
+  "name": "woow-omnigent-tutorial-site",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node scripts/build_nav.js --check && node scripts/check_links.js && node scripts/check_content.js && node scripts/check_sensitive.js",
+    "responsive": "node scripts/validate_responsive.js",
+    "check:i18n": "node scripts/build_nav.js --check && SITE_ROOT=en node scripts/build_nav.js --check && node scripts/check_links.js && SITE_ROOT=en node scripts/check_links.js && node scripts/check_i18n.js --strict"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "yaml": "2.8.1"
+  }
+}

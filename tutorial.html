@@ -1,0 +1,204 @@
+<!doctype html><html lang="zh-Hant-TW"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WoowTech Omnigent 完整指南 · 自架 AI 代理指揮中心完整教學</title>
+  <meta name="description" content="WoowTech 台灣繁體中文 Omnigent 完整指南，22 章涵蓋登入導覽、Session 與 Composer 操作、Automations 排程、成員與 Policy 治理、用量成本判讀，以及 Home Assistant 附加元件、Rootless Podman 與 k3s Helm 三種自架部署。" />
+  <meta name="author" content="WoowTech" />
+  <link rel="canonical" href="https://omnigent-guide.woowtech.io/tutorial.html" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://omnigent-guide.woowtech.io/tutorial.html" />
+  <link rel="alternate" hreflang="zh" href="https://omnigent-guide.woowtech.io/tutorial.html" />
+  <link rel="alternate" hreflang="en" href="https://omnigent-guide.woowtech.io/en/tutorial.html" />
+  <link rel="alternate" hreflang="x-default" href="https://omnigent-guide.woowtech.io/en/tutorial.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="WoowTech Omnigent 完整指南" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:title" content="WoowTech Omnigent 完整指南 · 自架 AI 代理指揮中心完整教學" />
+  <meta property="og:description" content="WoowTech 台灣繁體中文 Omnigent 完整指南，22 章涵蓋登入導覽、Session 與 Composer 操作、Automations 排程、成員與 Policy 治理、用量成本判讀，以及 Home Assistant 附加元件、Rootless Podman 與 k3s Helm 三種自架部署。" />
+  <meta property="og:url" content="https://omnigent-guide.woowtech.io/tutorial.html" />
+  <meta property="og:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WoowTech Omnigent 完整指南 · 自架 AI 代理指揮中心完整教學" />
+  <meta name="twitter:description" content="WoowTech 台灣繁體中文 Omnigent 完整指南，22 章涵蓋登入導覽、Session 與 Composer 操作、Automations 排程、成員與 Policy 治理、用量成本判讀，以及 Home Assistant 附加元件、Rootless Podman 與 k3s Helm 三種自架部署。" />
+  <meta name="twitter:image" content="https://omnigent-guide.woowtech.io/assets/og/omnigent-guide.png" />
+  <meta name="theme-color" content="#6183FC" />
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Yellowtail&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/i18n.css" />
+</head><body><main class="home"><header class="hero">
+      <!-- i18n:switch -->
+      <nav class="lang-switch" aria-label="語言"><a class="active" href="tutorial.html" lang="zh-Hant" aria-current="page">中文</a><a href="en/tutorial.html" lang="en" hreflang="en">EN</a></nav>
+      <!-- /i18n:switch --><span class="kicker-script">WoowTech</span><div class="kicker">Node-RED Guide</div><h1>22 章 Node-RED 完整教學</h1><p>全 22 章均已依固定版本來源完成正文、操作範例與技術驗證，涵蓋安全入門、Home Assistant 實戰、外部整合與維運。</p></header><section class="chapter-index">
+      <h2 class="index-title">第一部：先把它用起來</h2>
+      <div class="chapter-grid">
+        <a class="chapter-card" href="ch1_what_is_omnigent.html">
+          <span class="num">01</span>
+          <h3>Omnigent 是什麼：一個介面，指揮多個 AI 代理</h3>
+          <p>用一句話說清楚 Omnigent 的定位，以及它跟單一 AI 聊天視窗的根本差別。</p>
+        </a>
+        <a class="chapter-card" href="ch2_first_login.html">
+          <span class="num">02</span>
+          <h3>第一次登入與介面導覽</h3>
+          <p>從登入畫面到看懂側邊欄每一個入口，五分鐘建立方向感。</p>
+        </a>
+        <a class="chapter-card" href="ch3_four_nouns.html">
+          <span class="num">03</span>
+          <h3>Server、Runner、Host、Harness：四個名詞一次搞懂</h3>
+          <p>分清楚這四個詞，後面所有設定畫面才看得懂。</p>
+        </a>
+        <a class="chapter-card" href="ch4_first_session.html">
+          <span class="num">04</span>
+          <h3>開第一個 Session，讓代理回你第一句話</h3>
+          <p>完成從輸入第一句話到拿到第一個回覆的完整往返。</p>
+        </a>
+        <a class="chapter-card" href="ch5_composer.html">
+          <span class="num">05</span>
+          <h3>Composer 完全指南：斜線指令、@ 提及、模型挑選與中斷</h3>
+          <p>把輸入框的每一個隱藏功能都挖出來用。</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="chapter-index spaced">
+      <h2 class="index-title">第二部：把工作交出去</h2>
+      <div class="chapter-grid">
+        <a class="chapter-card" href="ch6_host_harness_picker.html">
+          <span class="num">06</span>
+          <h3>Host picker 與 Harness picker：選機器、選代理</h3>
+          <p>同一個任務丟到不同機器、不同代理，結果差很多。</p>
+        </a>
+        <a class="chapter-card" href="ch7_workspace.html">
+          <span class="num">07</span>
+          <h3>Workspace 面板：Files、Changes、Agents 與 Terminal</h3>
+          <p>在瀏覽器裡看代理改了哪些檔、跑了哪些指令。</p>
+        </a>
+        <a class="chapter-card" href="ch8_projects_sessions.html">
+          <span class="num">08</span>
+          <h3>用 Project 與 Session 把工作分門別類</h3>
+          <p>任務一多就會亂，這章講組織法。</p>
+        </a>
+        <a class="chapter-card" href="ch9_inbox_sharing.html">
+          <span class="num">09</span>
+          <h3>Inbox 通知與 Session 分享</h3>
+          <p>代理跑完了要怎麼通知你，結果要怎麼給別人看。</p>
+        </a>
+        <a class="chapter-card" href="ch10_automations.html">
+          <span class="num">10</span>
+          <h3>Automations：用排程讓代理自己跑</h3>
+          <p>把重複的事交給排程，不必每次自己開 Session。</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="chapter-index spaced">
+      <h2 class="index-title">第三部：多人、成本與治理</h2>
+      <div class="chapter-grid">
+        <a class="chapter-card" href="ch11_invite_members.html">
+          <span class="num">11</span>
+          <h3>邀請成員與權限隔離</h3>
+          <p>團隊一起用的時候，誰看得到誰的東西。</p>
+        </a>
+        <a class="chapter-card" href="ch12_policies.html">
+          <span class="num">12</span>
+          <h3>Policy 導覽：成本上限、敏感資料與危險指令</h3>
+          <p>讓代理有邊界，而不是全憑自律。</p>
+        </a>
+        <a class="chapter-card" href="ch13_usage_cost.html">
+          <span class="num">13</span>
+          <h3>Usage：看懂每一塊錢花在哪</h3>
+          <p>按 harness、按模型、按天，把帳算清楚。</p>
+        </a>
+        <a class="chapter-card" href="ch14_security_baseline.html">
+          <span class="num">14</span>
+          <h3>安全基線：憑證輪替與對外暴露面</h3>
+          <p>預設密碼與公開網址的組合是最常見的破口。</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="chapter-index spaced">
+      <h2 class="index-title">第四部：接上你自己的機器</h2>
+      <div class="chapter-grid">
+        <a class="chapter-card" href="ch15_why_own_runner.html">
+          <span class="num">15</span>
+          <h3>為什麼你需要自己的 Runner</h3>
+          <p>代理要能碰到你的檔案，才有辦法幫你做事。</p>
+        </a>
+        <a class="chapter-card" href="ch16_register_host.html">
+          <span class="num">16</span>
+          <h3>用 omnigent host 註冊你的第一台主機</h3>
+          <p>把自己的電腦變成 Omnigent 的執行機。</p>
+        </a>
+        <a class="chapter-card" href="ch17_harness_ecosystem.html">
+          <span class="num">17</span>
+          <h3>Harness 生態：pi、Claude Code、Codex 怎麼選</h3>
+          <p>不同代理擅長的事情不一樣。</p>
+        </a>
+        <a class="chapter-card" href="ch18_runner_troubleshooting.html">
+          <span class="num">18</span>
+          <h3>Runner 疑難排解：離線、孤兒與無回應</h3>
+          <p>綠點不代表真的能用。</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="chapter-index spaced">
+      <h2 class="index-title">第五部：自己架一台</h2>
+      <div class="chapter-grid">
+        <a class="chapter-card" href="ch19_choose_deployment.html">
+          <span class="num">19</span>
+          <h3>三種部署口味怎麼選：決策表</h3>
+          <p>先決定跑在哪，再決定怎麼裝。</p>
+        </a>
+        <a class="chapter-card" href="ch20_ha_addon.html">
+          <span class="num">20</span>
+          <h3>部署方式一：Home Assistant 附加元件</h3>
+          <p>門檻最低的一條路。</p>
+        </a>
+        <a class="chapter-card" href="ch21_podman.html">
+          <span class="num">21</span>
+          <h3>部署方式二：Rootless Podman</h3>
+          <p>單機自架，不需要 Kubernetes。</p>
+        </a>
+        <a class="chapter-card" href="ch22_k3s.html">
+          <span class="num">22</span>
+          <h3>部署方式三：k3s Helm Chart</h3>
+          <p>要多台 Runner、要高可用就走這條。</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="chapter-index spaced">
+      <h2 class="index-title">附錄</h2>
+      <div class="chapter-grid">
+        <a class="chapter-card" href="appendix_install_quickstart.html">
+          <span class="num">A</span>
+          <h3>附錄 A：三種部署的安裝速查表</h3>
+          <p>把三條安裝路線壓縮成可以照著打的指令清單。</p>
+        </a>
+        <a class="chapter-card" href="appendix_troubleshooting.html">
+          <span class="num">B</span>
+          <h3>附錄 B：疑難排解全集</h3>
+          <p>把散在各章的故障徵狀收攏成一張對照表。</p>
+        </a>
+        <a class="chapter-card" href="appendix_glossary.html">
+          <span class="num">C</span>
+          <h3>附錄 C：中英名詞對照表</h3>
+          <p>中英對照，查詞用。</p>
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>《WoowTech Omnigent 完整指南》由 <a href="https://github.com/WOOWTECH/Woow_omnigent_tutorial_site" rel="noopener">WoowTech</a> 製作，以 <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant">CC BY 4.0</a> 授權釋出 — 可自由分享與改作，請保留出處。</p>
+      <div class="link-row"><a href="https://github.com/WOOWTECH/Woow_ha_omnigent_addon" rel="noopener">Woow HA Omnigent 附加元件</a><a href="https://github.com/WOOWTECH/Woow_podman_omnigent_package" rel="noopener">Woow Omnigent Podman 套件</a><a href="https://github.com/WOOWTECH/Woow_k3s_omnigent_package" rel="noopener">Woow Omnigent k3s 套件</a><a href="https://github.com/WOOWTECH/Woow_omnigent_tutorial_site" rel="noopener">本站原始碼</a></div>
+      <p class="footer-meta">本站為 WoowTech 製作的獨立社群教學；版本與引用來源以各章「固定來源」為準。書中所有帳號密碼皆為示範用佔位值，請勿直接沿用。 · <a href="https://github.com/WOOWTECH/Woow_omnigent_tutorial_site" rel="noopener">原始碼與勘誤</a></p>
+    </footer>
+  </main></body></html>
